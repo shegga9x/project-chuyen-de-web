@@ -1,0 +1,39 @@
+-- template ???
+Frontend - nextjs
+Backend - spring
+
+function
+-- multi language
+-- jwt (fb,gg)
+-- capcha
+-- favourite
+-- voucher
+-- shipping (giao hang tiet kiem)
+-- comment
+-- buyer
++ manage with
++ chat
+-- seller
++ buy
++ like
++ comment
++ sale
+-- product
++ cart
++ list view
++ filter
++ rate
++ cagetory
+-- admin
+-- pay method
+
+screen
+-- home
+-- product view
+-- cart
+-- shipping
+-- method pay 
+-- single product
+-- account profile
+-- seller shop
+-- admin template
