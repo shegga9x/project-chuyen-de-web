@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -61,15 +63,14 @@ public class AccountService {
             throw new CustomException("This Email already be taken !!!");
         }
         Account account = new Account();
-        account = (Account) SubUtils.mapperObject(model, account);
+        SubUtils.mapperObject(model, account);
         // first registered account is an admin
         account.setCreated(new Date());
         account.setPasswordHash(encoder.encode(model.getPassword()));
         account.setAcceptTerms(true);
         account.setLastExpires(new Date());
-        account = accountRepository.save(account);
         AccountDetail accountDetail = new AccountDetail();
-        accountDetail = (AccountDetail) SubUtils.mapperObject(model, accountDetail);
+        SubUtils.mapperObject(model, accountDetail);
         boolean isFirstAccount = accountRepository.findAll().size() == 0;
         RoleEnum roleEnum = (isFirstAccount ? RoleEnum.Admin : RoleEnum.Student);
         List<Role> roles = new ArrayList<>(List.of(new Role(roleEnum)));

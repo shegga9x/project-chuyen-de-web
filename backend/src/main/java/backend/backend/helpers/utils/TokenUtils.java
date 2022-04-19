@@ -66,7 +66,7 @@ public class TokenUtils {
     }
 
     public RefreshToken rotateRefreshToken(RefreshToken refreshToken, String ipAddress) {
-        RefreshToken newRefreshToken = jwtUtils.generateRefreshToken(ipAddress, refreshToken.getAccountId());
+        RefreshToken newRefreshToken = jwtUtils.generateRefreshToken(ipAddress, refreshToken.getIdAccount());
         return newRefreshToken;
     }
 

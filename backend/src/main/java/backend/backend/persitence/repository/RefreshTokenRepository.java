@@ -16,7 +16,7 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Inte
 
     boolean existsByToken(String token);
 
-    @Query("SELECT m FROM RefreshToken m  WHERE m.accountId = ?1")
+    @Query("SELECT m FROM RefreshToken m  WHERE m.idAccount = ?1")
     List<RefreshToken> getTokenListOfUser(int accountId);
 
 }
