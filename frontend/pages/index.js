@@ -1,7 +1,30 @@
-import Head from 'next/head'
-import Script from 'next/script'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faAngleRight, faBars, faBasketShopping, faEnvelope, faHeart, faHome, faPersonDress, faPhone, faPlus, faShirt } from '@fortawesome/free-solid-svg-icons'
+import Head from "next/head";
+import Script from "next/script";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleDown,
+  faAngleRight,
+  faBars,
+  faBasketShopping,
+  faBookAtlas,
+  faBookOpen,
+  faEnvelope,
+  faHeart,
+  faHeartbeat,
+  faHome,
+  faMobileAndroid,
+  faMobileAndroidAlt,
+  faPersonDress,
+  faPhone,
+  faPhoneFlip,
+  faPlus,
+  faRocket,
+  faSearch,
+  faShirt,
+  faTelevision,
+  faTv,
+  faTvAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   return (
@@ -9,19 +32,31 @@ export default function Home() {
       <Head>
         <meta charSet="UTF-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>
-          Groover - Online Shopping for Electronics, Apparel, Computers, Books, DVDs
-          & more
+          Groover - Online Shopping for Electronics, Apparel, Computers, Books,
+          DVDs & more
         </title>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" />
-        <link href="https://fonts.googleapis.com/css?family=Raleway:400,800" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css?family=Open+Sans:400,700"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css?family=Raleway:400,800"
+          rel="stylesheet"
+        />
         <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
         <link rel="stylesheet" href="/static/css/animate.min.css" />
         <link rel="stylesheet" href="/static/css/owl.carousel.min.css" />
-        <link rel="stylesheet" href="/static/css/jquery-ui-range-slider.min.css" />
+        <link
+          rel="stylesheet"
+          href="/static/css/jquery-ui-range-slider.min.css"
+        />
         <link rel="stylesheet" href="/static/css/utility.css" />
         <link rel="stylesheet" href="/static/css/bundle.css" />
       </Head>
@@ -36,7 +71,7 @@ export default function Home() {
                   <li>
                     <a href="tel:+111444989">
                       <i className="u-c-brand u-s-m-r-9">
-                        <FontAwesomeIcon icon={faPhone} />
+                        <FontAwesomeIcon icon={faPhoneFlip} />
                       </i>
                       Telephone:+111-444-989
                     </a>
@@ -56,7 +91,8 @@ export default function Home() {
                   <li>
                     <a>
                       My Account
-                      <i className="fas fa-chevron-down u-s-m-l-9" />
+                      {/* <i className="fas fa-chevron-down u-s-m-l-9" /> */}
+                      <FontAwesomeIcon icon={faAngleDown} />
                     </a>
                     <ul className="g-dropdown" style={{ width: 200 }}>
                       <li>
@@ -88,7 +124,8 @@ export default function Home() {
                   <li>
                     <a>
                       USD
-                      <i className="fas fa-chevron-down u-s-m-l-9" />
+                      {/* <i className="fas fa-chevron-down u-s-m-l-9" /> */}
+                      <FontAwesomeIcon icon={faAngleDown} />
                     </a>
                     <ul className="g-dropdown" style={{ width: 90 }}>
                       <li>
@@ -104,7 +141,8 @@ export default function Home() {
                   <li>
                     <a>
                       ENG
-                      <i className="fas fa-chevron-down u-s-m-l-9" />
+                      {/* <i className="fas fa-chevron-down u-s-m-l-9" /> */}
+                      <FontAwesomeIcon icon={faAngleDown} />
                     </a>
                     <ul className="g-dropdown" style={{ width: 70 }}>
                       <li>
@@ -130,7 +168,7 @@ export default function Home() {
                   <div className="brand-logo text-lg-center">
                     <a href="home.html">
                       <img
-                        src="images/main-logo/groover-branding-1.png"
+                        src="/static/images/main-logo/groover-branding-1.png"
                         alt="Groover Brand Logo"
                         className="app-brand-logo"
                       />
@@ -153,10 +191,8 @@ export default function Home() {
                         <label className="sr-only" htmlFor="select-category">
                           Choose category for search
                         </label>
-                        <select className="select-box" id="select-category">
-                          <option value="">
-                            All
-                          </option>
+                        <select className="select-box" id="select-category" FontAwesomeIcon icon={faAngleDown}>
+                          <option value="">All</option>
                           <option value="">Men's Clothing</option>
                           <option value="">Women's Clothing</option>
                           <option value="">Toys Hobbies &amp; Robots</option>
@@ -172,6 +208,7 @@ export default function Home() {
                       id="btn-search"
                       type="submit"
                       className="button button-primary fas fa-search"
+                      // FontAwesomeIcon icon={faSearch}
                     />
                   </form>
                 </div>
@@ -239,15 +276,23 @@ export default function Home() {
               <ul className="mini-cart-list">
                 <li className="clearfix">
                   <a href="single-product.html">
-                    <img src="images/product/product@1x.jpg" alt="Product" />
-                    <span className="mini-item-name">Casual Hoodie Full Cotton</span>
+                    <img
+                      src="/static/images/product/product@1x.jpg"
+                      alt="Product"
+                    />
+                    <span className="mini-item-name">
+                      Casual Hoodie Full Cotton
+                    </span>
                     <span className="mini-item-price">$55.00</span>
                     <span className="mini-item-quantity"> x 1 </span>
                   </a>
                 </li>
                 <li className="clearfix">
                   <a href="single-product.html">
-                    <img src="images/product/product@1x.jpg" alt="Product" />
+                    <img
+                      src="/static/images/product/product@1x.jpg"
+                      alt="Product"
+                    />
                     <span className="mini-item-name">
                       Black Rock Dress with High Jewelery Necklace
                     </span>
@@ -257,15 +302,23 @@ export default function Home() {
                 </li>
                 <li className="clearfix">
                   <a href="single-product.html">
-                    <img src="images/product/product@1x.jpg" alt="Product" />
-                    <span className="mini-item-name">Xiaomi Note 2 Black Color</span>
+                    <img
+                      src="/static/images/product/product@1x.jpg"
+                      alt="Product"
+                    />
+                    <span className="mini-item-name">
+                      Xiaomi Note 2 Black Color
+                    </span>
                     <span className="mini-item-price">$55.00</span>
                     <span className="mini-item-quantity"> x 1 </span>
                   </a>
                 </li>
                 <li className="clearfix">
                   <a href="single-product.html">
-                    <img src="images/product/product@1x.jpg" alt="Product" />
+                    <img
+                      src="/static/images/product/product@1x.jpg"
+                      alt="Product"
+                    />
                     <span className="mini-item-name">Dell Inspiron 15</span>
                     <span className="mini-item-price">$55.00</span>
                     <span className="mini-item-quantity"> x 1 </span>
@@ -294,11 +347,14 @@ export default function Home() {
                 <div className="col-lg-3">
                   <div className="v-menu">
                     <span className="v-title">
-                      <i style={{ color: 'white' }} className="ion-md-menu">
+                      <i style={{ color: "white" }} className="ion-md-menu">
                         <FontAwesomeIcon icon={faBars} />
                       </i>
                       All Categories
-                      <i className="fas fa-angle-down" style={{ lineHeight: '1' }}>
+                      <i
+                        className="fas fa-angle-down"
+                        style={{ lineHeight: "1" }}
+                      >
                         <FontAwesomeIcon icon={faAngleDown} />
                       </i>
                     </span>
@@ -318,12 +374,17 @@ export default function Home() {
                             <button className="v-button">
                               <FontAwesomeIcon icon={faPlus} />
                             </button>
-                            <div className="v-drop-right" style={{ width: 700 }}>
+                            <div
+                              className="v-drop-right"
+                              style={{ width: 700 }}
+                            >
                               <div className="row">
                                 <div className="col-lg-4">
                                   <ul className="v-level-2">
                                     <li>
-                                      <a href="shop-v2-sub-category.html">Tops</a>
+                                      <a href="shop-v2-sub-category.html">
+                                        Tops
+                                      </a>
                                       <ul>
                                         <li>
                                           <a href="shop-v3-sub-sub-category.html">
@@ -352,7 +413,9 @@ export default function Home() {
                                 <div className="col-lg-4">
                                   <ul className="v-level-2">
                                     <li>
-                                      <a href="shop-v2-sub-category.html">Outwear</a>
+                                      <a href="shop-v2-sub-category.html">
+                                        Outwear
+                                      </a>
                                       <ul>
                                         <li>
                                           <a href="shop-v3-sub-sub-category.html">
@@ -414,7 +477,9 @@ export default function Home() {
                                 <div className="col-lg-4">
                                   <ul className="v-level-2">
                                     <li>
-                                      <a href="shop-v2-sub-category.html">Bottoms</a>
+                                      <a href="shop-v2-sub-category.html">
+                                        Bottoms
+                                      </a>
                                       <ul>
                                         <li>
                                           <a href="shop-v3-sub-sub-category.html">
@@ -508,7 +573,10 @@ export default function Home() {
                           <li className="js-backdrop">
                             <a href="shop-v1-root-category.html">
                               <i>
-                                <FontAwesomeIcon icon={faPersonDress} size="2x" />
+                                <FontAwesomeIcon
+                                  icon={faPersonDress}
+                                  size="2x"
+                                />
                               </i>
                               Women's Clothing
                               <i className="ion-ios-arrow-forward">
@@ -518,12 +586,17 @@ export default function Home() {
                             <button className="v-button">
                               <FontAwesomeIcon icon={faPlus} />
                             </button>
-                            <div className="v-drop-right" style={{ width: 700 }}>
+                            <div
+                              className="v-drop-right"
+                              style={{ width: 700 }}
+                            >
                               <div className="row">
                                 <div className="col-lg-4">
                                   <ul className="v-level-2">
                                     <li>
-                                      <a href="shop-v2-sub-category.html">Tops</a>
+                                      <a href="shop-v2-sub-category.html">
+                                        Tops
+                                      </a>
                                       <ul>
                                         <li>
                                           <a href="shop-v3-sub-sub-category.html">
@@ -616,7 +689,9 @@ export default function Home() {
                                 <div className="col-lg-4">
                                   <ul className="v-level-2">
                                     <li>
-                                      <a href="shop-v2-sub-category.html">Bottoms</a>
+                                      <a href="shop-v2-sub-category.html">
+                                        Bottoms
+                                      </a>
                                       <ul>
                                         <li>
                                           <a href="shop-v3-sub-sub-category.html">
@@ -710,15 +785,18 @@ export default function Home() {
                           <li className="js-backdrop">
                             <a href="shop-v1-root-category.html">
                               <i>
-                                <FontAwesomeIcon icon="fa-solid fa-rocket-launch" />
+                                <FontAwesomeIcon icon={faRocket} />
                               </i>
                               Toys Hobbies &amp; Robots
-                              <i>
-                                <FontAwesomeIcon icon="fa-regular fa-angle-right" />
+                              <i className="ion-ios-arrow-forward">
+                                <FontAwesomeIcon icon={faAngleRight} />
                               </i>
                             </a>
                             <button className="v-button ion ion-md-add" />
-                            <div className="v-drop-right" style={{ width: 700 }}>
+                            <div
+                              className="v-drop-right"
+                              style={{ width: 700 }}
+                            >
                               <div className="row">
                                 <div className="col-lg-4">
                                   <ul className="v-level-2">
@@ -799,7 +877,9 @@ export default function Home() {
                                           </a>
                                         </li>
                                         <li className="view-more-flag">
-                                          <a href="store-directory.html">View More</a>
+                                          <a href="store-directory.html">
+                                            View More
+                                          </a>
                                         </li>
                                       </ul>
                                     </li>
@@ -813,7 +893,7 @@ export default function Home() {
                               >
                                 <a href="#" className="d-block">
                                   <img
-                                    src="images/banners/mega-3.png"
+                                    src="/static/images/banners/mega-3.png"
                                     className="img-fluid"
                                     alt="Product"
                                   />
@@ -823,37 +903,52 @@ export default function Home() {
                           </li>
                           <li>
                             <a href="shop-v1-root-category.html">
-                              <i className="ion ion-md-phone-portrait" />
+                              {/* <i className="ion ion-md-phone-portrait" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faMobileAndroidAlt} />
+                              </i>
                               Mobiles &amp; Tablets
                             </a>
                           </li>
                           <li>
                             <a href="shop-v1-root-category.html">
-                              <i className="ion ion-md-tv" />
+                              {/* <i className="ion ion-md-tv" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faTvAlt} />
+                              </i>
                               Consumer Electronics
                             </a>
                           </li>
                           <li>
                             <a href="shop-v1-root-category.html">
-                              <i className="ion ion-ios-book" />
+                              {/* <i className="ion ion-ios-book" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faBookOpen} />
+                              </i>
                               Books &amp; Audible
                             </a>
                           </li>
                           <li>
                             <a href="shop-v1-root-category.html">
-                              <i className="ion ion-md-heart" />
+                              {/* <i className="ion ion-md-heart" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faHeartbeat} />
+                              </i>
                               Beauty &amp; Health
                             </a>
                           </li>
                           <li className="v-none" style={{ display: "none" }}>
                             <a href="shop-v1-root-category.html">
-                              <i className="ion ion-md-easel" />
+                              {/* <i className="ion ion-md-easel" /> */}
                               Furniture Home &amp; Office
                             </a>
                           </li>
                           <li>
                             <a className="v-more">
-                              <i className="ion ion-md-add" />
+                              {/* <i className="ion ion-md-add" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faPlus} />
+                              </i>
                               <span>View More</span>
                             </a>
                           </li>
@@ -882,11 +977,16 @@ export default function Home() {
                     <li className="mega-position">
                       <a>
                         Pages
-                        <i className="fas fa-chevron-down u-s-m-l-9" />
+                        {/* <i className="fas fa-chevron-down u-s-m-l-9" /> */}
+                        <i className="ion-ios-arrow-forward">
+                          <FontAwesomeIcon icon={faAngleDown} />
+                        </i>
                       </a>
                       <div className="mega-menu mega-3-colm">
                         <ul>
-                          <li className="menu-title">Home &amp; Static Pages</li>
+                          <li className="menu-title">
+                            Home &amp; Static Pages
+                          </li>
                           <li>
                             <a href="home.html" className="u-c-brand">
                               Home
@@ -914,7 +1014,9 @@ export default function Home() {
                           </li>
                           <li className="menu-title">Single Product Page</li>
                           <li>
-                            <a href="single-product.html">Single Product Fullwidth</a>
+                            <a href="single-product.html">
+                              Single Product Fullwidth
+                            </a>
                           </li>
                           <li className="menu-title">Blog</li>
                           <li>
@@ -953,7 +1055,9 @@ export default function Home() {
                           </li>
                           <li className="menu-title">Wishlist Variations</li>
                           <li>
-                            <a href="wishlist-empty.html">Wishlist Ver 1 Empty</a>
+                            <a href="wishlist-empty.html">
+                              Wishlist Ver 1 Empty
+                            </a>
                           </li>
                           <li>
                             <a href="wishlist.html">Wishlist Ver 2 Full</a>
@@ -993,11 +1097,15 @@ export default function Home() {
                           </li>
                           <li className="menu-title">My Account Variation</li>
                           <li>
-                            <a href="lost-password.html">Lost Your Password ?</a>
+                            <a href="lost-password.html">
+                              Lost Your Password ?
+                            </a>
                           </li>
                           <li className="menu-title">Checkout Variation</li>
                           <li>
-                            <a href="confirmation.html">Checkout Confirmation</a>
+                            <a href="confirmation.html">
+                              Checkout Confirmation
+                            </a>
                           </li>
                           <li className="menu-title">Custom Deals Page</li>
                           <li>
@@ -1058,7 +1166,7 @@ export default function Home() {
               >
                 <img
                   className="img-fluid"
-                  src="images/banners/bannerlayer-1.jpg"
+                  src="/static/images/banners/bannerlayer-1.jpg"
                   alt="Winter Season Banner"
                 />
               </a>
@@ -1113,9 +1221,15 @@ export default function Home() {
             <div className="wrapper-content">
               <div className="outer-area-tab">
                 <div className="tab-content">
-                  <div className="tab-pane active show fade" id="men-latest-products">
+                  <div
+                    className="tab-pane active show fade"
+                    id="men-latest-products"
+                  >
                     <div className="slider-fouc">
-                      <div className="products-slider owl-carousel" data-item={4}>
+                      <div
+                        className="products-slider owl-carousel"
+                        data-item={4}
+                      >
                         <div className="item">
                           <div className="image-container">
                             <a
@@ -1124,7 +1238,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1139,10 +1253,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1160,7 +1271,9 @@ export default function Home() {
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Hoodies</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Hoodies
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1195,7 +1308,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1210,10 +1323,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1231,7 +1341,9 @@ export default function Home() {
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">T-Shirts</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    T-Shirts
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1263,7 +1375,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1278,10 +1390,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1333,7 +1442,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1348,10 +1457,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1366,10 +1472,14 @@ export default function Home() {
                                   <a href="shop-v1-root-category.html">Men's</a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Bottoms</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Bottoms
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Jeans</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Jeans
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1404,7 +1514,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1419,10 +1529,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1440,7 +1547,9 @@ export default function Home() {
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Suits</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Suits
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1475,7 +1584,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1490,10 +1599,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1508,10 +1614,14 @@ export default function Home() {
                                   <a href="shop-v1-root-category.html">Men's</a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Outwear</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Outwear
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Jackets</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Jackets
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1543,7 +1653,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1558,10 +1668,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1576,10 +1683,14 @@ export default function Home() {
                                   <a href="shop-v1-root-category.html">Men's</a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Accessories</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Accessories
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Ties</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Ties
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1611,7 +1722,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1626,10 +1737,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1644,10 +1752,14 @@ export default function Home() {
                                   <a href="shop-v1-root-category.html">Men's</a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Bottoms</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Bottoms
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Shoes</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Shoes
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1689,7 +1801,10 @@ export default function Home() {
                   </div>
                   <div className="tab-pane fade" id="men-top-rating-products">
                     <div className="slider-fouc">
-                      <div className="products-slider owl-carousel" data-item={4}>
+                      <div
+                        className="products-slider owl-carousel"
+                        data-item={4}
+                      >
                         <div className="item">
                           <div className="image-container">
                             <a
@@ -1698,7 +1813,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1713,10 +1828,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1734,7 +1846,9 @@ export default function Home() {
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Suits</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Suits
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1769,7 +1883,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1784,10 +1898,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1802,10 +1913,14 @@ export default function Home() {
                                   <a href="shop-v1-root-category.html">Men's</a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Outwear</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Outwear
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Jackets</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Jackets
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1837,7 +1952,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1852,10 +1967,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1870,10 +1982,14 @@ export default function Home() {
                                   <a href="shop-v1-root-category.html">Men's</a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Accessories</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Accessories
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Ties</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Ties
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1905,7 +2021,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -1920,10 +2036,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -1938,10 +2051,14 @@ export default function Home() {
                                   <a href="shop-v1-root-category.html">Men's</a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Bottoms</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Bottoms
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Shoes</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Shoes
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -1995,7 +2112,10 @@ export default function Home() {
               <span className="sec-maker-span-text">Ends in</span>
               {/* Timing-Box */}
               <div className="section-timing-wrapper dynamic">
-                <span className="fictitious-seconds" style={{ display: "none" }}>
+                <span
+                  className="fictitious-seconds"
+                  style={{ display: "none" }}
+                >
                   18000
                 </span>
                 <div className="section-box-wrapper box-days">
@@ -2030,10 +2150,13 @@ export default function Home() {
               <div className="products-slider owl-carousel" data-item={4}>
                 <div className="item">
                   <div className="image-container">
-                    <a className="item-img-wrapper-link" href="single-product.html">
+                    <a
+                      className="item-img-wrapper-link"
+                      href="single-product.html"
+                    >
                       <img
                         className="img-fluid"
-                        src="images/product/product@3x.jpg"
+                        src="/static/images/product/product@3x.jpg"
                         alt="Product"
                       />
                     </a>
@@ -2075,7 +2198,10 @@ export default function Home() {
                         </a>
                       </h6>
                       <div className="item-stars">
-                        <div className="star" title="0 out of 5 - based on 0 Reviews">
+                        <div
+                          className="star"
+                          title="0 out of 5 - based on 0 Reviews"
+                        >
                           <span style={{ width: 0 }} />
                         </div>
                         <span>(0)</span>
@@ -2092,10 +2218,13 @@ export default function Home() {
                 </div>
                 <div className="item">
                   <div className="image-container">
-                    <a className="item-img-wrapper-link" href="single-product.html">
+                    <a
+                      className="item-img-wrapper-link"
+                      href="single-product.html"
+                    >
                       <img
                         className="img-fluid"
-                        src="images/product/product@3x.jpg"
+                        src="/static/images/product/product@3x.jpg"
                         alt="Product"
                       />
                     </a>
@@ -2132,10 +2261,15 @@ export default function Home() {
                         </li>
                       </ul>
                       <h6 className="item-title">
-                        <a href="single-product.html">Fern Green Men's Jacket</a>
+                        <a href="single-product.html">
+                          Fern Green Men's Jacket
+                        </a>
                       </h6>
                       <div className="item-stars">
-                        <div className="star" title="0 out of 5 - based on 0 Reviews">
+                        <div
+                          className="star"
+                          title="0 out of 5 - based on 0 Reviews"
+                        >
                           <span style={{ width: 0 }} />
                         </div>
                         <span>(0)</span>
@@ -2152,10 +2286,13 @@ export default function Home() {
                 </div>
                 <div className="item">
                   <div className="image-container">
-                    <a className="item-img-wrapper-link" href="single-product.html">
+                    <a
+                      className="item-img-wrapper-link"
+                      href="single-product.html"
+                    >
                       <img
                         className="img-fluid"
-                        src="images/product/product@3x.jpg"
+                        src="/static/images/product/product@3x.jpg"
                         alt="Product"
                       />
                     </a>
@@ -2197,7 +2334,10 @@ export default function Home() {
                         </a>
                       </h6>
                       <div className="item-stars">
-                        <div className="star" title="0 out of 5 - based on 0 Reviews">
+                        <div
+                          className="star"
+                          title="0 out of 5 - based on 0 Reviews"
+                        >
                           <span style={{ width: 0 }} />
                         </div>
                         <span>(0)</span>
@@ -2214,10 +2354,13 @@ export default function Home() {
                 </div>
                 <div className="item">
                   <div className="image-container">
-                    <a className="item-img-wrapper-link" href="single-product.html">
+                    <a
+                      className="item-img-wrapper-link"
+                      href="single-product.html"
+                    >
                       <img
                         className="img-fluid"
-                        src="images/product/product@3x.jpg"
+                        src="/static/images/product/product@3x.jpg"
                         alt="Product"
                       />
                     </a>
@@ -2259,7 +2402,10 @@ export default function Home() {
                         </a>
                       </h6>
                       <div className="item-stars">
-                        <div className="star" title="0 out of 5 - based on 0 Reviews">
+                        <div
+                          className="star"
+                          title="0 out of 5 - based on 0 Reviews"
+                        >
                           <span style={{ width: 0 }} />
                         </div>
                         <span>(0)</span>
@@ -2290,7 +2436,7 @@ export default function Home() {
               >
                 <img
                   className="img-fluid"
-                  src="images/banners/ban-men.jpg"
+                  src="/static/images/banners/ban-men.jpg"
                   alt="Banner Image"
                 />
               </a>
@@ -2356,7 +2502,10 @@ export default function Home() {
                     id="women-latest-products"
                   >
                     <div className="slider-fouc">
-                      <div className="products-slider owl-carousel" data-item={4}>
+                      <div
+                        className="products-slider owl-carousel"
+                        data-item={4}
+                      >
                         <div className="item">
                           <div className="image-container">
                             <a
@@ -2365,7 +2514,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -2380,10 +2529,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -2395,13 +2541,17 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Dresses</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Dresses
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -2436,7 +2586,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -2451,10 +2601,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -2466,13 +2613,17 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Dresses</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Dresses
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -2504,7 +2655,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -2519,10 +2670,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -2534,13 +2682,17 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Dresses</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Dresses
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -2572,7 +2724,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -2587,10 +2739,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -2602,19 +2751,23 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Dresses</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Dresses
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
                                 <a href="single-product.html">
-                                  Black &amp; White Wrap Dress with High Jewelery
-                                  Necklace
+                                  Black &amp; White Wrap Dress with High
+                                  Jewelery Necklace
                                 </a>
                               </h6>
                               <div className="item-stars">
@@ -2644,7 +2797,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -2659,10 +2812,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -2674,13 +2824,17 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Dresses</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Dresses
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -2715,7 +2869,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -2730,10 +2884,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -2745,13 +2896,17 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Dresses</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Dresses
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -2783,7 +2938,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -2798,10 +2953,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -2813,13 +2965,19 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Bottoms</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Bottoms
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Shoes</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Shoes
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -2851,7 +3009,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -2866,10 +3024,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -2881,13 +3036,19 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Intimates</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Intimates
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Bras</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Bras
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -2915,7 +3076,10 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="tab-pane fade" id="women-best-selling-products">
+                  <div
+                    className="tab-pane fade"
+                    id="women-best-selling-products"
+                  >
                     {/* Product Not Found */}
                     <div className="product-not-found">
                       <div className="not-found">
@@ -2927,7 +3091,10 @@ export default function Home() {
                   </div>
                   <div className="tab-pane fade" id="women-top-rating-products">
                     <div className="slider-fouc">
-                      <div className="products-slider owl-carousel" data-item={4}>
+                      <div
+                        className="products-slider owl-carousel"
+                        data-item={4}
+                      >
                         <div className="item">
                           <div className="image-container">
                             <a
@@ -2936,7 +3103,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -2951,10 +3118,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -2966,13 +3130,17 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Dresses</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Dresses
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3007,7 +3175,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3022,10 +3190,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3037,13 +3202,17 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">Tops</a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Dresses</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Dresses
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3075,7 +3244,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3090,10 +3259,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3105,13 +3271,19 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Bottoms</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Bottoms
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Shoes</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Shoes
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3143,7 +3315,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3158,10 +3330,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3173,13 +3342,19 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Women's</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Women's
+                                  </a>
                                 </li>
                                 <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Intimates</a>
+                                  <a href="shop-v2-sub-category.html">
+                                    Intimates
+                                  </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">Bras</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    Bras
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3280,7 +3455,10 @@ export default function Home() {
                     id="toys-latest-products"
                   >
                     <div className="slider-fouc">
-                      <div className="products-slider owl-carousel" data-item={4}>
+                      <div
+                        className="products-slider owl-carousel"
+                        data-item={4}
+                      >
                         <div className="item">
                           <div className="image-container">
                             <a
@@ -3289,7 +3467,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3304,10 +3482,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3319,7 +3494,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3333,7 +3510,9 @@ export default function Home() {
                                 </li>
                               </ul>
                               <h6 className="item-title">
-                                <a href="single-product.html">RC Helicopter 6-Cell</a>
+                                <a href="single-product.html">
+                                  RC Helicopter 6-Cell
+                                </a>
                               </h6>
                               <div className="item-stars">
                                 <div
@@ -3362,7 +3541,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3377,10 +3556,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3392,7 +3568,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3400,7 +3578,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3432,7 +3612,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3447,10 +3627,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3462,7 +3639,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3470,7 +3649,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3502,7 +3683,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3517,10 +3698,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3532,7 +3710,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3540,7 +3720,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3575,7 +3757,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3590,10 +3772,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3605,7 +3784,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3613,7 +3794,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3646,7 +3829,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3661,10 +3844,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3676,7 +3856,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3684,7 +3866,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3716,7 +3900,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3731,10 +3915,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3746,7 +3927,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3754,7 +3937,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3786,7 +3971,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3801,10 +3986,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3816,7 +3998,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3824,7 +4008,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3854,7 +4040,10 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="tab-pane fade" id="toys-best-selling-products">
+                  <div
+                    className="tab-pane fade"
+                    id="toys-best-selling-products"
+                  >
                     {/* Product Not Found */}
                     <div className="product-not-found">
                       <div className="not-found">
@@ -3866,7 +4055,10 @@ export default function Home() {
                   </div>
                   <div className="tab-pane fade" id="toys-top-rating-products">
                     <div className="slider-fouc">
-                      <div className="products-slider owl-carousel" data-item={4}>
+                      <div
+                        className="products-slider owl-carousel"
+                        data-item={4}
+                      >
                         <div className="item">
                           <div className="image-container">
                             <a
@@ -3875,7 +4067,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3890,10 +4082,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3905,7 +4094,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3913,7 +4104,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -3946,7 +4139,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -3961,10 +4154,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -3976,7 +4166,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -3984,7 +4176,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -4016,7 +4210,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -4031,10 +4225,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -4046,7 +4237,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -4054,7 +4247,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -4086,7 +4281,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -4101,10 +4296,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -4116,7 +4308,9 @@ export default function Home() {
                             <div className="what-product-is">
                               <ul className="bread-crumb">
                                 <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Toys Drones</a>
+                                  <a href="shop-v1-root-category.html">
+                                    Toys Drones
+                                  </a>
                                 </li>
                                 <li className="has-separator">
                                   <a href="shop-v2-sub-category.html">
@@ -4124,7 +4318,9 @@ export default function Home() {
                                   </a>
                                 </li>
                                 <li>
-                                  <a href="shop-v3-sub-sub-category.html">RC Drone</a>
+                                  <a href="shop-v3-sub-sub-category.html">
+                                    RC Drone
+                                  </a>
                                 </li>
                               </ul>
                               <h6 className="item-title">
@@ -4303,7 +4499,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -4315,22 +4511,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -4365,8 +4552,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag new">
@@ -4381,7 +4572,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -4393,22 +4584,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -4443,8 +4625,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -4456,7 +4642,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -4468,22 +4654,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -4518,8 +4695,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag sale">
@@ -4534,7 +4715,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -4546,22 +4727,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -4596,8 +4768,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag discount">
@@ -4613,7 +4789,8 @@ export default function Home() {
                               <div className="not-found">
                                 <h2>SORRY!</h2>
                                 <h6>
-                                  There is not any product in specific catalogue.
+                                  There is not any product in specific
+                                  catalogue.
                                 </h6>
                               </div>
                             </div>
@@ -4633,7 +4810,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -4645,22 +4822,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -4695,8 +4863,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag new">
@@ -4711,7 +4883,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -4723,22 +4895,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -4773,8 +4936,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -4786,7 +4953,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -4798,22 +4965,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -4848,8 +5006,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag sale">
@@ -4864,7 +5026,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -4876,22 +5038,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -4926,8 +5079,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag discount">
@@ -4937,13 +5094,17 @@ export default function Home() {
                               </div>
                             </div>
                           </div>
-                          <div className="tab-pane fade" id="device-accessories">
+                          <div
+                            className="tab-pane fade"
+                            id="device-accessories"
+                          >
                             {/* Product Not Found */}
                             <div className="product-not-found">
                               <div className="not-found">
                                 <h2>SORRY!</h2>
                                 <h6>
-                                  There is not any product in specific catalogue.
+                                  There is not any product in specific
+                                  catalogue.
                                 </h6>
                               </div>
                             </div>
@@ -4955,7 +5116,8 @@ export default function Home() {
                               <div className="not-found">
                                 <h2>SORRY!</h2>
                                 <h6>
-                                  There is not any product in specific catalogue.
+                                  There is not any product in specific
+                                  catalogue.
                                 </h6>
                               </div>
                             </div>
@@ -4965,7 +5127,10 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="tab-pane fade" id="mobiles-best-selling-products">
+                  <div
+                    className="tab-pane fade"
+                    id="mobiles-best-selling-products"
+                  >
                     {/* Product Not Found */}
                     <div className="product-not-found">
                       <div className="not-found">
@@ -4975,7 +5140,10 @@ export default function Home() {
                     </div>
                     {/* Product Not Found /- */}
                   </div>
-                  <div className="tab-pane fade" id="mobiles-top-rating-products">
+                  <div
+                    className="tab-pane fade"
+                    id="mobiles-top-rating-products"
+                  >
                     {/* Product Not Found */}
                     <div className="product-not-found">
                       <div className="not-found">
@@ -5117,7 +5285,10 @@ export default function Home() {
                       </div>
                       <div className="col-lg-11 col-md-12">
                         <div className="tab-content">
-                          <div className="tab-pane fade show active" id="laptops">
+                          <div
+                            className="tab-pane fade show active"
+                            id="laptops"
+                          >
                             <div className="slider-fouc">
                               <div
                                 className="specific-category-slider owl-carousel"
@@ -5131,7 +5302,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -5143,22 +5314,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -5193,8 +5355,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag new">
@@ -5209,7 +5375,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -5221,22 +5387,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -5271,8 +5428,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -5284,7 +5445,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -5296,22 +5457,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -5346,8 +5498,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag sale">
@@ -5362,7 +5518,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -5374,22 +5530,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -5424,8 +5571,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag discount">
@@ -5435,13 +5586,17 @@ export default function Home() {
                               </div>
                             </div>
                           </div>
-                          <div className="tab-pane fade" id="pc-and-accessories">
+                          <div
+                            className="tab-pane fade"
+                            id="pc-and-accessories"
+                          >
                             {/* Product Not Found */}
                             <div className="product-not-found">
                               <div className="not-found">
                                 <h2>SORRY!</h2>
                                 <h6>
-                                  There is not any product in specific catalogue.
+                                  There is not any product in specific
+                                  catalogue.
                                 </h6>
                               </div>
                             </div>
@@ -5461,7 +5616,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -5473,22 +5628,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -5523,8 +5669,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag new">
@@ -5539,7 +5689,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -5551,22 +5701,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -5601,8 +5742,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -5614,7 +5759,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -5626,22 +5771,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -5676,8 +5812,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag sale">
@@ -5692,7 +5832,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="images/product/product@3x.jpg"
+                                        src="/static/images/product/product@3x.jpg"
                                         alt="Product"
                                       />
                                     </a>
@@ -5704,22 +5844,13 @@ export default function Home() {
                                       >
                                         Quick Look
                                       </a>
-                                      <a
-                                        className="item-mail"
-                                        href=""
-                                      >
+                                      <a className="item-mail" href="">
                                         Mail
                                       </a>
-                                      <a
-                                        className="item-addwishlist"
-                                        href=""
-                                      >
+                                      <a className="item-addwishlist" href="">
                                         Add to Wishlist
                                       </a>
-                                      <a
-                                        className="item-addCart"
-                                        href=""
-                                      >
+                                      <a className="item-addCart" href="">
                                         Add to Cart
                                       </a>
                                     </div>
@@ -5754,8 +5885,12 @@ export default function Home() {
                                       </div>
                                     </div>
                                     <div className="price-template">
-                                      <div className="item-new-price">$55.00</div>
-                                      <div className="item-old-price">$60.00</div>
+                                      <div className="item-new-price">
+                                        $55.00
+                                      </div>
+                                      <div className="item-old-price">
+                                        $60.00
+                                      </div>
                                     </div>
                                   </div>
                                   <div className="tag discount">
@@ -5771,7 +5906,8 @@ export default function Home() {
                               <div className="not-found">
                                 <h2>SORRY!</h2>
                                 <h6>
-                                  There is not any product in specific catalogue.
+                                  There is not any product in specific
+                                  catalogue.
                                 </h6>
                               </div>
                             </div>
@@ -5783,7 +5919,8 @@ export default function Home() {
                               <div className="not-found">
                                 <h2>SORRY!</h2>
                                 <h6>
-                                  There is not any product in specific catalogue.
+                                  There is not any product in specific
+                                  catalogue.
                                 </h6>
                               </div>
                             </div>
@@ -5793,7 +5930,10 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="tab-pane fade" id="consumer-best-selling-products">
+                  <div
+                    className="tab-pane fade"
+                    id="consumer-best-selling-products"
+                  >
                     {/* Product Not Found */}
                     <div className="product-not-found">
                       <div className="not-found">
@@ -5803,7 +5943,10 @@ export default function Home() {
                     </div>
                     {/* Product Not Found /- */}
                   </div>
-                  <div className="tab-pane fade" id="consumer-top-rating-products">
+                  <div
+                    className="tab-pane fade"
+                    id="consumer-top-rating-products"
+                  >
                     {/* Product Not Found */}
                     <div className="product-not-found">
                       <div className="not-found">
@@ -5813,7 +5956,10 @@ export default function Home() {
                     </div>
                     {/* Product Not Found /- */}
                   </div>
-                  <div className="tab-pane fade" id="consumer-featured-products">
+                  <div
+                    className="tab-pane fade"
+                    id="consumer-featured-products"
+                  >
                     {/* Product Not Found */}
                     <div className="product-not-found">
                       <div className="not-found">
@@ -5886,7 +6032,10 @@ export default function Home() {
                     id="books-latest-products"
                   >
                     <div className="slider-fouc">
-                      <div className="products-slider owl-carousel" data-item={4}>
+                      <div
+                        className="products-slider owl-carousel"
+                        data-item={4}
+                      >
                         <div className="item">
                           <div className="image-container">
                             <a
@@ -5895,7 +6044,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -5910,10 +6059,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -5930,7 +6076,8 @@ export default function Home() {
                               </ul>
                               <h6 className="item-title">
                                 <a href="single-product.html">
-                                  JavaScript The Definitive Guide by David Flanagan
+                                  JavaScript The Definitive Guide by David
+                                  Flanagan
                                 </a>
                               </h6>
                               <div className="item-stars">
@@ -5960,7 +6107,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -5975,10 +6122,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -6022,7 +6166,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -6037,10 +6181,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -6057,8 +6198,8 @@ export default function Home() {
                               </ul>
                               <h6 className="item-title">
                                 <a href="single-product.html">
-                                  Secret of the JavaScript Ninja by Bear Bibeault
-                                  &amp; John Resig
+                                  Secret of the JavaScript Ninja by Bear
+                                  Bibeault &amp; John Resig
                                 </a>
                               </h6>
                               <div className="item-stars">
@@ -6085,7 +6226,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="images/product/product@3x.jpg"
+                                src="/static/images/product/product@3x.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -6100,10 +6241,7 @@ export default function Home() {
                               <a className="item-mail" href="">
                                 Mail
                               </a>
-                              <a
-                                className="item-addwishlist"
-                                href=""
-                              >
+                              <a className="item-addwishlist" href="">
                                 Add to Wishlist
                               </a>
                               <a className="item-addCart" href="">
@@ -6145,7 +6283,10 @@ export default function Home() {
                       </div>
                     </div>
                   </div>
-                  <div className="tab-pane fade" id="books-best-selling-products">
+                  <div
+                    className="tab-pane fade"
+                    id="books-best-selling-products"
+                  >
                     {/* Product Not Found */}
                     <div className="product-not-found">
                       <div className="not-found">
@@ -6203,32 +6344,50 @@ export default function Home() {
             <div className="brand-slider-content owl-carousel" data-item={5}>
               <div className="brand-pic">
                 <a href="#">
-                  <img src="images/brand-logos/b1.png" alt="Brand Logo 1" />
+                  <img
+                    src="/static/images/brand-logos/b1.png"
+                    alt="Brand Logo 1"
+                  />
                 </a>
               </div>
               <div className="brand-pic">
                 <a href="#">
-                  <img src="images/brand-logos/b1.png" alt="Brand Logo 2" />
+                  <img
+                    src="/static/images/brand-logos/b1.png"
+                    alt="Brand Logo 2"
+                  />
                 </a>
               </div>
               <div className="brand-pic">
                 <a href="#">
-                  <img src="images/brand-logos/b1.png" alt="Brand Logo 3" />
+                  <img
+                    src="/static/images/brand-logos/b1.png"
+                    alt="Brand Logo 3"
+                  />
                 </a>
               </div>
               <div className="brand-pic">
                 <a href="#">
-                  <img src="images/brand-logos/b1.png" alt="Brand Logo 5" />
+                  <img
+                    src="/static/images/brand-logos/b1.png"
+                    alt="Brand Logo 5"
+                  />
                 </a>
               </div>
               <div className="brand-pic">
                 <a href="#">
-                  <img src="images/brand-logos/b1.png" alt="Brand Logo 6" />
+                  <img
+                    src="/static/images/brand-logos/b1.png"
+                    alt="Brand Logo 6"
+                  />
                 </a>
               </div>
               <div className="brand-pic">
                 <a href="#">
-                  <img src="images/brand-logos/b1.png" alt="Brand Logo 7" />
+                  <img
+                    src="/static/images/brand-logos/b1.png"
+                    alt="Brand Logo 7"
+                  />
                 </a>
               </div>
             </div>
@@ -6247,8 +6406,8 @@ export default function Home() {
                     </div>
                     <h2>Great Value</h2>
                     <p>
-                      We offer competitive prices on our 100 million plus product
-                      range
+                      We offer competitive prices on our 100 million plus
+                      product range
                     </p>
                   </div>
                 </div>
@@ -6258,7 +6417,9 @@ export default function Home() {
                       <i className="ion ion-md-cash" />
                     </div>
                     <h2>Shop with Confidence</h2>
-                    <p>Our Protection covers your purchase from click to delivery</p>
+                    <p>
+                      Our Protection covers your purchase from click to delivery
+                    </p>
                   </div>
                 </div>
                 <div className="col-lg-3 col-md-3 col-sm-3">
@@ -6268,7 +6429,8 @@ export default function Home() {
                     </div>
                     <h2>Safe Payment</h2>
                     <p>
-                      Pay with the world’s most popular and secure payment methods
+                      Pay with the world’s most popular and secure payment
+                      methods
                     </p>
                   </div>
                 </div>
@@ -6278,7 +6440,10 @@ export default function Home() {
                       <i className="ion ion-md-contacts" />
                     </div>
                     <h2>24/7 Help Center</h2>
-                    <p>Round-the-clock assistance for a smooth shopping experience</p>
+                    <p>
+                      Round-the-clock assistance for a smooth shopping
+                      experience
+                    </p>
                   </div>
                 </div>
               </div>
@@ -6294,8 +6459,8 @@ export default function Home() {
               <h6>For special offers and other discount information</h6>
               <h1>Subscribe to our Newsletter</h1>
               <p>
-                Subscribe to the mailing list to receive updates on promotions, new
-                arrivals, discount and coupons.
+                Subscribe to the mailing list to receive updates on promotions,
+                new arrivals, discount and coupons.
               </p>
               <form className="newsletter-form">
                 <label className="sr-only" htmlFor="newsletter-field">
@@ -6326,7 +6491,9 @@ export default function Home() {
                         <a href="track-order.html">Track Order</a>
                       </li>
                       <li>
-                        <a href="terms-and-conditions.html">Terms &amp; Conditions</a>
+                        <a href="terms-and-conditions.html">
+                          Terms &amp; Conditions
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -6431,7 +6598,8 @@ export default function Home() {
                 </ul>
               </div>
               <p className="copyright-text">
-                Copyright © 2018 <a href="home.html">Groover</a> All Right Reserved
+                Copyright © 2018 <a href="home.html">Groover</a> All Right
+                Reserved
               </p>
             </div>
           </div>
@@ -6490,7 +6658,7 @@ export default function Home() {
                       >
                         <img
                           className="img-fluid"
-                          src="images/banners/newsletter-1.jpg"
+                          src="/static/images/banners/newsletter-1.jpg"
                           alt="Newsletter Image"
                         />
                       </a>
@@ -6546,47 +6714,65 @@ export default function Home() {
                       <img
                         id="zoom-pro-quick-view"
                         className="img-fluid"
-                        src="images/product/product@4x.jpg"
-                        data-zoom-image="images/product/product@4x.jpg"
+                        src="/static/images/product/product@4x.jpg"
+                        data-zoom-image="/static/images/product/product@4x.jpg"
                         alt="Zoom Image"
                       />
                       <div id="gallery-quick-view" className="u-s-m-t-10">
                         <a
                           className="active"
-                          data-image="images/product/product@4x.jpg"
-                          data-zoom-image="images/product/product@4x.jpg"
+                          data-image="/static/images/product/product@4x.jpg"
+                          data-zoom-image="/static/images/product/product@4x.jpg"
                         >
-                          <img src="images/product/product@2x.jpg" alt="Product" />
+                          <img
+                            src="/static/images/product/product@2x.jpg"
+                            alt="Product"
+                          />
                         </a>
                         <a
-                          data-image="images/product/product@4x.jpg"
-                          data-zoom-image="images/product/product@4x.jpg"
+                          data-image="/static/images/product/product@4x.jpg"
+                          data-zoom-image="/static/images/product/product@4x.jpg"
                         >
-                          <img src="images/product/product@2x.jpg" alt="Product" />
+                          <img
+                            src="/static/images/product/product@2x.jpg"
+                            alt="Product"
+                          />
                         </a>
                         <a
-                          data-image="images/product/product@4x.jpg"
-                          data-zoom-image="images/product/product@4x.jpg"
+                          data-image="/static/images/product/product@4x.jpg"
+                          data-zoom-image="/static/images/product/product@4x.jpg"
                         >
-                          <img src="images/product/product@2x.jpg" alt="Product" />
+                          <img
+                            src="/static/images/product/product@2x.jpg"
+                            alt="Product"
+                          />
                         </a>
                         <a
-                          data-image="images/product/product@4x.jpg"
-                          data-zoom-image="images/product/product@4x.jpg"
+                          data-image="/static/images/product/product@4x.jpg"
+                          data-zoom-image="/static/images/product/product@4x.jpg"
                         >
-                          <img src="images/product/product@2x.jpg" alt="Product" />
+                          <img
+                            src="/static/images/product/product@2x.jpg"
+                            alt="Product"
+                          />
                         </a>
                         <a
-                          data-image="images/product/product@4x.jpg"
-                          data-zoom-image="images/product/product@4x.jpg"
+                          data-image="/static/images/product/product@4x.jpg"
+                          data-zoom-image="/static/images/product/product@4x.jpg"
                         >
-                          <img src="images/product/product@2x.jpg" alt="Product" />
+                          <img
+                            src="/static/images/product/product@2x.jpg"
+                            alt="Product"
+                          />
                         </a>
                         <a
-                          data-image="images/product/product@4x.jpg"
-                          data-zoom-image="images/product/product@4x.jpg"
+                          data-image="/static/images/product/product@4x.jpg"
+                          data-zoom-image="/static/images/product/product@4x.jpg"
                         >
-                          <img src="images/product/product@2x.jpg" alt="Product" />
+                          <img
+                            src="/static/images/product/product@2x.jpg"
+                            alt="Product"
+                          />
                         </a>
                       </div>
                     </div>
@@ -6608,7 +6794,9 @@ export default function Home() {
                             <a href="home.html">Home</a>
                           </li>
                           <li className="has-separator">
-                            <a href="shop-v1-root-category.html">Men's Clothing</a>
+                            <a href="shop-v1-root-category.html">
+                              Men's Clothing
+                            </a>
                           </li>
                           <li className="has-separator">
                             <a href="shop-v2-sub-category.html">Tops</a>
@@ -6632,13 +6820,14 @@ export default function Home() {
                           Description:
                         </h6>
                         <p>
-                          This hoodie is full cotton. It includes a muff sewn onto the
-                          lower front, and (usually) a drawstring to adjust the hood
-                          opening. Throughout the U.S., it is common for
-                          middle-school, high-school, and college students to wear
-                          this sweatshirts—with or without hoods—that display their
-                          respective school names or mascots across the chest, either
-                          as part of a uniform or personal preference.
+                          This hoodie is full cotton. It includes a muff sewn
+                          onto the lower front, and (usually) a drawstring to
+                          adjust the hood opening. Throughout the U.S., it is
+                          common for middle-school, high-school, and college
+                          students to wear this sweatshirts—with or without
+                          hoods—that display their respective school names or
+                          mascots across the chest, either as part of a uniform
+                          or personal preference.
                         </p>
                       </div>
                       <div className="section-3-price-original-discount u-s-p-y-14">
@@ -6778,21 +6967,63 @@ export default function Home() {
         </div>
         {/* Quick-view-Modal /- */}
       </div>
-      <Script src="https://www.google-analytics.com/analytics.js" async defer></Script>
-      <Script type="text/javascript" src="/static/js/vendor/modernizr-custom.min.js"></Script>
+      <Script
+        src="https://www.google-analytics.com/analytics.js"
+        async
+        defer
+      ></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/vendor/modernizr-custom.min.js"
+      ></Script>
       <Script type="text/javascript" src="/static/js/nprogress.min.js"></Script>
-      <Script type="text/javascript" src="/static/js/jquery.min.js" strategy="beforeInteractive"></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/jquery.min.js"
+        strategy="beforeInteractive"
+      ></Script>
       <Script type="text/javascript" src="/static/js/bootstrap.min.js"></Script>
       <Script type="text/javascript" src="/static/js/popper.min.js"></Script>
-      <Script type="text/javascript" src="/static/js/jquery.scrollUp.min.js" strategy="beforeInteractive"></Script>
-      <Script type="text/javascript" src="/static/js/jquery.elevatezoom.min.js" strategy="beforeInteractive"></Script>
-      <Script type="text/javascript" src="/static/js/jquery-ui.range-slider.min.js" strategy="beforeInteractive"></Script>
-      <Script type="text/javascript" src="/static/js/jquery.slimscroll.min.js" strategy="beforeInteractive"></Script>
-      <Script type="text/javascript" src="/static/js/jquery.resize-select.min.js" strategy="beforeInteractive"></Script>
-      <Script type="text/javascript" src="/static/js/jquery.custom-megamenu.min.js" strategy="beforeInteractive"></Script>
-      <Script type="text/javascript" src="/static/js/jquery.custom-countdown.min.js" strategy="beforeInteractive"></Script>
-      <Script type="text/javascript" src="/static/js/owl.carousel.min.js"></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/jquery.scrollUp.min.js"
+        strategy="beforeInteractive"
+      ></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/jquery.elevatezoom.min.js"
+        strategy="beforeInteractive"
+      ></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/jquery-ui.range-slider.min.js"
+        strategy="beforeInteractive"
+      ></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/jquery.slimscroll.min.js"
+        strategy="beforeInteractive"
+      ></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/jquery.resize-select.min.js"
+        strategy="beforeInteractive"
+      ></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/jquery.custom-megamenu.min.js"
+        strategy="beforeInteractive"
+      ></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/jquery.custom-countdown.min.js"
+        strategy="beforeInteractive"
+      ></Script>
+      <Script
+        type="text/javascript"
+        src="/static/js/owl.carousel.min.js"
+      ></Script>
       <Script type="text/javascript" src="/static/js/app.js"></Script>
     </>
-  )
+  );
 }
