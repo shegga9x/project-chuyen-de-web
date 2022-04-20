@@ -3,15 +3,18 @@ import Script from "next/script";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
+  faAngleLeft,
   faAngleRight,
   faBars,
   faBasketShopping,
   faBookAtlas,
   faBookOpen,
+  faChevronDown,
   faEnvelope,
   faHeart,
   faHeartbeat,
   faHome,
+  faLongArrowAltUp,
   faMobileAndroid,
   faMobileAndroidAlt,
   faPersonDress,
@@ -91,8 +94,9 @@ export default function Home() {
                   <li>
                     <a>
                       My Account
-                      {/* <i className="fas fa-chevron-down u-s-m-l-9" /> */}
-                      <FontAwesomeIcon icon={faAngleDown} />
+                      <i className="u-s-m-l-9">
+                        <FontAwesomeIcon icon={faChevronDown} size="2xs" />
+                      </i>
                     </a>
                     <ul className="g-dropdown" style={{ width: 200 }}>
                       <li>
@@ -124,8 +128,9 @@ export default function Home() {
                   <li>
                     <a>
                       USD
-                      {/* <i className="fas fa-chevron-down u-s-m-l-9" /> */}
-                      <FontAwesomeIcon icon={faAngleDown} />
+                      <i className="u-s-m-l-9">
+                        <FontAwesomeIcon icon={faChevronDown} size="2xs" />
+                      </i>
                     </a>
                     <ul className="g-dropdown" style={{ width: 90 }}>
                       <li>
@@ -141,8 +146,9 @@ export default function Home() {
                   <li>
                     <a>
                       ENG
-                      {/* <i className="fas fa-chevron-down u-s-m-l-9" /> */}
-                      <FontAwesomeIcon icon={faAngleDown} />
+                      <i className="u-s-m-l-9">
+                        <FontAwesomeIcon icon={faChevronDown} size="2xs" />
+                      </i>
                     </a>
                     <ul className="g-dropdown" style={{ width: 70 }}>
                       <li>
@@ -191,7 +197,7 @@ export default function Home() {
                         <label className="sr-only" htmlFor="select-category">
                           Choose category for search
                         </label>
-                        <select className="select-box" id="select-category" FontAwesomeIcon icon={faAngleDown}>
+                        <select className="select-box" id="select-category">
                           <option value="">All</option>
                           <option value="">Men's Clothing</option>
                           <option value="">Women's Clothing</option>
@@ -202,14 +208,24 @@ export default function Home() {
                           <option value="">Beauty &amp; Health</option>
                           <option value="">Furniture Home &amp; Office</option>
                         </select>
+                        <i style={{
+                          fontSize: 8,
+                          position: "absolute",
+                          right: 8,
+                          top: "50%",
+                          transform: "translateY(-50%)"
+                        }}>
+                          <FontAwesomeIcon icon={faAngleDown} />
+                        </i>
                       </div>
                     </div>
                     <button
                       id="btn-search"
                       type="submit"
                       className="button button-primary fas fa-search"
-                      // FontAwesomeIcon icon={faSearch}
-                    />
+                    >
+                      <FontAwesomeIcon icon={faSearch} />
+                    </button>
                   </form>
                 </div>
                 <div className="col-lg-3 col-md-3 col-sm-6">
@@ -6967,11 +6983,6 @@ export default function Home() {
         </div>
         {/* Quick-view-Modal /- */}
       </div>
-      <Script
-        src="https://www.google-analytics.com/analytics.js"
-        async
-        defer
-      ></Script>
       <Script
         type="text/javascript"
         src="/static/js/vendor/modernizr-custom.min.js"
