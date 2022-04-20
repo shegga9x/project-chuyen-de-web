@@ -28,7 +28,7 @@ import backend.backend.helpers.payload.response.MessageResponse;
 import backend.backend.helpers.utils.ControlerUtils;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.model.UserDetailCustom;
-import backend.backend.services.AccountService;
+import backend.backend.services.mainService.AuthService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -37,7 +37,7 @@ public class AuthController {
     @Autowired
     ControlerUtils controlerUtils;
     @Autowired
-    AccountService accountService;
+    AuthService accountService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest model, HttpServletRequest request) {

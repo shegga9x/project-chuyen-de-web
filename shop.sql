@@ -33,6 +33,8 @@ CREATE TABLE ACCOUNT
     --Admin là ad ,student là st,professor là pr
     email nvarchar(50) NOT NULL,
     password_hash nvarchar(255) NOT NULL,
+	provider varchar(255) NOT NULL,
+	provider_id varchar(255),
     [created] [datetime2](7) ,
     [updated] [datetime2](7) ,
     [last_expires] [datetime2](7) ,
@@ -49,6 +51,7 @@ CREATE TABLE ACCOUNT_Detail
     ID_ACCOUNT int NOT NULL FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,
     first_name nvarchar(max) ,
     last_name nvarchar(max) ,
+	imageUrl nvarchar(max),
     address nvarchar(50)  ,
     phone_number varchar(10) ,
     birthday smalldatetime ,

@@ -1,4 +1,4 @@
-package backend.backend.persitence.enumModel;
+package backend.backend.persitence.model.enumModel;
 
 public enum RoleEnum {
     Admin,

@@ -1,10 +1,8 @@
-package backend.backend.services;
+package backend.backend.services.mainService;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +26,8 @@ import backend.backend.persitence.entities.RefreshToken;
 import backend.backend.persitence.entities.ResetToken;
 import backend.backend.persitence.entities.Role;
 import backend.backend.persitence.entities.VerificationToken;
-import backend.backend.persitence.enumModel.RoleEnum;
+import backend.backend.persitence.model.enumModel.AuthProvider;
+import backend.backend.persitence.model.enumModel.RoleEnum;
 import backend.backend.persitence.repository.AccountRepository;
 import backend.backend.persitence.repository.RefreshTokenRepository;
 import backend.backend.persitence.repository.ResetTokenRepository;
@@ -36,7 +35,7 @@ import backend.backend.persitence.repository.VerificationTokenRepository;
 import backend.backend.services.subService.EmailService;
 
 @Service
-public class AccountService {
+public class AuthService {
     @Value("${bezkoder.app.jwtRefreshExpirationMs}")
     private int jwtRefreshExpirationMs;
     @Autowired
@@ -69,6 +68,8 @@ public class AccountService {
         account.setPasswordHash(encoder.encode(model.getPassword()));
         account.setAcceptTerms(true);
         account.setLastExpires(new Date());
+        account.setProvider(AuthProvider.local);
+        account.setLastExpires(new Date());
         AccountDetail accountDetail = new AccountDetail();
         SubUtils.mapperObject(model, accountDetail);
         boolean isFirstAccount = accountRepository.findAll().size() == 0;
@@ -82,12 +83,12 @@ public class AccountService {
         account = accountRepository.save(account);
         emailService.sendVerificationEmail(account, origin, verificationToken);
     }
+
     public void verifyEmail(String token) {
         VerificationToken verificationToken = null;
         try {
             verificationToken = verificationTokenRepository.findByVerificationTokenContent(token).get();
         } catch (Exception e) {
-            System.out.println(e);
             throw new CustomException("Can't find token !!!");
         }
         verificationToken.setVerified(new Date());
