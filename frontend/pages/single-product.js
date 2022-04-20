@@ -1,11 +1,47 @@
 import Head from "next/head";
 import Script from "next/script";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFacebookF, faTwitter, faGooglePlusG, faPinterest } from "@fortawesome/free-brands-svg-icons"
+import {
+    faAngleDown,
+    faAngleLeft,
+    faAngleRight,
+    faBars,
+    faBasketShopping,
+    faBookAtlas,
+    faBookOpen,
+    faChevronDown,
+    faCircleCheck,
+    faTh,
+    faHeart,
+    faHeartbeat,
+    faHome,
+    faLocationArrow,
+    faLongArrowAltUp,
+    faMobileAndroid,
+    faMobileAndroidAlt,
+    faPersonDress,
+    faPhone,
+    faPhoneFlip,
+    faPlus,
+    faRocket,
+    faSearch,
+    faShirt,
+    faSignInAlt,
+    faTelevision,
+    faTv,
+    faTvAlt,
+    faEnvelope,
+    faFaceAngry,
+    faRss,
+} from "@fortawesome/free-solid-svg-icons";
+
 
 export default function SingleProduct() {
     return (
         <>
             <Head>
-                <meta charSet="UTF-8" key={'meta-charSet'}/>
+                <meta charSet="UTF-8" key={'meta-charSet'} />
                 <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
                 <meta
                     name="viewport"
@@ -136,7 +172,7 @@ export default function SingleProduct() {
                                     <div className="brand-logo text-lg-center">
                                         <a href="home.html">
                                             <img
-                                                src="images/main-logo/groover-branding-1.png"
+                                                src="/static/images/main-logo/groover-branding-1.png"
                                                 alt="Groover Brand Logo"
                                                 className="app-brand-logo"
                                             />
@@ -186,7 +222,9 @@ export default function SingleProduct() {
                                         <ul className="mid-nav g-nav">
                                             <li className="u-d-none-lg">
                                                 <a href="home.html">
-                                                    <i className="ion ion-md-home" />
+                                                     <i>
+                                        <FontAwesomeIcon icon={faHome} />
+                                    </i>
                                                 </a>
                                             </li>
                                             <li className="u-d-none-lg">
@@ -239,7 +277,7 @@ export default function SingleProduct() {
                             <ul className="mini-cart-list">
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">Casual Hoodie Full Cotton</span>
                                         <span className="mini-item-price">$55.00</span>
                                         <span className="mini-item-quantity"> x 1 </span>
@@ -247,7 +285,7 @@ export default function SingleProduct() {
                                 </li>
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">
                                             Black Rock Dress with High Jewelery Necklace
                                         </span>
@@ -257,7 +295,7 @@ export default function SingleProduct() {
                                 </li>
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">Xiaomi Note 2 Black Color</span>
                                         <span className="mini-item-price">$55.00</span>
                                         <span className="mini-item-quantity"> x 1 </span>
@@ -265,7 +303,7 @@ export default function SingleProduct() {
                                 </li>
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">Dell Inspiron 15</span>
                                         <span className="mini-item-price">$55.00</span>
                                         <span className="mini-item-quantity"> x 1 </span>
@@ -793,7 +831,7 @@ export default function SingleProduct() {
                                                             >
                                                                 <a href="#" className="d-block">
                                                                     <img
-                                                                        src="images/banners/mega-3.png"
+                                                                        src="/static/images/banners/mega-3.png"
                                                                         className="img-fluid"
                                                                         alt="Product"
                                                                     />
@@ -1007,7 +1045,9 @@ export default function SingleProduct() {
                             <h2>Detail</h2>
                             <ul className="bread-crumb">
                                 <li className="has-separator">
-                                    <i className="ion ion-md-home" />
+                                     <i>
+                                        <FontAwesomeIcon icon={faHome} />
+                                    </i>
                                     <a href="home.html">Home</a>
                                 </li>
                                 <li className="is-marked">
@@ -1029,47 +1069,47 @@ export default function SingleProduct() {
                                     <img
                                         id="zoom-pro"
                                         className="img-fluid"
-                                        src="images/product/product@4x.jpg"
-                                        data-zoom-image="images/product/product@4x.jpg"
+                                        src="/static/images/product/product@4x.jpg"
+                                        data-zoom-image="/static/images/product/product@4x.jpg"
                                         alt="Zoom Image"
                                     />
                                     <div id="gallery" className="u-s-m-t-10">
                                         <a
                                             className="active"
-                                            data-image="images/product/product@4x.jpg"
-                                            data-zoom-image="images/product/product@4x.jpg"
+                                            data-image="/static/images/product/product@4x.jpg"
+                                            data-zoom-image="/static/images/product/product@4x.jpg"
                                         >
-                                            <img src="images/product/product@2x.jpg" alt="Product" />
+                                            <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                         </a>
                                         <a
-                                            data-image="images/product/product@4x.jpg"
-                                            data-zoom-image="images/product/product@4x.jpg"
+                                            data-image="/static/images/product/product@4x.jpg"
+                                            data-zoom-image="/static/images/product/product@4x.jpg"
                                         >
-                                            <img src="images/product/product@2x.jpg" alt="Product" />
+                                            <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                         </a>
                                         <a
-                                            data-image="images/product/product@4x.jpg"
-                                            data-zoom-image="images/product/product@4x.jpg"
+                                            data-image="/static/images/product/product@4x.jpg"
+                                            data-zoom-image="/static/images/product/product@4x.jpg"
                                         >
-                                            <img src="images/product/product@2x.jpg" alt="Product" />
+                                            <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                         </a>
                                         <a
-                                            data-image="images/product/product@4x.jpg"
-                                            data-zoom-image="images/product/product@4x.jpg"
+                                            data-image="/static/images/product/product@4x.jpg"
+                                            data-zoom-image="/static/images/product/product@4x.jpg"
                                         >
-                                            <img src="images/product/product@2x.jpg" alt="Product" />
+                                            <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                         </a>
                                         <a
-                                            data-image="images/product/product@4x.jpg"
-                                            data-zoom-image="images/product/product@4x.jpg"
+                                            data-image="/static/images/product/product@4x.jpg"
+                                            data-zoom-image="/static/images/product/product@4x.jpg"
                                         >
-                                            <img src="images/product/product@2x.jpg" alt="Product" />
+                                            <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                         </a>
                                         <a
-                                            data-image="images/product/product@4x.jpg"
-                                            data-zoom-image="images/product/product@4x.jpg"
+                                            data-image="/static/images/product/product@4x.jpg"
+                                            data-zoom-image="/static/images/product/product@4x.jpg"
                                         >
-                                            <img src="images/product/product@2x.jpg" alt="Product" />
+                                            <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                         </a>
                                     </div>
                                 </div>
@@ -1162,6 +1202,15 @@ export default function SingleProduct() {
                                                     <option value={3}>Black</option>
                                                     <option value={5}>White</option>
                                                 </select>
+                                                <i style={{
+                                                    fontSize: 8,
+                                                    position: "absolute",
+                                                    right: 8,
+                                                    top: "50%",
+                                                    transform: "translateY(-50%)"
+                                                }}>
+                                                    <FontAwesomeIcon icon={faAngleDown} />
+                                                </i>
                                             </div>
                                         </div>
                                         <div className="sizes u-s-m-b-11">
@@ -1184,6 +1233,15 @@ export default function SingleProduct() {
                                                     <option value="">Female XL</option>
                                                     <option value="">Male XL</option>
                                                 </select>
+                                                <i style={{
+                                                    fontSize: 8,
+                                                    position: "absolute",
+                                                    right: 8,
+                                                    top: "50%",
+                                                    transform: "translateY(-50%)"
+                                                }}>
+                                                    <FontAwesomeIcon icon={faAngleDown} />
+                                                </i>
                                             </div>
                                         </div>
                                     </div>
@@ -1194,27 +1252,33 @@ export default function SingleProduct() {
                                                 <ul className="social-media-list">
                                                     <li>
                                                         <a href="#">
-                                                            <i className="fab fa-facebook-f" />
+                                                            <i>
+                                                                <FontAwesomeIcon icon={faFacebookF} />
+                                                            </i>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="#">
-                                                            <i className="fab fa-twitter" />
+                                                            <i>
+                                                                <FontAwesomeIcon icon={faTwitter} />
+                                                            </i>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="#">
-                                                            <i className="fab fa-google-plus-g" />
+                                                            <i>
+                                                                <FontAwesomeIcon icon={faGooglePlusG} />
+                                                            </i>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="#">
-                                                            <i className="fas fa-rss" />
+                                                            <i><FontAwesomeIcon icon={faRss} /></i>
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="#">
-                                                            <i className="fab fa-pinterest" />
+                                                            <i><FontAwesomeIcon icon={faPinterest} /></i>
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -1242,8 +1306,12 @@ export default function SingleProduct() {
                                                 >
                                                     Add to cart
                                                 </button>
-                                                <button className="button button-outline-secondary far fa-heart u-s-m-l-6" />
-                                                <button className="button button-outline-secondary far fa-envelope u-s-m-l-6" />
+                                                <button className="button button-outline-secondary  u-s-m-l-6" >
+                                                    <FontAwesomeIcon icon={faHeart} />
+                                                </button>
+                                                <button className="button button-outline-secondary u-s-m-l-6" >
+                                                    <FontAwesomeIcon icon={faEnvelope} />
+                                                </button>
                                             </div>
                                         </form>
                                     </div>
@@ -1298,14 +1366,14 @@ export default function SingleProduct() {
                                                 </p>
                                                 <img
                                                     className="desc-img img-fluid u-s-m-b-26"
-                                                    src="images/product/product@3x.jpg"
+                                                    src="/static/images/product/product@3x.jpg"
                                                     alt="Product"
                                                 />
                                                 <iframe
                                                     className="desc-iframe u-s-m-b-45"
                                                     width={710}
                                                     height={400}
-                                                    src="images/product/iframe-youtube.jpg"
+                                                    src="/static/images/product/iframe-youtube.jpg"
                                                     allowFullScreen=""
                                                 />
                                             </div>
@@ -1667,7 +1735,7 @@ export default function SingleProduct() {
                                                     >
                                                         <img
                                                             className="img-fluid"
-                                                            src="images/product/product@3x.jpg"
+                                                            src="/static/images/product/product@3x.jpg"
                                                             alt="Product"
                                                         />
                                                     </a>
@@ -1735,7 +1803,7 @@ export default function SingleProduct() {
                                                     >
                                                         <img
                                                             className="img-fluid"
-                                                            src="images/product/product@3x.jpg"
+                                                            src="/static/images/product/product@3x.jpg"
                                                             alt="Product"
                                                         />
                                                     </a>
@@ -1803,7 +1871,7 @@ export default function SingleProduct() {
                                                     >
                                                         <img
                                                             className="img-fluid"
-                                                            src="images/product/product@3x.jpg"
+                                                            src="/static/images/product/product@3x.jpg"
                                                             alt="Product"
                                                         />
                                                     </a>
@@ -1871,7 +1939,7 @@ export default function SingleProduct() {
                                                     >
                                                         <img
                                                             className="img-fluid"
-                                                            src="images/product/product@3x.jpg"
+                                                            src="/static/images/product/product@3x.jpg"
                                                             alt="Product"
                                                         />
                                                     </a>
@@ -1952,7 +2020,7 @@ export default function SingleProduct() {
                                                     >
                                                         <img
                                                             className="img-fluid"
-                                                            src="images/product/product@3x.jpg"
+                                                            src="/static/images/product/product@3x.jpg"
                                                             alt="Product"
                                                         />
                                                     </a>
@@ -2225,47 +2293,47 @@ export default function SingleProduct() {
                                             <img
                                                 id="zoom-pro-quick-view"
                                                 className="img-fluid"
-                                                src="images/product/product@4x.jpg"
-                                                data-zoom-image="images/product/product@4x.jpg"
+                                                src="/static/images/product/product@4x.jpg"
+                                                data-zoom-image="/static/images/product/product@4x.jpg"
                                                 alt="Zoom Image"
                                             />
                                             <div id="gallery-quick-view" className="u-s-m-t-10">
                                                 <a
                                                     className="active"
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                             </div>
                                         </div>

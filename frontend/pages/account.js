@@ -1,5 +1,38 @@
 import Head from "next/head";
 import Script from "next/script";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAngleDown,
+  faAngleLeft,
+  faAngleRight,
+  faBars,
+  faBasketShopping,
+  faBookAtlas,
+  faBookOpen,
+  faChevronDown,
+  faCircleCheck,
+  faCog,
+  faElevator,
+  faEnvelope,
+  faHeart,
+  faHeartbeat,
+  faHome,
+  faLocationArrow,
+  faLongArrowAltUp,
+  faMobileAndroid,
+  faMobileAndroidAlt,
+  faPersonDress,
+  faPhone,
+  faPhoneFlip,
+  faPlus,
+  faRocket,
+  faSearch,
+  faShirt,
+  faSignInAlt,
+  faTelevision,
+  faTv,
+  faTvAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function Account() {
     return (
@@ -186,7 +219,9 @@ export default function Account() {
                                         <ul className="mid-nav g-nav">
                                             <li className="u-d-none-lg">
                                                 <a href="home.html">
-                                                    <i className="ion ion-md-home" />
+                                                     <i>
+                                        <FontAwesomeIcon icon={faHome} />
+                                    </i>
                                                 </a>
                                             </li>
                                             <li className="u-d-none-lg">
@@ -1007,7 +1042,9 @@ export default function Account() {
                             <h2>Account</h2>
                             <ul className="bread-crumb">
                                 <li className="has-separator">
-                                    <i className="ion ion-md-home" />
+                                     <i>
+                                        <FontAwesomeIcon icon={faHome} />
+                                    </i>
                                     <a href="home.html">Home</a>
                                 </li>
                                 <li className="is-marked">

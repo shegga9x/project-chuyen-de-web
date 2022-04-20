@@ -1,5 +1,39 @@
 import Head from "next/head";
 import Script from "next/script";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faAngleDown,
+    faAngleLeft,
+    faAngleRight,
+    faBars,
+    faBasketShopping,
+    faBookAtlas,
+    faBookOpen,
+    faChevronDown,
+    faCircleCheck,
+    faList,
+    faThList,
+    faTh,
+    faHeart,
+    faHeartbeat,
+    faHome,
+    faLocationArrow,
+    faLongArrowAltUp,
+    faMobileAndroid,
+    faMobileAndroidAlt,
+    faPersonDress,
+    faPhone,
+    faPhoneFlip,
+    faPlus,
+    faRocket,
+    faSearch,
+    faShirt,
+    faSignInAlt,
+    faTelevision,
+    faTv,
+    faTvAlt,
+} from "@fortawesome/free-solid-svg-icons";
+
 export default function Shop() {
     return (
         <>
@@ -135,7 +169,7 @@ export default function Shop() {
                                     <div className="brand-logo text-lg-center">
                                         <a href="home.html">
                                             <img
-                                                src="images/main-logo/groover-branding-1.png"
+                                                src="/static/images/main-logo/groover-branding-1.png"
                                                 alt="Groover Brand Logo"
                                                 className="app-brand-logo"
                                             />
@@ -159,9 +193,7 @@ export default function Shop() {
                                                     Choose category for search
                                                 </label>
                                                 <select className="select-box" id="select-category">
-                                                    <option value="">
-                                                        All
-                                                    </option>
+                                                    <option value="">All</option>
                                                     <option value="">Men's Clothing</option>
                                                     <option value="">Women's Clothing</option>
                                                     <option value="">Toys Hobbies &amp; Robots</option>
@@ -171,6 +203,15 @@ export default function Shop() {
                                                     <option value="">Beauty &amp; Health</option>
                                                     <option value="">Furniture Home &amp; Office</option>
                                                 </select>
+                                                <i style={{
+                                                    fontSize: 8,
+                                                    position: "absolute",
+                                                    right: 8,
+                                                    top: "50%",
+                                                    transform: "translateY(-50%)"
+                                                }}>
+                                                    <FontAwesomeIcon icon={faAngleDown} />
+                                                </i>
                                             </div>
                                         </div>
                                         <button
@@ -238,7 +279,7 @@ export default function Shop() {
                             <ul className="mini-cart-list">
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">Casual Hoodie Full Cotton</span>
                                         <span className="mini-item-price">$55.00</span>
                                         <span className="mini-item-quantity"> x 1 </span>
@@ -246,7 +287,7 @@ export default function Shop() {
                                 </li>
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">
                                             Black Rock Dress with High Jewelery Necklace
                                         </span>
@@ -256,7 +297,7 @@ export default function Shop() {
                                 </li>
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">Xiaomi Note 2 Black Color</span>
                                         <span className="mini-item-price">$55.00</span>
                                         <span className="mini-item-quantity"> x 1 </span>
@@ -264,7 +305,7 @@ export default function Shop() {
                                 </li>
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">Dell Inspiron 15</span>
                                         <span className="mini-item-price">$55.00</span>
                                         <span className="mini-item-quantity"> x 1 </span>
@@ -792,7 +833,7 @@ export default function Shop() {
                                                             >
                                                                 <a href="#" className="d-block">
                                                                     <img
-                                                                        src="images/banners/mega-3.png"
+                                                                        src="/static/images/banners/mega-3.png"
                                                                         className="img-fluid"
                                                                         alt="Product"
                                                                     />
@@ -1009,7 +1050,10 @@ export default function Shop() {
                             <h2>Shop</h2>
                             <ul className="bread-crumb">
                                 <li className="has-separator">
-                                    <i className="ion ion-md-home" />
+                                    {/* <i className="ion ion-md-home" /> */}
+                                    <i>
+                                        <FontAwesomeIcon icon={faHome} />
+                                    </i>
                                     <a href="home.html">Home</a>
                                 </li>
                                 <li className="is-marked">
@@ -1259,11 +1303,18 @@ export default function Shop() {
                                 {/* Page-Bar */}
                                 <div className="page-bar clearfix">
                                     <div className="shop-settings">
-                                        <a id="list-anchor" className="active">
-                                            <i className="fas fa-th-list" />
+                                        {/* <a id="list-anchor" className="active"> */}
+                                        <a id="list-anchor" >
+                                            {/* <i className="fas fa-th-list" /> */}
+                                            <i>
+                                                <FontAwesomeIcon icon={faThList} />
+                                            </i>
                                         </a>
                                         <a id="grid-anchor">
-                                            <i className="fas fa-th" />
+                                            {/* <i className="fas fa-th" /> */}
+                                            <i >
+                                                <FontAwesomeIcon icon={faTh} />
+                                            </i>
                                         </a>
                                     </div>
                                     {/* Toolbar Sorter 1  */}
@@ -1281,6 +1332,15 @@ export default function Shop() {
                                                 <option value="">Sort By: Highest Price</option>
                                                 <option value="">Sort By: Best Rating</option>
                                             </select>
+                                            <i style={{
+                                                fontSize: 8,
+                                                position: "absolute",
+                                                right: 8,
+                                                top: "50%",
+                                                transform: "translateY(-50%)"
+                                            }}>
+                                                <FontAwesomeIcon icon={faAngleDown} />
+                                            </i>
                                         </div>
                                     </div>
                                     {/* //end Toolbar Sorter 1  */}
@@ -1297,6 +1357,15 @@ export default function Shop() {
                                                 <option value="">Show: 16</option>
                                                 <option value="">Show: 28</option>
                                             </select>
+                                            <i style={{
+                                                fontSize: 8,
+                                                position: "absolute",
+                                                right: 8,
+                                                top: "50%",
+                                                transform: "translateY(-50%)"
+                                            }}>
+                                                <FontAwesomeIcon icon={faAngleDown} />
+                                            </i>
                                         </div>
                                     </div>
                                     {/* //end Toolbar Sorter 2  */}
@@ -1313,11 +1382,12 @@ export default function Shop() {
                                                 >
                                                     <img
                                                         className="img-fluid"
-                                                        src="images/product/product@3x.jpg"
+                                                        src="/static/images/product/product@3x.jpg"
                                                         alt="Product"
                                                     />
                                                 </a>
                                                 <div className="item-action-behaviors">
+                                                    {/* <FontAwesomeIcon icon={faSearch} /> */}
                                                     <a
                                                         className="item-quick-look"
                                                         data-toggle="modal"
@@ -1395,7 +1465,7 @@ export default function Shop() {
                                                 >
                                                     <img
                                                         className="img-fluid"
-                                                        src="images/product/product@3x.jpg"
+                                                        src="/static/images/product/product@3x.jpg"
                                                         alt="Product"
                                                     />
                                                 </a>
@@ -1474,7 +1544,7 @@ export default function Shop() {
                                                 >
                                                     <img
                                                         className="img-fluid"
-                                                        src="images/product/product@3x.jpg"
+                                                        src="/static/images/product/product@3x.jpg"
                                                         alt="Product"
                                                     />
                                                 </a>
@@ -1553,7 +1623,7 @@ export default function Shop() {
                                                 >
                                                     <img
                                                         className="img-fluid"
-                                                        src="images/product/product@3x.jpg"
+                                                        src="/static/images/product/product@3x.jpg"
                                                         alt="Product"
                                                     />
                                                 </a>
@@ -1635,7 +1705,7 @@ export default function Shop() {
                                                 >
                                                     <img
                                                         className="img-fluid"
-                                                        src="images/product/product@3x.jpg"
+                                                        src="/static/images/product/product@3x.jpg"
                                                         alt="Product"
                                                     />
                                                 </a>
@@ -1717,7 +1787,7 @@ export default function Shop() {
                                                 >
                                                     <img
                                                         className="img-fluid"
-                                                        src="images/product/product@3x.jpg"
+                                                        src="/static/images/product/product@3x.jpg"
                                                         alt="Product"
                                                     />
                                                 </a>
@@ -1794,7 +1864,7 @@ export default function Shop() {
                                                 >
                                                     <img
                                                         className="img-fluid"
-                                                        src="images/product/product@3x.jpg"
+                                                        src="/static/images/product/product@3x.jpg"
                                                         alt="Product"
                                                     />
                                                 </a>
@@ -1869,7 +1939,7 @@ export default function Shop() {
                                                 >
                                                     <img
                                                         className="img-fluid"
-                                                        src="images/product/product@3x.jpg"
+                                                        src="/static/images/product/product@3x.jpg"
                                                         alt="Product"
                                                     />
                                                 </a>
@@ -2186,47 +2256,47 @@ export default function Shop() {
                                             <img
                                                 id="zoom-pro-quick-view"
                                                 className="img-fluid"
-                                                src="images/product/product@4x.jpg"
-                                                data-zoom-image="images/product/product@4x.jpg"
+                                                src="/static/images/product/product@4x.jpg"
+                                                data-zoom-image="/static/images/product/product@4x.jpg"
                                                 alt="Zoom Image"
                                             />
                                             <div id="gallery-quick-view" className="u-s-m-t-10">
                                                 <a
                                                     className="active"
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                                 <a
-                                                    data-image="images/product/product@4x.jpg"
-                                                    data-zoom-image="images/product/product@4x.jpg"
+                                                    data-image="/static/images/product/product@4x.jpg"
+                                                    data-zoom-image="/static/images/product/product@4x.jpg"
                                                 >
-                                                    <img src="images/product/product@2x.jpg" alt="Product" />
+                                                    <img src="/static/images/product/product@2x.jpg" alt="Product" />
                                                 </a>
                                             </div>
                                         </div>

@@ -10,10 +10,14 @@ import {
   faBookAtlas,
   faBookOpen,
   faChevronDown,
+  faCircleCheck,
+  faCog,
+  faElevator,
   faEnvelope,
   faHeart,
   faHeartbeat,
   faHome,
+  faLocationArrow,
   faLongArrowAltUp,
   faMobileAndroid,
   faMobileAndroidAlt,
@@ -24,6 +28,7 @@ import {
   faRocket,
   faSearch,
   faShirt,
+  faSignInAlt,
   faTelevision,
   faTv,
   faTvAlt,
@@ -101,26 +106,30 @@ export default function Home() {
                     <ul className="g-dropdown" style={{ width: 200 }}>
                       <li>
                         <a href="cart.html">
-                          <i className="fas fa-cog u-s-m-r-9" />
-                          My Cart
+                          <i className=" u-s-m-r-9">
+                            <FontAwesomeIcon icon={faCog} />
+                          </i>My Cart
                         </a>
                       </li>
                       <li>
                         <a href="wishlist.html">
-                          <i className="far fa-heart u-s-m-r-9" />
-                          My Wishlist
+                          <i className=" u-s-m-r-9" >
+                            <FontAwesomeIcon icon={faHeart} />
+                          </i>My Wishlist
                         </a>
                       </li>
                       <li>
                         <a href="checkout.html">
-                          <i className="far fa-check-circle u-s-m-r-9" />
-                          Checkout
+                          <i className="u-s-m-r-9">
+                            <FontAwesomeIcon icon={faCircleCheck} />
+                          </i>Checkout
                         </a>
                       </li>
                       <li>
                         <a href="account.html">
-                          <i className="fas fa-sign-in-alt u-s-m-r-9" />
-                          Login / Signup
+                          <i className=" u-s-m-r-9" >
+                            <FontAwesomeIcon icon={faSignInAlt} />
+                          </i>Login / Signup
                         </a>
                       </li>
                     </ul>
@@ -6551,18 +6560,24 @@ export default function Home() {
                     <h6>Address</h6>
                     <ul>
                       <li>
-                        <i className="fas fa-location-arrow u-s-m-r-9" />
+                        <i className=" u-s-m-r-9" >
+                          <FontAwesomeIcon icon={faLocationArrow} />
+                        </i>
                         <span>819 Sugar Camp Road, West Concord, MN 55985</span>
                       </li>
                       <li>
                         <a href="tel:+923086561801">
-                          <i className="fas fa-phone u-s-m-r-9" />
+                          <i className=" u-s-m-r-9" >
+                            <FontAwesomeIcon icon={faPhone} />
+                          </i>
                           <span>+111-444-989</span>
                         </a>
                       </li>
                       <li>
                         <a href="mailto:contact@domain.com">
-                          <i className="fas fa-envelope u-s-m-r-9" />
+                          <i className=" u-s-m-r-9" >
+                            <FontAwesomeIcon icon={faEnvelope} />
+                          </i>
                           <span> contact@domain.com</span>
                         </a>
                       </li>

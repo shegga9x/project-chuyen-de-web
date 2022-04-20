@@ -1,3 +1,7 @@
+import {
+    faHome, faSync, faTrash
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Script from "next/script";
 
@@ -148,7 +152,7 @@ export default function Cart() {
                                     <div className="brand-logo text-lg-center">
                                         <a href="home.html">
                                             <img
-                                                src="images/main-logo/groover-branding-1.png"
+                                                src="/static/images/main-logo/groover-branding-1.png"
                                                 alt="Groover Brand Logo"
                                                 className="app-brand-logo"
                                             />
@@ -200,7 +204,12 @@ export default function Cart() {
                                         <ul className="mid-nav g-nav">
                                             <li className="u-d-none-lg">
                                                 <a href="home.html">
-                                                    <i className="ion ion-md-home" />
+                                                    {/*  <i>
+                                        <FontAwesomeIcon icon={faHome} />
+                                    </i> */}
+                                                    <i className=" u-s-m-r-9" >
+                                                        <FontAwesomeIcon icon={faHome} />
+                                                    </i>
                                                 </a>
                                             </li>
                                             <li className="u-d-none-lg">
@@ -253,7 +262,7 @@ export default function Cart() {
                             <ul className="mini-cart-list">
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">
                                             Casual Hoodie Full Cotton
                                         </span>
@@ -263,7 +272,7 @@ export default function Cart() {
                                 </li>
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">
                                             Black Rock Dress with High Jewelery Necklace
                                         </span>
@@ -273,7 +282,7 @@ export default function Cart() {
                                 </li>
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">
                                             Xiaomi Note 2 Black Color
                                         </span>
@@ -283,7 +292,7 @@ export default function Cart() {
                                 </li>
                                 <li className="clearfix">
                                     <a href="single-product.html">
-                                        <img src="images/product/product@1x.jpg" alt="Product" />
+                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
                                         <span className="mini-item-name">Dell Inspiron 15</span>
                                         <span className="mini-item-price">$55.00</span>
                                         <span className="mini-item-quantity"> x 1 </span>
@@ -832,7 +841,7 @@ export default function Cart() {
                                                             >
                                                                 <a href="#" className="d-block">
                                                                     <img
-                                                                        src="images/banners/mega-3.png"
+                                                                        src="/static/images/banners/mega-3.png"
                                                                         className="img-fluid"
                                                                         alt="Product"
                                                                     />
@@ -1058,7 +1067,9 @@ export default function Cart() {
                             <h2>Cart</h2>
                             <ul className="bread-crumb">
                                 <li className="has-separator">
-                                    <i className="ion ion-md-home" />
+                                     <i>
+                                        <FontAwesomeIcon icon={faHome} />
+                                    </i>
                                     <a href="home.html">Home</a>
                                 </li>
                                 <li className="is-marked">
@@ -1092,7 +1103,7 @@ export default function Cart() {
                                                         <div className="cart-anchor-image">
                                                             <a href="single-product.html">
                                                                 <img
-                                                                    src="images/product/product@1x.jpg"
+                                                                    src="/static/images/product/product@1x.jpg"
                                                                     alt="Product"
                                                                 />
                                                                 <h6>Casual Hoodie Full Cotton</h6>
@@ -1121,8 +1132,12 @@ export default function Cart() {
                                                     </td>
                                                     <td>
                                                         <div className="action-wrapper">
-                                                            <button className="button button-outline-secondary fas fa-sync" />
-                                                            <button className="button button-outline-secondary fas fa-trash" />
+                                                            <button className="button button-outline-secondary fas fa-sync" >
+                                                                <FontAwesomeIcon icon={faSync} />
+                                                            </button>
+                                                            <button className="button button-outline-secondary fas fa-trash" >
+                                                                <FontAwesomeIcon icon={faTrash} />
+                                                            </button>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -1131,7 +1146,7 @@ export default function Cart() {
                                                         <div className="cart-anchor-image">
                                                             <a href="single-product.html">
                                                                 <img
-                                                                    src="images/product/product@1x.jpg"
+                                                                    src="/static/images/product/product@1x.jpg"
                                                                     alt="Product"
                                                                 />
                                                                 <h6>
@@ -1172,7 +1187,7 @@ export default function Cart() {
                                                         <div className="cart-anchor-image">
                                                             <a href="single-product.html">
                                                                 <img
-                                                                    src="images/product/product@1x.jpg"
+                                                                    src="/static/images/product/product@1x.jpg"
                                                                     alt="Product"
                                                                 />
                                                                 <h6>Xiaomi Note 2 Black Color</h6>
@@ -1211,7 +1226,7 @@ export default function Cart() {
                                                         <div className="cart-anchor-image">
                                                             <a href="single-product.html">
                                                                 <img
-                                                                    src="images/product/product@1x.jpg"
+                                                                    src="/static/images/product/product@1x.jpg"
                                                                     alt="Product"
                                                                 />
                                                                 <h6>Dell Inspiron 15</h6>
