@@ -1,0 +1,6 @@
+export { default as Footer } from './footer'
+export { default as Header } from './header'
+export { default as DummySelectBox } from './dummy-selectbox'
+export { default as NewsletterModule } from './newsletter-modal'
+export { default as QuickViewModal } from './quick-view-modal'
+export { default as ResponsiveSearch } from './responsive-search'
