@@ -22,7 +22,7 @@ $(function () {
     // Bind Scroll Up plugin to all pages
     $.scrollUp({
         scrollName: 'topScroll',
-        scrollText: '<i class="fas fa-long-arrow-alt-up"></i>',
+        scrollText: '<i><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="up-long" class="svg-inline--fa fa-up-long fa-2xs " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M285.1 145.7c-3.81 8.758-12.45 14.42-21.1 14.42L192 160.1V480c0 17.69-14.33 32-32 32s-32-14.31-32-32V160.1L55.1 160.1c-9.547 0-18.19-5.658-22-14.42c-3.811-8.758-2.076-18.95 4.408-25.94l104-112.1c9.498-10.24 25.69-10.24 35.19 0l104 112.1C288.1 126.7 289.8 136.9 285.1 145.7z"></path></svg></i>',
         easingType: 'linear',
         scrollSpeed: 900,
         animation: 'fade',
@@ -149,7 +149,7 @@ $(function () {
      */
     const MouseEnterFunctionForMegaMenu = function () {
         // I also Hope elements are appropriate assign
-        $vMenu.css({'z-index': settings.zIndexNumber});
+        $vMenu.css({ 'z-index': settings.zIndexNumber });
         // Show Back Drop
         showBackDrop($backDrop);
     };
@@ -158,7 +158,7 @@ $(function () {
      */
     const MouseLeaveFunctionForMegaMenu = function () {
         // I also Hope elements are appropriate assign
-        $vMenu.css({'z-index': ''});
+        $vMenu.css({ 'z-index': '' });
         // Remove Back Drop
         removeBackDrop($backDrop);
     };
@@ -197,12 +197,12 @@ $(function () {
                     $searchFormWrapper = $('.form-searchbox');
                     $searchFormElement.focus(function () {
                         // I Hope elements are appropriate assign
-                        $searchFormWrapper.css({'position': 'relative', 'z-index': settings.zIndexNumber});
+                        $searchFormWrapper.css({ 'position': 'relative', 'z-index': settings.zIndexNumber });
                         // Show Back Drop
                         showBackDrop($backDrop);
                     }).blur(function () {
                         // I Hope elements are appropriate assign
-                        $searchFormWrapper.css({'position': '', 'z-index': ''});
+                        $searchFormWrapper.css({ 'position': '', 'z-index': '' });
                         // Remove Back Drop
                         removeBackDrop($backDrop);
                     });
@@ -240,7 +240,7 @@ $(function () {
      * Attach Click Event on Quantity buttons
      */
     const attachClickQuantityButton = function () {
-        let $currentTextField,currentVal;
+        let $currentTextField, currentVal;
         $('.plus-a').each(function () {
             $(this).on('click', function () {
                 let $currentTextField = $(this).prev();
@@ -325,7 +325,7 @@ $(function () {
         attachClickOnMiniCart();
         // Attach Click Event on VMenu
         attachClickOnVMenu();
-       // Manually Restart Pace-js when we change any tab
+        // Manually Restart Pace-js when we change any tab
         manuallyRestartProgress();
         // Attach Click Event on Quantity buttons
         attachClickQuantityButton();
@@ -343,10 +343,10 @@ $(function () {
      * Shows Newsletter Modal After 5sec = 5000milliseconds
      */
     const showNewsletterModal = function () {
-            setTimeout(function () {
-                // Manually opens a modal
-                $('#newsletter-modal').modal('show');
-            }, 5000);
+        setTimeout(function () {
+            // Manually opens a modal
+            $('#newsletter-modal').modal('show');
+        }, 5000);
     };
     /**
      * Initialize Main Slider
@@ -356,7 +356,7 @@ $(function () {
         $owl.owlCarousel({
             items: 1,
             autoplay: true,
-			autoplayTimeout: 8000,
+            autoplayTimeout: 8000,
             loop: false,
             dots: false,
             rewind: true, // Go backwards when the boundary has reached
@@ -364,7 +364,7 @@ $(function () {
             //   navContainerClass: 'owl-nav' by default,
             navElement: 'div',
             navClass: ['main-slider-previous', 'main-slider-next'],// Add these classes on navElement
-            navText: ['<i class="fas fa-angle-left"></i>', '<i class="fas fa-angle-right"></i>'], // by default text prev, next will not show
+            navText: ['<i><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-left" class="svg-inline--fa fa-angle-left " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M192 448c-8.188 0-16.38-3.125-22.62-9.375l-160-160c-12.5-12.5-12.5-32.75 0-45.25l160-160c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L77.25 256l137.4 137.4c12.5 12.5 12.5 32.75 0 45.25C208.4 444.9 200.2 448 192 448z"></path></svg></i>', '<i><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="angle-right" class="svg-inline--fa fa-angle-right " role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><path fill="currentColor" d="M64 448c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L178.8 256L41.38 118.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l160 160c12.5 12.5 12.5 32.75 0 45.25l-160 160C80.38 444.9 72.19 448 64 448z"></path></svg></i>'], // by default text prev, next will not show
         });
 
     };
@@ -374,8 +374,8 @@ $(function () {
     const productSlider = function () {
         // Get Collection of all Product Slider
         let $productsSlider = $('.products-slider');
-        $productsSlider.on('initialize.owl.carousel',function () {
-           $(this).closest('.slider-fouc').removeAttr('class');
+        $productsSlider.on('initialize.owl.carousel', function () {
+            $(this).closest('.slider-fouc').removeAttr('class');
         }).each(function () {
             let thisInstance = $(this);
             let itemPerLine = thisInstance.data('item');
@@ -411,7 +411,7 @@ $(function () {
     const SpecificCategorySlider = function () {
         // Get Collection of all Product Slider
         let $specificCategorySlider = $('.specific-category-slider');
-        $specificCategorySlider.on('initialize.owl.carousel',function () {
+        $specificCategorySlider.on('initialize.owl.carousel', function () {
             $(this).closest('.slider-fouc').removeAttr('class');
         }).each(function () {
             let thisInstance = $(this);
@@ -433,7 +433,7 @@ $(function () {
                         items: 2,
                     },
                     991: {
-                        items: itemPerLine -1,
+                        items: itemPerLine - 1,
                     },
                     1200: {
                         items: itemPerLine,
@@ -466,7 +466,7 @@ $(function () {
         let itemPerLine = thisInstance.data('item');
         thisInstance.owlCarousel({
             autoplay: true,
-			autoplayTimeout: 8000,
+            autoplayTimeout: 8000,
             loop: false,
             dots: false,
             rewind: true,
@@ -504,9 +504,9 @@ $(function () {
     /**
      * Check everything including DOM elements and images loaded
      */
-    $(window).on('load',function () {
+    $(window).on('load', function () {
         showNewsletterModal();
-       $('.ph-item').removeClass('ph-item');
+        $('.ph-item').removeClass('ph-item');
     });
 
 })(jQuery, window, document);
@@ -544,7 +544,7 @@ $(function () {
 
     $(function () {
         // GoogleMap Init
-        if ($('#map').length !== 0 ) {
+        if ($('#map').length !== 0) {
             try {
                 google.maps.event.addDomListener(window, 'load', googleinitMap);
             } catch (e) {
@@ -578,9 +578,9 @@ $(function () {
         let comment;
         let currentVal;
         // On Every key type
-        $ratingField.on('keyup',function () {
+        $ratingField.on('keyup', function () {
             // Reset Star Width
-            $starWidth.css('width',0);
+            $starWidth.css('width', 0);
             // Reset Comment
             $starComment.text('');
             // Always remember when when you enter any number and immediately enter some strings then parseFloat
@@ -598,27 +598,27 @@ $(function () {
              * By default NaN (e.g. the result of 1/0) is false so its convert to true and expression
              * becomes true.
              */
-            if ( !currentVal || currentVal === '' || currentVal === 'NaN' || currentVal === 0) {
+            if (!currentVal || currentVal === '' || currentVal === 'NaN' || currentVal === 0) {
                 // if value is NaN
                 currentVal = 0;
-                $starWidth.css('width',0);
+                $starWidth.css('width', 0);
                 $starComment.text('');
             } else {
-                if ( (currentVal >=1) && (currentVal <= ratingthresholdNumber)) {
+                if ((currentVal >= 1) && (currentVal <= ratingthresholdNumber)) {
 
-                    if (currentVal === 1 ) {
+                    if (currentVal === 1) {
                         comment = 'I hate it.';
                     }
-                    else if(currentVal === 2 ) {
+                    else if (currentVal === 2) {
                         comment = "I don't like it.";
                     }
-                    else if(currentVal === 3 ) {
+                    else if (currentVal === 3) {
                         comment = "It's OK.";
                     }
-                    else if(currentVal === 4 ) {
+                    else if (currentVal === 4) {
                         comment = "I like it.";
                     }
-                    else if(currentVal === 5 ) {
+                    else if (currentVal === 5) {
                         comment = "It's Perfect.";
                     }
                     // Precise Float value to only one decimal. example: 2.454544 to 2.5
@@ -628,7 +628,7 @@ $(function () {
                     // Remove decimals from a variable, Convert float value to downward
                     newStarWidth = Math.floor(newStarWidth);
                     // Update Star Width
-                    $starWidth.css('width',newStarWidth);
+                    $starWidth.css('width', newStarWidth);
                     // Add Comment
                     $starComment.text(comment);
                 }
@@ -678,9 +678,9 @@ $(function () {
                 range: true,
                 min: queryMin,
                 max: queryMax,
-                values: [ defaultLow, defaultHigh ],
+                values: [defaultLow, defaultHigh],
                 slide: function (event, ui) {
-                    let result = '<div class="price-from">'+ currecyUnit + ui.values[ 0 ] + '</div>\n<div class="price-to">' + currecyUnit + ui.values[ 1 ] + '</div>\n';
+                    let result = '<div class="price-from">' + currecyUnit + ui.values[0] + '</div>\n<div class="price-to">' + currecyUnit + ui.values[1] + '</div>\n';
                     $instance.parent().find('.amount-result').html(result);
                 }
             });
@@ -692,13 +692,13 @@ $(function () {
      * Attach Click event to Grid & List
      */
     const attachClickGridAndList = function () {
-        $('#list-anchor').on('click',function () {
+        $('#list-anchor').on('click', function () {
             $(this).addClass('active');
             $(this).next().removeClass('active');
             $shopProductContainer.removeClass('grid-style');
             $shopProductContainer.addClass('list-style');
         });
-        $('#grid-anchor').on('click',function () {
+        $('#grid-anchor').on('click', function () {
             $(this).addClass('active');
             $(this).prev().removeClass('active');
             $shopProductContainer.removeClass('list-style');
@@ -709,9 +709,9 @@ $(function () {
      * All Categories Functionality
      */
     const searchFetchAllCategoriesFunctionality = function () {
-        $searchFetchAllbtn.on('click',function () {
+        $searchFetchAllbtn.on('click', function () {
             $(this).toggleClass('js-open');
-             $(this).next('ul').stop(true,true).slideToggle();
+            $(this).next('ul').stop(true, true).slideToggle();
         });
     };
     /**
@@ -721,9 +721,9 @@ $(function () {
         $('.associate-wrapper').each(function () {
             $(this).slimScroll({
                 height: 'auto',
-                railClass : 'grooverScrollRail',// default CSS class of the slimscroll rail
-                barClass : 'grooverScrollBar',// default CSS class of the slimscroll bar
-                wrapperClass : 'grooverScrollDiv',// default CSS class of the slimscroll wrapper
+                railClass: 'grooverScrollRail',// default CSS class of the slimscroll rail
+                barClass: 'grooverScrollBar',// default CSS class of the slimscroll bar
+                wrapperClass: 'grooverScrollDiv',// default CSS class of the slimscroll wrapper
             });
         });
     };
