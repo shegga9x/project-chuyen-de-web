@@ -1273,6 +1273,7 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
+                                <FontAwesomeIcon icon={faHeart} />
                                 Quick Look
                               </a>
                               <a className="item-mail" href="">

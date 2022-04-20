@@ -222,9 +222,9 @@ export default function SingleProduct() {
                                         <ul className="mid-nav g-nav">
                                             <li className="u-d-none-lg">
                                                 <a href="home.html">
-                                                     <i>
-                                        <FontAwesomeIcon icon={faHome} />
-                                    </i>
+                                                    <i>
+                                                        <FontAwesomeIcon icon={faHome} />
+                                                    </i>
                                                 </a>
                                             </li>
                                             <li className="u-d-none-lg">
@@ -1045,7 +1045,7 @@ export default function SingleProduct() {
                             <h2>Detail</h2>
                             <ul className="bread-crumb">
                                 <li className="has-separator">
-                                     <i>
+                                    <i>
                                         <FontAwesomeIcon icon={faHome} />
                                     </i>
                                     <a href="home.html">Home</a>
