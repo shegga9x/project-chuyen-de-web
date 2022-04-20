@@ -922,7 +922,8 @@ body {
   color: #d90429; }
   .check-box:checked + .label-text:before {
     font-family: 'Font Awesome 5 Free';
-    content: '\F00C';
+    /* content: '\F00C'; */
+    content: '✔';
     display: inline-block;
     position: absolute;
     font-weight: 900;

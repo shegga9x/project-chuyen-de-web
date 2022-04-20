@@ -78,6 +78,7 @@ export default function Account() {
                                                     className="check-box"
                                                     id="remember-me-token"
                                                 />
+                                                {/* <FontAwesomeIcon icon={facheckbox} /> */}
                                                 <label className="label-text" htmlFor="remember-me-token">
                                                     Remember me
                                                 </label>

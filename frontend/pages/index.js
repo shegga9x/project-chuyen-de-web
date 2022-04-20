@@ -1,24 +1,29 @@
-import Head from "next/head";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBatteryHalf,
+  faCog,
   faEnvelope,
   faHeart,
+  faLaptop,
   faMagnifyingGlass,
-  faPlus
+  faMobileButton,
+  faPhoneSlash,
+  faPlus,
+  faStopwatch,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Head from "next/head";
 import Layout from "../components/layout";
 
 export default function Home() {
   return (
     <>
-     <Head>
+      <Head>
         <title>
           Groover - Online Shopping for Electronics, Apparel, Computers, Books,
           DVDs & more
         </title>
       </Head>
       <Layout home>
-      
         {/* Main-Slider */}
         <div className="default-height ph-item">
           <div className="slider-main owl-carousel">
@@ -3326,7 +3331,10 @@ export default function Home() {
                               href="#smart-phones"
                               title="Smart Phones"
                             >
-                              <i className="ion ion-ios-phone-portrait" />
+                              {/* <i className="ion ion-ios-phone-portrait" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faMobileButton} />
+                              </i>
                             </a>
                           </li>
                           <li className="nav-item">
@@ -3336,7 +3344,10 @@ export default function Home() {
                               href="#tablets"
                               title="Tablets"
                             >
-                              <i className="ion ion-md-phone-landscape" />
+                              {/* <i className="ion ion-md-phone-landscape" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faPhoneSlash} />
+                              </i>
                             </a>
                           </li>
                           <li className="nav-item">
@@ -3346,7 +3357,10 @@ export default function Home() {
                               href="#smart-watches"
                               title="Smart Watches"
                             >
-                              <i className="ion ion-md-watch" />
+                              {/* <i className="ion ion-md-watch" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faStopwatch} />
+                              </i>
                             </a>
                           </li>
                           <li className="nav-item">
@@ -3356,7 +3370,10 @@ export default function Home() {
                               href="#device-accessories"
                               title="Device Accessories"
                             >
-                              <i className="ion ion-md-settings" />
+                              {/* <i className="ion ion-md-settings" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faCog} />
+                              </i>
                             </a>
                           </li>
                           <li className="nav-item">
@@ -3366,7 +3383,10 @@ export default function Home() {
                               href="#power-banks"
                               title="Power Banks"
                             >
-                              <i className="ion ion-md-battery-charging" />
+                              {/* <i className="ion ion-md-battery-charging" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faBatteryHalf} />
+                              </i>
                             </a>
                           </li>
                         </ul>
@@ -4129,7 +4149,10 @@ export default function Home() {
                               href="#laptops"
                               title="Laptops"
                             >
-                              <i className="ion ion-md-laptop" />
+                              {/* <i className="ion ion-md-laptop" /> */}
+                              <i>
+                                <FontAwesomeIcon icon={faLaptop} />
+                              </i>
                             </a>
                           </li>
                           <li className="nav-item">
