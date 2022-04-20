@@ -8,10 +8,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.RefreshToken;
+import backend.backend.persitence.model.UserDetailCustom;
 import backend.backend.persitence.repository.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -38,6 +40,17 @@ public class JwtUtils {
                 .setSubject(account.getEmail())
                 .claim("email", account.getEmail())
                 .claim("birthday", account.getLastExpires().toInstant().toString())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .signWith(SignatureAlgorithm.HS512, jwtSecret)
+                .compact();
+    }
+    public String generateJwtToken(Authentication authentication) {
+        UserDetailCustom userPrincipal = (UserDetailCustom) authentication.getPrincipal();
+        return Jwts.builder()
+                .setSubject(userPrincipal.getEmail())
+                .claim("email", userPrincipal.getEmail())
+                .claim("birthday", userPrincipal.getLastExpireds().toInstant().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

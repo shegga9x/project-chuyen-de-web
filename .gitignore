@@ -98,4 +98,5 @@ $RECYCLE.BIN/
 backend/mvnw
 backend/mvnw.cmd
 backend/HELP.md
+frontend/.next
 .vscode

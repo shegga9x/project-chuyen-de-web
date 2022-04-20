@@ -8,7 +8,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
-import backend.backend.persitence.enumModel.RoleEnum;
+import backend.backend.persitence.model.enumModel.RoleEnum;
 
 /**
  * JPA entity class for "Role"
