@@ -922,7 +922,8 @@ body {
   color: #d90429; }
   .check-box:checked + .label-text:before {
     font-family: 'Font Awesome 5 Free';
-    content: '\F00C';
+    /* content: '\F00C'; */
+    content: '✔';
     display: inline-block;
     position: absolute;
     font-weight: 900;
@@ -1229,6 +1230,7 @@ body {
     transition: all 0.3s; }
 
 .item-action-behaviors {
+  color:red;
   position: absolute;
   top: 0;
   left: 20px;
@@ -1240,8 +1242,8 @@ body {
 .item-quick-look, .item-mail, .item-addwishlist, .item-addCart {
   transition: all 0.5s ease;
   transform: translateX(-40px);
-  font-family: 'Ionicons';
-  font-size: 0;
+  /* font-family: 'Ionicons'; */
+  font-size: 17px;
   margin: 10px 0;
   padding: 0;
   width: 35px;
@@ -1253,22 +1255,24 @@ body {
   border-radius: 50%;
   background-color: #ffffff; }
   .item-quick-look:before, .item-mail:before, .item-addwishlist:before, .item-addCart:before {
-    font-size: 17px; }
+    /* font-size: 17px;  */
+  }
   .item-quick-look:hover, .item-mail:hover, .item-addwishlist:hover, .item-addCart:hover {
-    color: #ffffff;
-    background-color: #d90429; }
+    /* color: #ffffff;
+    background-color: #d90429;  */
+  }
 
 .item-quick-look:before {
-  content: '\F4A5'; }
+  content: ''; }
 
 .item-mail:before {
-  content: '\F322'; }
+  content: ''; }
 
 .item-addwishlist:before {
-  content: '\F308'; }
+  content: ''; }
 
 .item-addCart:before {
-  content: '\F273'; }
+  content: ''; }
 
 .item-content {
   padding: 15px; }
@@ -2974,12 +2978,14 @@ body {
 
 .action-wrapper {
   display: inline-block; }
-  .action-wrapper button:before {
+  .action-wrapper button .F-icon {
     transform: rotate(0deg);
     transition: .3s;
-    display: block; }
-  .action-wrapper button:hover:before {
-    transform: rotate(360deg); }
+    display: block; 
+  }
+  .action-wrapper button .F-icon:hover {
+    transform: rotate(360deg); 
+  }
   .action-wrapper .fa-trash {
     margin-left: 6px; }
 
