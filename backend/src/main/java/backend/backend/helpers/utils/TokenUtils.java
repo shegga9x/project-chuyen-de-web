@@ -13,6 +13,7 @@ import backend.backend.helpers.advice.CustomException;
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.RefreshToken;
 import backend.backend.persitence.entities.ResetToken;
+import backend.backend.persitence.repository.AccountRepository;
 import backend.backend.persitence.repository.RefreshTokenRepository;
 import backend.backend.persitence.repository.ResetTokenRepository;
 import backend.backend.persitence.repository.VerificationTokenRepository;
@@ -27,6 +28,8 @@ public class TokenUtils {
     ResetTokenRepository resetTokenRepository;
     @Autowired
     RefreshTokenRepository refreshTokenRepository;
+    @Autowired
+    AccountRepository accountRepository;
     @Autowired
     JwtUtils jwtUtils;
 
@@ -79,8 +82,9 @@ public class TokenUtils {
         return refreshToken;
     }
 
-    public void removeOldRefreshTokens(Account account) {
+    public void removeOldRefreshTokens(int idAccount) {
         List<Integer> ids = new ArrayList<>();
+        Account account = accountRepository.findById(idAccount).get();
         for (RefreshToken refreshToken : account.getListOfRefreshToken()) {
             if (refreshToken.getRevoked() != null
                     && refreshToken.getExpires().before(new Date())

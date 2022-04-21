@@ -1,4 +1,4 @@
-package backend.backend.helpers.handler;
+package backend.backend.config.handler;
 
 import java.io.IOException;
 import java.net.URI;
@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -24,6 +23,8 @@ import backend.backend.persitence.repository.subRepository.HttpCookieOAuth2Autho
 
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+    @Autowired
+    CookieUtils cookieUtils;
 
     private JwtUtils tokenProvider;
 
@@ -43,19 +44,18 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         String targetUrl = determineTargetUrl(request, response, authentication);
-
         if (response.isCommitted()) {
             logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
             return;
         }
-
         clearAuthenticationAttributes(request, response);
         getRedirectStrategy().sendRedirect(request, response, targetUrl);
+    
     }
 
     protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) {
-        Optional<String> redirectUri = CookieUtils
+        Optional<String> redirectUri = cookieUtils
                 .getCookie(request, HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME)
                 .map(Cookie::getValue);
 
@@ -65,9 +65,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         }
 
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-
-        String token = tokenProvider.generateJwtToken(authentication);
-
+        String token = tokenProvider.generateJwtToken(authentication,response);
+       
         return UriComponentsBuilder.fromUriString(targetUrl)
                 .queryParam("token", token)
                 .build().toUriString();

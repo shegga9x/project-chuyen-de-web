@@ -20,8 +20,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import backend.backend.helpers.handler.OAuth2AuthenticationFailureHandler;
-import backend.backend.helpers.handler.OAuth2AuthenticationSuccessHandler;
+import backend.backend.config.handler.OAuth2AuthenticationFailureHandler;
+import backend.backend.config.handler.OAuth2AuthenticationSuccessHandler;
 import backend.backend.persitence.repository.subRepository.HttpCookieOAuth2AuthorizationRequestRepository;
 import backend.backend.services.subService.CustomOAuth2UserService;
 import backend.backend.services.subService.UserDetailsCustomService;
@@ -46,9 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
-
-    @Autowired
-    private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
     @Bean
     public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {

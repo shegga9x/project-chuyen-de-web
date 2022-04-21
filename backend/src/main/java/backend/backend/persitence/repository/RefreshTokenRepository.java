@@ -1,7 +1,7 @@
 package backend.backend.persitence.repository;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,6 +17,6 @@ public interface RefreshTokenRepository extends JpaRepository<RefreshToken, Inte
     boolean existsByToken(String token);
 
     @Query("SELECT m FROM RefreshToken m  WHERE m.idAccount = ?1")
-    List<RefreshToken> getTokenListOfUser(int accountId);
+    Set<RefreshToken> getTokenListOfUser(int accountId);
 
 }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.backend.helpers.payload.request.AuthenticateRequest;
@@ -25,7 +26,7 @@ import backend.backend.helpers.payload.request.ResetPasswordRequest;
 import backend.backend.helpers.payload.request.ValidateResetTokenRequest;
 import backend.backend.helpers.payload.request.VerifyEmailRequest;
 import backend.backend.helpers.payload.response.MessageResponse;
-import backend.backend.helpers.utils.ControlerUtils;
+import backend.backend.helpers.utils.CookieUtils;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.model.UserDetailCustom;
 import backend.backend.services.mainService.AuthService;
@@ -35,13 +36,12 @@ import backend.backend.services.mainService.AuthService;
 @RequestMapping("/accounts")
 public class AuthController {
     @Autowired
-    ControlerUtils controlerUtils;
+    CookieUtils controlerUtils;
     @Autowired
     AuthService accountService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest model, HttpServletRequest request) {
-      
         accountService.register(model, request.getHeader("origin"));
         return ResponseEntity.ok(
                 new MessageResponse("Registration successful, please check your email for verification instructions"));
@@ -65,7 +65,7 @@ public class AuthController {
     @PostMapping("/refresh-token")
     public ResponseEntity<?> refreshToken(HttpServletResponse servletResponse) {
         String refreshToken = controlerUtils.getSingleFormCookie("refreshToken");
-        var response = accountService.refreshToken(refreshToken, controlerUtils.ipAddress());
+        var response = accountService.refreshToken(servletResponse, refreshToken, controlerUtils.ipAddress());
         try {
             controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
         } catch (Exception e) {
@@ -114,6 +114,13 @@ public class AuthController {
     @GetMapping("")
     public ResponseEntity<?> getAll() {
         return ResponseEntity.ok(accountService.getAll());
+    }
+
+    @PostMapping("authenticate-with-jwt")
+    public ResponseEntity<?> authenticateWithJWT(@RequestBody String token, HttpServletResponse servletResponse) {
+        var response = accountService.authenticateWithJWT(token, controlerUtils.ipAddress());
+        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
+        return ResponseEntity.ok(response);
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -22,7 +23,7 @@ public class UserDetailCustom implements UserDetails, OAuth2User {
     private int id;
     private String username;
     private String email;
-    private List<RefreshToken> listOfRefreshToken;
+    private Set<RefreshToken> listOfRefreshToken;
     private Date lastExpireds;
     private Map<String, Object> attributes;
     @JsonIgnore
@@ -30,7 +31,7 @@ public class UserDetailCustom implements UserDetails, OAuth2User {
     private Collection<? extends GrantedAuthority> authorities;
 
     public UserDetailCustom(int id, String username, String email, String password,
-            List<RefreshToken> listOfRefreshToken, Date lastExpireds,
+            Set<RefreshToken> listOfRefreshToken, Date lastExpireds,
             Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
@@ -54,11 +55,13 @@ public class UserDetailCustom implements UserDetails, OAuth2User {
                 user.getLastExpires(),
                 authorities);
     }
+
     public static UserDetailCustom build(Account user, Map<String, Object> attributes) {
         UserDetailCustom userPrincipal = UserDetailCustom.build(user);
         userPrincipal.setAttributes(attributes);
         return userPrincipal;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
@@ -114,11 +117,11 @@ public class UserDetailCustom implements UserDetails, OAuth2User {
         this.email = email;
     }
 
-    public List<RefreshToken> getListOfRefreshToken() {
+    public Set<RefreshToken> getListOfRefreshToken() {
         return this.listOfRefreshToken;
     }
 
-    public void setListOfRefreshToken(List<RefreshToken> listOfRefreshToken) {
+    public void setListOfRefreshToken(Set<RefreshToken> listOfRefreshToken) {
         this.listOfRefreshToken = listOfRefreshToken;
     }
 

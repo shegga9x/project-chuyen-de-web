@@ -7,12 +7,14 @@ package backend.backend.persitence.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -75,12 +77,13 @@ public class Account implements Serializable {
 
     private String providerId;
     // --- ENTITY LINKS ( RELATIONSHIP )
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
-    private List<RefreshToken> listOfRefreshToken;
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    private Set<RefreshToken> listOfRefreshToken;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "ACCOUNT_Has_Role", joinColumns = @JoinColumn(name = "ID_ACCOUNT", referencedColumnName = "ID_ACCOUNT"), inverseJoinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(name = "ACCOUNT_has_role", joinColumns = @JoinColumn(name = "ID_ACCOUNT", referencedColumnName = "ID_ACCOUNT"), inverseJoinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
     private List<Role> listOfRole;
+
     @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private ResetToken resetToken;
@@ -158,11 +161,11 @@ public class Account implements Serializable {
     }
 
     // --- GETTERS FOR LINKS
-    public List<RefreshToken> getListOfRefreshToken() {
+    public Set<RefreshToken> getListOfRefreshToken() {
         return this.listOfRefreshToken;
     }
 
-    public void setListOfRefreshToken(List<RefreshToken> listOfRefreshToken) {
+    public void setListOfRefreshToken(Set<RefreshToken> listOfRefreshToken) {
         this.listOfRefreshToken = listOfRefreshToken;
     }
 

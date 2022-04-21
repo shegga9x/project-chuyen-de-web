@@ -1,8 +1,12 @@
 package backend.backend.helpers.utils;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.RefreshToken;
 import backend.backend.persitence.model.UserDetailCustom;
+import backend.backend.persitence.repository.AccountRepository;
 import backend.backend.persitence.repository.RefreshTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -34,6 +40,10 @@ public class JwtUtils {
     private int jwtRefreshExpirationMs;
     @Autowired
     RefreshTokenRepository refreshTokenRepository;
+    @Autowired
+    AccountRepository accountRepository;
+    @Autowired
+    CookieUtils cookieUtils;
 
     public String generateJwtToken(Account account) {
         return Jwts.builder()
@@ -45,8 +55,11 @@ public class JwtUtils {
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
-    public String generateJwtToken(Authentication authentication) {
+
+    public String generateJwtToken(Authentication authentication, HttpServletResponse response) {
         UserDetailCustom userPrincipal = (UserDetailCustom) authentication.getPrincipal();
+        // cookieUtils.setTokenCookie(response, token);
+
         return Jwts.builder()
                 .setSubject(userPrincipal.getEmail())
                 .claim("email", userPrincipal.getEmail())
@@ -110,4 +123,16 @@ public class JwtUtils {
         return sb.toString().substring(0, numchars);
     }
 
+    public void removeOldRefreshTokens(int idAccount) {
+        List<Integer> ids = new ArrayList<>();
+        Account account = accountRepository.findById(idAccount).get();
+        for (RefreshToken refreshToken : account.getListOfRefreshToken()) {
+            if (refreshToken.getRevoked() != null
+                    && refreshToken.getExpires().before(new Date())
+                    && new Date(refreshToken.getCreated().getTime() + jwtRefreshExpirationMs).before(new Date())) {
+                ids.add(refreshToken.getId());
+            }
+        }
+        refreshTokenRepository.deleteAllById(ids);
+    }
 }

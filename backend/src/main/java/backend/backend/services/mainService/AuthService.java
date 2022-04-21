@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -98,7 +100,7 @@ public class AuthService {
 
     public AuthenticateResponse authenticate(AuthenticateRequest model, String ipAddress) {
         Account account = accountRepository.findByEmail(model.email).get();
-        if (account == null || account.getVerificationToken().getVerified() == null
+        if (account == null || account.getVerificationToken() == null
                 || !encoder.matches(model.password, account.getPasswordHash())) {
             throw new CustomException("Wrong password or Not Active yet !!!");
         } else {
@@ -106,7 +108,7 @@ public class AuthService {
             // delete OldRefreshTokens
             RefreshToken refreshToken = jwtUtils.generateRefreshToken(ipAddress, account.getIdAccount());
             refreshTokenRepository.save(refreshToken);
-            tokenUtils.removeOldRefreshTokens(account);
+            tokenUtils.removeOldRefreshTokens(account.getIdAccount());
 
             List<String> roles = new ArrayList<>();
             for (Role role : account.getListOfRole()) {
@@ -123,7 +125,32 @@ public class AuthService {
         }
     }
 
-    public AuthenticateResponse refreshToken(String token, String ipAddress) {
+    public AuthenticateResponse authenticateWithJWT(String token, String ipAddress) {
+        if (jwtUtils.validateJwtToken(token)) {
+            String email = jwtUtils.getAllClaimsFromToken(token).get("email").toString();
+            Account account = accountRepository.findByEmail(email).get();
+            account.setLastExpires(new Date());
+            
+            RefreshToken refreshToken = jwtUtils.generateRefreshToken(ipAddress, account.getIdAccount());
+            refreshTokenRepository.save(refreshToken);
+            tokenUtils.removeOldRefreshTokens(account.getIdAccount());
+            List<String> roles = new ArrayList<>();
+            for (Role role : account.getListOfRole()) {
+                roles.add(role.getRoleName().toString());
+            }
+            // init respone
+            String jwtToken = jwtUtils.generateJwtToken(account);
+            AuthenticateResponse response = new AuthenticateResponse();
+            response.setRole(roles);
+            response.jwtToken = jwtToken;
+            response.refreshToken = refreshToken.getToken();
+            response = (AuthenticateResponse) SubUtils.mapperObject(account, response);
+            return response;
+        }
+       throw new CustomException("Jwt Invalid !!!");
+    }
+
+    public AuthenticateResponse refreshToken(HttpServletResponse servletResponse, String token, String ipAddress) {
         RefreshToken refreshToken = null;
         try {
             refreshToken = refreshTokenRepository.findByToken(token).get();
@@ -144,7 +171,7 @@ public class AuthService {
         RefreshToken newRefreshToken = tokenUtils.rotateRefreshToken(refreshToken, ipAddress);
         refreshToken = tokenUtils.revokeRefreshToken(refreshToken, ipAddress, "Replaced by new token",
                 newRefreshToken.getToken());
-        tokenUtils.removeOldRefreshTokens(account);
+        tokenUtils.removeOldRefreshTokens(account.getIdAccount());
 
         account.addToListOfRefreshToken(newRefreshToken);
         account.addToListOfRefreshToken(refreshToken);
@@ -211,4 +238,5 @@ public class AuthService {
         }
         return listRespone;
     }
+
 }
