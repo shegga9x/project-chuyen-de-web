@@ -1,9 +1,7 @@
 package backend.backend.helpers.utils;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.RefreshToken;
@@ -123,16 +120,5 @@ public class JwtUtils {
         return sb.toString().substring(0, numchars);
     }
 
-    public void removeOldRefreshTokens(int idAccount) {
-        List<Integer> ids = new ArrayList<>();
-        Account account = accountRepository.findById(idAccount).get();
-        for (RefreshToken refreshToken : account.getListOfRefreshToken()) {
-            if (refreshToken.getRevoked() != null
-                    && refreshToken.getExpires().before(new Date())
-                    && new Date(refreshToken.getCreated().getTime() + jwtRefreshExpirationMs).before(new Date())) {
-                ids.add(refreshToken.getId());
-            }
-        }
-        refreshTokenRepository.deleteAllById(ids);
-    }
+ 
 }
