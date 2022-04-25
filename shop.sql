@@ -90,6 +90,7 @@ CREATE TABLE Reset_Token
 
 
 select * from ACCOUNT
+select * from Verification_Token
 select * from role
 select * from ACCOUNT_Detail
 

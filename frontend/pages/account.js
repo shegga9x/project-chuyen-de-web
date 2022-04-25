@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from "../helpers/customHook/useAuth";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import { useRouter } from 'next/router'
 import {
     faHome
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
-import { async } from "rxjs";
 
 export default function Account() {
 
