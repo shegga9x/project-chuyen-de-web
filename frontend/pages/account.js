@@ -1,11 +1,54 @@
 import Head from "next/head";
+import { useState } from 'react';
+import { signIn } from 'next-auth/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useAuth from "../helpers/customHook/useAuth";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 import {
     faHome
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
+import { async } from "rxjs";
 
 export default function Account() {
+
+    const [isAuthenticated] = useAuth(true);
+
+    //login useState
+    const [email, setEmail] = useState("");
+
+    const [password, setPassword] = useState("");
+
+    const submit = (e) => {
+        e.preventDefault();
+        signIn('credentials', { email: email, password: password });
+    }
+
+
+    //register useState
+    const { register, handleSubmit, formState: { errors } } = useForm();
+    const onSubmit = async ({ userName, email, password }) => {
+        const message = await axios.post('http://localhost:4000/accounts/register', {
+            title: 'Mrs',
+            firstName: userName,
+            lastName: 'Phung pink',
+            email: email,
+            password: password,
+            confirmPassword: password
+        }, { withCredentials: true }).
+            catch(errors => {
+                console.log(errors.response)
+                alert(errors.response.data.message)
+            })
+        // console.log(message);
+        alert(message.data.message)
+    };
+
+    const onError = () => {
+        console.log(errors);
+    }
+
     return (
         <>
             <Head>
@@ -46,7 +89,7 @@ export default function Account() {
                                     <h6 className="account-h6 u-s-m-b-30">
                                         Welcome back! Sign in to your account.
                                     </h6>
-                                    <form>
+                                    <form onSubmit={submit}>
                                         <div className="u-s-m-b-30">
                                             <label htmlFor="user-name-email">
                                                 Username or Email
@@ -57,6 +100,8 @@ export default function Account() {
                                                 id="user-name-email"
                                                 className="text-field"
                                                 placeholder="Username / Email"
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
                                             />
                                         </div>
                                         <div className="u-s-m-b-30">
@@ -69,6 +114,8 @@ export default function Account() {
                                                 id="login-password"
                                                 className="text-field"
                                                 placeholder="Password"
+                                                value={password}
+                                                onChange={(e) => setPassword(e.target.value)}
                                             />
                                         </div>
                                         <div className="group-inline u-s-m-b-30">
@@ -109,7 +156,7 @@ export default function Account() {
                                         Registering for this site allows you to access your order status
                                         and history.
                                     </h6>
-                                    <form>
+                                    <form onSubmit={handleSubmit(onSubmit, onError)}>
                                         <div className="u-s-m-b-30">
                                             <label htmlFor="user-name">
                                                 Username
@@ -120,7 +167,9 @@ export default function Account() {
                                                 id="user-name"
                                                 className="text-field"
                                                 placeholder="Username"
+                                                {...register("userName", { required: 'userName is required', minLength: { value: 6, message: 'user name min length is 6' } })}
                                             />
+                                            {errors?.userName && <p style={{ color: "red" }}>{errors?.userName.message}</p>}
                                         </div>
                                         <div className="u-s-m-b-30">
                                             <label htmlFor="email">
@@ -132,7 +181,15 @@ export default function Account() {
                                                 id="email"
                                                 className="text-field"
                                                 placeholder="Email"
+                                                {...register("email", {
+                                                    required: 'Email is required', pattern: {
+                                                        value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                                                        message: 'Please enter a valid email'
+                                                    }
+                                                })}
                                             />
+                                            {errors?.email && <p style={{ color: "red" }}>{errors?.email.message}</p>}
+
                                         </div>
                                         <div className="u-s-m-b-30">
                                             <label htmlFor="password">
@@ -140,11 +197,14 @@ export default function Account() {
                                                 <span className="astk">*</span>
                                             </label>
                                             <input
+                                                required
                                                 type="text"
                                                 id="password"
                                                 className="text-field"
                                                 placeholder="Password"
+                                                {...register("password", { required: 'Password is required', minLength: { value: 6, message: 'Password min length is 6' } })}
                                             />
+                                            {errors?.password && <p style={{ color: "red" }}>{errors?.password.message}</p>}
                                         </div>
                                         <div className="u-s-m-b-30">
                                             <input type="checkbox" className="check-box" id="accept" />

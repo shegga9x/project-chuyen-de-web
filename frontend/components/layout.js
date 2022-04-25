@@ -40,6 +40,7 @@ export default function Layout({ children, home, shop }) {
                 <ResponsiveSearch />
 
                 {/* trang chủ thì mới có 2 thằng này */}
+
                 {
                     home && (<NewsletterModule />)
                 }
@@ -51,56 +52,59 @@ export default function Layout({ children, home, shop }) {
             <Script
                 type="text/javascript"
                 src="/static/js/vendor/modernizr-custom.min.js"
+                key={'modernizr - custom.min.js'}
             ></Script>
-            <Script type="text/javascript" src="/static/js/nprogress.min.js"></Script>
+            <Script type="text/javascript" src="/static/js/nprogress.min.js" key={'nprogress.min.js'}></Script>
             <Script
                 type="text/javascript"
                 src="/static/js/jquery.min.js"
                 strategy="beforeInteractive"
+                key={'jquery.min.js'}
             ></Script>
-            <Script type="text/javascript" src="/static/js/bootstrap.min.js"></Script>
-            <Script type="text/javascript" src="/static/js/popper.min.js"></Script>
+            <Script type="text/javascript" src="/static/js/bootstrap.min.js" key={'bootstrap.min.js'}></Script>
+            <Script type="text/javascript" src="/static/js/popper.min.js" key={'popper.min.js'}></Script>
             <Script
                 type="text/javascript"
                 src="/static/js/jquery.scrollUp.min.js"
-                strategy="beforeInteractive"
+                key={'jquery.scrollUp.min.js'}
             ></Script>
             <Script
                 type="text/javascript"
                 src="/static/js/jquery.elevatezoom.min.js"
-                strategy="beforeInteractive"
+                key={'jquery.elevatezoom.min.js'}
             ></Script>
             <Script
                 type="text/javascript"
                 src="/static/js/jquery-ui.range-slider.min.js"
-                strategy="beforeInteractive"
+                key={'jquery - ui.range - slider.min.js'}
             ></Script>
             <Script
                 type="text/javascript"
                 src="/static/js/jquery.slimscroll.min.js"
-                strategy="beforeInteractive"
+                key={'jquery.slimscroll.min.js'}
             ></Script>
             <Script
                 type="text/javascript"
                 src="/static/js/jquery.resize-select.min.js"
-                strategy="beforeInteractive"
+                key={'jquery.resize - select.min.js'}
             ></Script>
             <Script
                 type="text/javascript"
                 src="/static/js/jquery.custom-megamenu.min.js"
-                strategy="beforeInteractive"
+                key={'jquery.custom - megamenu.min.js'}
             ></Script>
             <Script
                 type="text/javascript"
                 src="/static/js/jquery.custom-countdown.min.js"
-                strategy="beforeInteractive"
+                key={'jquery.custom - countdown.min.js'}
             ></Script>
             <Script
                 type="text/javascript"
                 src="/static/js/owl.carousel.min.js"
+                key={'owl.carousel.min.js'}
                 strategy="beforeInteractive"
             ></Script>
-            <Script type="text/javascript" src="/static/js/app.js"></Script>
+            <Script type="text/javascript" src="/static/js/app.js" key={'app.js'}></Script>
         </>
     )
 }

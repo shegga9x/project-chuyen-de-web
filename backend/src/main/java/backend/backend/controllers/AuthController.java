@@ -45,6 +45,7 @@ public class AuthController {
         accountService.register(model, request.getHeader("origin"));
         return ResponseEntity.ok(
                 new MessageResponse("Registration successful, please check your email for verification instructions"));
+
     }
 
     @PostMapping("/verify-email")
@@ -108,6 +109,12 @@ public class AuthController {
         accountService.resetPassword(model);
         return ResponseEntity.ok(
                 new MessageResponse("Password reset successful, you can now login"));
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> test() {
+        return ResponseEntity.ok(
+                new MessageResponse("Test"));
     }
 
     // @PreAuthorize("hasRole('ROLE_Admin')")

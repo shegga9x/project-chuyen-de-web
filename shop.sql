@@ -92,5 +92,7 @@ select * from ACCOUNT
 select * from role
 select * from ACCOUNT_Detail
 
---insert into ACCOUNT  values (  'shegga9x@gmail.com','123456',null ,null,null ,1)
+
+
+--insert into ACCOUNT  values ('shegga9x@gmail.com','123456',null ,null,null ,1)
 --insert into ACCOUNT_Detail  values ( 1,null ,null,null ,null,null)

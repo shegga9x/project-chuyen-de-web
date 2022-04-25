@@ -43,7 +43,6 @@ public class EmailService {
                     "<p>Please click the below link to verify your email address:</p><p><a href=\"\"{0}\"\">{0}</a></p>",
                     verifyUrl);
         } else {
-
             message = MessageFormat.format(
                     "<p>Please use the below token to verify your email address with the <code>/accounts/verify-email</code> api route:</p><p><code>{0}</code></p>",
                     account.getVerificationToken().getVerificationTokenContent());

@@ -38,7 +38,7 @@ public class VerificationToken implements Serializable {
     @OneToOne
     @JoinColumn(name="ID_ACCOUNT", referencedColumnName="ID_ACCOUNT", insertable=false, updatable=false)
     @MapsId
-    private Account    account ; 
+    private Account account ;
 
 
     /**

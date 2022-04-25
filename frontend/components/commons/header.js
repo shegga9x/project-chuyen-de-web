@@ -15,15 +15,23 @@ import {
     faPersonDress,
     faPhoneFlip,
     faPlus,
+    faRightFromBracket,
     faRocket,
     faSearch,
     faShirt,
     faSignInAlt,
+    faSignOut,
     faTvAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSession, signOut } from "next-auth/client";
 
 export default function Header() {
+
+    const [session, loading] = useSession();
+
+    console.log(session)
+
     return (
         <>
             {/* Header */}
@@ -46,7 +54,7 @@ export default function Header() {
                                         <i className="u-c-brand u-s-m-r-9">
                                             <FontAwesomeIcon icon={faEnvelope} />
                                         </i>
-                                        E-mail: contact@domain.com
+                                        {session ? `E-mail: ${session.user.email}` : 'E-mail: contact@domain.com'}
                                     </a>
                                 </li>
                             </ul>
@@ -55,40 +63,50 @@ export default function Header() {
                             <ul className="secondary-nav g-nav">
                                 <li>
                                     <a>
-                                        My Account
+                                        {session ? `${session.user.name}` : 'MyAccount'}
                                         <i className="u-s-m-l-9">
                                             <FontAwesomeIcon icon={faChevronDown} size="2xs" />
                                         </i>
                                     </a>
                                     <ul className="g-dropdown" style={{ width: 200 }}>
                                         <li>
-                                            <a href="cart.html">
+                                            <a>
                                                 <i className=" u-s-m-r-9">
                                                     <FontAwesomeIcon icon={faCog} />
                                                 </i>My Cart
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="wishlist.html">
+                                            <a>
                                                 <i className=" u-s-m-r-9" >
                                                     <FontAwesomeIcon icon={faHeart} />
                                                 </i>My Wishlist
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="checkout.html">
+                                            <a>
                                                 <i className="u-s-m-r-9">
                                                     <FontAwesomeIcon icon={faCircleCheck} />
                                                 </i>Checkout
                                             </a>
                                         </li>
-                                        <li>
-                                            <a href="account.html">
-                                                <i className=" u-s-m-r-9" >
+                                        {!loading && !session && <li>
+                                            <a href='/account'>
+                                                <i className=" u-s-m-r-9">
                                                     <FontAwesomeIcon icon={faSignInAlt} />
                                                 </i>Login / Signup
                                             </a>
-                                        </li>
+                                        </li>}
+                                        {session && <li>
+                                            <a onClick={(e) => {
+                                                e.preventDefault();
+                                                signOut()
+                                            }}>
+                                                <i className=" u-s-m-r-9" >
+                                                    <FontAwesomeIcon icon={faRightFromBracket} />
+                                                </i>Sign out
+                                            </a>
+                                        </li>}
                                     </ul>
                                 </li>
                                 <li>
