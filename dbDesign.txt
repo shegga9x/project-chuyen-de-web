@@ -1,0 +1,62 @@
+-- Evaluate
+-- Chat
+-- Wallet
+-- Cart
+-- CartItem
+-- Order
+-- Voucher
+-- Sale
+-- Shop Product
+-- Shop Detail
+-- Shop Category
+-- Shop
+-- ProductDetail
+-- Customer
+-- CustomerDetail
+-- Product
+    + ProductDetail
+        + Name
+        + product images
+        + Price
+        + Sale Price
+    + Shop
+    + Available
+    + SingleProduct
+-- SingleProduct
+    + Product
+    + Evaluate
+    + Description
+    + Shipping
+    + ProductCategory
+    + Status
+-- Account
+    + JWT
+    + Boilerplate
+    + Shop
+        + Order
+        + Shop Product
+        + Shop Detail
+        + Shop Category
+        + Chat
+        + Wallet
+        + Voucher
+    + Customer
+        + CustomerDetail
+        + Order
+        + Cart
+        + Chat
+        + Wallet
+    + Role
+-- Category
+    -- id 
+    -- name 
+    -- CategoryKind  
+    -- level 
+-- CategoryKind
+    + id
+    + idCategory
+-- ProductCategory
+    -- category
+    -- SingleProduct
+
+??? -- Shipping
