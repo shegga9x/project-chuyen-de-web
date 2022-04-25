@@ -11,22 +11,29 @@ export default function VerifyEmail() {
 
     useEffect(() => {
         if (token) {
-            const message = async () => {
-                const mes = await axios.post('http://localhost:4000/accounts/verify-email', {
-                    token: token
-                }).catch(errors => {
-                    setValid(true);
-                    return undefined;
-                })
+            const fetchData = async () => {
+                const message = await verify();
 
-                return mes.data.message;
+                if (message !== undefined) {
+                    window.location.href = "/account"
+                }
             }
-            if (message !== undefined) {
-                window.location.href = "/account"
-            }
+
+            fetchData();
         }
 
     }, [token])
+
+    const verify = async () => {
+        const mes = await axios.post('http://localhost:4000/accounts/verify-email', {
+            token: token
+        }).catch(errors => {
+            setValid(true);
+            return undefined;
+        })
+
+        return mes.data.message;
+    }
 
 
     return (<>
