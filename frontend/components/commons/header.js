@@ -6,6 +6,7 @@ import {
     faBookOpen,
     faChevronDown,
     faCircleCheck,
+    faClose,
     faCog,
     faEnvelope,
     faHeart,
@@ -271,7 +272,11 @@ export default function Header() {
                                 type="button"
                                 className="button ion ion-md-close"
                                 id="mini-cart-close"
-                            />
+                            >
+                                <i>
+                                    <FontAwesomeIcon icon={faClose} />
+                                </i>
+                            </button>
                         </div>
                         <ul className="mini-cart-list">
                             <li className="clearfix">

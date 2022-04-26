@@ -1,6 +1,7 @@
 import {
   faBatteryHalf,
   faCog,
+  faEllipsis,
   faEnvelope,
   faHeart,
   faLaptop,
@@ -5249,7 +5250,10 @@ export default function Home() {
             href="store-directory.html"
             title="View all products on site"
           >
-            <i className="ion ion-ios-more" />
+            {/* <i className="ion ion-ios-more" /> */}
+            <i>
+              <FontAwesomeIcon icon={faEllipsis} />
+            </i>
           </a>
         </div>
         {/* Continue-Link /- */}
