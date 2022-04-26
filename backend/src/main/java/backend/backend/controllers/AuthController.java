@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import backend.backend.helpers.payload.request.*;
+import backend.backend.services.subService.GoogleOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +20,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import backend.backend.helpers.payload.request.AuthenticateRequest;
-import backend.backend.helpers.payload.request.ForgotPasswordRequest;
-import backend.backend.helpers.payload.request.RegisterRequest;
-import backend.backend.helpers.payload.request.ResetPasswordRequest;
-import backend.backend.helpers.payload.request.ValidateResetTokenRequest;
-import backend.backend.helpers.payload.request.VerifyEmailRequest;
 import backend.backend.helpers.payload.response.MessageResponse;
 import backend.backend.helpers.utils.CookieUtils;
 import backend.backend.helpers.utils.SubUtils;
@@ -38,6 +34,8 @@ public class AuthController {
     CookieUtils controlerUtils;
     @Autowired
     AuthService accountService;
+    @Autowired
+    GoogleOAuth2UserService googleOAuth2UserService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest model, HttpServletRequest request) {
@@ -56,7 +54,7 @@ public class AuthController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@Valid @RequestBody AuthenticateRequest model,
-            HttpServletResponse servletResponse) {
+                                          HttpServletResponse servletResponse) {
         var response = accountService.authenticate(model, controlerUtils.ipAddress());
         controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
         return ResponseEntity.ok(response);
@@ -122,10 +120,23 @@ public class AuthController {
         return ResponseEntity.ok(accountService.getAll());
     }
 
+//    @PostMapping("authenticate-with-jwt")
+//    public ResponseEntity<?> authenticateWithJWT(@RequestBody String token, HttpServletResponse servletResponse) {
+//        var response = accountService.authenticateWithJWT(token, controlerUtils.ipAddress());
+//        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
+//        return ResponseEntity.ok(response);
+//    }
+
     @PostMapping("authenticate-with-jwt")
-    public ResponseEntity<?> authenticateWithJWT(@RequestBody String token, HttpServletResponse servletResponse) {
-        var response = accountService.authenticateWithJWT(token, controlerUtils.ipAddress());
+    public ResponseEntity<?> authenticateWithJWT(@RequestBody AccountGoogleRequest accountGoogleRequest, HttpServletResponse servletResponse) {
+        var response = accountService.authenticateWithJWT(accountGoogleRequest, controlerUtils.ipAddress());
         controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("check-user-login-google")
+    public ResponseEntity<?> checkUserLoginGoogle(@RequestBody AccountGoogleRequest accountGoogleRequest) {
+        var response = googleOAuth2UserService.loadUser(accountGoogleRequest);
         return ResponseEntity.ok(response);
     }
 

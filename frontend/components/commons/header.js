@@ -30,7 +30,7 @@ export default function Header() {
 
     const [session, loading] = useSession();
 
-    console.log(session)
+    // console.log(session)
 
     return (
         <>

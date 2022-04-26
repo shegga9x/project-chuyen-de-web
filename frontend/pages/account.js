@@ -22,7 +22,8 @@ export default function Account() {
 
     const submit = (e) => {
         e.preventDefault();
-        signIn('credentials', { email: email, password: password });
+        // signIn('credentials', { email: email, password: password });
+        signIn('google');
     }
 
 

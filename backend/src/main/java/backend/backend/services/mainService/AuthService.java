@@ -6,17 +6,13 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import backend.backend.helpers.payload.request.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import backend.backend.helpers.advice.CustomException;
-import backend.backend.helpers.payload.request.AuthenticateRequest;
-import backend.backend.helpers.payload.request.ForgotPasswordRequest;
-import backend.backend.helpers.payload.request.RegisterRequest;
-import backend.backend.helpers.payload.request.ResetPasswordRequest;
-import backend.backend.helpers.payload.request.ValidateResetTokenRequest;
 import backend.backend.helpers.payload.response.AccountResponse;
 import backend.backend.helpers.payload.response.AuthenticateResponse;
 import backend.backend.helpers.utils.JwtUtils;
@@ -130,7 +126,7 @@ public class AuthService {
             String email = jwtUtils.getAllClaimsFromToken(token).get("email").toString();
             Account account = accountRepository.findByEmail(email).get();
             account.setLastExpires(new Date());
-            
+
             RefreshToken refreshToken = jwtUtils.generateRefreshToken(ipAddress, account.getIdAccount());
             refreshTokenRepository.save(refreshToken);
             tokenUtils.removeOldRefreshTokens(account.getIdAccount());
@@ -148,6 +144,28 @@ public class AuthService {
             return response;
         }
        throw new CustomException("Jwt Invalid !!!");
+    }
+
+    public AuthenticateResponse authenticateWithJWT(AccountGoogleRequest accountGoogleRequest, String ipAddress) {
+        String email = accountGoogleRequest.getEmail();
+        Account account = accountRepository.findByEmail(email).get();
+        account.setLastExpires(new Date());
+
+        RefreshToken refreshToken = jwtUtils.generateRefreshToken(ipAddress, account.getIdAccount());
+        refreshTokenRepository.save(refreshToken);
+        tokenUtils.removeOldRefreshTokens(account.getIdAccount());
+        List<String> roles = new ArrayList<>();
+        for (Role role : account.getListOfRole()) {
+            roles.add(role.getRoleName().toString());
+        }
+        // init respone
+        String jwtToken = jwtUtils.generateJwtToken(account);
+        AuthenticateResponse response = new AuthenticateResponse();
+        response.setRole(roles);
+        response.jwtToken = jwtToken;
+        response.refreshToken = refreshToken.getToken();
+        response = (AuthenticateResponse) SubUtils.mapperObject(account, response);
+        return response;
     }
 
     public AuthenticateResponse refreshToken(HttpServletResponse servletResponse, String token, String ipAddress) {
@@ -238,5 +256,9 @@ public class AuthService {
         }
         return listRespone;
     }
+
+//    private Account registerNewUser(){
+//
+//    }
 
 }

@@ -6,10 +6,10 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 config.autoAddCss = false
 
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps: { session, ...pageProps } }) => {
   // const [interval, setInterval] = useState(0);
   return (
-    <Provider session={pageProps.session}>
+    <Provider session={session}>
       {/* refetchInterval={interval} */}
       <Component {...pageProps} />
       {/* <RefreshTokenHandler setInterval={setInterval} /> */}

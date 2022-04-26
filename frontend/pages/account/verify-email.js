@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import { signIn } from 'next-auth/client';
 
 export default function VerifyEmail() {
     const [isInValid, setValid] = useState(false);
