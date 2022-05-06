@@ -73,11 +73,11 @@ public class GoogleOAuth2UserService {
         user.setCreated(new Date());
         user.setAcceptTerms(true);
         user.setLastExpires(new Date());
-        AccountDetail accountDetail = new AccountDetail();
-        accountDetail.setFirstName(accountGoogleRequest.getFirstName());
-        accountDetail.setLastName(accountGoogleRequest.getLastName());
-        accountDetail.setImageUrl(accountGoogleRequest.getImgUrl());
-        user.setAccountDetail(accountDetail);
+        // AccountDetail accountDetail = new AccountDetail();
+        // accountDetail.setFirstName(accountGoogleRequest.getFirstName());
+        // accountDetail.setLastName(accountGoogleRequest.getLastName());
+        // accountDetail.setImageUrl(accountGoogleRequest.getImgUrl());
+        // user.setAccountDetail(accountDetail);
         boolean isFirstAccount = accountRepository.findAll().size() == 0;
         RoleEnum roleEnum = (isFirstAccount ? RoleEnum.Admin : RoleEnum.Student);
         List<Role> roles = new ArrayList<>(List.of(new Role(roleEnum)));
@@ -88,11 +88,11 @@ public class GoogleOAuth2UserService {
     }
 
     private Account updateExistingUser(Account existingUser, AccountGoogleRequest accountGoogleRequest) {
-        AccountDetail accountDetail = existingUser.getAccountDetail();
-        accountDetail.setFirstName(accountGoogleRequest.getFirstName());
-        accountDetail.setLastName(accountGoogleRequest.getLastName());
-        accountDetail.setImageUrl(accountGoogleRequest.getImgUrl());
-        existingUser.setAccountDetail(accountDetail);
+        // AccountDetail accountDetail = existingUser.getAccountDetail();
+        // accountDetail.setFirstName(accountGoogleRequest.getFirstName());
+        // accountDetail.setLastName(accountGoogleRequest.getLastName());
+        // accountDetail.setImageUrl(accountGoogleRequest.getImgUrl());
+        // existingUser.setAccountDetail(accountDetail);
         return accountRepository.save(existingUser);
     }
 }

@@ -6,7 +6,6 @@
 -- Order
 -- Voucher
 -- Sale
--- Shop Product
 -- Shop Detail
 -- Shop Category
 -- Shop
@@ -19,10 +18,10 @@
         + product images
         + Price
         + Sale Price
-    + Shop
     + Available
     + SingleProduct
 -- SingleProduct
+    + Shop
     + Product
     + Evaluate
     + Description

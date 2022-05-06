@@ -17,7 +17,6 @@ import org.springframework.util.StringUtils;
 
 import backend.backend.helpers.advice.OAuth2AuthenticationProcessingException;
 import backend.backend.persitence.entities.Account;
-import backend.backend.persitence.entities.AccountDetail;
 import backend.backend.persitence.entities.ResetToken;
 import backend.backend.persitence.entities.Role;
 import backend.backend.persitence.entities.VerificationToken;
@@ -84,11 +83,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setCreated(new Date());
         user.setAcceptTerms(true);
         user.setLastExpires(new Date());
-        AccountDetail accountDetail = new AccountDetail();
-        accountDetail.setFirstName(oAuth2UserInfo.getFirstName());
-        accountDetail.setLastName(oAuth2UserInfo.getLastName());
-        accountDetail.setImageUrl(oAuth2UserInfo.getImageUrl());
-        user.setAccountDetail(accountDetail);
+        // AccountDetail accountDetail = new AccountDetail();
+        // accountDetail.setFirstName(oAuth2UserInfo.getFirstName());
+        // accountDetail.setLastName(oAuth2UserInfo.getLastName());
+        // accountDetail.setImageUrl(oAuth2UserInfo.getImageUrl());
+        // user.setAccountDetail(accountDetail);
         boolean isFirstAccount = accountRepository.findAll().size() == 0;
         RoleEnum roleEnum = (isFirstAccount ? RoleEnum.Admin : RoleEnum.Student);
         List<Role> roles = new ArrayList<>(List.of(new Role(roleEnum)));
@@ -99,11 +98,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
     }
 
     private Account updateExistingUser(Account existingUser, OAuth2UserInfo oAuth2UserInfo) {
-        AccountDetail accountDetail = existingUser.getAccountDetail();
-        accountDetail.setFirstName(oAuth2UserInfo.getFirstName());
-        accountDetail.setLastName(oAuth2UserInfo.getLastName());
-        accountDetail.setImageUrl(oAuth2UserInfo.getImageUrl());
-        existingUser.setAccountDetail(accountDetail);
+        // AccountDetail accountDetail = existingUser.getAccountDetail();
+        // accountDetail.setFirstName(oAuth2UserInfo.getFirstName());
+        // accountDetail.setLastName(oAuth2UserInfo.getLastName());
+        // accountDetail.setImageUrl(oAuth2UserInfo.getImageUrl());
+        // existingUser.setAccountDetail(accountDetail);
         return accountRepository.save(existingUser);
     }
 

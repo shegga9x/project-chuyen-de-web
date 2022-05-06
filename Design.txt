@@ -1,0 +1,128 @@
+-- Account
+   id_account
+
+-- Customer
+   id_account
+   name
+   phone_number
+   gender
+   birthday
+   img_url
+   address
+
+-- Shop
+   id_account
+   name
+   img_url
+   address
+   description
+
+-- Shop_Category
+   id_shop_category
+   id_shop
+   name
+
+-- Product
+   id_product
+   name
+   quantity
+   price
+   img_url
+
+-- Single_Product_Page
+   id_single_product_page
+   id_product
+   name
+   id_shop
+   description
+   id_category
+   id_evaluate 
+   sold_count
+   status
+
+-- Category
+   id_category
+   id_category_parent
+   name
+
+-- Cart_Item
+   id_customer
+   id_product
+   quantity
+
+-- Order
+   id_order
+   id_customer
+   id_product
+   status
+
+-- Wallet_Shop
+   id_shop
+   total
+
+-- Wallet_Customer
+   id_customer
+   total
+
+-- Evaluate
+   id_evaluate
+   id_customer
+   date_create
+   date_update
+   id_product
+   like
+   rate
+   content
+
+-- Evaluate_Reply
+   id_evaluate
+   id_shop
+   date_create
+   date_update
+   content
+
+
+-- Sale
+   id_sale
+   -- (total_? , quantity_?)
+   sale_condition
+   -- (% or number)
+   discount_kind
+   -- (total_? , quantity_?)
+   discount_condition
+   -- (số giảm)
+   discount_value
+
+-- Voucher
+   id_voucher
+   id_sale
+   code
+   quantity
+   date
+   name
+
+-- Promote
+   id_promote
+   id_sale
+   date
+   name
+
+-- Promote_Product_List
+   id_promote
+   id_product
+
+-- Chat_Line
+   id_account
+   id_product
+   date_create
+   date_update
+   content
+
+-- Chat
+   id_account
+   is_account_shop
+   id_account_reply
+   is_account_reply_shop
+
+
+   
