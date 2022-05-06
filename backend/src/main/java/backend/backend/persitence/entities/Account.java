@@ -92,17 +92,19 @@ public class Account implements Serializable {
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private VerificationToken verificationToken;
 
-    @OneToMany(mappedBy = "account")
-    private List<Shop> listOfShop;
+    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    private Shop shop;
+
+    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    private Customer customer;
 
     @OneToMany(mappedBy = "account")
     private List<Chat> listOfChat;
 
     @OneToMany(mappedBy = "account2")
     private List<Chat> listOfChat2;
-
-    @OneToMany(mappedBy = "account")
-    private List<Customer> listOfCustomer;
 
     /**
      * Constructor

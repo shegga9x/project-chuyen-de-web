@@ -15,126 +15,131 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Shop", schema="dbo", catalog="shop" )
+@Table(name = "Shop", schema = "dbo", catalog = "shop")
 public class Shop implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
+    // --- ENTITY PRIMARY KEY
     @Id
-    @Column(name="id_shop", nullable=false)
-    private Integer    idShop ;
+    @Column(name = "id_shop", nullable = false)
+    private Integer idShop;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="name", length=2147483647)
-    private String     name ;
+    // --- ENTITY DATA FIELDS
+    @Column(name = "name", length = 2147483647)
+    private String name;
 
-    @Column(name="phone_number", length=15)
-    private String     phoneNumber ;
+    @Column(name = "phone_number", length = 15)
+    private String phoneNumber;
 
-    @Column(name="img_url", length=2147483647)
-    private String     imgUrl ;
+    @Column(name = "img_url", length = 2147483647)
+    private String imgUrl;
 
-    @Column(name="address", length=2147483647)
-    private String     address ;
+    @Column(name = "address", length = 2147483647)
+    private String address;
 
-    @Column(name="description", length=2147483647)
-    private String     description ;
+    @Column(name = "description", length = 2147483647)
+    private String description;
 
+    // --- ENTITY LINKS ( RELATIONSHIP )
+    @OneToMany(mappedBy = "shop")
+    private List<SingleProductPage> listOfSingleProductPage;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @OneToMany(mappedBy="shop")
-    private List<SingleProductPage> listOfSingleProductPage ; 
+    @OneToOne(mappedBy = "shop")
+    private WalletShop walletShop;
 
-    @OneToOne(mappedBy="shop")
-    private WalletShop walletShop ; 
+    @OneToOne
+    @JoinColumn(name = "id_shop", referencedColumnName = "ID_ACCOUNT", insertable = false, updatable = false)
+    @MapsId
+    private Account account;
 
-    @ManyToOne
-    @JoinColumn(name="id_shop", referencedColumnName="ID_ACCOUNT", insertable=false, updatable=false)
-    private Account    account ; 
+    @OneToMany(mappedBy = "shop")
+    private List<EvaluateReply> listOfEvaluateReply;
 
-    @OneToMany(mappedBy="shop")
-    private List<EvaluateReply> listOfEvaluateReply ; 
-
-    @OneToMany(mappedBy="shop")
-    private List<ShopCategory> listOfShopCategory ; 
-
+    @OneToMany(mappedBy = "shop")
+    private List<ShopCategory> listOfShopCategory;
 
     /**
      * Constructor
      */
     public Shop() {
-		super();
+        super();
     }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setIdShop( Integer idShop ) {
-        this.idShop = idShop ;
+
+    // --- GETTERS & SETTERS FOR FIELDS
+    public void setIdShop(Integer idShop) {
+        this.idShop = idShop;
     }
+
     public Integer getIdShop() {
         return this.idShop;
     }
 
-    public void setName( String name ) {
-        this.name = name ;
+    public void setName(String name) {
+        this.name = name;
     }
+
     public String getName() {
         return this.name;
     }
 
-    public void setPhoneNumber( String phoneNumber ) {
-        this.phoneNumber = phoneNumber ;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
+
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
 
-    public void setImgUrl( String imgUrl ) {
-        this.imgUrl = imgUrl ;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
+
     public String getImgUrl() {
         return this.imgUrl;
     }
 
-    public void setAddress( String address ) {
-        this.address = address ;
+    public void setAddress(String address) {
+        this.address = address;
     }
+
     public String getAddress() {
         return this.address;
     }
 
-    public void setDescription( String description ) {
-        this.description = description ;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
     public String getDescription() {
         return this.description;
     }
 
-    //--- GETTERS FOR LINKS
+    // --- GETTERS FOR LINKS
     public List<SingleProductPage> getListOfSingleProductPage() {
         return this.listOfSingleProductPage;
-    } 
+    }
 
     public WalletShop getWalletShop() {
         return this.walletShop;
-    } 
+    }
 
     public Account getAccount() {
         return this.account;
-    } 
+    }
 
     public List<EvaluateReply> getListOfEvaluateReply() {
         return this.listOfEvaluateReply;
-    } 
+    }
 
     public List<ShopCategory> getListOfShopCategory() {
         return this.listOfShopCategory;
-    } 
+    }
 
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
+    // --- toString specific method
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(idShop);
         sb.append("|");
         sb.append(name);
@@ -146,7 +151,7 @@ public class Shop implements Serializable {
         sb.append(address);
         sb.append("|");
         sb.append(description);
-        return sb.toString(); 
-    } 
+        return sb.toString();
+    }
 
 }

@@ -16,137 +16,143 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Customer", schema="dbo", catalog="shop" )
+@Table(name = "Customer", schema = "dbo", catalog = "shop")
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
+    // --- ENTITY PRIMARY KEY
     @Id
-    @Column(name="id_customer", nullable=false)
-    private Integer    idCustomer ;
+    @Column(name = "id_customer", nullable = false)
+    private Integer idCustomer;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="name", length=2147483647)
-    private String     name ;
+    // --- ENTITY DATA FIELDS
+    @Column(name = "name", length = 2147483647)
+    private String name;
 
-    @Column(name="phone_number", length=15)
-    private String     phoneNumber ;
+    @Column(name = "phone_number", length = 15)
+    private String phoneNumber;
 
-    @Column(name="gender", length=1)
-    private String     gender ;
+    @Column(name = "gender", length = 1)
+    private String gender;
 
     @Temporal(TemporalType.DATE)
-    @Column(name="birthday")
-    private Date       birthday ;
+    @Column(name = "birthday")
+    private Date birthday;
 
-    @Column(name="img_url", length=2147483647)
-    private String     imgUrl ;
+    @Column(name = "img_url", length = 2147483647)
+    private String imgUrl;
 
-    @Column(name="address", length=2147483647)
-    private String     address ;
+    @Column(name = "address", length = 2147483647)
+    private String address;
 
+    // --- ENTITY LINKS ( RELATIONSHIP )
+    @OneToMany(mappedBy = "customer")
+    private List<Evaluate> listOfEvaluate;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @OneToMany(mappedBy="customer")
-    private List<Evaluate> listOfEvaluate ; 
+    @OneToOne
+    @JoinColumn(name = "id_customer", referencedColumnName = "ID_ACCOUNT", insertable = false, updatable = false)
+    @MapsId
+    private Account account;
 
-    @ManyToOne
-    @JoinColumn(name="id_customer", referencedColumnName="ID_ACCOUNT", insertable=false, updatable=false)
-    private Account    account ; 
+    @OneToMany(mappedBy = "customer")
+    private List<OrderItem> listOfOrderItem;
 
-    @OneToMany(mappedBy="customer")
-    private List<OrderItem> listOfOrderItem ; 
+    @OneToOne(mappedBy = "customer")
+    private WalletCustomer walletCustomer;
 
-    @OneToOne(mappedBy="customer")
-    private WalletCustomer walletCustomer ; 
-
-    @OneToMany(mappedBy="customer")
-    private List<CartItem> listOfCartItem ; 
-
+    @OneToMany(mappedBy = "customer")
+    private List<CartItem> listOfCartItem;
 
     /**
      * Constructor
      */
     public Customer() {
-		super();
+        super();
     }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setIdCustomer( Integer idCustomer ) {
-        this.idCustomer = idCustomer ;
+
+    // --- GETTERS & SETTERS FOR FIELDS
+    public void setIdCustomer(Integer idCustomer) {
+        this.idCustomer = idCustomer;
     }
+
     public Integer getIdCustomer() {
         return this.idCustomer;
     }
 
-    public void setName( String name ) {
-        this.name = name ;
+    public void setName(String name) {
+        this.name = name;
     }
+
     public String getName() {
         return this.name;
     }
 
-    public void setPhoneNumber( String phoneNumber ) {
-        this.phoneNumber = phoneNumber ;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
+
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
 
-    public void setGender( String gender ) {
-        this.gender = gender ;
+    public void setGender(String gender) {
+        this.gender = gender;
     }
+
     public String getGender() {
         return this.gender;
     }
 
-    public void setBirthday( Date birthday ) {
-        this.birthday = birthday ;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
+
     public Date getBirthday() {
         return this.birthday;
     }
 
-    public void setImgUrl( String imgUrl ) {
-        this.imgUrl = imgUrl ;
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
+
     public String getImgUrl() {
         return this.imgUrl;
     }
 
-    public void setAddress( String address ) {
-        this.address = address ;
+    public void setAddress(String address) {
+        this.address = address;
     }
+
     public String getAddress() {
         return this.address;
     }
 
-    //--- GETTERS FOR LINKS
+    // --- GETTERS FOR LINKS
     public List<Evaluate> getListOfEvaluate() {
         return this.listOfEvaluate;
-    } 
+    }
 
     public Account getAccount() {
         return this.account;
-    } 
+    }
 
     public List<OrderItem> getListOfOrderItem() {
         return this.listOfOrderItem;
-    } 
+    }
 
     public WalletCustomer getWalletCustomer() {
         return this.walletCustomer;
-    } 
+    }
 
     public List<CartItem> getListOfCartItem() {
         return this.listOfCartItem;
-    } 
+    }
 
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
+    // --- toString specific method
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(idCustomer);
         sb.append("|");
         sb.append(name);
@@ -160,7 +166,7 @@ public class Customer implements Serializable {
         sb.append(imgUrl);
         sb.append("|");
         sb.append(address);
-        return sb.toString(); 
-    } 
+        return sb.toString();
+    }
 
 }
