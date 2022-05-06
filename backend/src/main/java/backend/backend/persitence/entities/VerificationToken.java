@@ -15,81 +15,85 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Verification_Token", schema="dbo", catalog="shop" )
+@Table(name = "Verification_Token", schema = "dbo", catalog = "shop")
 public class VerificationToken implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
+    // --- ENTITY PRIMARY KEY
     @Id
-    @Column(name="ID_ACCOUNT", nullable=false)
-    private Integer    idAccount ;
+    @Column(name = "ID_ACCOUNT", nullable = false)
+    private Integer idAccount;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="verification_token_content", length=2147483647)
-    private String     verificationTokenContent ;
+    // --- ENTITY DATA FIELDS
+    @Column(name = "verification_token_content", length = 2147483647)
+    private String verificationTokenContent;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="verified")
-    private Date       verified ;
+    @Column(name = "verified")
+    private Date verified;
 
-
-    //--- ENTITY LINKS ( RELATIONSHIP )
+    // --- ENTITY LINKS ( RELATIONSHIP )
     @OneToOne
-    @JoinColumn(name="ID_ACCOUNT", referencedColumnName="ID_ACCOUNT", insertable=false, updatable=false)
+    @JoinColumn(name = "ID_ACCOUNT", referencedColumnName = "ID_ACCOUNT", insertable = false, updatable = false)
     @MapsId
-    private Account account ;
-
+    private Account account;
 
     /**
      * Constructor
      */
     public VerificationToken() {
-		super();
+        super();
     }
-    public VerificationToken( String verificationTokenContent) {
+
+    public VerificationToken(String verificationTokenContent) {
         this.verificationTokenContent = verificationTokenContent;
     }
 
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setIdAccount( Integer idAccount ) {
-        this.idAccount = idAccount ;
+    // --- GETTERS & SETTERS FOR FIELDS
+    public void setIdAccount(Integer idAccount) {
+        this.idAccount = idAccount;
     }
+
     public Integer getIdAccount() {
         return this.idAccount;
     }
 
-    public void setVerificationTokenContent( String verificationTokenContent ) {
-        this.verificationTokenContent = verificationTokenContent ;
+    public void setVerificationTokenContent(String verificationTokenContent) {
+        this.verificationTokenContent = verificationTokenContent;
     }
+
     public String getVerificationTokenContent() {
         return this.verificationTokenContent;
     }
 
-    public void setVerified( Date verified ) {
-        this.verified = verified ;
+    public void setVerified(Date verified) {
+        this.verified = verified;
     }
+
     public Date getVerified() {
         return this.verified;
     }
 
-    //--- GETTERS FOR LINKS
+    // --- GETTERS FOR LINKS
     public Account getAccount() {
         return this.account;
-    } 
+    }
+
     public void setAccount(Account account) {
-        this.account =account ;
-   } 
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
+        this.account = account;
+    }
+
+    // --- toString specific method
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(idAccount);
         sb.append("|");
         sb.append(verificationTokenContent);
         sb.append("|");
         sb.append(verified);
-        return sb.toString(); 
-    } 
+        return sb.toString();
+    }
 
 }

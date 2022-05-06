@@ -77,10 +77,10 @@ public class Account implements Serializable {
 
     private String providerId;
     // --- ENTITY LINKS ( RELATIONSHIP )
-    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RefreshToken> listOfRefreshToken;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "ACCOUNT_has_role", joinColumns = @JoinColumn(name = "ID_ACCOUNT", referencedColumnName = "ID_ACCOUNT"), inverseJoinColumns = @JoinColumn(name = "id", referencedColumnName = "id"))
     private List<Role> listOfRole;
 
@@ -92,9 +92,17 @@ public class Account implements Serializable {
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private VerificationToken verificationToken;
 
-    @PrimaryKeyJoinColumn
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
-    private AccountDetail accountDetail;
+    @OneToMany(mappedBy = "account")
+    private List<Shop> listOfShop;
+
+    @OneToMany(mappedBy = "account")
+    private List<Chat> listOfChat;
+
+    @OneToMany(mappedBy = "account2")
+    private List<Chat> listOfChat2;
+
+    @OneToMany(mappedBy = "account")
+    private List<Customer> listOfCustomer;
 
     /**
      * Constructor
@@ -181,10 +189,6 @@ public class Account implements Serializable {
         return this.verificationToken;
     }
 
-    public AccountDetail getAccountDetail() {
-        return this.accountDetail;
-    }
-
     // --- toString specific method
     @Override
     public String toString() {
@@ -213,11 +217,6 @@ public class Account implements Serializable {
     public void setResetToken(ResetToken resetToken) {
         this.resetToken = resetToken;
         resetToken.setAccount(this);
-    }
-
-    public void setAccountDetail(AccountDetail accountDetail) {
-        this.accountDetail = accountDetail;
-        accountDetail.setAccount(this);
     }
 
     public void setListOfRole(List<Role> listOfRole) {
