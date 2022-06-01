@@ -249,7 +249,6 @@ ALTER TABLE Chat_Line
 INSERT INTO Role VALUES (0)
 INSERT INTO Role VALUES (1)
 	
--- INSERT
 --INSERT INTO ACCOUNT Values(N'sa@gmail.com',N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS','','',getdate(),null,null,1)
 select * from ACCOUNT
 select * from Reset_Token
