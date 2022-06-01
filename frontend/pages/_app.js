@@ -7,12 +7,9 @@ config.autoAddCss = false
 
 
 const MyApp = ({ Component, pageProps: { session, ...pageProps } }) => {
-  // const [interval, setInterval] = useState(0);
   return (
     <Provider session={session}>
-      {/* refetchInterval={interval} */}
       <Component {...pageProps} />
-      {/* <RefreshTokenHandler setInterval={setInterval} /> */}
     </Provider>
   )
 }

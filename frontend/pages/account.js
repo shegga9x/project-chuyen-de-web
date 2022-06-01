@@ -5,11 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from "../helpers/customHook/useAuth";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useRouter } from 'next/router'
 import {
     faHome
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 export default function Account() {
 
@@ -20,10 +20,14 @@ export default function Account() {
 
     const [password, setPassword] = useState("");
 
+    const loginWithGoogle = () => {
+        signIn('google');
+    }
+
     const submit = (e) => {
         e.preventDefault();
-        // signIn('credentials', { email: email, password: password });
-        signIn('google');
+        signIn('credentials', { email: email, password: password });
+        // signIn('google');
     }
 
 
@@ -42,8 +46,10 @@ export default function Account() {
                 console.log(errors.response)
                 alert(errors.response.data.message)
             })
-        // console.log(message);
-        alert(message.data.message)
+        if (message !== undefined) {
+            // console.log(message);
+            alert(message.data.message)
+        }
     };
 
     const onError = () => {
@@ -139,6 +145,11 @@ export default function Account() {
                                                     </a>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div style={{ textAlign: "center", marginBottom: "5px" }}>
+                                            <i style={{ cursor: "pointer", color: "red", fontSize: "20px" }} onClick={loginWithGoogle}>
+                                                <FontAwesomeIcon icon={faGoogle} />
+                                            </i>
                                         </div>
                                         <div className="m-b-45">
                                             <button className="button button-outline-secondary w-100">

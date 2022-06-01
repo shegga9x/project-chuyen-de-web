@@ -13,12 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import backend.backend.helpers.payload.response.MessageResponse;
 import backend.backend.helpers.utils.CookieUtils;
@@ -56,20 +51,23 @@ public class AuthController {
     public ResponseEntity<?> authenticate(@Valid @RequestBody AuthenticateRequest model,
                                           HttpServletResponse servletResponse) {
         var response = accountService.authenticate(model, controlerUtils.ipAddress());
-        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
+        System.out.println(response.getRefreshToken());
+//        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/refresh-token")
-    public ResponseEntity<?> refreshToken(HttpServletResponse servletResponse) {
-        String refreshToken = controlerUtils.getSingleFormCookie("refreshToken");
-        var response = accountService.refreshToken(servletResponse, refreshToken, controlerUtils.ipAddress());
-        try {
-            controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
-        } catch (Exception e) {
-            controlerUtils.setTokenCookie(servletResponse, "");
-        }
+    public ResponseEntity<?> refreshToken(@RequestBody String refreshToken) {
+//        String refreshToken = controlerUtils.getSingleFormCookie("refreshToken");
+        System.out.println(refreshToken);
+        var response = accountService.refreshToken(refreshToken, controlerUtils.ipAddress());
+//        try {
+//            controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
+//        } catch (Exception e) {
+//            controlerUtils.setTokenCookie(servletResponse, "");
+//        }
         return ResponseEntity.ok(response);
+//        return ResponseEntity.ok("oke");
     }
 
     @PostMapping("/revoke-token")
@@ -130,7 +128,7 @@ public class AuthController {
     @PostMapping("authenticate-with-jwt")
     public ResponseEntity<?> authenticateWithJWT(@RequestBody AccountGoogleRequest accountGoogleRequest, HttpServletResponse servletResponse) {
         var response = accountService.authenticateWithJWT(accountGoogleRequest, controlerUtils.ipAddress());
-        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
+//        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
         return ResponseEntity.ok(response);
     }
 

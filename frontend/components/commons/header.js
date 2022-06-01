@@ -21,17 +21,23 @@ import {
     faSearch,
     faShirt,
     faSignInAlt,
-    faSignOut,
     faTvAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession, signOut } from "next-auth/client";
+import axios from 'axios'
 
 export default function Header() {
 
     const [session, loading] = useSession();
 
     // console.log(session)
+    const test = async () => {
+        // await axios.get("http://localhost:4000/test/getJWT", { headers: { Authorization:`Bearer ${session.user.jwtToken}` }});
+        // await axios.get("http://localhost:4000/test/getJWT");
+        console.log(session?.user?.refreshToken)
+        console.log(session?.user?.jwtToken)
+    };
 
     return (
         <>
@@ -217,7 +223,7 @@ export default function Header() {
                                 <nav>
                                     <ul className="mid-nav g-nav">
                                         <li className="u-d-none-lg">
-                                            <a href="home.html">
+                                            <a onClick={test}>
                                                 <i className="u-c-brand">
                                                     <FontAwesomeIcon icon={faHome} />
                                                 </i>

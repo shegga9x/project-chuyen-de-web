@@ -164,7 +164,7 @@ public class AuthService {
         return response;
     }
 
-    public AuthenticateResponse refreshToken(HttpServletResponse servletResponse, String token, String ipAddress) {
+    public AuthenticateResponse refreshToken(String token, String ipAddress) {
         RefreshToken refreshToken = null;
         try {
             refreshToken = refreshTokenRepository.findByToken(token).get();

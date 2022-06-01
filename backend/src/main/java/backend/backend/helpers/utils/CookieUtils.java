@@ -24,6 +24,7 @@ public class CookieUtils {
 
     public void setTokenCookie(HttpServletResponse servletResponse, String token) {
         Cookie cookie = new Cookie("refreshToken", token);
+        System.out.println(token);
         cookie.setHttpOnly(true);
         cookie.setMaxAge(jwtRefreshExpirationMs);
         servletResponse.addCookie(cookie);
@@ -32,10 +33,11 @@ public class CookieUtils {
     public String ipAddress() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())
                 .getRequest();
-        if (request.getHeader("X-Forwarded-For") != null)
+        if (request.getHeader("X-Forwarded-For") != null) {
             return request.getHeader("X-Forwarded-For");
-        else
+        } else {
             return request.getRemoteAddr();
+        }
     }
 
     public String getSingleFormCookie(String objectName) {
