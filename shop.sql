@@ -249,31 +249,17 @@ ALTER TABLE Chat_Line
 INSERT INTO Role VALUES (0)
 INSERT INTO Role VALUES (1)
 	
---INSERT INTO ACCOUNT Values(N'sa@gmail.com',N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS','','',getdate(),null,null,1)
-select * from ACCOUNT
-select * from Reset_Token
-select * from Verification_Token
-select * from refresh_token
-delete from Reset_Token
-delete from Verification_Token
-delete from refresh_token
-delete from ACCOUNT_Has_Role
-delete from ACCOUNT
-select * from ACCOUNT_Has_Role
-INSERT INTO ACCOUNT Values(1,getdate(),N'sa@gmail.com',null,N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS','local',null,null);
+-- INSERT
+INSERT INTO ACCOUNT Values(N'sa@gmail.com',N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS','local',null,null,null,null,1);
 INSERT INTO ACCOUNT_has_role VALUES (1,2) ;
 INSERT INTO Verification_Token VALUES (1,null,getdate())
     -- Customer
---INSERT INTO Customer VALUES(1,N'Lê Đình Phùng','0378876395','m','25/08/2000','','334/35/12 Nguyễn Văn Nghi F7 Gò Vấp');
-INSERT INTO Customer VALUES(1,'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp','25/08/2000','m','',N'Lê Đình Phùng','0378876395')
+INSERT INTO Customer VALUES(1,N'Lê Đình Phùng','0378876395','m','25/08/2000','','334/35/12 Nguyễn Văn Nghi F7 Gò Vấp');
     -- Shop
---INSERT INTO Shop VALUES(1,N'shop của Phùng','0378876395',N'','334/35/12 Nguyễn Văn Nghi F7 Gò Vấp',N'Shop ác nhất hành tinh');
-select * from Shop
-INSERT INTO Shop VALUES(1,N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp',N'Shop ác nhất hành tinh','',N'shop của Phùng','0378876395');
+INSERT INTO Shop VALUES(1,N'shop của Phùng','0378876395',N'','334/35/12 Nguyễn Văn Nghi F7 Gò Vấp',N'Shop ác nhất hành tinh');
     -- Shop_Category
-	Select * from shop_category
-INSERT INTO Shop_Category VALUES(2,1,N'Điện Thoại');
-INSERT INTO Shop_Category VALUES(1,1,N'Áo Dú');
+INSERT INTO Shop_Category VALUES(1,N'Điện Thoại');
+INSERT INTO Shop_Category VALUES(1,N'Áo Dú');
 INSERT INTO Shop_Category VALUES(1,N'Quần Xì');
     -- Category
         -- Level 1 (1 - 30)
