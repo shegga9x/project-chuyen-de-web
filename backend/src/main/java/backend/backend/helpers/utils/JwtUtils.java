@@ -60,7 +60,7 @@ public class JwtUtils {
         return Jwts.builder()
                 .setSubject(userPrincipal.getEmail())
                 .claim("email", userPrincipal.getEmail())
-                .claim("birthday", userPrincipal.getLastExpireds().toInstant().toString())
+//                .claim("birthday", userPrincipal.getLastExpireds().toInstant().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)

@@ -2,6 +2,7 @@ package backend.backend.config;
 
 import java.util.Arrays;
 
+import backend.backend.services.subService.UserDetailsCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,11 +21,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
-import backend.backend.config.handler.OAuth2AuthenticationFailureHandler;
-import backend.backend.config.handler.OAuth2AuthenticationSuccessHandler;
-import backend.backend.persitence.repository.subRepository.HttpCookieOAuth2AuthorizationRequestRepository;
-import backend.backend.services.subService.CustomOAuth2UserService;
-import backend.backend.services.subService.UserDetailsCustomService;
+//import backend.backend.persitence.repository.subRepository.HttpCookieOAuth2AuthorizationRequestRepository;
+
 
 @Configuration
 @EnableWebSecurity
@@ -36,21 +34,21 @@ import backend.backend.services.subService.UserDetailsCustomService;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsCustomService userDetailsService;
-    @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
-    @Autowired
-    private CustomOAuth2UserService customOAuth2UserService;
+//    @Autowired
+//    private AuthEntryPointJwt unauthorizedHandler;
+//    @Autowired
+//    private CustomOAuth2UserService customOAuth2UserService;
 
-    @Autowired
-    private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+//    @Autowired
+//    private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+//
+//    @Autowired
+//    private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 
-    @Autowired
-    private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
-
-    @Bean
-    public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
-        return new HttpCookieOAuth2AuthorizationRequestRepository();
-    }
+//    @Bean
+//    public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+//        return new HttpCookieOAuth2AuthorizationRequestRepository();
+//    }
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter() {
@@ -67,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-
+//
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -89,25 +87,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+//                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/accounts/**").permitAll()
-                .antMatchers("/test/**").permitAll()
-                .anyRequest().authenticated().and()
-                .oauth2Login()
-                .authorizationEndpoint()
-                .baseUri("/oauth2/authorize")
-                .authorizationRequestRepository(cookieAuthorizationRequestRepository())
-                .and()
-                .redirectionEndpoint()
-                .baseUri("/oauth2/callback/*")
-                .and()
-                .userInfoEndpoint()
-                .userService(customOAuth2UserService)
-                .and()
-                .successHandler(oAuth2AuthenticationSuccessHandler)
-                .failureHandler(oAuth2AuthenticationFailureHandler);
+                .antMatchers("/api/accounts/**").permitAll()
+//                .antMatchers("/api/test/**").permitAll()
+                .anyRequest().authenticated();
+//                .oauth2Login()
+//                .authorizationEndpoint()
+//                .baseUri("/oauth2/authorize")
+//                .authorizationRequestRepository(cookieAuthorizationRequestRepository())
+//                .and()
+//                .redirectionEndpoint()
+//                .baseUri("/oauth2/callback/*")
+//                .and()
+//                .userInfoEndpoint()
+//                .userService(customOAuth2UserService)
+//                .and()
+//                .successHandler(oAuth2AuthenticationSuccessHandler)
+//                .failureHandler(oAuth2AuthenticationFailureHandler);
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 

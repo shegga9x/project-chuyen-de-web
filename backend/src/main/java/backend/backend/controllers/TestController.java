@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/test")
+@RequestMapping("/api/test")
 public class TestController {
 
     @GetMapping("/getJWT")
     public ResponseEntity<?> test() {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        UserDetailCustom user = (UserDetailCustom) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(user.getEmail()+"-"+user.getId());
         return ResponseEntity.ok(
                 new MessageResponse("Test"));
     }

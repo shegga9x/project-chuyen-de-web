@@ -253,8 +253,5 @@ public class AuthService {
         return listRespone;
     }
 
-//    private Account registerNewUser(){
-//
-//    }
 
 }

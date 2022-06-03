@@ -18,13 +18,13 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.RefreshToken;
 
-public class UserDetailCustom implements UserDetails, OAuth2User {
+public class UserDetailCustom implements UserDetails {
     private static final long serialVersionUID = 1L;
     private int id;
     private String username;
     private String email;
-    private Set<RefreshToken> listOfRefreshToken;
-    private Date lastExpireds;
+//    private Set<RefreshToken> listOfRefreshToken;
+//    private Date lastExpireds;
     private Map<String, Object> attributes;
     @JsonIgnore
     private String password;
@@ -37,8 +37,8 @@ public class UserDetailCustom implements UserDetails, OAuth2User {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.listOfRefreshToken = listOfRefreshToken;
-        this.lastExpireds = lastExpireds;
+//        this.listOfRefreshToken = listOfRefreshToken;
+//        this.lastExpireds = lastExpireds;
         this.authorities = authorities;
     }
 
@@ -56,11 +56,11 @@ public class UserDetailCustom implements UserDetails, OAuth2User {
                 authorities);
     }
 
-    public static UserDetailCustom build(Account user, Map<String, Object> attributes) {
-        UserDetailCustom userPrincipal = UserDetailCustom.build(user);
-        userPrincipal.setAttributes(attributes);
-        return userPrincipal;
-    }
+//    public static UserDetailCustom build(Account user, Map<String, Object> attributes) {
+//        UserDetailCustom userPrincipal = UserDetailCustom.build(user);
+//        userPrincipal.setAttributes(attributes);
+//        return userPrincipal;
+//    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -117,25 +117,25 @@ public class UserDetailCustom implements UserDetails, OAuth2User {
         this.email = email;
     }
 
-    public Set<RefreshToken> getListOfRefreshToken() {
-        return this.listOfRefreshToken;
-    }
-
-    public void setListOfRefreshToken(Set<RefreshToken> listOfRefreshToken) {
-        this.listOfRefreshToken = listOfRefreshToken;
-    }
+//    public Set<RefreshToken> getListOfRefreshToken() {
+//        return this.listOfRefreshToken;
+//    }
+//
+//    public void setListOfRefreshToken(Set<RefreshToken> listOfRefreshToken) {
+//        this.listOfRefreshToken = listOfRefreshToken;
+//    }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public Date getLastExpireds() {
-        return this.lastExpireds;
-    }
-
-    public void setLastExpireds(Date lastExpireds) {
-        this.lastExpireds = lastExpireds;
-    }
+//    public Date getLastExpireds() {
+//        return this.lastExpireds;
+//    }
+//
+//    public void setLastExpireds(Date lastExpireds) {
+//        this.lastExpireds = lastExpireds;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -147,24 +147,24 @@ public class UserDetailCustom implements UserDetails, OAuth2User {
         return Objects.equals(id, user.id);
     }
 
-    public boolean OwnsToken(String token) {
-        int size = this.listOfRefreshToken.stream().filter(x -> x.getToken().equals(token)).collect(Collectors.toList())
-                .size();
-        return (size != 0 ? true : false);
+//    public boolean OwnsToken(String token) {
+//        int size = this.listOfRefreshToken.stream().filter(x -> x.getToken().equals(token)).collect(Collectors.toList())
+//                .size();
+//        return (size != 0 ? true : false);
+//
+//    }
 
-    }
+//    @Override
+//    public Map<String, Object> getAttributes() {
+//        return attributes;
+//    }
 
-    @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
+//    public void setAttributes(Map<String, Object> attributes) {
+//        this.attributes = attributes;
+//    }
 
-    public void setAttributes(Map<String, Object> attributes) {
-        this.attributes = attributes;
-    }
-
-    @Override
-    public String getName() {
-        return String.valueOf(id);
-    }
+//    @Override
+//    public String getName() {
+//        return String.valueOf(id);
+//    }
 }

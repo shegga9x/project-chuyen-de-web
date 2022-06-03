@@ -4,22 +4,6 @@ import GithubProvider from 'next-auth/providers/github'
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from 'axios'
 
-// async function refreshAccessToken() {
-//   try {
-//     // Get a new set of tokens with a refreshToken
-//     const user = await axios.post('http://localhost:4000/accounts/refresh-token', {}, { withCredentials: true });
-//     return {
-//       expireToken: user.data.expireToken,
-//       refreshToken: user.data.refreshToken,
-//       id: user.data.idAccount
-//     }
-//   } catch (error) {
-//     return {
-//       error: "RefreshAccessTokenError",
-//     }
-//   }
-// }
-
 const nextAuthOptions = (req, res) => {
   return {
     providers: [
@@ -34,13 +18,15 @@ const nextAuthOptions = (req, res) => {
           const accountGoogleRequest = { id: profile.id, providerId: profile.id, name: profile.name, firstName: profile.family_name, lastName: profile.given_name, email: profile.email, imgUrl: profile.picture };
 
           // gọi api check user, không cần dữ liệu trả về
-          await axios.post("http://localhost:4000/accounts/check-user-login-google", accountGoogleRequest).
+          await axios.post("http://localhost:4000/api/accounts/check-user-login-google", accountGoogleRequest).
             catch(e => {
               const errorMessage = e.response.data.message
               // Redirecting to the login page with error message in the URL
               throw new Error(errorMessage + '&email=' + credentials.email)
             })
+
           console.log("---account----")
+
           console.log(accountGoogleRequest);
 
           return {
@@ -56,7 +42,7 @@ const nextAuthOptions = (req, res) => {
         name: 'Credentials',
         authorize: async (credentials) => {
           try {
-            const response = await axios.post('http://localhost:4000/accounts/authenticate',
+            const response = await axios.post('http://localhost:4000/api/accounts/authenticate',
               {
                 password: credentials.password,
                 email: credentials.email
@@ -66,7 +52,7 @@ const nextAuthOptions = (req, res) => {
               // console.log('----user----')
               // console.log(user)
               const name = (response.data.firstName && response.data.lastName) ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`
-              return { id: response.data.idAccount, name: name, email: response.data.email, jwtToken: response.data.jwtToken, refreshToken: response.data.refreshToken, expireToken: new Date() };
+              return { id: response.data.idAccount, name: name, email: response.data.email, jwtToken: response.data.jwtToken, refreshToken: response.data.refreshToken };
             }
           } catch (e) {
             const errorMessage = e.response.data.message
@@ -97,7 +83,7 @@ const nextAuthOptions = (req, res) => {
           if (account.provider === 'google') {
             //bước này khi đã nhận được user trả về từ api check user
             //gọi pt login with jwt ở đây
-            const userGetFormApi = await axios.post('http://localhost:4000/accounts/authenticate-with-jwt', { ...user }, { withCredentials: true })
+            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-with-jwt', { ...user }, { withCredentials: true })
               .catch(e => {
                 const errorMessage = e.response.data.message
                 // Redirecting to the login page with error message in the URL
@@ -106,7 +92,7 @@ const nextAuthOptions = (req, res) => {
             // console.log("----userGetFormApi----")
             // console.log(userGetFormApi)
             const name = (userGetFormApi.data.firstName && userGetFormApi.data.lastName) ? `${userGetFormApi.data.firstName} ${userGetFormApi.data.lastName}` : `${userGetFormApi.data.email}`
-            user = { id: userGetFormApi.data.idAccount, name: name, email: userGetFormApi.data.email, jwtToken: userGetFormApi.data.jwtToken, refreshToken: userGetFormApi.data.refreshToken, expireToken: new Date()};
+            user = { id: userGetFormApi.data.idAccount, name: name, email: userGetFormApi.data.email, jwtToken: userGetFormApi.data.jwtToken, refreshToken: userGetFormApi.data.refreshToken};
           }
         }
 
@@ -116,23 +102,23 @@ const nextAuthOptions = (req, res) => {
           if (user.jwtToken !== undefined) {
             token.jwtToken = user.jwtToken
             token.refreshToken = user.refreshToken
-            token.expireToken = user.expireToken
+            // token.expireToken = user.expireToken
           }
           token.id = user.id
         }
 
         // chạy refresh token ở đây
-        if (firstTime == false) {
-          let shouldRefreshTime = (new Date().getTime() / 1000) - (new Date(token.expireToken).getTime() / 1000);
-          if (shouldRefreshTime > 30) {
-            let account = await axios.post("http://localhost:4000/accounts/refresh-token", token.refreshToken, { headers: { 'Content-Type': 'text/plain' } })
-            if (account) {
-              token.jwtToken = account.data.jwtToken;
-              token.refreshToken = account.data.refreshToken;
-              token.expireToken = new Date();
-            }
-          }
-        }
+        // if (firstTime == false) {
+        //   let shouldRefreshTime = (new Date().getTime() / 1000) - (new Date(token.expireToken).getTime() / 1000);
+        //   if (shouldRefreshTime > 30) {
+        //     let account = await axios.post("http://localhost:4000/api/accounts/refresh-token", token.refreshToken, { headers: { 'Content-Type': 'text/plain' } })
+        //     if (account) {
+        //       token.jwtToken = account.data.jwtToken;
+        //       token.refreshToken = account.data.refreshToken;
+        //       token.expireToken = new Date();
+        //     }
+        //   }
+        // }
 
         return token;
       },
@@ -156,6 +142,7 @@ const nextAuthOptions = (req, res) => {
   }
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (req, res) => {
   return NextAuth(req, res, nextAuthOptions(req, res))
 }

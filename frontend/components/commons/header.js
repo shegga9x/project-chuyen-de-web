@@ -25,7 +25,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession, signOut } from "next-auth/client";
-import axios from 'axios'
+import instance from "../../helpers/axiosConfig";
 
 export default function Header() {
 
@@ -34,9 +34,7 @@ export default function Header() {
     // console.log(session)
     const test = async () => {
         // await axios.get("http://localhost:4000/test/getJWT", { headers: { Authorization:`Bearer ${session.user.jwtToken}` }});
-        // await axios.get("http://localhost:4000/test/getJWT");
-        console.log(session?.user?.refreshToken)
-        console.log(session?.user?.jwtToken)
+        await instance.get("http://localhost:4000/api/test/getJWT");
     };
 
     return (

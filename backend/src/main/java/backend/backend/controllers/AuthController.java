@@ -12,6 +12,7 @@ import backend.backend.services.subService.GoogleOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ import backend.backend.services.mainService.AuthService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/api/accounts")
 public class AuthController {
     @Autowired
     CookieUtils controlerUtils;
@@ -52,38 +53,30 @@ public class AuthController {
                                           HttpServletResponse servletResponse) {
         var response = accountService.authenticate(model, controlerUtils.ipAddress());
         System.out.println(response.getRefreshToken());
-//        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/refresh-token")
-    public ResponseEntity<?> refreshToken(@RequestBody String refreshToken) {
-//        String refreshToken = controlerUtils.getSingleFormCookie("refreshToken");
-        System.out.println(refreshToken);
-        var response = accountService.refreshToken(refreshToken, controlerUtils.ipAddress());
-//        try {
-//            controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
-//        } catch (Exception e) {
-//            controlerUtils.setTokenCookie(servletResponse, "");
-//        }
-        return ResponseEntity.ok(response);
-//        return ResponseEntity.ok("oke");
-    }
+//    @PostMapping("/refresh-token")
+//    public ResponseEntity<?> refreshToken(@RequestBody String refreshToken) {
+//        System.out.println(refreshToken);
+//        var response = accountService.refreshToken(refreshToken, controlerUtils.ipAddress());
+//        return ResponseEntity.ok(response);
+//    }
 
-    @PostMapping("/revoke-token")
-    public ResponseEntity<?> revokeToken() {
-        String token = controlerUtils.getSingleFormCookie("refreshToken");
-        if (SubUtils.isNullOrBlank(token))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Token is required"));
-        UserDetailCustom currentAccount = (UserDetailCustom) SecurityContextHolder.getContext().getAuthentication()
-                .getPrincipal();
-        List<String> roles = currentAccount.getAuthorities().stream().map(item -> item.getAuthority())
-                .collect(Collectors.toList()).stream().filter(x -> x.equals("Admin")).collect(Collectors.toList());
-        if (!currentAccount.OwnsToken(token) && roles.size() > 0)
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Unauthorized"));
-        accountService.revokeToken(token, controlerUtils.ipAddress());
-        return ResponseEntity.ok(new MessageResponse("Token revoked"));
-    }
+//    @PostMapping("/revoke-token")
+//    public ResponseEntity<?> revokeToken() {
+//        String token = controlerUtils.getSingleFormCookie("refreshToken");
+//        if (SubUtils.isNullOrBlank(token))
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Token is required"));
+//        UserDetailCustom currentAccount = (UserDetailCustom) SecurityContextHolder.getContext().getAuthentication()
+//                .getPrincipal();
+//        List<String> roles = currentAccount.getAuthorities().stream().map(item -> item.getAuthority())
+//                .collect(Collectors.toList()).stream().filter(x -> x.equals("Admin")).collect(Collectors.toList());
+//        if (!currentAccount.OwnsToken(token) && roles.size() > 0)
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Unauthorized"));
+//        accountService.revokeToken(token, controlerUtils.ipAddress());
+//        return ResponseEntity.ok(new MessageResponse("Token revoked"));
+//    }
 
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@Valid @RequestBody ForgotPasswordRequest model) {
@@ -92,12 +85,12 @@ public class AuthController {
                 new MessageResponse("Please check your email for password reset instructions"));
     }
 
-    @PostMapping("/validate-reset-token")
-    public ResponseEntity<?> validateResetToken(@Valid @RequestBody ValidateResetTokenRequest model) {
-        accountService.validateResetToken(model);
-        return ResponseEntity.ok(
-                new MessageResponse("Token is valid"));
-    }
+//    @PostMapping("/validate-reset-token")
+//    public ResponseEntity<?> validateResetToken(@Valid @RequestBody ValidateResetTokenRequest model) {
+//        accountService.validateResetToken(model);
+//        return ResponseEntity.ok(
+//                new MessageResponse("Token is valid"));
+//    }
 
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@Valid @RequestBody ResetPasswordRequest model) {
@@ -112,11 +105,11 @@ public class AuthController {
                 new MessageResponse("Test"));
     }
 
-    // @PreAuthorize("hasRole('ROLE_Admin')")
-    @GetMapping("")
-    public ResponseEntity<?> getAll() {
-        return ResponseEntity.ok(accountService.getAll());
-    }
+//    @PreAuthorize("hasRole('ROLE_Admin')")
+//    @GetMapping("")
+//    public ResponseEntity<?> getAll() {
+//        return ResponseEntity.ok(accountService.getAll());
+//    }
 
 //    @PostMapping("authenticate-with-jwt")
 //    public ResponseEntity<?> authenticateWithJWT(@RequestBody String token, HttpServletResponse servletResponse) {
@@ -128,7 +121,7 @@ public class AuthController {
     @PostMapping("authenticate-with-jwt")
     public ResponseEntity<?> authenticateWithJWT(@RequestBody AccountGoogleRequest accountGoogleRequest, HttpServletResponse servletResponse) {
         var response = accountService.authenticateWithJWT(accountGoogleRequest, controlerUtils.ipAddress());
-//        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
+        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
         return ResponseEntity.ok(response);
     }
 

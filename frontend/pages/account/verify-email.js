@@ -9,6 +9,17 @@ export default function VerifyEmail() {
 
 
     useEffect(() => {
+        const verify = async () => {
+            const mes = await axios.post('http://localhost:4000/api/accounts/verify-email', {
+                token: token
+            }).catch(errors => {
+                setValid(true);
+                return undefined;
+            })
+
+            return mes.data.message;
+        }
+
         if (token) {
             const fetchData = async () => {
                 const message = await verify();
@@ -17,22 +28,10 @@ export default function VerifyEmail() {
                     window.location.href = "/account"
                 }
             }
-
             fetchData();
         }
 
     }, [token])
-
-    const verify = async () => {
-        const mes = await axios.post('http://localhost:4000/accounts/verify-email', {
-            token: token
-        }).catch(errors => {
-            setValid(true);
-            return undefined;
-        })
-
-        return mes.data.message;
-    }
 
 
     return (<>

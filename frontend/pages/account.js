@@ -34,7 +34,7 @@ export default function Account() {
     //register useState
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async ({ userName, email, password }) => {
-        const message = await axios.post('http://localhost:4000/accounts/register', {
+        const message = await axios.post('http://localhost:4000/api/accounts/register', {
             title: 'Mrs',
             firstName: userName,
             lastName: 'Phung pink',
