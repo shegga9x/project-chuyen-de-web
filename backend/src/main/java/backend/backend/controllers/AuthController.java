@@ -8,18 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import backend.backend.helpers.payload.request.*;
+import backend.backend.services.subService.FacebookOAuth2UserService;
+import backend.backend.services.subService.GithubOAuth2UserService;
 import backend.backend.services.subService.GoogleOAuth2UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import backend.backend.helpers.payload.response.MessageResponse;
 import backend.backend.helpers.utils.CookieUtils;
-import backend.backend.helpers.utils.SubUtils;
-import backend.backend.persitence.model.UserDetailCustom;
 import backend.backend.services.mainService.AuthService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -32,6 +29,10 @@ public class AuthController {
     AuthService accountService;
     @Autowired
     GoogleOAuth2UserService googleOAuth2UserService;
+    @Autowired
+    GithubOAuth2UserService githubOAuth2UserService;
+    @Autowired
+    FacebookOAuth2UserService facebookOAuth2UserService;
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest model, HttpServletRequest request) {
@@ -118,16 +119,39 @@ public class AuthController {
 //        return ResponseEntity.ok(response);
 //    }
 
-    @PostMapping("authenticate-with-jwt")
-    public ResponseEntity<?> authenticateWithJWT(@RequestBody AccountGoogleRequest accountGoogleRequest, HttpServletResponse servletResponse) {
-        var response = accountService.authenticateWithJWT(accountGoogleRequest, controlerUtils.ipAddress());
-        controlerUtils.setTokenCookie(servletResponse, response.getRefreshToken());
+    @PostMapping("authenticate-google-with-jwt")
+    public ResponseEntity<?> authenticateGoogleWithJWT(@RequestBody AccountGoogleRequest accountGoogleRequest, HttpServletResponse servletResponse) {
+        var response = accountService.authenticateGoogleWithJWT(accountGoogleRequest, controlerUtils.ipAddress());
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("authenticate-github-with-jwt")
+    public ResponseEntity<?> authenticateGithubWithJWT(@RequestBody AccountGithubRequest accountGithubRequest, HttpServletResponse servletResponse) {
+        var response = accountService.authenticateGithubWithJWT(accountGithubRequest, controlerUtils.ipAddress());
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("authenticate-facebook-with-jwt")
+    public ResponseEntity<?> authenticateFacebookWithJWT(@RequestBody AccountFacebookRequest accountFacebookRequest, HttpServletResponse servletResponse) {
+        var response = accountService.authenticateFacebookWithJWT(accountFacebookRequest, controlerUtils.ipAddress());
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("check-user-login-google")
     public ResponseEntity<?> checkUserLoginGoogle(@RequestBody AccountGoogleRequest accountGoogleRequest) {
         var response = googleOAuth2UserService.loadUser(accountGoogleRequest);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("check-user-login-github")
+    public ResponseEntity<?> checkUserLoginGithub(@RequestBody AccountGithubRequest accountGithubRequest) {
+        var response = githubOAuth2UserService.loadUser(accountGithubRequest);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("check-user-login-facebook")
+    public ResponseEntity<?> checkUserLoginFacebook(@RequestBody AccountFacebookRequest accountFacebookRequest) {
+        var response = facebookOAuth2UserService.loadUser(accountFacebookRequest);
         return ResponseEntity.ok(response);
     }
 

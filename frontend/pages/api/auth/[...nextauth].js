@@ -1,6 +1,7 @@
 import NextAuth from 'next-auth'
 import GoogleProvider from 'next-auth/providers/google'
 import GithubProvider from 'next-auth/providers/github'
+import FacebookProvider from 'next-auth/providers/facebook'
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from 'axios'
 
@@ -36,7 +37,49 @@ const nextAuthOptions = (req, res) => {
       }),
       GithubProvider({
         clientId: process.env.GITHUB_ID,
-        clientSecret: process.env.GITHUB_SECRET
+        clientSecret: process.env.GITHUB_SECRET,
+        profile: async (profile) => {
+          const accountGithubRequest = { id: profile.id, providerId: profile.id, name: profile.login, email: profile.email, imgUrl: profile.avatar_url };
+          // gọi api check user, không cần dữ liệu trả về
+          await axios.post("http://localhost:4000/api/accounts/check-user-login-github", accountGithubRequest).
+            catch(e => {
+              const errorMessage = e.response.data.message
+              // Redirecting to the login page with error message in the URL
+              throw new Error(errorMessage + '&email=' + credentials.email)
+            })
+
+          console.log('profile github')
+
+          console.log(accountGithubRequest);
+
+          return {
+            ...accountGithubRequest
+          };
+        }
+      }),
+      FacebookProvider({
+        clientId: process.env.FACEBOOK_ID,
+        clientSecret: process.env.FACEBOOK_SECRET,
+        profile: async (profile) => {
+          console.log('profile facebook')
+          console.log(profile);
+          const accountFacebookRequest = { id: profile.id, providerId: profile.id, name: profile.name, email: profile.email, imgUrl: profile.picture.data.url };
+          // gọi api check user, không cần dữ liệu trả về
+          await axios.post("http://localhost:4000/api/accounts/check-user-login-facebook", accountFacebookRequest).
+            catch(e => {
+              const errorMessage = e.response.data.message
+              // Redirecting to the login page with error message in the URL
+              throw new Error(errorMessage + '&email=' + credentials.email)
+            })
+
+          console.log('profile github')
+
+          console.log(accountFacebookRequest);
+
+          return {
+            ...accountFacebookRequest
+          };
+        }
       }),
       CredentialsProvider({
         name: 'Credentials',
@@ -52,7 +95,7 @@ const nextAuthOptions = (req, res) => {
               // console.log('----user----')
               // console.log(user)
               const name = (response.data.firstName && response.data.lastName) ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`
-              return { id: response.data.idAccount, name: name, email: response.data.email, jwtToken: response.data.jwtToken, refreshToken: response.data.refreshToken };
+              return { id: response.data.idAccount, name: name, email: response.data.email };
             }
           } catch (e) {
             const errorMessage = e.response.data.message
@@ -79,46 +122,37 @@ const nextAuthOptions = (req, res) => {
         if (account) {
           firstTime = true;
           console.log('----account----')
-          console.log(account.provider)
+          console.log(account)
           if (account.provider === 'google') {
-            //bước này khi đã nhận được user trả về từ api check user
-            //gọi pt login with jwt ở đây
-            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-with-jwt', { ...user }, { withCredentials: true })
+            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-google-with-jwt', { ...user }, { withCredentials: true })
               .catch(e => {
                 const errorMessage = e.response.data.message
-                // Redirecting to the login page with error message in the URL
                 throw new Error(errorMessage + '&email=' + credentials.email)
               })
-            // console.log("----userGetFormApi----")
-            // console.log(userGetFormApi)
             const name = (userGetFormApi.data.firstName && userGetFormApi.data.lastName) ? `${userGetFormApi.data.firstName} ${userGetFormApi.data.lastName}` : `${userGetFormApi.data.email}`
-            user = { id: userGetFormApi.data.idAccount, name: name, email: userGetFormApi.data.email, jwtToken: userGetFormApi.data.jwtToken, refreshToken: userGetFormApi.data.refreshToken};
+            user = { id: userGetFormApi.data.idAccount, name: name, email: userGetFormApi.data.email };
+          } else if (account.provider === 'github') {
+            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-github-with-jwt', { ...user }, { withCredentials: true })
+              .catch(e => {
+                const errorMessage = e.response.data.message
+                throw new Error(errorMessage + '&email=' + credentials.email)
+              })
+            user = { id: userGetFormApi.data.idAccount, name: userGetFormApi.name, email: userGetFormApi.data.email };
+          } else if (account.provider === 'facebook') {
+            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-facebook-with-jwt', { ...user }, { withCredentials: true })
+              .catch(e => {
+                const errorMessage = e.response.data.message
+                throw new Error(errorMessage + '&email=' + credentials.email)
+              })
+            user = { id: userGetFormApi.data.idAccount, name: userGetFormApi.name, email: userGetFormApi.data.email };
           }
         }
 
         // chỉ chạy lúc đăng nhập
         if (user) {
           firstTime = true;
-          if (user.jwtToken !== undefined) {
-            token.jwtToken = user.jwtToken
-            token.refreshToken = user.refreshToken
-            // token.expireToken = user.expireToken
-          }
           token.id = user.id
         }
-
-        // chạy refresh token ở đây
-        // if (firstTime == false) {
-        //   let shouldRefreshTime = (new Date().getTime() / 1000) - (new Date(token.expireToken).getTime() / 1000);
-        //   if (shouldRefreshTime > 30) {
-        //     let account = await axios.post("http://localhost:4000/api/accounts/refresh-token", token.refreshToken, { headers: { 'Content-Type': 'text/plain' } })
-        //     if (account) {
-        //       token.jwtToken = account.data.jwtToken;
-        //       token.refreshToken = account.data.refreshToken;
-        //       token.expireToken = new Date();
-        //     }
-        //   }
-        // }
 
         return token;
       },
@@ -126,11 +160,6 @@ const nextAuthOptions = (req, res) => {
         // có thể lấy jwt ở đây
         // chạy lại mỗi request
         console.log(token)
-        if (token.jwtToken !== undefined) {
-          session.user.jwtToken = token.jwtToken;
-          session.user.refreshToken = token.refreshToken;
-          session.user.expireToken = token.expireToken;
-        }
         session.user.id = token.id
         // console.log(session.user);
         return session

@@ -326,3 +326,10 @@ INSERT INTO Category VALUES(31,N'Áo sơ mi');
 INSERT INTO Category VALUES(31,N'Áo polo');
 INSERT INTO Category VALUES(31,N'Áo liền thân');
 INSERT INTO Category VALUES(31,N'Khác');
+
+select * from ACCOUNT
+delete from ACCOUNT_Has_Role
+delete from Refresh_Token
+delete from Verification_Token
+delete from Reset_Token
+delete from ACCOUNT

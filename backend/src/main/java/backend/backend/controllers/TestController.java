@@ -18,7 +18,6 @@ public class TestController {
     @GetMapping("/getJWT")
     public ResponseEntity<?> test() {
         UserDetailCustom user = (UserDetailCustom) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(user.getEmail()+"-"+user.getId());
         return ResponseEntity.ok(
                 new MessageResponse("Test"));
     }

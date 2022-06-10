@@ -1,8 +1,12 @@
 package backend.backend.services.subService;
 
 import backend.backend.helpers.advice.OAuth2AuthenticationProcessingException;
-import backend.backend.helpers.payload.request.AccountGoogleRequest;
-import backend.backend.persitence.entities.*;
+import backend.backend.helpers.payload.request.AccountFacebookRequest;
+import backend.backend.helpers.payload.request.AccountGithubRequest;
+import backend.backend.persitence.entities.Account;
+import backend.backend.persitence.entities.ResetToken;
+import backend.backend.persitence.entities.Role;
+import backend.backend.persitence.entities.VerificationToken;
 import backend.backend.persitence.model.enumModel.AuthProvider;
 import backend.backend.persitence.model.enumModel.RoleEnum;
 import backend.backend.persitence.repository.AccountRepository;
@@ -16,15 +20,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-@Service
-public class GoogleOAuth2UserService {
 
+@Service
+public class FacebookOAuth2UserService {
     @Autowired
     private AccountRepository accountRepository;
 
-    public Account loadUser(AccountGoogleRequest accountGoogleRequest) throws OAuth2AuthenticationException {
+    public Account loadUser(AccountFacebookRequest accountFacebookRequest) throws OAuth2AuthenticationException {
         try {
-            return processOAuth2User(accountGoogleRequest);
+            return processOAuth2User(accountFacebookRequest);
         } catch (AuthenticationException ex) {
             throw ex;
         } catch (Exception ex) {
@@ -35,35 +39,35 @@ public class GoogleOAuth2UserService {
         }
     }
 
-    private Account processOAuth2User(AccountGoogleRequest accountGoogleRequest) {
-        if (accountGoogleRequest.getEmail() == null || accountGoogleRequest.getEmail().equals("")) {
+    private Account processOAuth2User(AccountFacebookRequest accountFacebookRequest) {
+        if (accountFacebookRequest.getEmail() == null || accountFacebookRequest.getEmail().equals("")) {
             throw new OAuth2AuthenticationProcessingException("Email not found from OAuth2 provider");
         }
 
-        Optional<Account> userOptional = accountRepository.findByEmail(accountGoogleRequest.getEmail());
+        Optional<Account> userOptional = accountRepository.findByEmail(accountFacebookRequest.getEmail());
         Account user;
         if (userOptional.isPresent()) {
             user = userOptional.get();
             if (!user.getProvider()
-                    .equals(AuthProvider.valueOf(accountGoogleRequest.getProvider()))) {
+                    .equals(AuthProvider.valueOf(accountFacebookRequest.getProvider()))) {
                 throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
                         user.getProvider() + " account. Please use your " + user.getProvider() +
                         " account to login.");
             }
-            user = updateExistingUser(user, accountGoogleRequest);
+            user = updateExistingUser(user, accountFacebookRequest);
         } else {
-            user = registerNewUser(accountGoogleRequest);
+            user = registerNewUser(accountFacebookRequest);
         }
 
         return user;
     }
 
-    private Account registerNewUser(AccountGoogleRequest accountGoogleRequest) {
+    private Account registerNewUser(AccountFacebookRequest accountFacebookRequest) {
         Account user = new Account();
         user.setPasswordHash("");
-        user.setProvider(AuthProvider.valueOf(accountGoogleRequest.getProvider()));
-        user.setProviderId(accountGoogleRequest.getProviderId());
-        user.setEmail(accountGoogleRequest.getEmail());
+        user.setProvider(AuthProvider.valueOf(accountFacebookRequest.getProvider()));
+        user.setProviderId(accountFacebookRequest.getProviderId());
+        user.setEmail(accountFacebookRequest.getEmail());
         user.setCreated(new Date());
         user.setAcceptTerms(true);
         user.setLastExpires(new Date());
@@ -76,7 +80,7 @@ public class GoogleOAuth2UserService {
         return accountRepository.save(user);
     }
 
-    private Account updateExistingUser(Account existingUser, AccountGoogleRequest accountGoogleRequest) {
+    private Account updateExistingUser(Account existingUser, AccountFacebookRequest accountFacebookRequest) {
         return accountRepository.save(existingUser);
     }
 }

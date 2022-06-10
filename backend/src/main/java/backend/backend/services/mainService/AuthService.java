@@ -142,8 +142,52 @@ public class AuthService {
        throw new CustomException("Jwt Invalid !!!");
     }
 
-    public AuthenticateResponse authenticateWithJWT(AccountGoogleRequest accountGoogleRequest, String ipAddress) {
+    public AuthenticateResponse authenticateGoogleWithJWT(AccountGoogleRequest accountGoogleRequest, String ipAddress) {
         String email = accountGoogleRequest.getEmail();
+        Account account = accountRepository.findByEmail(email).get();
+        account.setLastExpires(new Date());
+
+        RefreshToken refreshToken = jwtUtils.generateRefreshToken(ipAddress, account.getIdAccount());
+        refreshTokenRepository.save(refreshToken);
+        tokenUtils.removeOldRefreshTokens(account.getIdAccount());
+        List<String> roles = new ArrayList<>();
+        for (Role role : account.getListOfRole()) {
+            roles.add(role.getRoleName().toString());
+        }
+        // init respone
+        String jwtToken = jwtUtils.generateJwtToken(account);
+        AuthenticateResponse response = new AuthenticateResponse();
+        response.setRole(roles);
+        response.jwtToken = jwtToken;
+        response.refreshToken = refreshToken.getToken();
+        response = (AuthenticateResponse) SubUtils.mapperObject(account, response);
+        return response;
+    }
+
+    public AuthenticateResponse authenticateGithubWithJWT(AccountGithubRequest accountGithubRequest, String ipAddress) {
+        String email = accountGithubRequest.getEmail();
+        Account account = accountRepository.findByEmail(email).get();
+        account.setLastExpires(new Date());
+
+        RefreshToken refreshToken = jwtUtils.generateRefreshToken(ipAddress, account.getIdAccount());
+        refreshTokenRepository.save(refreshToken);
+        tokenUtils.removeOldRefreshTokens(account.getIdAccount());
+        List<String> roles = new ArrayList<>();
+        for (Role role : account.getListOfRole()) {
+            roles.add(role.getRoleName().toString());
+        }
+        // init respone
+        String jwtToken = jwtUtils.generateJwtToken(account);
+        AuthenticateResponse response = new AuthenticateResponse();
+        response.setRole(roles);
+        response.jwtToken = jwtToken;
+        response.refreshToken = refreshToken.getToken();
+        response = (AuthenticateResponse) SubUtils.mapperObject(account, response);
+        return response;
+    }
+
+    public AuthenticateResponse authenticateFacebookWithJWT(AccountFacebookRequest accountFacebookRequest, String ipAddress) {
+        String email = accountFacebookRequest.getEmail();
         Account account = accountRepository.findByEmail(email).get();
         account.setLastExpires(new Date());
 

@@ -9,7 +9,7 @@ import {
     faHome
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
-import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { faFacebook, faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 export default function Account() {
 
@@ -22,6 +22,14 @@ export default function Account() {
 
     const loginWithGoogle = () => {
         signIn('google');
+    }
+
+    const loginWithGithub = () => {
+        signIn('github');
+    }
+
+    const loginWithFacebook = () => {
+        signIn('facebook');
     }
 
     const submit = (e) => {
@@ -58,6 +66,12 @@ export default function Account() {
 
     return (
         <>
+            <style jsx>{`
+             .iconn{
+                 padding-left:4px;
+                 padding-right:4px;
+             }
+      `}</style>
             <Head>
                 <title>
                     Groover - Online Shopping for Electronics, Apparel, Computers, Books,
@@ -147,8 +161,14 @@ export default function Account() {
                                             </div>
                                         </div>
                                         <div style={{ textAlign: "center", marginBottom: "5px" }}>
-                                            <i style={{ cursor: "pointer", color: "red", fontSize: "20px" }} onClick={loginWithGoogle}>
+                                            <i className="iconn" style={{ cursor: "pointer", color: "red", fontSize: "20px" }} onClick={loginWithGoogle}>
                                                 <FontAwesomeIcon icon={faGoogle} />
+                                            </i>
+                                            <i className="iconn" style={{ cursor: "pointer", color: "black", fontSize: "20px" }} onClick={loginWithGithub}>
+                                                <FontAwesomeIcon icon={faGithub} />
+                                            </i>
+                                            <i className="iconn" style={{ cursor: "pointer", color: "blue", fontSize: "20px" }} onClick={loginWithFacebook}>
+                                                <FontAwesomeIcon icon={faFacebook} />
                                             </i>
                                         </div>
                                         <div className="m-b-45">
