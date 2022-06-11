@@ -27,12 +27,15 @@ const nextAuthOptions = (req, res) => {
           };
 
           // gọi api check user, không cần dữ liệu trả về
-          await axios.post(
-            "http://localhost:4000/api/accounts/check-user-login-google",
-            accountGoogleRequest
-          );
+          await axios.post("http://localhost:4000/api/accounts/check-user-login-google", accountGoogleRequest).catch(
+            e => {
+              console.log(e)
+              const errorMessage = e.response === undefined ? 'error connect' : 'e.response.data.message'
+              accountGoogleRequest.error = errorMessage;
+            }
+          )
 
-          //console.log("---account----")
+          console.log("profile google")
 
           //console.log(accountGoogleRequest);
 
@@ -45,18 +48,16 @@ const nextAuthOptions = (req, res) => {
         clientId: process.env.GITHUB_ID,
         clientSecret: process.env.GITHUB_SECRET,
         profile: async (profile) => {
-          const accountGithubRequest = {
-            id: profile.id,
-            providerId: profile.id,
-            name: profile.login,
-            email: profile.email,
-            imgUrl: profile.avatar_url,
-          };
+          console.log(profile)
+          const accountGithubRequest = { id: profile.id, providerId: profile.id, name: profile.login, email: profile.email, imgUrl: profile.avatar_url };
           // gọi api check user, không cần dữ liệu trả về
-          await axios.post(
-            "http://localhost:4000/api/accounts/check-user-login-github",
-            accountGithubRequest
-          );
+          await axios.post("http://localhost:4000/api/accounts/check-user-login-github", accountGithubRequest).catch(
+            e => {
+              console.log(e)
+              const errorMessage = e.response === undefined ? 'error connect' : 'e.response.data.message'
+              accountGoogleRequest.error = errorMessage;
+            }
+          )
 
           //console.log('profile github')
 
@@ -71,22 +72,17 @@ const nextAuthOptions = (req, res) => {
         clientId: process.env.FACEBOOK_ID,
         clientSecret: process.env.FACEBOOK_SECRET,
         profile: async (profile) => {
-          //console.log('profile facebook')
-          //console.log(profile);
-          const accountFacebookRequest = {
-            id: profile.id,
-            providerId: profile.id,
-            name: profile.name,
-            email: profile.email,
-            imgUrl: profile.picture.data.url,
-          };
+          const accountFacebookRequest = { id: profile.id, providerId: profile.id, name: profile.name, email: profile.email, imgUrl: profile.picture.data.url };
           // gọi api check user, không cần dữ liệu trả về
-          await axios.post(
-            "http://localhost:4000/api/accounts/check-user-login-facebook",
-            accountFacebookRequest
-          );
+          await axios.post("http://localhost:4000/api/accounts/check-user-login-facebook", accountFacebookRequest).catch(
+            e => {
+              console.log(e)
+              const errorMessage = e.response === undefined ? 'error connect' : 'e.response.data.message'
+              accountGoogleRequest.error = errorMessage;
+            }
+          )
 
-          //console.log('profile github')
+          console.log('profile facebook')
 
           //console.log(accountFacebookRequest);
 
@@ -121,8 +117,10 @@ const nextAuthOptions = (req, res) => {
               };
             }
           } catch (e) {
-            const errorMessage = e.response.data.message;
+            console.log(e);
+            const errorMessage = e.response === undefined ? 'system error' : e.response.data.message
             // Redirecting to the login page with error message in the URL
+            throw new Error(errorMessage)
           }
         },
       }),
@@ -138,69 +136,42 @@ const nextAuthOptions = (req, res) => {
     },
     callbacks: {
       async jwt(token, user, account) {
-        let firstTime = false;
         // có thể lấy jwt ở đây
         // chỉ chạy lúc đăng nhập
         if (account) {
-          firstTime = true;
-          //console.log('----account----')
-          //console.log(account)
-          if (account.provider === "google") {
-            const userGetFormApi = await axios
-              .post(
-                "http://localhost:4000/api/accounts/authenticate-google-with-jwt",
-                { ...user },
-                { withCredentials: true }
-              )
-              .catch((e) => {
-                const errorMessage = e.response.data.message;
-              });
-            const name =
-              userGetFormApi.data.firstName && userGetFormApi.data.lastName
-                ? `${userGetFormApi.data.firstName} ${userGetFormApi.data.lastName}`
-                : `${userGetFormApi.data.email}`;
-            user = {
-              id: userGetFormApi.data.idAccount,
-              name: name,
-              email: userGetFormApi.data.email,
-            };
-          } else if (account.provider === "github") {
-            const userGetFormApi = await axios
-              .post(
-                "http://localhost:4000/api/accounts/authenticate-github-with-jwt",
-                { ...user },
-                { withCredentials: true }
-              )
-              .catch((e) => {
-                const errorMessage = e.response.data.message;
-              });
-            user = {
-              id: userGetFormApi.data.idAccount,
-              name: userGetFormApi.name,
-              email: userGetFormApi.data.email,
-            };
-          } else if (account.provider === "facebook") {
-            const userGetFormApi = await axios
-              .post(
-                "http://localhost:4000/api/accounts/authenticate-facebook-with-jwt",
-                { ...user },
-                { withCredentials: true }
-              )
-              .catch((e) => {
-                const errorMessage = e.response.data.message;
-              });
-            user = {
-              id: userGetFormApi.data.idAccount,
-              name: userGetFormApi.name,
-              email: userGetFormApi.data.email,
-            };
+          console.log('----user----')
+          console.log(user)
+          if (user.error !== undefined) {
+            throw new Error(user.error + '&email=' + user.email);
+          }
+          if (account.provider === 'google') {
+            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-google-with-jwt', { ...user }, { withCredentials: true })
+              .catch(e => {
+                const errorMessage = e.response.data.message
+                throw new Error(errorMessage + '&email=' + account.email)
+              })
+            const name = (userGetFormApi.data.firstName && userGetFormApi.data.lastName) ? `${userGetFormApi.data.firstName} ${userGetFormApi.data.lastName}` : `${userGetFormApi.data.email}`
+            user = { id: userGetFormApi.data.idAccount, name: name, email: userGetFormApi.data.email };
+          } else if (account.provider === 'github') {
+            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-github-with-jwt', { ...user }, { withCredentials: true })
+              .catch(e => {
+                const errorMessage = e.response.data.message
+                throw new Error(errorMessage + '&email=' + account.email)
+              })
+            user = { id: userGetFormApi.data.idAccount, name: userGetFormApi.name, email: userGetFormApi.data.email };
+          } else if (account.provider === 'facebook') {
+            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-facebook-with-jwt', { ...user }, { withCredentials: true })
+              .catch(e => {
+                const errorMessage = e.response.data.message
+                throw new Error(errorMessage + '&email=' + account.email)
+              })
+            user = { id: userGetFormApi.data.idAccount, name: userGetFormApi.name, email: userGetFormApi.data.email };
           }
         }
 
         // chỉ chạy lúc đăng nhập
         if (user) {
-          firstTime = true;
-          token.id = user.id;
+          token.id = user.id
         }
 
         return token;

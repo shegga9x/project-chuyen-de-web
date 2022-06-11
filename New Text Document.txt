@@ -1,7 +1,0 @@
- <li><p> Áo hai dây và ba lỗ </p>  <i></i></li>
- <li><p> Áo ống </p>  <i></i></li>
- <li><p> Áo thun </p>  <i></i></li>
- <li><p> Áo sơ mi </p>  <i></i></li>
- <li><p> Áo polo </p>  <i></i></li>
- <li><p> Áo liền thân </p>  <i></i></li>
- <li><p> Khác </p>  <i></i></li>
