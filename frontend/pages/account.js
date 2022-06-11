@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { signIn } from 'next-auth/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useAuth from "../helpers/customHook/useAuth";
@@ -10,8 +10,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
 import { faFacebook, faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { useRouter } from 'next/router'
 
 export default function Account() {
+
+    const router = useRouter()
+    // use router
+    console.log(router.query);
+
+    const elementRef = useRef(null);
+
+    if (router.query?.error === 'Callback' || router.query?.error === 'system error') {
+        window.location.href = '/404';
+    }
+
+    if (router.query?.error === 'No value present') {
+        if (elementRef.current) {
+            elementRef.current.style.display = 'block';
+        }
+    }
 
     const [isAuthenticated] = useAuth(true);
 
@@ -175,6 +192,9 @@ export default function Account() {
                                             <button className="button button-outline-secondary w-100">
                                                 Login
                                             </button>
+                                        </div>
+                                        <div className="errorMessage" style={{ display: "none",marginTop:'10px' }} ref={elementRef}>
+                                            <p style={{ color: "red" }}>Sai thông tin đăng nhập (email hoặc mật khẩu)</p>
                                         </div>
                                     </form>
                                 </div>
