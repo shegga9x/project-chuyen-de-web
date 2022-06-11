@@ -102,8 +102,4 @@ frontend/.next
 .vscode
 frontend/.babelrc
 frontend/.eslintrc.json
-frontend/.eslintrc.json
-frontend/.eslintrc.json
-frontend/.eslintrc.json
-frontend/package-lock.json
 frontend/package-lock.json
