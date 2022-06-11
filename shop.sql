@@ -122,6 +122,7 @@ CREATE TABLE Single_Product_Page
     description nvarchar(max),
     PRIMARY KEY (id_single_product_page)
 )
+
 CREATE TABLE Product
 (
     id_product int IDENTITY(1,1) ,
@@ -327,9 +328,31 @@ INSERT INTO Category VALUES(31,N'Áo polo');
 INSERT INTO Category VALUES(31,N'Áo liền thân');
 INSERT INTO Category VALUES(31,N'Khác');
 
-select * from ACCOUNT
-delete from ACCOUNT_Has_Role
-delete from Refresh_Token
-delete from Verification_Token
-delete from Reset_Token
-delete from ACCOUNT
+
+
+
+
+INSERT INTO Single_Product_Page VALUES(1,51,1,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2','');
+INSERT INTO Single_Product_Page VALUES(1,52,3,N'nón Beanie vành tròn phong cách Retro Hàn Quốc Nam/Nữ','');
+INSERT INTO Single_Product_Page VALUES(1,53,2,N'Mũ nón Miki kiểu Thủy Thủ Không Vành Founded 1986 N04','');
+INSERT INTO Single_Product_Page VALUES(1,54,1,N'Mũ thủy thủ không vành vải canvas loại 1 nhiều màu phong cách hiphop M01','');
+INSERT INTO Single_Product_Page VALUES(1,55,2,N'Áo khoác nữ','');
+INSERT INTO Single_Product_Page VALUES(1,56,3,N'Sửa chữa nhà cửa','');
+INSERT INTO Single_Product_Page VALUES(1,57,3,N'Ống Kính - Ống Ngắm','');
+
+INSERT INTO Single_Product_Page VALUES(1,51,1,N'Cá, thuỷ hải sản','');
+INSERT INTO Single_Product_Page VALUES(1,52,3,N'Combo 2 hộp chia ngăn sắp xếp quần áo phong cách Nhật Bản VINAVU - Có Nắp - Kem Trơn','');
+INSERT INTO Single_Product_Page VALUES(1,53,2,N'Áo thun hình gấu teddy cho chó mèo ( một cái, màu giao ngẫu nhiên ) - XXL','');
+INSERT INTO Single_Product_Page VALUES(1,54,1,N'Bộ bàn ăn mặt đá ceramic bóng kết hợp ghế Nelson - Bàn 1m4 + 4 ghế','');
+INSERT INTO Single_Product_Page VALUES(1,55,2,N'Hộp vải đựng quần áo SETHOME đa năng giỏ đựng đồ lót sách vở đồ cá nhân thùng đựng mỹ phẩm cao cấp dễ dang gấp gọn - Chữ nhật - Be','');
+INSERT INTO Single_Product_Page VALUES(1,56,3,N'Bộ bàn ăn mặt mặt đá cẩm thạch nhân tạo kết hợp 4 ghế 6 ghế 8 ghế Nelson - Bàn 1m4 + 4 ghế - Ghế màu trắng ghi','');
+INSERT INTO Single_Product_Page VALUES(1,57,3,N'Mũ đi biển vành tròn gắn tag chư M nón móc len sợi rộng vành đi chơi siêu đẹp dành cho nữ.','');
+
+INSERT INTO Single_Product_Page VALUES(1,51,1,N'Nón Beanie vành tròn ️ Mũ tròn phong cách Retro Hàn Quốc form Unisex nam nữ N04','');
+INSERT INTO Single_Product_Page VALUES(1,52,3,N'Mũ tròn Miki màu trơn phong cách cổ điển độc đáo – thêu chữ kiểu dáng đơn giản','');
+INSERT INTO Single_Product_Page VALUES(1,53,2,N'Mũ nón bucket nam nữ trơn tròn vành nhiều màu siêu đẹp MN20','');
+INSERT INTO Single_Product_Page VALUES(1,54,1,N'Điện thoại Samsung Galaxy S22 Ultra 5G (12GB/512GB) - Hàng Chính Hãng','');
+INSERT INTO Single_Product_Page VALUES(1,55,2,N'Tã Quần Huggies Dry Tràm Trà Tự Nhiên Gói Cực Đại XL62/XXL56 + Tặng 6 miếng','');
+INSERT INTO Single_Product_Page VALUES(1,56,3,N'Combo 2 TúI Nước Giặt Omo Matic Cho Máy Giặt Cửa Trước Bền Đẹp Bền Màu Sau 100 Lần Giặt 3.6Kg','');
+INSERT INTO Single_Product_Page VALUES(1,57,3,N'Apple iPhone 11','');
+
