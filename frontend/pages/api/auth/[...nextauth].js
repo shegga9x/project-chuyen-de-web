@@ -47,7 +47,7 @@ const nextAuthOptions = (req, res) => {
             e => {
               console.log(e)
               const errorMessage = e.response === undefined ? 'error connect' : 'e.response.data.message'
-              accountGoogleRequest.error = errorMessage;
+              accountGithubRequest.error = errorMessage;
             }
           )
 
@@ -70,7 +70,7 @@ const nextAuthOptions = (req, res) => {
             e => {
               console.log(e)
               const errorMessage = e.response === undefined ? 'error connect' : 'e.response.data.message'
-              accountGoogleRequest.error = errorMessage;
+              accountFacebookRequest.error = errorMessage;
             }
           )
 

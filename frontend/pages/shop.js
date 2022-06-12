@@ -1,4 +1,3 @@
-import useAuth from "../helpers/customHook/useAuth";
 import {
   faAngleDown,
   faCartPlus,
@@ -14,9 +13,6 @@ import Head from "next/head";
 import Layout from "../components/layout";
 
 export default function Shop() {
-
-  const [isAuthenticated] = useAuth(true);
-
   return (
     <>
       <Head>
