@@ -1,11 +1,10 @@
 import Head from "next/head";
-import Layout from "../components/layout";
 export default function Page404() {
     return (
         <>
             <Head>
                 <title>
-                    404 Page
+                    Server 500!
                 </title>
                 <link
                     href="https://fonts.googleapis.com/css?family=Open+Sans:400,700"
@@ -31,7 +30,7 @@ export default function Page404() {
                 <div className="page-404">
                     <div className="vertical-center">
                         <div className="text-center">
-                            <h1>404!</h1>
+                            <h1>Err 500!</h1>
                             <h5>Something go wrong please try again!</h5>
                             <div className="redirect-link-wrapper u-s-p-t-25">
                                 <a className="redirect-link" href="home.html">

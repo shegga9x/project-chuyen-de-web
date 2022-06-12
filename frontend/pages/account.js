@@ -20,7 +20,6 @@ export default function Account(props) {
         }
     }
 
-
     //login useState
     const [email, setEmail] = useState("");
 
@@ -40,7 +39,7 @@ export default function Account(props) {
 
     const submit = (e) => {
         e.preventDefault();
-        signIn('credentials', { email: email, password: password });
+        signIn('credentials', { email: email, password: password,callbackUrl:'/' });
         // signIn('google');
     }
 
@@ -280,7 +279,7 @@ export function getServerSideProps({ req, res, query }) {
             return {
                 redirect: {
                     permanent: false,
-                    destination: "/404"
+                    destination: "/500"
                 }
             }
         } else {

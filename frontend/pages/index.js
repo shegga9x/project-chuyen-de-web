@@ -77,7 +77,7 @@ export default function Home() {
         <section className="section-maker">
           <div className="container">
             <div className="sec-maker-header text-center">
-              <h3 className="sec-maker-h3">MEN'S CLOTHING</h3>
+              {/* <h3 className="sec-maker-h3">MEN'S CLOTHING</h3> */}
               <ul className="nav tab-nav-style-1-a justify-content-center">
                 <li className="nav-item">
                   <a

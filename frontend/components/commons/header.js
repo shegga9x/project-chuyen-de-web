@@ -26,10 +26,19 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession, signOut } from "next-auth/client";
 import instance from "../../helpers/axiosConfig";
+import { useRouter } from 'next/router'
 
 export default function Header() {
 
+    const { locale } = useRouter()
+
     const [session, loading] = useSession();
+
+    const goToAccountPage = () => {
+        window.location.href = '/' + locale + '/account';
+    }
+
+
 
     // console.log(session)
     const test = async () => {
@@ -96,7 +105,7 @@ export default function Header() {
                                             </a>
                                         </li>
                                         {!loading && !session && <li>
-                                            <a href='/account'>
+                                            <a onClick={goToAccountPage}>
                                                 <i className=" u-s-m-r-9">
                                                     <FontAwesomeIcon icon={faSignInAlt} />
                                                 </i>Login / Signup
@@ -354,7 +363,7 @@ export default function Header() {
                     <div className="container">
                         <div className="row align-items-center">
                             <div className="col-lg-3">
-                                <div className="v-menu">
+                                <div className="v-menu v-close">
                                     <span className="v-title">
                                         <i style={{ color: "white" }} className="ion-md-menu">
                                             <FontAwesomeIcon icon={faBars} />
