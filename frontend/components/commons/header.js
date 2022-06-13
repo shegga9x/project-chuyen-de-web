@@ -26,8 +26,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession, signOut } from "next-auth/client";
 import instance from "../../helpers/axiosConfig";
+import { useRouter } from 'next/router'
+import { changeLanguage } from "../../helpers/customFunction/changeLanguage";
+import { changeRoute } from "../../helpers/customFunction/changeRoute";
 
 export default function Header() {
+
+    const router = useRouter()
 
     const [session, loading] = useSession();
 
@@ -96,7 +101,7 @@ export default function Header() {
                                             </a>
                                         </li>
                                         {!loading && !session && <li>
-                                            <a href='/account'>
+                                            <a onClick={() => { changeRoute('/', router) }}>
                                                 <i className=" u-s-m-r-9">
                                                     <FontAwesomeIcon icon={faSignInAlt} />
                                                 </i>Login / Signup
@@ -134,19 +139,20 @@ export default function Header() {
                                 </li>
                                 <li>
                                     <a>
-                                        ENG
+                                        {router.locale === 'vi' ? 'VI' : 'ENG'}
                                         <i className="u-s-m-l-9">
                                             <FontAwesomeIcon icon={faChevronDown} size="2xs" />
                                         </i>
                                     </a>
                                     <ul className="g-dropdown" style={{ width: 70 }}>
+                                        {/* className="u-c-brand"  */}
                                         <li>
-                                            <a href="#" className="u-c-brand">
+                                            <a className={router.locale === 'en' ? 'u-c-brand' : ''} onClick={() => { changeLanguage(router.route, "en", router) }}>
                                                 ENG
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#">ARB</a>
+                                            <a className={router.locale === 'vi' ? 'u-c-brand' : ''} onClick={() => { changeLanguage(router.route, "vi", router) }}>VI</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -161,7 +167,7 @@ export default function Header() {
                         <div className="row clearfix align-items-center">
                             <div className="col-lg-3 col-md-9 col-sm-6">
                                 <div className="brand-logo text-lg-center">
-                                    <a href="home.html">
+                                    <a onClick={() => { changeRoute('/', router) }}>
                                         <img
                                             src="/static/images/main-logo/groover-branding-1.png"
                                             alt="Groover Brand Logo"
@@ -354,7 +360,7 @@ export default function Header() {
                     <div className="container">
                         <div className="row align-items-center">
                             <div className="col-lg-3">
-                                <div className="v-menu">
+                                <div className="v-menu v-close">
                                     <span className="v-title">
                                         <i style={{ color: "white" }} className="ion-md-menu">
                                             <FontAwesomeIcon icon={faBars} />

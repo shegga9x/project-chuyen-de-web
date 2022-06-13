@@ -9,8 +9,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
 import { faFacebook, faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
+import useTrans from "../helpers/customHook/useTrans";
 
 export default function Account(props) {
+
+    const trans = useTrans();
 
     const elementRef = useRef(null);
 
@@ -19,7 +22,6 @@ export default function Account(props) {
             elementRef.current.style.display = 'block';
         }
     }
-
 
     //login useState
     const [email, setEmail] = useState("");
@@ -40,7 +42,7 @@ export default function Account(props) {
 
     const submit = (e) => {
         e.preventDefault();
-        signIn('credentials', { email: email, password: password });
+        signIn('credentials', { email: email, password: password,callbackUrl:'/' });
         // signIn('google');
     }
 
@@ -114,7 +116,8 @@ export default function Account(props) {
                                 <div className="login-wrapper">
                                     <h2 className="account-h2 u-s-m-b-20">Login</h2>
                                     <h6 className="account-h6 u-s-m-b-30">
-                                        Welcome back! Sign in to your account.
+                                        {/* Welcome back! Sign in to your account. */}
+                                        {trans.home.title}
                                     </h6>
                                     <form onSubmit={submit}>
                                         <div className="u-s-m-b-30">
@@ -280,7 +283,7 @@ export function getServerSideProps({ req, res, query }) {
             return {
                 redirect: {
                     permanent: false,
-                    destination: "/404"
+                    destination: "/500"
                 }
             }
         } else {
