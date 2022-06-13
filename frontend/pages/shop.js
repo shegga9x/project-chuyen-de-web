@@ -433,8 +433,8 @@ export default function Shop(props) {
                                   </div>
                                 </div>
                                 <div className="price-template">
-                                  <div className="item-new-price">$55.00</div>
-                                  <div className="item-old-price">$60.00</div>
+                                  <div className="item-new-price">${d.priceRange}</div>
+                                  <div className="item-old-price">${d.priceRange}</div>
                                 </div>
                               </div>
                               <div className="tag new">
@@ -481,6 +481,7 @@ export async function getServerSideProps({ query }) {
     const page = query.page == null ? 1 : query.page;
     const res = await fetch(`http://localhost:4000/api/product/loadAll?page=${page - 1}`);
     const data = await res.json()
+    console.log(data)
     if (data.page != null) {
       return {
         props: {

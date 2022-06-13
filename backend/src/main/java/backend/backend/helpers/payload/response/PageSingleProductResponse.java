@@ -2,15 +2,17 @@ package backend.backend.helpers.payload.response;
 
 import java.util.List;
 
+import backend.backend.helpers.payload.dto.SingleProductPageDTO;
+
 public class PageSingleProductResponse {
-    List<SingleProductPageResponse> page;
+    List<SingleProductPageDTO> page;
     int totalPage;
 
-    public List<SingleProductPageResponse> getPage() {
+    public List<SingleProductPageDTO> getPage() {
         return this.page;
     }
 
-    public void setPage(List<SingleProductPageResponse> page) {
+    public void setPage(List<SingleProductPageDTO> page) {
         this.page = page;
     }
 

@@ -1,7 +1,7 @@
 
-package backend.backend.helpers.payload.response;
+package backend.backend.helpers.payload.dto;
 
-public class SingleProductPageResponse {
+public class SingleProductPageDTO {
 
     private Integer idSingleProductPage;
 
@@ -14,6 +14,8 @@ public class SingleProductPageResponse {
     private String name;
 
     private String description;
+
+    private String priceRange;
 
     public Integer getIdSingleProductPage() {
         return this.idSingleProductPage;
@@ -62,4 +64,13 @@ public class SingleProductPageResponse {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getPriceRange() {
+        return this.priceRange;
+    }
+
+    public void setPriceRange(String priceRange) {
+        this.priceRange = priceRange;
+    }
+
 }

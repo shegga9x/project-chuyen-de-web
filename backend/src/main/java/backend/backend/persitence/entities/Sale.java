@@ -5,7 +5,7 @@
 package backend.backend.persitence.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+
 import java.util.List;
 import javax.persistence.*;
 
@@ -38,7 +38,7 @@ public class Sale implements Serializable {
     private String     discountCondition ;
 
     @Column(name="discount_value")
-    private BigDecimal discountValue ;
+    private Double discountValue ;
 
 
     //--- ENTITY LINKS ( RELATIONSHIP )
@@ -85,10 +85,10 @@ public class Sale implements Serializable {
         return this.discountCondition;
     }
 
-    public void setDiscountValue( BigDecimal discountValue ) {
+    public void setDiscountValue( Double discountValue ) {
         this.discountValue = discountValue ;
     }
-    public BigDecimal getDiscountValue() {
+    public Double getDiscountValue() {
         return this.discountValue;
     }
 
