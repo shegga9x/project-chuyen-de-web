@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useState, useRef } from 'react';
 import { signIn } from 'next-auth/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useAuth from "../helpers/customHook/useAuth";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import {
@@ -10,27 +9,19 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
 import { faFacebook, faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
-import { useRouter } from 'next/router'
+import useTrans from "../helpers/customHook/useTrans";
 
-export default function Account() {
+export default function Account(props) {
 
-    const router = useRouter()
-    // use router
-    console.log(router.query);
+    const trans = useTrans();
 
     const elementRef = useRef(null);
 
-    if (router.query?.error === 'Callback' || router.query?.error === 'system error') {
-        window.location.href = '/404';
-    }
-
-    if (router.query?.error === 'No value present') {
+    if (props?.error) {
         if (elementRef.current) {
             elementRef.current.style.display = 'block';
         }
     }
-
-    const [isAuthenticated] = useAuth(true);
 
     //login useState
     const [email, setEmail] = useState("");
@@ -51,7 +42,7 @@ export default function Account() {
 
     const submit = (e) => {
         e.preventDefault();
-        signIn('credentials', { email: email, password: password });
+        signIn('credentials', { email: email, password: password,callbackUrl:'/' });
         // signIn('google');
     }
 
@@ -125,7 +116,8 @@ export default function Account() {
                                 <div className="login-wrapper">
                                     <h2 className="account-h2 u-s-m-b-20">Login</h2>
                                     <h6 className="account-h6 u-s-m-b-30">
-                                        Welcome back! Sign in to your account.
+                                        {/* Welcome back! Sign in to your account. */}
+                                        {trans.home.title}
                                     </h6>
                                     <form onSubmit={submit}>
                                         <div className="u-s-m-b-30">
@@ -193,7 +185,7 @@ export default function Account() {
                                                 Login
                                             </button>
                                         </div>
-                                        <div className="errorMessage" style={{ display: "none",marginTop:'10px' }} ref={elementRef}>
+                                        <div className="errorMessage" style={{ display: "none", marginTop: '10px' }} ref={elementRef}>
                                             <p style={{ color: "red" }}>Sai thông tin đăng nhập (email hoặc mật khẩu)</p>
                                         </div>
                                     </form>
@@ -283,4 +275,20 @@ export default function Account() {
             </Layout>
         </>
     )
+}
+
+export function getServerSideProps({ req, res, query }) {
+    if (query.error != undefined) {
+        if (query.error === 'Callback' || query.error === 'system error') {
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: "/500"
+                }
+            }
+        } else {
+            return { props: { error: query.error } }
+        }
+    }
+    return { props: {} }
 }

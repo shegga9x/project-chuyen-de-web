@@ -15,8 +15,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Layout from "../components/layout";
 // import { useSession} from "next-auth/client";
+import useTrans from "../helpers/customHook/useTrans";
 
 export default function Home() {
+
+  const trans = useTrans();
 
   return (
     <>
@@ -77,7 +80,7 @@ export default function Home() {
         <section className="section-maker">
           <div className="container">
             <div className="sec-maker-header text-center">
-              <h3 className="sec-maker-h3">MEN'S CLOTHING</h3>
+              {/* <h3 className="sec-maker-h3">MEN'S CLOTHING</h3> */}
               <ul className="nav tab-nav-style-1-a justify-content-center">
                 <li className="nav-item">
                   <a

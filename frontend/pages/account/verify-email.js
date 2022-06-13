@@ -1,44 +1,28 @@
-import { useRouter } from 'next/router'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
 
 export default function VerifyEmail() {
-    const [isInValid, setValid] = useState(false);
-    const router = useRouter()
-    const token = router.query.token
+    return (
+        <>
+            Invalid Token
+        </>
+    )
+}
 
-
-    useEffect(() => {
-        const verify = async () => {
-            const mes = await axios.post('http://localhost:4000/api/accounts/verify-email', {
-                token: token
-            }).catch(errors => {
-                setValid(true);
-                return undefined;
-            })
-
-            return mes.data.message;
-        }
-
-        if (token) {
-            const fetchData = async () => {
-                const message = await verify();
-
-                if (message !== undefined) {
-                    window.location.href = "/account"
+export async function getServerSideProps({ req, res, query }) {
+    if (query.token != undefined) {
+        const mes = await axios.post('http://localhost:4000/api/accounts/verify-email', {
+            token: query.token
+        }).catch(errors => {
+            return { props: {} }
+        })
+        if (mes) {
+            return {
+                redirect: {
+                    permanent: false,
+                    destination: "/account"
                 }
             }
-            fetchData();
         }
-
-    }, [token])
-
-
-    return (<>
-        {
-            isInValid && (<>
-                Invalid Token
-            </>)
-        }
-    </>)
+    }
+    return { props: {} }
 }
