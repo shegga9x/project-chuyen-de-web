@@ -21,8 +21,6 @@ class BackendApplicationTests {
 	@Test
 	@Transactional
 	void test1() {
-		for (SingleProductPage singleProductPage : singleProductPageService.loadAll()) {
-			System.out.println(singleProductPage);
-		}
+
 	}
 }

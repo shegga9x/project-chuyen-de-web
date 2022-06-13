@@ -288,7 +288,7 @@ export function getServerSideProps({ req, res, query }) {
             }
         } else {
             return { props: { error: query.error } }
-        }
+        }   
     }
     return { props: {} }
 }

@@ -11,23 +11,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Layout from "../components/layout";
-import axios from 'axios'
 
-export default function Shop() {
+export default function Shop(props) {
 
-  const [data, setData] = useState(null)
-  const [isLoading, setLoading] = useState(false)
-
-  const [isAuthenticated] = useAuth(true);
-  useEffect(() => {
-    setLoading(true)
-    fetch('http://localhost:4000/api/product/loadAll')
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data)
-        setLoading(false)
-      })
-  }, [])
   return (
     <>
       <Head>
@@ -369,661 +355,95 @@ export default function Shop() {
                     {/* Page-Bar /- */}
                     {/* Row-of-Product-Container */}
                     <div className="row product-container list-style">
-                      <div className="product-item col-lg-4 col-md-6 col-sm-6">
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                <FontAwesomeIcon icon={faSearch} />
-                              </a>
-                              <a className="item-mail" href="">
-                                <FontAwesomeIcon icon={faEnvelope} />
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                <FontAwesomeIcon icon={faHeart} />
-                              </a>
-                              <a className="item-addCart" href="">
-                                <FontAwesomeIcon icon={faCartPlus} />
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Men's</a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Tops</a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    Hoodies
+                      {props.data.page.map(function (d) {
+                        return (
+                          <div className="product-item col-lg-4 col-md-6 col-sm-6">
+                            <div className="item">
+                              <div className="image-container">
+                                <a
+                                  className="item-img-wrapper-link"
+                                  href="single-product.html"
+                                >
+                                  <img
+                                    className="img-fluid"
+                                    src="/static/images/product/product@3x.jpg"
+                                    alt="Product"
+                                  />
+                                </a>
+                                <div className="item-action-behaviors">
+                                  <a
+                                    className="item-quick-look"
+                                    data-toggle="modal"
+                                    href="#quick-view"
+                                  >
+                                    <FontAwesomeIcon icon={faSearch} />
                                   </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Casual Hoodie Full Cotton
-                                </a>
-                              </h6>
-                              <div className="item-description">
-                                <p>
-                                  This hoodie is full cotton. It includes a muff
-                                  sewn onto the lower front, and (usually) a
-                                  drawstring to adjust the hood opening. Throughout
-                                  the U.S., it is common for middle-school,
-                                  high-school, and college students to wear this
-                                  sweatshirts—with or without hoods—that display
-                                  their respective school names or mascots across
-                                  the chest, either as part of a uniform or personal
-                                  preference.
-                                </p>
-                              </div>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag new">
-                            <span>NEW</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product-item col-lg-4 col-md-6 col-sm-6">
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Men's</a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Tops</a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    T-Shirts
+                                  <a className="item-mail" href="">
+                                    <FontAwesomeIcon icon={faEnvelope} />
                                   </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Mischka Plain Men T-Shirt
-                                </a>
-                              </h6>
-                              <div className="item-description">
-                                <p>
-                                  T-shirts with bold slogans were popular in the UK
-                                  in the 1980s. T-shirts were originally worn as
-                                  undershirts, but are now worn frequently as the
-                                  only piece of clothing on the top half of the
-                                  body, other than possibly a brassiere or, rarely,
-                                  a waistcoat (vest). T-shirts have also become a
-                                  medium for self-expression and advertising, with
-                                  any imaginable combination of words, art and
-                                  photographs on display.
-                                </p>
-                              </div>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product-item col-lg-4 col-md-6 col-sm-6">
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Men's</a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Tops</a>
-                                </li>
-                                <li>
-                                  <a href="shop-v4-filter-as-category.html">
-                                    T-Shirts
+                                  <a className="item-addwishlist" href="">
+                                    <FontAwesomeIcon icon={faHeart} />
                                   </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Black Bean Plain Men T-Shirt
-                                </a>
-                              </h6>
-                              <div className="item-description">
-                                <p>
-                                  T-shirts with bold slogans were popular in the UK
-                                  in the 1980s. T-shirts were originally worn as
-                                  undershirts, but are now worn frequently as the
-                                  only piece of clothing on the top half of the
-                                  body, other than possibly a brassiere or, rarely,
-                                  a waistcoat (vest). T-shirts have also become a
-                                  medium for self-expression and advertising, with
-                                  any imaginable combination of words, art and
-                                  photographs on display.
-                                </p>
-                              </div>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product-item col-lg-4 col-md-6 col-sm-6">
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Men's</a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Bottoms</a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">Jeans</a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Regular Rock Blue Men Jean
-                                </a>
-                              </h6>
-                              <div className="item-description">
-                                <p>
-                                  Traditionally, jeans were dyed to a blue color
-                                  using natural indigo dye. Most denim is now dyed
-                                  using synthetic indigo. Approximately 20 thousand
-                                  tons of indigo are produced annually for this
-                                  purpose, though only a few grams of the dye are
-                                  required for each pair. For other colors of denim
-                                  other dyes must be used. Currently, jeans are
-                                  produced in any color that can be achieved with
-                                  cotton.
-                                </p>
-                              </div>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag new">
-                            <span>NEW</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product-item col-lg-4 col-md-6 col-sm-6">
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Men's</a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Tops</a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">Suits</a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Black Maire Full Men Suit
-                                </a>
-                              </h6>
-                              <div className="item-description">
-                                <p>
-                                  British dandy Beau Brummell redefined and adapted
-                                  this style, then popularised it, leading European
-                                  men to wearing well-cut, tailored clothes, adorned
-                                  with carefully knotted neckties. The simplicity of
-                                  the new clothes and their sombre colours
-                                  contrasted strongly with the extravagant, foppish
-                                  styles just before. Brummell's influence
-                                  introduced the modern era of men's clothing which
-                                  now includes the modern suit and necktie.
-                                </p>
-                              </div>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag sale">
-                            <span>SALE</span>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product-item col-lg-4 col-md-6 col-sm-6">
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Men's</a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Outwear</a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    Jackets
+                                  <a className="item-addCart" href="">
+                                    <FontAwesomeIcon icon={faCartPlus} />
                                   </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Woodsmoke Rookie Parka Jacket
-                                </a>
-                              </h6>
-                              <div className="item-description">
-                                <p>
-                                  A parka or anorak is a type of coat with a hood,
-                                  often lined with fur or faux fur. The Caribou
-                                  Inuit invented this kind of garment, originally
-                                  made from caribou or seal skin, for hunting and
-                                  kayaking in the frigid Arctic. Some Inuit anoraks
-                                  require regular coating with fish oil to retain
-                                  their water resistance.
-                                </p>
-                              </div>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
                                 </div>
-                                <span>(23)</span>
                               </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product-item col-lg-4 col-md-6 col-sm-6">
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Men's</a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    Accessories
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">Ties</a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Blue Zodiac Boxes Reg Tie
-                                </a>
-                              </h6>
-                              <div className="item-description">
-                                <p>
-                                  A necktie, or simply a tie, is a long piece of
-                                  cloth, worn usually by men, for decorative
-                                  purposes around the neck, resting under the shirt
-                                  collar and knotted at the throat.
-                                </p>
-                              </div>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
+                              <div className="item-content">
+                                <div className="what-product-is">
+                                  <ul className="bread-crumb">
+                                    <li className="has-separator">
+                                      <a href="shop-v1-root-category.html">Men's</a>
+                                    </li>
+                                    <li className="has-separator">
+                                      <a href="shop-v2-sub-category.html">Tops</a>
+                                    </li>
+                                    <li>
+                                      <a href="shop-v3-sub-sub-category.html">
+                                        Hoodies
+                                      </a>
+                                    </li>
+                                  </ul>
+                                  <h6 className="item-title">
+                                    <a href="single-product.html">
+                                      {d.name}
+                                    </a>
+                                  </h6>
+                                  <div className="item-description">
+                                    <p>
+                                      This hoodie is full cotton. It includes a muff
+                                      sewn onto the lower front, and (usually) a
+                                      drawstring to adjust the hood opening. Throughout
+                                      the U.S., it is common for middle-school,
+                                      high-school, and college students to wear this
+                                      sweatshirts—with or without hoods—that display
+                                      their respective school names or mascots across
+                                      the chest, either as part of a uniform or personal
+                                      preference.
+                                    </p>
+                                  </div>
+                                  <div className="item-stars">
+                                    <div
+                                      className="star"
+                                      title="4.5 out of 5 - based on 23 Reviews"
+                                    >
+                                      <span style={{ width: 67 }} />
+                                    </div>
+                                    <span>(23)</span>
+                                  </div>
                                 </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="product-item col-lg-4 col-md-6 col-sm-6">
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">Men's</a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Bottoms</a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">Shoes</a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Zambezi Carved Leather Business Casual Shoes
-                                </a>
-                              </h6>
-                              <div className="item-description">
-                                <p>
-                                  Dress shoes are characterized by smooth and supple
-                                  leather uppers, leather soles, and narrow sleek
-                                  figure. Casual shoes are characterized by sturdy
-                                  leather uppers, non-leather outsoles, and wide
-                                  profile. Some designs of dress shoes can be worn
-                                  by either gender. The majority of dress shoes have
-                                  an upper covering, commonly made of leather,
-                                  enclosing most of the lower foot, but not covering
-                                  the ankles.
-                                </p>
-                              </div>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
+                                <div className="price-template">
+                                  <div className="item-new-price">$55.00</div>
+                                  <div className="item-old-price">$60.00</div>
                                 </div>
-                                <span>(23)</span>
+                              </div>
+                              <div className="tag new">
+                                <span>NEW</span>
                               </div>
                             </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
                           </div>
-                          <div className="tag discount">
-                            <span>-15%</span>
-                          </div>
-                        </div>
-                      </div>
+                        )
+                      })}
                     </div>
                     {/* Row-of-Product-Container /- */}
                   </div>
@@ -1032,31 +452,13 @@ export default function Shop() {
                   <div className="pagination-area">
                     <div className="pagination-number">
                       <ul>
-                        <li style={{ display: "none" }}>
-                          <a href="shop-v1-root-category.html" title="Previous">
-                            <i className="fa fa-angle-left" />
-                          </a>
-                        </li>
-                        <li className="active">
-                          <a href="shop-v1-root-category.html">1</a>
-                        </li>
-                        <li>
-                          <a href="shop-v1-root-category.html">2</a>
-                        </li>
-                        <li>
-                          <a href="shop-v1-root-category.html">3</a>
-                        </li>
-                        <li>
-                          <a href="shop-v1-root-category.html">...</a>
-                        </li>
-                        <li>
-                          <a href="shop-v1-root-category.html">10</a>
-                        </li>
-                        <li>
-                          <a href="shop-v1-root-category.html" title="Next">
-                            <i className="fa fa-angle-right" />
-                          </a>
-                        </li>
+                        {Array.apply(null, { length: props.data.totalPage }).map(Number.call, Number).map(item => {
+                          return (
+                            <li className={props.currentPage == (item + 1) ? "active" : ""}>
+                              <a href={"shop?page=" + (item + 1)}>{(item + 1)}</a>
+                            </li>
+                          )
+                        })}
                       </ul>
                     </div>
                   </div>
@@ -1070,5 +472,29 @@ export default function Shop() {
       </Layout>
     </>
   );
+
+}
+
+
+export async function getServerSideProps({ query }) {
+  try {
+    const page = query.page == null ? 1 : query.page;
+    const res = await fetch(`http://localhost:4000/api/product/loadAll?page=${page - 1}`);
+    const data = await res.json()
+    if (data.page != null) {
+      return {
+        props: {
+          data: data,
+          currentPage: page
+        }
+      }
+    }
+  } catch (error) { }
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/500"
+    }
+  }
 
 }
