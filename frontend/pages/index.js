@@ -15,8 +15,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Layout from "../components/layout";
 // import { useSession} from "next-auth/client";
+import useTrans from "../helpers/customHook/useTrans";
 
 export default function Home() {
+
+  const trans = useTrans();
 
   return (
     <>

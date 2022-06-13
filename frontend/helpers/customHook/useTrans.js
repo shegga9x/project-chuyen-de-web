@@ -3,8 +3,8 @@ import en from '../../public/lang/en.js'
 import vi from '../../public/lang/vi.js'
 
 const useTrans = () => {
-    const { locale } = useRouter()
-
+    const { locale, locales } = useRouter()
+    console.log(locale);
     const trans = locale === 'vi' ? vi : en
 
     return trans
