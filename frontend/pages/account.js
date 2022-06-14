@@ -42,7 +42,7 @@ export default function Account(props) {
 
     const submit = (e) => {
         e.preventDefault();
-        signIn('credentials', { email: email, password: password,callbackUrl:'/' });
+        signIn('credentials', { email: email, password: password, callbackUrl: '/' });
         // signIn('google');
     }
 
@@ -91,16 +91,16 @@ export default function Account(props) {
                 <div className="page-style-a">
                     <div className="container">
                         <div className="page-intro">
-                            <h2>Account</h2>
+                            <h2>{trans.header.account}</h2>
                             <ul className="bread-crumb">
                                 <li className="has-separator">
                                     <i>
                                         <FontAwesomeIcon icon={faHome} />
                                     </i>
-                                    <a href="home.html">Home</a>
+                                    <a href="home.html">{trans.header.home}</a>
                                 </li>
                                 <li className="is-marked">
-                                    <a href="account.html">Account</a>
+                                    <a href="account.html">{trans.header.account}</a>
                                 </li>
                             </ul>
                         </div>
@@ -114,15 +114,15 @@ export default function Account(props) {
                             {/* Login */}
                             <div className="col-lg-6">
                                 <div className="login-wrapper">
-                                    <h2 className="account-h2 u-s-m-b-20">Login</h2>
+                                    <h2 className="account-h2 u-s-m-b-20">{trans.account.login}</h2>
                                     <h6 className="account-h6 u-s-m-b-30">
                                         {/* Welcome back! Sign in to your account. */}
-                                        {trans.home.title}
+                                        {trans.account.titleLogin}
                                     </h6>
                                     <form onSubmit={submit}>
                                         <div className="u-s-m-b-30">
                                             <label htmlFor="user-name-email">
-                                                Username or Email
+                                                {trans.account.username} / Email
                                                 <span className="astk">*</span>
                                             </label>
                                             <input
@@ -136,7 +136,7 @@ export default function Account(props) {
                                         </div>
                                         <div className="u-s-m-b-30">
                                             <label htmlFor="login-password">
-                                                Password
+                                                {trans.account.password}
                                                 <span className="astk">*</span>
                                             </label>
                                             <input
@@ -157,14 +157,14 @@ export default function Account(props) {
                                                 />
                                                 {/* <FontAwesomeIcon icon={facheckbox} /> */}
                                                 <label className="label-text" htmlFor="remember-me-token">
-                                                    Remember me
+                                                    {trans.account.remember}
                                                 </label>
                                             </div>
                                             <div className="group-2 text-right">
                                                 <div className="page-anchor">
                                                     <a href="lost-password.html">
                                                         <i className="fas fa-circle-o-notch u-s-m-r-9" />
-                                                        Lost your password?
+                                                        {trans.account.lostPassword}
                                                     </a>
                                                 </div>
                                             </div>
@@ -182,11 +182,11 @@ export default function Account(props) {
                                         </div>
                                         <div className="m-b-45">
                                             <button className="button button-outline-secondary w-100">
-                                                Login
+                                                {trans.account.login}
                                             </button>
                                         </div>
                                         <div className="errorMessage" style={{ display: "none", marginTop: '10px' }} ref={elementRef}>
-                                            <p style={{ color: "red" }}>Sai thông tin đăng nhập (email hoặc mật khẩu)</p>
+                                            <p style={{ color: "red" }}>{trans.account.err}</p>
                                         </div>
                                     </form>
                                 </div>
@@ -195,15 +195,14 @@ export default function Account(props) {
                             {/* Register */}
                             <div className="col-lg-6">
                                 <div className="reg-wrapper">
-                                    <h2 className="account-h2 u-s-m-b-20">Register</h2>
+                                    <h2 className="account-h2 u-s-m-b-20">{trans.account.register}</h2>
                                     <h6 className="account-h6 u-s-m-b-30">
-                                        Registering for this site allows you to access your order status
-                                        and history.
+                                        {trans.account.titleRegister}
                                     </h6>
                                     <form onSubmit={handleSubmit(onSubmit, onError)}>
                                         <div className="u-s-m-b-30">
                                             <label htmlFor="user-name">
-                                                Username
+                                                {trans.account.username}
                                                 <span className="astk">*</span>
                                             </label>
                                             <input
@@ -237,7 +236,7 @@ export default function Account(props) {
                                         </div>
                                         <div className="u-s-m-b-30">
                                             <label htmlFor="password">
-                                                Password
+                                                {trans.account.password}
                                                 <span className="astk">*</span>
                                             </label>
                                             <input
@@ -253,9 +252,9 @@ export default function Account(props) {
                                         <div className="u-s-m-b-30">
                                             <input type="checkbox" className="check-box" id="accept" />
                                             <label className="label-text no-color" htmlFor="accept">
-                                                I’ve read and accept the
+                                                {trans.account.accept}
                                                 <a href="terms-and-conditions.html" className="u-c-brand">
-                                                    terms &amp; conditions
+                                                    {trans.account.terms}
                                                 </a>
                                             </label>
                                         </div>

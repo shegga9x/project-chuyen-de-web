@@ -16,8 +16,12 @@ import {
   faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
+import useTrans from "../helpers/customHook/useTrans";
 
 export default function SingleProduct() {
+
+  const trans = useTrans();
+
   return (
     <>
       <Head>
@@ -31,16 +35,16 @@ export default function SingleProduct() {
         <div className="page-style-a">
           <div className="container">
             <div className="page-intro">
-              <h2>Detail</h2>
+              <h2>{trans.header.detail}</h2>
               <ul className="bread-crumb">
                 <li className="has-separator">
                   <i>
                     <FontAwesomeIcon icon={faHome} />
                   </i>
-                  <a href="home.html">Home</a>
+                  <a href="home.html">{trans.header.home}</a>
                 </li>
                 <li className="is-marked">
-                  <a href="single-product.html">Detail</a>
+                  <a href="single-product.html">{trans.header.detail}</a>
                 </li>
               </ul>
             </div>
@@ -159,7 +163,7 @@ export default function SingleProduct() {
                   </div>
                   <div className="section-2-short-description u-s-p-y-14">
                     <h6 className="information-heading u-s-m-b-8">
-                      Description:
+                      {trans.detail.description}:
                     </h6>
                     <p>
                       This hoodie is full cotton. It includes a muff sewn onto
@@ -176,37 +180,37 @@ export default function SingleProduct() {
                       <h4>$55.00</h4>
                     </div>
                     <div className="original-price">
-                      <span>Original Price:</span>
+                      <span>{trans.detail.price}:</span>
                       <span>$60.00</span>
                     </div>
                     <div className="discount-price">
-                      <span>Discount:</span>
+                      <span>{trans.detail.discount}:</span>
                       <span>8%</span>
                     </div>
                     <div className="total-save">
-                      <span>Save:</span>
+                      <span>{trans.detail.save}:</span>
                       <span>$5</span>
                     </div>
                   </div>
                   <div className="section-4-sku-information u-s-p-y-14">
                     <h6 className="information-heading u-s-m-b-8">
-                      Sku Information:
+                      Sku {trans.detail.information}:
                     </h6>
                     <div className="availability">
-                      <span>Availability:</span>
+                      <span>{trans.detail.availability}:</span>
                       <span>In Stock</span>
                     </div>
                     <div className="left">
-                      <span>Only:</span>
+                      <span>{trans.detail.only}:</span>
                       <span>50 left</span>
                     </div>
                   </div>
                   <div className="section-5-product-variants u-s-p-y-14">
                     <h6 className="information-heading u-s-m-b-8">
-                      Product Variants:
+                      {trans.detail.variants}:
                     </h6>
                     <div className="color u-s-m-b-11">
-                      <span>Available Color:</span>
+                      <span>{trans.detail.color}:</span>
                       <div className="color-variant select-box-wrapper">
                         <select className="select-box product-color">
                           <option value={1}>Heather Grey</option>
@@ -227,7 +231,7 @@ export default function SingleProduct() {
                       </div>
                     </div>
                     <div className="sizes u-s-m-b-11">
-                      <span>Available Size:</span>
+                      <span>{trans.detail.size}:</span>
                       <div className="size-variant select-box-wrapper">
                         <select className="select-box product-size">
                           <option value="">Male 2XL</option>
@@ -263,7 +267,7 @@ export default function SingleProduct() {
                   <div className="section-6-social-media-quantity-actions u-s-p-y-14">
                     <form action="#" className="post-form">
                       <div className="quick-social-media-wrapper u-s-m-b-22">
-                        <span>Share:</span>
+                        <span>{trans.detail.share}:</span>
                         <ul className="social-media-list">
                           <li>
                             <a href="#">
@@ -303,7 +307,7 @@ export default function SingleProduct() {
                         </ul>
                       </div>
                       <div className="quantity-wrapper u-s-m-b-22">
-                        <span>Quantity:</span>
+                        <span>{trans.detail.quantity}:</span>
                         <div className="quantity">
                           <input
                             type="text"
@@ -323,7 +327,7 @@ export default function SingleProduct() {
                           className="button button-outline-secondary"
                           type="submit"
                         >
-                          Add to cart
+                          {trans.detail.addToCart}
                         </button>
                         <button className="button button-outline-secondary  u-s-m-l-6">
                           <FontAwesomeIcon icon={faHeart} />
@@ -796,23 +800,23 @@ export default function SingleProduct() {
                             />
                           </a>
                           <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                <FontAwesomeIcon icon={faMagnifyingGlass} />
-                              </a>
-                              <a className="item-mail" href="">
-                                <FontAwesomeIcon icon={faEnvelope} />
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                <FontAwesomeIcon icon={faHeart} />
-                              </a>
-                              <a className="item-addCart" href="">
-                                <FontAwesomeIcon icon={faPlus} />
-                              </a>
-                            </div>
+                            <a
+                              className="item-quick-look"
+                              data-toggle="modal"
+                              href="#quick-view"
+                            >
+                              <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            </a>
+                            <a className="item-mail" href="">
+                              <FontAwesomeIcon icon={faEnvelope} />
+                            </a>
+                            <a className="item-addwishlist" href="">
+                              <FontAwesomeIcon icon={faHeart} />
+                            </a>
+                            <a className="item-addCart" href="">
+                              <FontAwesomeIcon icon={faPlus} />
+                            </a>
+                          </div>
                         </div>
                         <div className="item-content">
                           <div className="what-product-is">
