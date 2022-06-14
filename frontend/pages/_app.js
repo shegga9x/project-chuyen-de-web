@@ -9,7 +9,7 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }) => {
     <Provider session={pageProps.session}>
       <Component {...pageProps} />
     </Provider>
-  )
-}
+  );
+};
 
-export default MyApp
+export default MyApp;

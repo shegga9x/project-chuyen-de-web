@@ -11,8 +11,12 @@ import {
   faRss,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useTrans from "../../helpers/customHook/useTrans";
 
 export default function QuickViewModal() {
+
+  const trans = useTrans();
+
   return (
     <>
       {/* Quick-view-Modal */}
@@ -135,7 +139,7 @@ export default function QuickViewModal() {
                     </div>
                     <div className="section-2-short-description u-s-p-y-14">
                       <h6 className="information-heading u-s-m-b-8">
-                        Description:
+                        {trans.detail.description}:
                       </h6>
                       <p>
                         This hoodie is full cotton. It includes a muff sewn onto
@@ -153,37 +157,37 @@ export default function QuickViewModal() {
                         <h4>$55.00</h4>
                       </div>
                       <div className="original-price">
-                        <span>Original Price:</span>
+                        <span>{trans.detail.price}:</span>
                         <span>$60.00</span>
                       </div>
                       <div className="discount-price">
-                        <span>Discount:</span>
+                        <span>{trans.detail.discount}:</span>
                         <span>8%</span>
                       </div>
                       <div className="total-save">
-                        <span>Save:</span>
+                        <span>{trans.detail.save}:</span>
                         <span>$5</span>
                       </div>
                     </div>
                     <div className="section-4-sku-information u-s-p-y-14">
                       <h6 className="information-heading u-s-m-b-8">
-                        Sku Information:
+                        Sku {trans.detail.information}:
                       </h6>
                       <div className="availability">
-                        <span>Availability:</span>
+                        <span>{trans.detail.availability}:</span>
                         <span>In Stock</span>
                       </div>
                       <div className="left">
-                        <span>Only:</span>
+                        <span>{trans.detail.only}:</span>
                         <span>50 left</span>
                       </div>
                     </div>
                     <div className="section-5-product-variants u-s-p-y-14">
                       <h6 className="information-heading u-s-m-b-8">
-                        Product Variants:
+                        {trans.detail.variants}:
                       </h6>
                       <div className="color u-s-m-b-11">
-                        <span>Available Color:</span>
+                        <span>{trans.detail.color}:</span>
                         <div className="color-variant select-box-wrapper">
                           <select className="select-box product-color">
                             <option value={1}>Heather Grey</option>
@@ -204,7 +208,7 @@ export default function QuickViewModal() {
                         </div>
                       </div>
                       <div className="sizes u-s-m-b-11">
-                        <span>Available Size:</span>
+                        <span>{trans.detail.size}:</span>
                         <div className="size-variant select-box-wrapper">
                           <select className="select-box product-size">
                             <option value="">Male 2XL</option>
@@ -240,7 +244,7 @@ export default function QuickViewModal() {
                     <div className="section-6-social-media-quantity-actions u-s-p-y-14">
                       <form action="#" className="post-form">
                         <div className="quick-social-media-wrapper u-s-m-b-22">
-                          <span>Share:</span>
+                          <span>{trans.detail.share}:</span>
                           <ul className="social-media-list">
                             <li>
                               <a href="#">
@@ -280,7 +284,7 @@ export default function QuickViewModal() {
                           </ul>
                         </div>
                         <div className="quantity-wrapper u-s-m-b-22">
-                          <span>Quantity:</span>
+                          <span>{trans.detail.quantity}:</span>
                           <div className="quantity">
                             <input
                               type="text"
@@ -300,7 +304,7 @@ export default function QuickViewModal() {
                             className="button button-outline-secondary"
                             type="submit"
                           >
-                            Add to cart
+                            {trans.detail.addToCart}
                           </button>
                           <button className="button button-outline-secondary  u-s-m-l-6">
                             <FontAwesomeIcon icon={faHeart} />
