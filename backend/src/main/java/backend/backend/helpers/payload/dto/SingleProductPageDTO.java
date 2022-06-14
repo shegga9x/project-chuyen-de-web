@@ -17,6 +17,8 @@ public class SingleProductPageDTO {
 
     private String priceRange;
 
+    private String imgURL;
+
     public Integer getIdSingleProductPage() {
         return this.idSingleProductPage;
     }
@@ -71,6 +73,14 @@ public class SingleProductPageDTO {
 
     public void setPriceRange(String priceRange) {
         this.priceRange = priceRange;
+    }
+
+    public String getImgURL() {
+        return this.imgURL;
+    }
+
+    public void setImgURL(String imgURL) {
+        this.imgURL = imgURL;
     }
 
 }

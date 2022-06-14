@@ -1,5 +1,7 @@
 package backend.backend.controllers;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,9 +19,9 @@ public class ProductController {
     @Autowired
     SingleProductPageService singleProductPageService;
 
-    @GetMapping("/loadAll")
-    public ResponseEntity<?> loadAll(@RequestParam("page") int page) {
-        return ResponseEntity.ok(singleProductPageService.loadAll(page));
-
+    @GetMapping({ "/loadAll" })
+    public ResponseEntity<?> loadAll(@RequestParam("page") int page, @RequestParam("size") int size,
+            @RequestParam(name = "catagory", required = false) String[] catagory) {
+        return ResponseEntity.ok(singleProductPageService.loadAll(page, size, catagory));
     }
 }

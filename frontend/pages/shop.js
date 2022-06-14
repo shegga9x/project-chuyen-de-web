@@ -1,18 +1,36 @@
-import {
-  faAngleDown,
-  faCartPlus,
-  faEnvelope,
-  faHeart,
-  faHome,
-  faSearch,
-  faTh,
-  faThList,
-} from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faCartPlus, faEnvelope, faHeart, faHome, faSearch, faTh, faThList, faCheckSquare, faChevronRight, faChevronDown, faPlusSquare, faMinusSquare, faSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Layout from "../components/layout";
+import { useRouter } from 'next/router'
+import '../node_modules/react-checkbox-tree/lib/react-checkbox-tree.css';
+import CheckboxTree from 'react-checkbox-tree';
+
+import React, { useState } from 'react';
+
 
 export default function Shop(props) {
+  const [checked, setChecked] = useState(['phoboss']);
+  const [expanded, setExpanded] = useState(['mars','phobos']);
+  const nodes = [{
+    value: 'mars',
+    label: 'Mars',
+    children: [
+      {
+        value: 'phobos', label: 'Phobos', children:
+          [
+            { value: 'phoboss', label: 'Phobos2' },
+            { value: 'deimoss', label: 'Deimos' },
+          ]
+      },
+      { value: 'deimos', label: 'Deimos' },
+    ],
+  }];
+  const router = useRouter()
+  function handleChange(event) {
+    event.preventDefault()
+    router.replace(event.target.value)
+  }
 
   return (
     <>
@@ -47,6 +65,7 @@ export default function Shop(props) {
             </div>
             {/* Page Introduction Wrapper /- */}
             {/* Shop-Page */}
+
             <div className="page-shop u-s-p-t-80">
               <div className="container">
                 {/* Shop-Intro */}
@@ -57,228 +76,31 @@ export default function Shop(props) {
                 <div className="row">
                   {/* Shop-Left-Side-Bar-Wrapper */}
                   <div className="col-lg-3 col-md-3 col-sm-12">
-                    {/* Fetch-Categories-from-Root-Category  */}
-                    <div className="fetch-categories">
-                      <h3 className="title-name">Browse Categories</h3>
-                      {/* Level-2 */}
-                      <h3 className="fetch-mark-category">
-                        <a href="shop-v2-sub-category.html">
-                          Tops
-                          <span className="total-fetch-items">(5)</span>
-                        </a>
-                      </h3>
-                      {/* Level-2 /- */}
-                      {/* Level-3 */}
-                      <ul>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            T-Shirts
-                            <span className="total-fetch-items">(2)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Hoodies
-                            <span className="total-fetch-items">(1)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Suits
-                            <span className="total-fetch-items">(1)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v4-filter-as-category.html">
-                            Black Bean T-Shirt
-                            <span className="total-fetch-items">(1)</span>
-                          </a>
-                        </li>
-                      </ul>
-                      {/* Level-3 /- */}
-                      {/* Level-2 */}
-                      <h3 className="fetch-mark-category">
-                        <a href="shop-v2-sub-category.html">
-                          Outwear
-                          <span className="total-fetch-items">(3)</span>
-                        </a>
-                      </h3>
-                      {/* Level-2 /- */}
-                      {/* Level-3 */}
-                      <ul>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Jackets
-                            <span className="total-fetch-items">(3)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Trench
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Parkas
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Sweaters
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                      </ul>
-                      {/* Level-3 /- */}
-                      {/* Level-2 */}
-                      <h3 className="fetch-mark-category">
-                        <a href="shop-v2-sub-category.html">
-                          Accessories
-                          <span className="total-fetch-items">(1)</span>
-                        </a>
-                      </h3>
-                      {/* Level-2 /- */}
-                      {/* Level-3 */}
-                      <ul>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Watches
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v2-sub-category.html">
-                            Ties
-                            <span className="total-fetch-items">(1)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Scarves
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Belts
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                      </ul>
-                      {/* Level-3 /- */}
-                      {/* Level-2 */}
-                      <h3 className="fetch-mark-category">
-                        <a href="shop-v2-sub-category.html">
-                          Bottoms
-                          <span className="total-fetch-items">(2)</span>
-                        </a>
-                      </h3>
-                      {/* Level-2 /- */}
-                      {/* Level-3 */}
-                      <ul>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Casual Pants
-                            <span className="total-fetch-items">(2)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Shoes
-                            <span className="total-fetch-items">(1)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Jeans
-                            <span className="total-fetch-items">(1)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Shorts
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                      </ul>
-                      {/* Level-3 /- */}
-                      {/* Level-2 */}
-                      <h3 className="fetch-mark-category">
-                        <a href="shop-v2-sub-category.html">
-                          Underwear
-                          <span className="total-fetch-items">(0)</span>
-                        </a>
-                      </h3>
-                      {/* Level-2 /- */}
-                      {/* Level-3 */}
-                      <ul>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Boxers
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Briefs
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Robes
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Socks
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                      </ul>
-                      {/* Level-3 /- */}
-                      {/* Level-2 */}
-                      <h3 className="fetch-mark-category">
-                        <a href="shop-v2-sub-category.html">
-                          Sunglasses
-                          <span className="total-fetch-items">(2)</span>
-                        </a>
-                      </h3>
-                      {/* Level-2 /- */}
-                      {/* Level-3 */}
-                      <ul>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Pilot
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Wayfarer
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Square
-                            <span className="total-fetch-items">(0)</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="shop-v3-sub-sub-category.html">
-                            Round
-                            <span className="total-fetch-items">(2)</span>
-                          </a>
-                        </li>
-                      </ul>
-                      {/* Level-3 /- */}
-                    </div>
+
+                    <h3 className="title-name">Browse Categories</h3>
+                    <CheckboxTree
+                      nodes={nodes}
+                      icons={{
+                        check: <FontAwesomeIcon icon={faCheckSquare} />,
+                        uncheck: <FontAwesomeIcon icon={faSquare} />,
+                        halfCheck: <FontAwesomeIcon icon={faMinusSquare} />,
+                        expandClose: <FontAwesomeIcon icon={faChevronRight} />,
+                        expandOpen: <FontAwesomeIcon icon={faChevronDown} />,
+                        expandAll: <FontAwesomeIcon icon={faPlusSquare} />,
+                        collapseAll: <FontAwesomeIcon icon={faMinusSquare} />,
+                        parentClose: null,
+                        parentOpen: null,
+                        leaf: null
+                      }}
+                      checked={checked}
+                      expanded={expanded}
+                      onCheck={checked => { setChecked(checked) }}
+                      onExpand={expanded => { setExpanded(expanded) }}
+                    />
+                    <button type="button">PhungVCIp</button>
                     {/* Fetch-Categories-from-Root-Category  /- */}
                   </div>
+
                   {/* Shop-Left-Side-Bar-Wrapper /- */}
                   {/* Shop-Right-Wrapper */}
                   <div className="col-lg-9 col-md-9 col-sm-12">
@@ -332,10 +154,10 @@ export default function Shop(props) {
                           <label className="sr-only" htmlFor="show-records">
                             Show Records Per Page
                           </label>
-                          <select className="select-box" id="show-records">
-                            <option value="">Show: 8</option>
-                            <option value="">Show: 16</option>
-                            <option value="">Show: 28</option>
+                          <select className="select-box" id="show-records" onChange={event => handleChange(event)}>
+                            <option value={"shop?page=" + (props.currentPage) + "&size=" + 8} selected={props.currentSize == 8 ? true : false}>Show: 8</option>
+                            <option value={"shop?page=" + (props.currentPage) + "&size=" + 16} selected={props.currentSize == 16 ? true : false}>Show: 16</option>
+                            <option value={"shop?page=" + (props.currentPage) + "&size=" + 28} selected={props.currentSize == 28 ? true : false} >Show: 28</option>
                           </select>
                           <i
                             style={{
@@ -366,7 +188,7 @@ export default function Shop(props) {
                                 >
                                   <img
                                     className="img-fluid"
-                                    src="/static/images/product/product@3x.jpg"
+                                    src={"/static/images/product/" + (d.imgURL == '' ? "product@3x.jpg" : d.imgURL)}
                                     alt="Product"
                                   />
                                 </a>
@@ -455,7 +277,7 @@ export default function Shop(props) {
                         {Array.apply(null, { length: props.data.totalPage }).map(Number.call, Number).map(item => {
                           return (
                             <li className={props.currentPage == (item + 1) ? "active" : ""}>
-                              <a href={"shop?page=" + (item + 1)}>{(item + 1)}</a>
+                              <a href={"shop?page=" + (item + 1) + "&size=" + props.currentSize}>{(item + 1)}</a>
                             </li>
                           )
                         })}
@@ -469,7 +291,7 @@ export default function Shop(props) {
             {/* Shop-Page /- */}
           </>
         }
-      </Layout>
+      </Layout >
     </>
   );
 
@@ -479,14 +301,16 @@ export default function Shop(props) {
 export async function getServerSideProps({ query }) {
   try {
     const page = query.page == null ? 1 : query.page;
-    const res = await fetch(`http://localhost:4000/api/product/loadAll?page=${page - 1}`);
+    const size = query.size == null ? 8 : query.size;
+    const catagory = query.catagory == null ? "" : `&catagory=${query.catagory}`;
+    const res = await fetch(`http://localhost:4000/api/product/loadAll?page=${page - 1}&size=${size}${catagory}`);
     const data = await res.json()
-    console.log(data)
     if (data.page != null) {
       return {
         props: {
           data: data,
-          currentPage: page
+          currentPage: page,
+          currentSize: size
         }
       }
     }

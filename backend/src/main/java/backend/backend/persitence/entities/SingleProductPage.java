@@ -86,7 +86,15 @@ public class SingleProductPage implements Serializable {
         } catch (Exception e) {
             return "0-0";
         }
-    
+
+    }
+
+    public String getFirstURLImage() {
+        try {
+            return listOfProduct.get(0).getImgUrl();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     // --- GETTERS & SETTERS FOR FIELDS

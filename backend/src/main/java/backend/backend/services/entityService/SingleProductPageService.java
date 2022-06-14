@@ -19,13 +19,14 @@ public class SingleProductPageService {
     @Autowired
     SingleProductPageRepository singleProductPageRepository;
 
-    public PageSingleProductResponse loadAll(int page) {
+    public PageSingleProductResponse loadAll(int page, int size, String[] catagory) {
         PageSingleProductResponse responses = new PageSingleProductResponse();
         List<SingleProductPageDTO> pageS = new ArrayList<>();
-        Page<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findAll(PageRequest.of(page, 5));
+        Page<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findAll(PageRequest.of(page, size));
         for (SingleProductPage singleProductPage : allProductsOnThisPage) {
             SingleProductPageDTO dto = new SingleProductPageDTO();
             dto.setPriceRange(singleProductPage.getPriceRange());
+            dto.setImgURL(singleProductPage.getFirstURLImage());
             pageS.add((SingleProductPageDTO) SubUtils.mapperObject(singleProductPage, dto));
 
         }

@@ -6,7 +6,6 @@ package backend.backend.persitence.entities;
 
 import java.io.Serializable;
 
-
 /**
  * Composite primary key for entity "Chat" ( stored in table "Chat" )
  *
@@ -17,11 +16,11 @@ public class ChatId implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //--- ENTITY KEY ATTRIBUTES 
-    private Integer    idAccount ;
-    
-    private Integer    idAccountReply ;
-    
+    // --- ENTITY KEY ATTRIBUTES
+    private Integer idAccount;
+
+    private Integer idAccountReply;
+
     /**
      * Constructor
      */
@@ -31,75 +30,80 @@ public class ChatId implements Serializable {
 
     /**
      * Constructor with values
-     * @param idAccount 
-     * @param idAccountReply 
+     * 
+     * @param idAccount
+     * @param idAccountReply
      */
-    public ChatId( Integer idAccount, Integer idAccountReply ) {
+    public ChatId(Integer idAccount, Integer idAccountReply) {
         super();
-        this.idAccount = idAccount ;
-        this.idAccountReply = idAccountReply ;
+        this.idAccount = idAccount;
+        this.idAccountReply = idAccountReply;
     }
-    
-    //--- GETTERS & SETTERS FOR KEY FIELDS
-    public void setIdAccount( Integer value ) {
+
+    // --- GETTERS & SETTERS FOR KEY FIELDS
+    public void setIdAccount(Integer value) {
         this.idAccount = value;
     }
+
     public Integer getIdAccount() {
         return this.idAccount;
     }
 
-    public void setIdAccountReply( Integer value ) {
+    public void setIdAccountReply(Integer value) {
         this.idAccountReply = value;
     }
+
     public Integer getIdAccountReply() {
         return this.idAccountReply;
     }
 
+    // --- equals METHOD
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (this.getClass() != obj.getClass())
+            return false;
+        ChatId other = (ChatId) obj;
+        // --- Attribute idAccount
+        if (idAccount == null) {
+            if (other.idAccount != null)
+                return false;
+        } else if (!idAccount.equals(other.idAccount))
+            return false;
+        // --- Attribute idAccountReply
+        if (idAccountReply == null) {
+            if (other.idAccountReply != null)
+                return false;
+        } else if (!idAccountReply.equals(other.idAccountReply))
+            return false;
+        return true;
+    }
 
-    //--- equals METHOD
-	@Override
-	public boolean equals(Object obj) { 
-		if ( this == obj ) return true ; 
-		if ( obj == null ) return false ;
-		if ( this.getClass() != obj.getClass() ) return false ; 
-		ChatId other = (ChatId) obj; 
-		//--- Attribute idAccount
-		if ( idAccount == null ) { 
-			if ( other.idAccount != null ) 
-				return false ; 
-		} else if ( ! idAccount.equals(other.idAccount) ) 
-			return false ; 
-		//--- Attribute idAccountReply
-		if ( idAccountReply == null ) { 
-			if ( other.idAccountReply != null ) 
-				return false ; 
-		} else if ( ! idAccountReply.equals(other.idAccountReply) ) 
-			return false ; 
-		return true; 
-	} 
+    // --- hashCode METHOD
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
 
-    //--- hashCode METHOD
-	@Override
-	public int hashCode() { 
-		final int prime = 31; 
-		int result = 1; 
-		
-		//--- Attribute idAccount
-		result = prime * result + ((idAccount == null) ? 0 : idAccount.hashCode() ) ; 
-		//--- Attribute idAccountReply
-		result = prime * result + ((idAccountReply == null) ? 0 : idAccountReply.hashCode() ) ; 
-		
-		return result; 
-	} 
+        // --- Attribute idAccount
+        result = prime * result + ((idAccount == null) ? 0 : idAccount.hashCode());
+        // --- Attribute idAccountReply
+        result = prime * result + ((idAccountReply == null) ? 0 : idAccountReply.hashCode());
 
-    //--- toString METHOD
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
+        return result;
+    }
+
+    // --- toString METHOD
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(idAccount);
         sb.append("|");
         sb.append(idAccountReply);
-        return sb.toString(); 
-    } 
+        return sb.toString();
+    }
 
 }
