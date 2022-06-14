@@ -1,8 +1,18 @@
 package backend.backend.services.subService;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.stereotype.Service;
+
 import backend.backend.helpers.advice.OAuth2AuthenticationProcessingException;
 import backend.backend.helpers.payload.request.AccountFacebookRequest;
-import backend.backend.helpers.payload.request.AccountGithubRequest;
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.ResetToken;
 import backend.backend.persitence.entities.Role;
@@ -10,16 +20,6 @@ import backend.backend.persitence.entities.VerificationToken;
 import backend.backend.persitence.model.enumModel.AuthProvider;
 import backend.backend.persitence.model.enumModel.RoleEnum;
 import backend.backend.persitence.repository.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.InternalAuthenticationServiceException;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class FacebookOAuth2UserService {

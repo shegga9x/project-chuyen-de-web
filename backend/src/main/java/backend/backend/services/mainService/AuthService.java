@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletResponse;
-
-import backend.backend.helpers.payload.request.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import backend.backend.helpers.advice.CustomException;
+import backend.backend.helpers.payload.request.AccountFacebookRequest;
+import backend.backend.helpers.payload.request.AccountGithubRequest;
+import backend.backend.helpers.payload.request.AccountGoogleRequest;
+import backend.backend.helpers.payload.request.AuthenticateRequest;
+import backend.backend.helpers.payload.request.ForgotPasswordRequest;
+import backend.backend.helpers.payload.request.RegisterRequest;
+import backend.backend.helpers.payload.request.ResetPasswordRequest;
+import backend.backend.helpers.payload.request.ValidateResetTokenRequest;
 import backend.backend.helpers.payload.response.AccountResponse;
 import backend.backend.helpers.payload.response.AuthenticateResponse;
 import backend.backend.helpers.utils.JwtUtils;

@@ -1,17 +1,20 @@
-import { faAngleDown, faCartPlus, faEnvelope, faHeart, faHome, faSearch, faTh, faThList, faCheckSquare, faChevronRight, faChevronDown, faPlusSquare, faMinusSquare, faSquare } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAngleDown, faCartPlus, faEnvelope, faHeart, faHome,
+  faSearch, faTh, faThList, faCheckSquare, faChevronRight,
+  faChevronDown, faPlusSquare, faMinusSquare, faSquare
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Layout from "../components/layout";
 import { useRouter } from 'next/router'
 import '../node_modules/react-checkbox-tree/lib/react-checkbox-tree.css';
 import CheckboxTree from 'react-checkbox-tree';
-
 import React, { useState } from 'react';
 
 
 export default function Shop(props) {
   const [checked, setChecked] = useState(['phoboss']);
-  const [expanded, setExpanded] = useState(['mars','phobos']);
+  const [expanded, setExpanded] = useState(['mars', 'phobos']);
   const nodes = [{
     value: 'mars',
     label: 'Mars',
