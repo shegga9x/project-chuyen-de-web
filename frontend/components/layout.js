@@ -14,10 +14,13 @@ export default function Layout({ children, home, shop }) {
                 />
                 <meta name="description" content="" />
                 <meta name="author" content="" />
+                <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css" />
+                <link href="/static/css/hummingbird-treeview.css" rel="stylesheet" type="text/css" />
                 <link
                     href="https://fonts.googleapis.com/css?family=Open+Sans:400,700"
                     rel="stylesheet"
                 />
+
                 <link
                     href="https://fonts.googleapis.com/css?family=Raleway:400,800"
                     rel="stylesheet"
@@ -49,6 +52,7 @@ export default function Layout({ children, home, shop }) {
                 }
                 <div className="body-backdrop"></div>
             </div>
+
             <Script
                 type="text/javascript"
                 src="/static/js/vendor/modernizr-custom.min.js"
@@ -105,6 +109,8 @@ export default function Layout({ children, home, shop }) {
                 strategy="beforeInteractive"
             ></Script>
             <Script type="text/javascript" src="/static/js/app.js" key={'app.js'}></Script>
+      
+        
         </>
     )
 }

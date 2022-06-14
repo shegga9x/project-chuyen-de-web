@@ -5,7 +5,7 @@
 package backend.backend.persitence.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+
 import javax.persistence.*;
 
 /**
@@ -27,7 +27,7 @@ public class WalletShop implements Serializable {
 
     //--- ENTITY DATA FIELDS 
     @Column(name="total")
-    private BigDecimal total ;
+    private Double total ;
 
 
     //--- ENTITY LINKS ( RELATIONSHIP )
@@ -51,10 +51,10 @@ public class WalletShop implements Serializable {
         return this.idShop;
     }
 
-    public void setTotal( BigDecimal total ) {
+    public void setTotal( Double total ) {
         this.total = total ;
     }
-    public BigDecimal getTotal() {
+    public Double getTotal() {
         return this.total;
     }
 

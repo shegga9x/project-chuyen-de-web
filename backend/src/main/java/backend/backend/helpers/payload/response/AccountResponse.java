@@ -14,7 +14,6 @@ public class AccountResponse {
     public Date updated;
     public boolean isVerified;
 
-
     public String getIdAccount() {
         return this.idAccount;
     }
@@ -22,7 +21,7 @@ public class AccountResponse {
     public void setIdAccount(String idAccount) {
         this.idAccount = idAccount;
     }
- 
+
     public String getTitle() {
         return this.title;
     }
@@ -94,16 +93,16 @@ public class AccountResponse {
     @Override
     public String toString() {
         return "{" +
-            " idAccount='" + getIdAccount() + "'" +
-            ", title='" + getTitle() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", role='" + getRole() + "'" +
-            ", created='" + getCreated() + "'" +
-            ", updated='" + getUpdated() + "'" +
-            ", isVerified='" + isIsVerified() + "'" +
-            "}";
+                " idAccount='" + getIdAccount() + "'" +
+                ", title='" + getTitle() + "'" +
+                ", firstName='" + getFirstName() + "'" +
+                ", lastName='" + getLastName() + "'" +
+                ", email='" + getEmail() + "'" +
+                ", role='" + getRole() + "'" +
+                ", created='" + getCreated() + "'" +
+                ", updated='" + getUpdated() + "'" +
+                ", isVerified='" + isIsVerified() + "'" +
+                "}";
     }
 
 }
