@@ -97,6 +97,8 @@ $RECYCLE.BIN/
 
 backend/mvnw
 backend/target
+backend/.idea
+backend/backend.iml
 backend/mvnw.cmd
 backend/HELP.md
 frontend/.next
