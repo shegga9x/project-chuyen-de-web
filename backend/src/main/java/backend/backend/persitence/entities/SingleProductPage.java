@@ -89,6 +89,27 @@ public class SingleProductPage implements Serializable {
 
     }
 
+    public Integer getTotalSoldCount() {
+        return listOfProduct.stream().map(Product::getSoldCount).mapToInt(Integer::intValue).sum();
+
+    }
+
+    public Integer getLastChildId() {
+        List<Integer> prices = listOfProduct.stream().map(Product::getIdProduct).collect(Collectors.toList());
+        Collections.sort(prices);
+        return prices.get(prices.size() - 1);
+    }
+
+    public Double getLowestPrice() {
+        return Double.parseDouble(getPriceRange().split("-")[0]);
+
+    }
+
+    public Double getHighestPrice() {
+        return Double.parseDouble(getPriceRange().split("-")[1]);
+
+    }
+
     public String getFirstURLImage() {
         try {
             return listOfProduct.get(0).getImgUrl();

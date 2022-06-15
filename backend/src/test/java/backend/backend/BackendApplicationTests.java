@@ -57,8 +57,7 @@ class BackendApplicationTests {
 		Integer[] catagory = new Integer[2];
 		catagory[0] = 53;
 		catagory[1] = 57;
-		Page<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findByIdCategoryIn(catagory,
-				PageRequest.of(0, 4));
+		List<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findByIdCategoryIn(catagory);
 		for (SingleProductPage singleProductPage : allProductsOnThisPage) {
 			System.out.println(singleProductPage.getName());
 		}
