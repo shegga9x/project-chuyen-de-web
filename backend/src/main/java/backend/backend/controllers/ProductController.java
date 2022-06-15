@@ -19,7 +19,14 @@ public class ProductController {
 
     @GetMapping({ "/loadAll" })
     public ResponseEntity<?> loadAll(@RequestParam("page") int page, @RequestParam("size") int size,
-            @RequestParam(name = "catagory", required = false) String[] catagory) {
-        return ResponseEntity.ok(singleProductPageService.loadAll(page, size, catagory));
+            @RequestParam(name = "catagory", required = false) Integer[] catagory,
+            @RequestParam(name = "sorter", required = false) Integer sorter) {
+   
+        return ResponseEntity.ok(singleProductPageService.loadAll(page, size, catagory, sorter));
+    }
+
+    @GetMapping({ "/loadCagetory" })
+    public ResponseEntity<?> loadCagetory() {
+        return ResponseEntity.ok(singleProductPageService.loadCagetory());
     }
 }

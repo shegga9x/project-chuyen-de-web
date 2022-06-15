@@ -5,6 +5,7 @@
 package backend.backend.persitence.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -16,6 +17,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import backend.backend.helpers.payload.dto.CategoryDto;
 
 /**
  * JPA entity class for "Category"
@@ -104,6 +107,32 @@ public class Category implements Serializable {
             result.addAll(category.getListOfSingleProductPageFromChild());
         }
         return result;
+    }
+
+    public List<Category> getListOfCategoryFromChild() {
+        List<Category> result = listOfCategory;
+        try {
+            for (Category category : listOfCategory) {
+                result.addAll(category.getListOfCategoryFromChild());
+            }
+        } catch (Exception e) {
+        }
+        return result;
+    }
+
+    public CategoryDto getListOfCategoryFromChildZ(CategoryDto categoryDto) {
+        List<CategoryDto> categoryDtos = categoryDto.getChildren();
+        try {
+            for (Category category : listOfCategory) {
+                CategoryDto categoryDtoChild = new CategoryDto(category.getIdCategory(), category.getName(),
+                        new ArrayList<>());
+                categoryDtoChild = category.getListOfCategoryFromChildZ(categoryDtoChild);
+                categoryDtos.add(categoryDtoChild);
+            }
+        } catch (Exception e) {
+        }
+        categoryDto.setChildren(categoryDtos);
+        return categoryDto;
     }
 
     // --- toString specific method

@@ -13,28 +13,16 @@ import React, { useState } from 'react';
 
 
 export default function Shop(props) {
-  const [checked, setChecked] = useState(['phoboss']);
-  const [expanded, setExpanded] = useState(['mars', 'phobos']);
-  const nodes = [{
-    value: 'mars',
-    label: 'Mars',
-    children: [
-      {
-        value: 'phobos', label: 'Phobos', children:
-          [
-            { value: 'phoboss', label: 'Phobos2' },
-            { value: 'deimoss', label: 'Deimos' },
-          ]
-      },
-      { value: 'deimos', label: 'Deimos' },
-    ],
-  }];
+  const [checked, setChecked] = useState(props.catagory);
+  const [expanded, setExpanded] = useState([]);
   const router = useRouter()
   function handleChange(event) {
     event.preventDefault()
-    router.replace(event.target.value)
+    router.push(event.target.value)
   }
-
+  function handleChangeCategories(url) {
+    router.push(url)
+  }
   return (
     <>
       <Head>
@@ -82,7 +70,7 @@ export default function Shop(props) {
 
                     <h3 className="title-name">Browse Categories</h3>
                     <CheckboxTree
-                      nodes={nodes}
+                      nodes={props.nodes}
                       icons={{
                         check: <FontAwesomeIcon icon={faCheckSquare} />,
                         uncheck: <FontAwesomeIcon icon={faSquare} />,
@@ -97,13 +85,16 @@ export default function Shop(props) {
                       }}
                       checked={checked}
                       expanded={expanded}
-                      onCheck={checked => { setChecked(checked) }}
+                      onCheck={checked => {
+                        {
+                          setChecked(checked);
+                          handleChangeCategories("shop?page=" + (props.currentPage) + "&size=" + (props.currentSize) + (checked.length != 0 ? "&catagory=" + checked.toString() : "") + (props.sorter ? "&sorter=" + props.sorter : ""))
+                        }
+                      }}
                       onExpand={expanded => { setExpanded(expanded) }}
                     />
-                    <button type="button">PhungVCIp</button>
                     {/* Fetch-Categories-from-Root-Category  /- */}
                   </div>
-
                   {/* Shop-Left-Side-Bar-Wrapper /- */}
                   {/* Shop-Right-Wrapper */}
                   <div className="col-lg-9 col-md-9 col-sm-12">
@@ -130,12 +121,23 @@ export default function Shop(props) {
                           <label className="sr-only" htmlFor="sort-by">
                             Sort By
                           </label>
-                          <select className="select-box" id="sort-by">
-                            <option value="">Sort By: Best Selling</option>
-                            <option value="">Sort By: Latest</option>
-                            <option value="">Sort By: Lowest Price</option>
-                            <option value="">Sort By: Highest Price</option>
-                            <option value="">Sort By: Best Rating</option>
+
+                          <select className="select-box" id="sort-by" onChange={event => handleChange(event)}>
+                            <option value={"shop?page=" + (props.currentPage)
+                              + "&size=" + props.currentSize + (checked.length != 0 ? "&catagory=" + checked.toString() : "")
+                              + "&sorter=" + 1} selected={props.sorter == 1 ? true : false} > Sort By: Best Selling </option>
+                            <option value={"shop?page=" + (props.currentPage)
+                              + "&size=" + props.currentSize + (checked.length != 0 ? "&catagory=" + checked.toString() : "")
+                              + "&sorter=" + 2} selected={props.sorter == 2 ? true : false}>Sort By: Latest</option>
+                            <option value={"shop?page=" + (props.currentPage)
+                              + "&size=" + props.currentSize + (checked.length != 0 ? "&catagory=" + checked.toString() : "")
+                              + "&sorter=" + 3} selected={props.sorter == 3 ? true : false}>Sort By: Lowest Price</option>
+                            <option value={"shop?page=" + (props.currentPage)
+                              + "&size=" + props.currentSize + (checked.length != 0 ? "&catagory=" + checked.toString() : "")
+                              + "&sorter=" + 4} selected={props.sorter == 4 ? true : false}>Sort By: Highest Price</option>
+                            <option value={"shop?page=" + (props.currentPage)
+                              + "&size=" + props.currentSize + (checked.length != 0 ? "&catagory=" + checked.toString() : "")
+                              + "&sorter=" + 5} selected={props.sorter == 5 ? true : false}>Sort By: Best Rating</option>
                           </select>
                           <i
                             style={{
@@ -158,9 +160,9 @@ export default function Shop(props) {
                             Show Records Per Page
                           </label>
                           <select className="select-box" id="show-records" onChange={event => handleChange(event)}>
-                            <option value={"shop?page=" + (props.currentPage) + "&size=" + 8} selected={props.currentSize == 8 ? true : false}>Show: 8</option>
-                            <option value={"shop?page=" + (props.currentPage) + "&size=" + 16} selected={props.currentSize == 16 ? true : false}>Show: 16</option>
-                            <option value={"shop?page=" + (props.currentPage) + "&size=" + 28} selected={props.currentSize == 28 ? true : false} >Show: 28</option>
+                            <option value={"shop?page=" + (props.currentPage) + "&size=" + 8 + (checked.length != 0 ? "&catagory=" + checked.toString() : "") + (props.sorter ? "&sorter=" + props.sorter : "")} selected={props.currentSize == 8 ? true : false}>Show: 8</option>
+                            <option value={"shop?page=" + (props.currentPage) + "&size=" + 16 + (checked.length != 0 ? "&catagory=" + checked.toString() : "") + (props.sorter ? "&sorter=" + props.sorter : "")} selected={props.currentSize == 16 ? true : false}>Show: 16</option>
+                            <option value={"shop?page=" + (props.currentPage) + "&size=" + 28 + (checked.length != 0 ? "&catagory=" + checked.toString() : "") + (props.sorter ? "&sorter=" + props.sorter : "")} selected={props.currentSize == 28 ? true : false} >Show: 28</option>
                           </select>
                           <i
                             style={{
@@ -306,14 +308,21 @@ export async function getServerSideProps({ query }) {
     const page = query.page == null ? 1 : query.page;
     const size = query.size == null ? 8 : query.size;
     const catagory = query.catagory == null ? "" : `&catagory=${query.catagory}`;
-    const res = await fetch(`http://localhost:4000/api/product/loadAll?page=${page - 1}&size=${size}${catagory}`);
+    const sorter = query.sorter == null ? "" : `&sorter=${query.sorter}`;
+    const res = await fetch(`http://localhost:4000/api/product/loadAll?page=${page - 1}&size=${size}${catagory}${sorter}`);
+    const res2 = await fetch(`http://localhost:4000/api/product/loadCagetory`);
     const data = await res.json()
+    const data2 = await res2.json()
+    const data3 = JSON.parse(JSON.stringify(data2).replaceAll(',"children":[]', ""))
     if (data.page != null) {
       return {
         props: {
           data: data,
+          nodes: data3,
           currentPage: page,
-          currentSize: size
+          currentSize: size,
+          sorter: (query.sorter == null ? null : query.sorter),
+          catagory: (catagory ? catagory.split("=")[1].split(",") : [])
         }
       }
     }
