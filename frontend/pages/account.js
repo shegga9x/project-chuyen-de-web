@@ -42,7 +42,7 @@ export default function Account(props) {
 
     const submit = (e) => {
         e.preventDefault();
-        signIn('credentials', { email: email, password: password,callbackUrl:'/' });
+        signIn('credentials', { email: email, password: password, callbackUrl: '/' });
         // signIn('google');
     }
 
@@ -292,3 +292,6 @@ export function getServerSideProps({ req, res, query }) {
     }
     return { props: {} }
 }
+
+
+//controller

@@ -11,7 +11,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
 import Layout from "../components/layout";
-import { getCsrfToken } from "next-auth/react"
 
 export default function Shop() {
   return (
