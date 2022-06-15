@@ -15,121 +15,126 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Chat_Line", schema="dbo", catalog="shop" )
+@Table(name = "Chat_Line", schema = "dbo", catalog = "shop")
 public class ChatLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
+    // --- ENTITY PRIMARY KEY
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id_chat_line", nullable=false)
-    private Integer    idChatLine ;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_chat_line", nullable = false)
+    private Integer idChatLine;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="id_account")
-    private Integer    idAccount ;
+    // --- ENTITY DATA FIELDS
+    @Column(name = "id_account")
+    private Integer idAccount;
 
-    @Column(name="id_account_reply")
-    private Integer    idAccountReply ;
+    @Column(name = "id_account_reply")
+    private Integer idAccountReply;
 
-    @Column(name="id_product")
-    private Integer    idProduct ;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="date_create")
-    private Date       dateCreate ;
+    @Column(name = "id_product")
+    private Integer idProduct;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name="date_update")
-    private Date       dateUpdate ;
+    @Column(name = "date_create")
+    private Date dateCreate;
 
-    @Column(name="content", length=2147483647)
-    private String     content ;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "date_update")
+    private Date dateUpdate;
 
+    @Column(name = "content", length = 2147483647)
+    private String content;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
+    // --- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
-    @JoinColumn(name="id_product", referencedColumnName="id_product", insertable=false, updatable=false)
-    private Product    product ; 
+    @JoinColumn(name = "id_product", referencedColumnName = "id_product", insertable = false, updatable = false)
+    private Product product;
 
     @ManyToOne
-    @JoinColumns( { 
-        @JoinColumn(name="id_account", referencedColumnName="id_account", insertable=false, updatable=false),
-        @JoinColumn(name="id_account_reply", referencedColumnName="id_account_reply", insertable=false, updatable=false) } )
-    private Chat       chat ; 
-
+    @JoinColumns({
+            @JoinColumn(name = "id_account", referencedColumnName = "id_account", insertable = false, updatable = false),
+            @JoinColumn(name = "id_account_reply", referencedColumnName = "id_account_reply", insertable = false, updatable = false) })
+    private Chat chat;
 
     /**
      * Constructor
      */
     public ChatLine() {
-		super();
+        super();
     }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setIdChatLine( Integer idChatLine ) {
-        this.idChatLine = idChatLine ;
+
+    // --- GETTERS & SETTERS FOR FIELDS
+    public void setIdChatLine(Integer idChatLine) {
+        this.idChatLine = idChatLine;
     }
+
     public Integer getIdChatLine() {
         return this.idChatLine;
     }
 
-    public void setIdAccount( Integer idAccount ) {
-        this.idAccount = idAccount ;
+    public void setIdAccount(Integer idAccount) {
+        this.idAccount = idAccount;
     }
+
     public Integer getIdAccount() {
         return this.idAccount;
     }
 
-    public void setIdAccountReply( Integer idAccountReply ) {
-        this.idAccountReply = idAccountReply ;
+    public void setIdAccountReply(Integer idAccountReply) {
+        this.idAccountReply = idAccountReply;
     }
+
     public Integer getIdAccountReply() {
         return this.idAccountReply;
     }
 
-    public void setIdProduct( Integer idProduct ) {
-        this.idProduct = idProduct ;
+    public void setIdProduct(Integer idProduct) {
+        this.idProduct = idProduct;
     }
+
     public Integer getIdProduct() {
         return this.idProduct;
     }
 
-    public void setDateCreate( Date dateCreate ) {
-        this.dateCreate = dateCreate ;
+    public void setDateCreate(Date dateCreate) {
+        this.dateCreate = dateCreate;
     }
+
     public Date getDateCreate() {
         return this.dateCreate;
     }
 
-    public void setDateUpdate( Date dateUpdate ) {
-        this.dateUpdate = dateUpdate ;
+    public void setDateUpdate(Date dateUpdate) {
+        this.dateUpdate = dateUpdate;
     }
+
     public Date getDateUpdate() {
         return this.dateUpdate;
     }
 
-    public void setContent( String content ) {
-        this.content = content ;
+    public void setContent(String content) {
+        this.content = content;
     }
+
     public String getContent() {
         return this.content;
     }
 
-    //--- GETTERS FOR LINKS
+    // --- GETTERS FOR LINKS
     public Product getProduct() {
         return this.product;
-    } 
+    }
 
     public Chat getChat() {
         return this.chat;
-    } 
+    }
 
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
+    // --- toString specific method
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(idChatLine);
         sb.append("|");
         sb.append(idAccount);
@@ -143,7 +148,7 @@ public class ChatLine implements Serializable {
         sb.append(dateUpdate);
         sb.append("|");
         sb.append(content);
-        return sb.toString(); 
-    } 
+        return sb.toString();
+    }
 
 }

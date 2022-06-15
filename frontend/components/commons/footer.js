@@ -4,7 +4,12 @@ import {
     faPhone
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useTrans from "../../helpers/customHook/useTrans";
+
 export default function Footer() {
+
+    const trans = useTrans();
+
     return (
         <>
             {/* Footer */}
@@ -12,23 +17,24 @@ export default function Footer() {
                 <div className="container">
                     {/* Outer-Footer */}
                     <div className="outer-footer-wrapper u-s-p-y-80">
-                        <h6>For special offers and other discount information</h6>
-                        <h1>Subscribe to our Newsletter</h1>
+                        <h6>{trans.footer.title1}</h6>
+                        <h1>{trans.footer.title2}</h1>
                         <p>
-                            Subscribe to the mailing list to receive updates on promotions,
-                            new arrivals, discount and coupons.
+                            {trans.footer.title3}
                         </p>
                         <form className="newsletter-form">
                             <label className="sr-only" htmlFor="newsletter-field">
-                                Enter your Email
+                                {trans.footer.title4}
                             </label>
                             <input
                                 type="text"
                                 id="newsletter-field"
                                 placeholder="Your Email Address"
+                            // {trans.footer.title5}
+
                             />
                             <button type="submit" className="button">
-                                SUBMIT
+                                {trans.footer.submit}
                             </button>
                         </form>
                     </div>
@@ -38,7 +44,7 @@ export default function Footer() {
                         <div className="row">
                             <div className="col-lg-3 col-md-3 col-sm-12">
                                 <div className="footer-list">
-                                    <h6>CUSTOMER SERVICE</h6>
+                                    <h6>{trans.footer.service}</h6>
                                     <ul>
                                         <li>
                                             <a href="faq.html">FAQs</a>
@@ -56,7 +62,7 @@ export default function Footer() {
                             </div>
                             <div className="col-lg-3 col-md-3 col-sm-12">
                                 <div className="footer-list">
-                                    <h6>COMPANY</h6>
+                                    <h6>{trans.footer.company}</h6>
                                     <ul>
                                         <li>
                                             <a href="home.html">Home</a>
@@ -72,7 +78,7 @@ export default function Footer() {
                             </div>
                             <div className="col-lg-3 col-md-3 col-sm-12">
                                 <div className="footer-list">
-                                    <h6>INFORMATION</h6>
+                                    <h6>{trans.footer.information}</h6>
                                     <ul>
                                         <li>
                                             <a href="store-directory.html">Categories Directory</a>
@@ -88,7 +94,7 @@ export default function Footer() {
                             </div>
                             <div className="col-lg-3 col-md-3 col-sm-12">
                                 <div className="footer-list">
-                                    <h6>Address</h6>
+                                    <h6>{trans.footer.address}</h6>
                                     <ul>
                                         <li>
                                             <i className=" u-s-m-r-9" >

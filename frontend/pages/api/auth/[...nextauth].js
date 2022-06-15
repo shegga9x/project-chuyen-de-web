@@ -1,9 +1,9 @@
-import NextAuth from 'next-auth'
-import GoogleProvider from 'next-auth/providers/google'
-import GithubProvider from 'next-auth/providers/github'
-import FacebookProvider from 'next-auth/providers/facebook'
+import NextAuth from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import GithubProvider from "next-auth/providers/github";
+import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from 'axios'
+import axios from "axios";
 
 const nextAuthOptions = (req, res) => {
   return {
@@ -11,12 +11,20 @@ const nextAuthOptions = (req, res) => {
       GoogleProvider({
         clientId: process.env.GOOGLE_ID,
         clientSecret: process.env.GOOGLE_SECRET,
-        profileUrl: 'https://www.googleapis.com/oauth2/v1/userinfo?alt=json',
+        profileUrl: "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
         profile: async (profile) => {
           //bước này lấy được profile account google và mình tùy chỉnh theo ý mình
           // => gọi api check user ở bước này là oke lun
 
-          const accountGoogleRequest = { id: profile.id, providerId: profile.id, name: profile.name, firstName: profile.family_name, lastName: profile.given_name, email: profile.email, imgUrl: profile.picture };
+          const accountGoogleRequest = {
+            id: profile.id,
+            providerId: profile.id,
+            name: profile.name,
+            firstName: profile.family_name,
+            lastName: profile.given_name,
+            email: profile.email,
+            imgUrl: profile.picture,
+          };
 
           // gọi api check user, không cần dữ liệu trả về
           await axios.post("http://localhost:4000/api/accounts/check-user-login-google", accountGoogleRequest).catch(
@@ -29,12 +37,12 @@ const nextAuthOptions = (req, res) => {
 
           console.log("profile google")
 
-          console.log(accountGoogleRequest);
+          //console.log(accountGoogleRequest);
 
           return {
-            ...accountGoogleRequest
-          }
-        }
+            ...accountGoogleRequest,
+          };
+        },
       }),
       GithubProvider({
         clientId: process.env.GITHUB_ID,
@@ -51,14 +59,14 @@ const nextAuthOptions = (req, res) => {
             }
           )
 
-          console.log('profile github')
+          //console.log('profile github')
 
-          console.log(accountGithubRequest);
+          //console.log(accountGithubRequest);
 
           return {
-            ...accountGithubRequest
+            ...accountGithubRequest,
           };
-        }
+        },
       }),
       FacebookProvider({
         clientId: process.env.FACEBOOK_ID,
@@ -76,28 +84,37 @@ const nextAuthOptions = (req, res) => {
 
           console.log('profile facebook')
 
-          console.log(accountFacebookRequest);
+          //console.log(accountFacebookRequest);
 
           return {
-            ...accountFacebookRequest
+            ...accountFacebookRequest,
           };
-        }
+        },
       }),
       CredentialsProvider({
-        name: 'Credentials',
+        name: "Credentials",
         authorize: async (credentials) => {
           try {
-            const response = await axios.post('http://localhost:4000/api/accounts/authenticate',
+            const response = await axios.post(
+              "http://localhost:4000/api/accounts/authenticate",
               {
                 password: credentials.password,
-                email: credentials.email
-              })
+                email: credentials.email,
+              }
+            );
 
             if (response) {
-              // console.log('----user----')
-              // console.log(user)
-              const name = (response.data.firstName && response.data.lastName) ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`
-              return { id: response.data.idAccount, name: name, email: response.data.email };
+              // //console.log('----user----')
+              // //console.log(user)
+              const name =
+                response.data.firstName && response.data.lastName
+                  ? `${response.data.firstName} ${response.data.lastName}`
+                  : `${response.data.email}`;
+              return {
+                id: response.data.idAccount,
+                name: name,
+                email: response.data.email,
+              };
             }
           } catch (e) {
             console.log(e);
@@ -105,17 +122,17 @@ const nextAuthOptions = (req, res) => {
             // Redirecting to the login page with error message in the URL
             throw new Error(errorMessage)
           }
-        }
-      })
+        },
+      }),
     ],
     session: {
       jwt: true,
       maxAge: 60 * 30,
-      updateAge: 60 * 30
+      updateAge: 60 * 30,
     },
     jwt: {
-      secret: 'asdcvbtjhm',
-      maxAge: 60 * 30
+      secret: "asdcvbtjhm",
+      maxAge: 60 * 30,
     },
     callbacks: {
       async jwt(token, user, account) {
@@ -162,21 +179,19 @@ const nextAuthOptions = (req, res) => {
       async session(session, token) {
         // có thể lấy jwt ở đây
         // chạy lại mỗi request
-        console.log(token)
-        session.user.id = token.id
-        // console.log(session.user);
-        return session
-      }
+        //console.log(token)
+        session.user.id = token.id;
+        // //console.log(session.user);
+        return session;
+      },
     },
     pages: {
-      error: '/account' // Changing the error redirect page to home page
-    }
-  }
-}
+      error: "/account", // Changing the error redirect page to home page
+    },
+  };
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (req, res) => {
-  return NextAuth(req, res, nextAuthOptions(req, res))
-}
-
-
+  return NextAuth(req, res, nextAuthOptions(req, res));
+};

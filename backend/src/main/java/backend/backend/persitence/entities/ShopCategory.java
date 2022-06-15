@@ -15,82 +15,83 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Shop_Category", schema="dbo", catalog="shop" )
+@Table(name = "Shop_Category", schema = "dbo", catalog = "shop")
 public class ShopCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
+    // --- ENTITY PRIMARY KEY
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id_shop_category", nullable=false)
-    private Integer    idShopCategory ;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_shop_category", nullable = false)
+    private Integer idShopCategory;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="id_shop")
-    private Integer    idShop ;
+    // --- ENTITY DATA FIELDS
+    @Column(name = "id_shop")
+    private Integer idShop;
 
-    @Column(name="name", length=2147483647)
-    private String     name ;
+    @Column(name = "name", length = 2147483647)
+    private String name;
 
-
-    //--- ENTITY LINKS ( RELATIONSHIP )
+    // --- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
-    @JoinColumn(name="id_shop", referencedColumnName="id_shop", insertable=false, updatable=false)
-    private Shop       shop ; 
+    @JoinColumn(name = "id_shop", referencedColumnName = "id_shop", insertable = false, updatable = false)
+    private Shop shop;
 
-    @OneToMany(mappedBy="shopCategory")
-    private List<SingleProductPage> listOfSingleProductPage ; 
-
+    @OneToMany(mappedBy = "shopCategory")
+    private List<SingleProductPage> listOfSingleProductPage;
 
     /**
      * Constructor
      */
     public ShopCategory() {
-		super();
+        super();
     }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setIdShopCategory( Integer idShopCategory ) {
-        this.idShopCategory = idShopCategory ;
+
+    // --- GETTERS & SETTERS FOR FIELDS
+    public void setIdShopCategory(Integer idShopCategory) {
+        this.idShopCategory = idShopCategory;
     }
+
     public Integer getIdShopCategory() {
         return this.idShopCategory;
     }
 
-    public void setIdShop( Integer idShop ) {
-        this.idShop = idShop ;
+    public void setIdShop(Integer idShop) {
+        this.idShop = idShop;
     }
+
     public Integer getIdShop() {
         return this.idShop;
     }
 
-    public void setName( String name ) {
-        this.name = name ;
+    public void setName(String name) {
+        this.name = name;
     }
+
     public String getName() {
         return this.name;
     }
 
-    //--- GETTERS FOR LINKS
+    // --- GETTERS FOR LINKS
     public Shop getShop() {
         return this.shop;
-    } 
+    }
 
     public List<SingleProductPage> getListOfSingleProductPage() {
         return this.listOfSingleProductPage;
-    } 
+    }
 
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
+    // --- toString specific method
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(idShopCategory);
         sb.append("|");
         sb.append(idShop);
         sb.append("|");
         sb.append(name);
-        return sb.toString(); 
-    } 
+        return sb.toString();
+    }
 
 }

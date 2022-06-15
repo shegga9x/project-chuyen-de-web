@@ -4,7 +4,6 @@ import vi from '../../public/lang/vi.js'
 
 const useTrans = () => {
     const { locale, locales } = useRouter()
-    console.log(locale);
     const trans = locale === 'vi' ? vi : en
 
     return trans

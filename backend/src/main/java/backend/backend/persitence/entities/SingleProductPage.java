@@ -5,8 +5,19 @@
 package backend.backend.persitence.entities;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
-import javax.persistence.*;
+import java.util.stream.Collectors;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  * JPA entity class for "SingleProductPage"
@@ -15,122 +26,168 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Single_Product_Page", schema="dbo", catalog="shop" )
+@Table(name = "Single_Product_Page", schema = "dbo", catalog = "shop")
 public class SingleProductPage implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
+    // --- ENTITY PRIMARY KEY
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id_single_product_page", nullable=false)
-    private Integer    idSingleProductPage ;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_single_product_page", nullable = false)
+    private Integer idSingleProductPage;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="id_shop")
-    private Integer    idShop ;
+    // --- ENTITY DATA FIELDS
+    @Column(name = "id_shop")
+    private Integer idShop;
 
-    @Column(name="id_category")
-    private Integer    idCategory ;
+    @Column(name = "id_category")
+    private Integer idCategory;
 
-    @Column(name="id_shop_category")
-    private Integer    idShopCategory ;
+    @Column(name = "id_shop_category")
+    private Integer idShopCategory;
 
-    @Column(name="name", length=2147483647)
-    private String     name ;
+    @Column(name = "name", length = 2147483647)
+    private String name;
 
-    @Column(name="description", length=2147483647)
-    private String     description ;
+    @Column(name = "description", length = 2147483647)
+    private String description;
 
-
-    //--- ENTITY LINKS ( RELATIONSHIP )
+    // --- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
-    @JoinColumn(name="id_category", referencedColumnName="id_category", insertable=false, updatable=false)
-    private Category   category ; 
-
-    @ManyToOne
-    @JoinColumn(name="id_shop", referencedColumnName="id_shop", insertable=false, updatable=false)
-    private Shop       shop ; 
+    @JoinColumn(name = "id_category", referencedColumnName = "id_category", insertable = false, updatable = false)
+    private Category category;
 
     @ManyToOne
-    @JoinColumn(name="id_shop_category", referencedColumnName="id_shop_category", insertable=false, updatable=false)
-    private ShopCategory shopCategory ; 
+    @JoinColumn(name = "id_shop", referencedColumnName = "id_shop", insertable = false, updatable = false)
+    private Shop shop;
 
-    @OneToMany(mappedBy="singleProductPage")
-    private List<Product> listOfProduct ; 
+    @ManyToOne
+    @JoinColumn(name = "id_shop_category", referencedColumnName = "id_shop_category", insertable = false, updatable = false)
+    private ShopCategory shopCategory;
 
+    @OneToMany(mappedBy = "singleProductPage")
+    private List<Product> listOfProduct;
 
     /**
      * Constructor
      */
     public SingleProductPage() {
-		super();
+        super();
     }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setIdSingleProductPage( Integer idSingleProductPage ) {
-        this.idSingleProductPage = idSingleProductPage ;
+
+    // util method
+
+    public String getPriceRange() {
+        try {
+            List<Double> prices = listOfProduct.stream().map(Product::getPrice).collect(Collectors.toList());
+            Collections.sort(prices);
+            return prices.get(0) + "-" + prices.get(prices.size() - 1);
+        } catch (Exception e) {
+            return "0-0";
+        }
+
     }
+
+    public Integer getTotalSoldCount() {
+        return listOfProduct.stream().map(Product::getSoldCount).mapToInt(Integer::intValue).sum();
+
+    }
+
+    public Integer getLastChildId() {
+        List<Integer> prices = listOfProduct.stream().map(Product::getIdProduct).collect(Collectors.toList());
+        Collections.sort(prices);
+        return prices.get(prices.size() - 1);
+    }
+
+    public Double getLowestPrice() {
+        return Double.parseDouble(getPriceRange().split("-")[0]);
+
+    }
+
+    public Double getHighestPrice() {
+        return Double.parseDouble(getPriceRange().split("-")[1]);
+
+    }
+
+    public String getFirstURLImage() {
+        try {
+            return listOfProduct.get(0).getImgUrl();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    // --- GETTERS & SETTERS FOR FIELDS
+    public void setIdSingleProductPage(Integer idSingleProductPage) {
+        this.idSingleProductPage = idSingleProductPage;
+    }
+
     public Integer getIdSingleProductPage() {
         return this.idSingleProductPage;
     }
 
-    public void setIdShop( Integer idShop ) {
-        this.idShop = idShop ;
+    public void setIdShop(Integer idShop) {
+        this.idShop = idShop;
     }
+
     public Integer getIdShop() {
         return this.idShop;
     }
 
-    public void setIdCategory( Integer idCategory ) {
-        this.idCategory = idCategory ;
+    public void setIdCategory(Integer idCategory) {
+        this.idCategory = idCategory;
     }
+
     public Integer getIdCategory() {
         return this.idCategory;
     }
 
-    public void setIdShopCategory( Integer idShopCategory ) {
-        this.idShopCategory = idShopCategory ;
+    public void setIdShopCategory(Integer idShopCategory) {
+        this.idShopCategory = idShopCategory;
     }
+
     public Integer getIdShopCategory() {
         return this.idShopCategory;
     }
 
-    public void setName( String name ) {
-        this.name = name ;
+    public void setName(String name) {
+        this.name = name;
     }
+
     public String getName() {
         return this.name;
     }
 
-    public void setDescription( String description ) {
-        this.description = description ;
+    public void setDescription(String description) {
+        this.description = description;
     }
+
     public String getDescription() {
         return this.description;
     }
 
-    //--- GETTERS FOR LINKS
+    // --- GETTERS FOR LINKS
     public Category getCategory() {
         return this.category;
-    } 
+    }
 
     public Shop getShop() {
         return this.shop;
-    } 
+    }
 
     public ShopCategory getShopCategory() {
         return this.shopCategory;
-    } 
+    }
 
     public List<Product> getListOfProduct() {
         return this.listOfProduct;
-    } 
+    }
 
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
+    // --- toString specific method
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(idSingleProductPage);
         sb.append("|");
         sb.append(idShop);
@@ -142,7 +199,7 @@ public class SingleProductPage implements Serializable {
         sb.append(name);
         sb.append("|");
         sb.append(description);
-        return sb.toString(); 
-    } 
+        return sb.toString();
+    }
 
 }

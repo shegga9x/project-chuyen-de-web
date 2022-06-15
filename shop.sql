@@ -107,7 +107,7 @@ CREATE TABLE Shop_Category
 CREATE TABLE Category
 (
     id_category int IDENTITY(1,1) ,
-    id_category_parent int ,
+    id_category_parent int null FOREIGN KEY REFERENCES Category  (id_category),
     name nvarchar(max),
     PRIMARY KEY (id_category)
 )
@@ -122,6 +122,7 @@ CREATE TABLE Single_Product_Page
     description nvarchar(max),
     PRIMARY KEY (id_single_product_page)
 )
+
 CREATE TABLE Product
 (
     id_product int IDENTITY(1,1) ,
@@ -133,6 +134,8 @@ CREATE TABLE Product
     img_url VARCHAR(MAX),
     PRIMARY KEY (id_product)
 )
+
+
 CREATE TABLE Evaluate
 (
     id_evaluate int IDENTITY(1,1) ,
@@ -263,39 +266,39 @@ INSERT INTO Shop_Category VALUES(1,N'Áo Dú');
 INSERT INTO Shop_Category VALUES(1,N'Quần Xì');
     -- Category
         -- Level 1 (1 - 30)
-INSERT INTO Category VALUES(0,N'Thời Trang Nữ');
-INSERT INTO Category VALUES(0,N'Thời Trang Nam');
-INSERT INTO Category VALUES(0,N'Sắc Đẹp');
-INSERT INTO Category VALUES(0,N'Sức Khỏe');
-INSERT INTO Category VALUES(0,N'Phụ Kiện Thời Trang');
-INSERT INTO Category VALUES(0,N'Thiết Bị Điện Gia Dụng');
-INSERT INTO Category VALUES(0,N'Giày Dép Nam');
-INSERT INTO Category VALUES(0,N'Điện Thoại &amp; Phụ Kiện');
-INSERT INTO Category VALUES(0,N'Du lịch &amp; Hành lý');
-INSERT INTO Category VALUES(0,N'Túi Ví Nữ');
-INSERT INTO Category VALUES(0,N'Giày Dép Nữ');
-INSERT INTO Category VALUES(0,N'Túi Ví Nam');
-INSERT INTO Category VALUES(0,N'Đồng Hồ');
-INSERT INTO Category VALUES(0,N'Thiết Bị Âm Thanh');
-INSERT INTO Category VALUES(0,N'Thực phẩm và đồ uống');
-INSERT INTO Category VALUES(0,N'Chăm Sóc Thú Cưng');
-INSERT INTO Category VALUES(0,N'Mẹ &amp; Bé');
-INSERT INTO Category VALUES(0,N'Thời trang trẻ em &amp; trẻ sơ sinh');
-INSERT INTO Category VALUES(0,N'Gaming &amp; Console');
-INSERT INTO Category VALUES(0,N'Cameras &amp; Flycam');
-INSERT INTO Category VALUES(0,N'Nhà cửa &amp; Đời sống');
-INSERT INTO Category VALUES(0,N'Thể Thao &amp; Dã Ngoại');
-INSERT INTO Category VALUES(0,N'Văn Phòng Phẩm');
-INSERT INTO Category VALUES(0,N'Sở thích &amp; Sưu tầm');
-INSERT INTO Category VALUES(0,N'Ô tô');
-INSERT INTO Category VALUES(0,N'Mô tô, xe máy');
-INSERT INTO Category VALUES(0,N'Voucher &amp; Dịch vụ');
-INSERT INTO Category VALUES(0,N'Sách &amp; Tạp Chí');
-INSERT INTO Category VALUES(0,N'Máy tính &amp; Laptop');
-INSERT INTO Category VALUES(0,N'Deal Gần bạn');
+INSERT INTO Category (name) VALUES(N'Thời Trang Nữ');
+INSERT INTO Category (name) VALUES(N'Thời Trang Nam');
+INSERT INTO Category (name) VALUES(N'Sắc Đẹp');
+INSERT INTO Category (name) VALUES(N'Sức Khỏe');
+INSERT INTO Category (name) VALUES(N'Phụ Kiện Thời Trang');
+INSERT INTO Category (name) VALUES(N'Thiết Bị Điện Gia Dụng');
+INSERT INTO Category (name) VALUES(N'Giày Dép Nam');
+INSERT INTO Category (name) VALUES(N'Điện Thoại &amp; Phụ Kiện');
+INSERT INTO Category (name) VALUES(N'Du lịch &amp; Hành lý');
+INSERT INTO Category (name) VALUES(N'Túi Ví Nữ');
+INSERT INTO Category (name) VALUES(N'Giày Dép Nữ');
+INSERT INTO Category (name) VALUES(N'Túi Ví Nam');
+INSERT INTO Category (name) VALUES(N'Đồng Hồ');
+INSERT INTO Category (name) VALUES(N'Thiết Bị Âm Thanh');
+INSERT INTO Category (name) VALUES(N'Thực phẩm và đồ uống');
+INSERT INTO Category (name) VALUES(N'Chăm Sóc Thú Cưng');
+INSERT INTO Category (name) VALUES(N'Mẹ &amp; Bé');
+INSERT INTO Category (name) VALUES(N'Thời trang trẻ em &amp; trẻ sơ sinh');
+INSERT INTO Category (name) VALUES(N'Gaming &amp; Console');
+INSERT INTO Category (name) VALUES(N'Cameras &amp; Flycam');
+INSERT INTO Category (name) VALUES(N'Nhà cửa &amp; Đời sống');
+INSERT INTO Category (name) VALUES(N'Thể Thao &amp; Dã Ngoại');
+INSERT INTO Category (name) VALUES(N'Văn Phòng Phẩm');
+INSERT INTO Category (name) VALUES(N'Sở thích &amp; Sưu tầm');
+INSERT INTO Category (name) VALUES(N'Ô tô');
+INSERT INTO Category (name) VALUES(N'Mô tô, xe máy');
+INSERT INTO Category (name) VALUES(N'Voucher &amp; Dịch vụ');
+INSERT INTO Category (name) VALUES(N'Sách &amp; Tạp Chí');
+INSERT INTO Category (name) VALUES(N'Máy tính &amp; Laptop');
+INSERT INTO Category (name) VALUES(N'Deal Gần bạn');
 
         -- Level 2
-            -- Thời Trang Nữ (31 - 51)
+            -- Thời Trang Nữ (31 - 50)
 INSERT INTO Category VALUES(1,N'Áo');
 INSERT INTO Category VALUES(1,N'Quần');
 INSERT INTO Category VALUES(1,N'Quần đùi');
@@ -318,7 +321,7 @@ INSERT INTO Category VALUES(1,N'Vải');
 INSERT INTO Category VALUES(1,N'Vớ/ Tất');
 
         -- Level 3
-            -- Áo (52 - 59)
+            -- Áo (51 - 58)
 INSERT INTO Category VALUES(31,N'Áo hai dây và ba lỗ');
 INSERT INTO Category VALUES(31,N'Áo ống');
 INSERT INTO Category VALUES(31,N'Áo thun');
@@ -327,9 +330,84 @@ INSERT INTO Category VALUES(31,N'Áo polo');
 INSERT INTO Category VALUES(31,N'Áo liền thân');
 INSERT INTO Category VALUES(31,N'Khác');
 
-select * from ACCOUNT
-delete from ACCOUNT_Has_Role
-delete from Refresh_Token
-delete from Verification_Token
-delete from Reset_Token
-delete from ACCOUNT
+use shop
+select * from Category
+
+
+
+INSERT INTO Single_Product_Page VALUES(1,51,1,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2','');
+INSERT INTO Single_Product_Page VALUES(1,52,3,N'nón Beanie vành tròn phong cách Retro Hàn Quốc Nam/Nữ','');
+INSERT INTO Single_Product_Page VALUES(1,53,2,N'Mũ nón Miki kiểu Thủy Thủ Không Vành Founded 1986 N04','');
+INSERT INTO Single_Product_Page VALUES(1,54,1,N'Mũ thủy thủ không vành vải canvas loại 1 nhiều màu phong cách hiphop M01','');
+INSERT INTO Single_Product_Page VALUES(1,55,2,N'Áo khoác nữ','');
+INSERT INTO Single_Product_Page VALUES(1,56,3,N'Sửa chữa nhà cửa','');
+INSERT INTO Single_Product_Page VALUES(1,57,3,N'Ống Kính - Ống Ngắm','');
+
+
+INSERT INTO Single_Product_Page VALUES(1,51,1,N'Cá, thuỷ hải sản','');
+INSERT INTO Single_Product_Page VALUES(1,52,3,N'Combo 2 hộp chia ngăn sắp xếp quần áo phong cách Nhật Bản VINAVU - Có Nắp - Kem Trơn','');
+INSERT INTO Single_Product_Page VALUES(1,53,2,N'Áo thun hình gấu teddy cho chó mèo ( một cái, màu giao ngẫu nhiên ) - XXL','');
+INSERT INTO Single_Product_Page VALUES(1,54,1,N'Bộ bàn ăn mặt đá ceramic bóng kết hợp ghế Nelson - Bàn 1m4 + 4 ghế','');
+INSERT INTO Single_Product_Page VALUES(1,55,2,N'Hộp vải đựng quần áo SETHOME đa năng giỏ đựng đồ lót sách vở đồ cá nhân thùng đựng mỹ phẩm cao cấp dễ dang gấp gọn - Chữ nhật - Be','');
+INSERT INTO Single_Product_Page VALUES(1,56,3,N'Bộ bàn ăn mặt mặt đá cẩm thạch nhân tạo kết hợp 4 ghế 6 ghế 8 ghế Nelson - Bàn 1m4 + 4 ghế - Ghế màu trắng ghi','');
+INSERT INTO Single_Product_Page VALUES(1,57,3,N'Mũ đi biển vành tròn gắn tag chư M nón móc len sợi rộng vành đi chơi siêu đẹp dành cho nữ.','');
+
+INSERT INTO Single_Product_Page VALUES(1,51,1,N'Nón Beanie vành tròn ️ Mũ tròn phong cách Retro Hàn Quốc form Unisex nam nữ N04','');
+INSERT INTO Single_Product_Page VALUES(1,52,3,N'Mũ tròn Miki màu trơn phong cách cổ điển độc đáo – thêu chữ kiểu dáng đơn giản','');
+INSERT INTO Single_Product_Page VALUES(1,53,2,N'Mũ nón bucket nam nữ trơn tròn vành nhiều màu siêu đẹp MN20','');
+INSERT INTO Single_Product_Page VALUES(1,54,1,N'Điện thoại Samsung Galaxy S22 Ultra 5G (12GB/512GB) - Hàng Chính Hãng','');
+INSERT INTO Single_Product_Page VALUES(1,55,2,N'Tã Quần Huggies Dry Tràm Trà Tự Nhiên Gói Cực Đại XL62/XXL56 + Tặng 6 miếng','');
+INSERT INTO Single_Product_Page VALUES(1,56,3,N'Combo 2 TúI Nước Giặt Omo Matic Cho Máy Giặt Cửa Trước Bền Đẹp Bền Màu Sau 100 Lần Giặt 3.6Kg','');
+INSERT INTO Single_Product_Page VALUES(1,57,3,N'Apple iPhone 11','');
+
+
+INSERT INTO Product VALUES(1,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(1,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(1,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(1,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(1,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(1,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+
+INSERT INTO Product VALUES(2,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(2,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(2,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(2,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+
+INSERT INTO Product VALUES(3,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(3,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(3,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(3,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(3,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+
+INSERT INTO Product VALUES(4,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(4,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(4,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(4,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(4,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+
+INSERT INTO Product VALUES(5,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(5,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(5,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(5,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(5,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(6,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+
+INSERT INTO Product VALUES(7,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(7,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(7,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(7,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+
+INSERT INTO Product VALUES(8,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(9,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(10,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(11,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(12,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(13,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(14,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(15,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(16,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(17,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(18,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(19,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(20,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+INSERT INTO Product VALUES(21,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');

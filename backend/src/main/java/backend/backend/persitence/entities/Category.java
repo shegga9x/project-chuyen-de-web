@@ -5,8 +5,20 @@
 package backend.backend.persitence.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import backend.backend.helpers.payload.dto.CategoryDto;
 
 /**
  * JPA entity class for "Category"
@@ -15,74 +27,124 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Category", schema="dbo", catalog="shop" )
+@Table(name = "Category", schema = "dbo", catalog = "shop")
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
+    // --- ENTITY PRIMARY KEY
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="id_category", nullable=false)
-    private Integer    idCategory ;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_category", nullable = false)
+    private Integer idCategory;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="id_category_parent")
-    private Integer    idCategoryParent ;
+    // --- ENTITY DATA FIELDS
+    @Column(name = "id_category_parent")
+    private Integer idCategoryParent;
 
-    @Column(name="name", length=2147483647)
-    private String     name ;
+    @Column(name = "name", length = 2147483647)
+    private String name;
 
+    // --- ENTITY LINKS ( RELATIONSHIP )
+    @ManyToOne
+    @JoinColumn(name = "id_category_parent", referencedColumnName = "id_category", insertable = false, updatable = false)
+    private Category categoryParent;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @OneToMany(mappedBy="category")
-    private List<SingleProductPage> listOfSingleProductPage ; 
+    @OneToMany(mappedBy = "categoryParent")
+    private List<Category> listOfCategory;
 
+    @OneToMany(mappedBy = "category")
+    private List<SingleProductPage> listOfSingleProductPage;
 
     /**
      * Constructor
      */
     public Category() {
-		super();
+        super();
     }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setIdCategory( Integer idCategory ) {
-        this.idCategory = idCategory ;
+
+    // --- GETTERS & SETTERS FOR FIELDS
+    public void setIdCategory(Integer idCategory) {
+        this.idCategory = idCategory;
     }
+
     public Integer getIdCategory() {
         return this.idCategory;
     }
 
-    public void setIdCategoryParent( Integer idCategoryParent ) {
-        this.idCategoryParent = idCategoryParent ;
+    public void setIdCategoryParent(Integer idCategoryParent) {
+        this.idCategoryParent = idCategoryParent;
     }
+
     public Integer getIdCategoryParent() {
         return this.idCategoryParent;
     }
 
-    public void setName( String name ) {
-        this.name = name ;
+    public void setName(String name) {
+        this.name = name;
     }
+
     public String getName() {
         return this.name;
     }
 
-    //--- GETTERS FOR LINKS
+    // --- GETTERS FOR LINKS
+    public Category getCategoryParent() {
+        return this.categoryParent;
+    }
+
+    public List<Category> getListOfCategory() {
+        return this.listOfCategory;
+    }
+
     public List<SingleProductPage> getListOfSingleProductPage() {
         return this.listOfSingleProductPage;
-    } 
+    }
 
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
+    public List<SingleProductPage> getListOfSingleProductPageFromChild() {
+        List<SingleProductPage> result = listOfSingleProductPage;
+        for (Category category : listOfCategory) {
+            result.addAll(category.getListOfSingleProductPageFromChild());
+        }
+        return result;
+    }
+
+    public List<Category> getListOfCategoryFromChild() {
+        List<Category> result = listOfCategory;
+        try {
+            for (Category category : listOfCategory) {
+                result.addAll(category.getListOfCategoryFromChild());
+            }
+        } catch (Exception e) {
+        }
+        return result;
+    }
+
+    public CategoryDto getListOfCategoryFromChildZ(CategoryDto categoryDto) {
+        List<CategoryDto> categoryDtos = categoryDto.getChildren();
+        try {
+            for (Category category : listOfCategory) {
+                CategoryDto categoryDtoChild = new CategoryDto(category.getIdCategory(), category.getName(),
+                        new ArrayList<>());
+                categoryDtoChild = category.getListOfCategoryFromChildZ(categoryDtoChild);
+                categoryDtos.add(categoryDtoChild);
+            }
+        } catch (Exception e) {
+        }
+        categoryDto.setChildren(categoryDtos);
+        return categoryDto;
+    }
+
+    // --- toString specific method
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(idCategory);
         sb.append("|");
         sb.append(idCategoryParent);
         sb.append("|");
         sb.append(name);
-        return sb.toString(); 
-    } 
+        return sb.toString();
+    }
 
 }
