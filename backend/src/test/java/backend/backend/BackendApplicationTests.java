@@ -3,6 +3,7 @@ package backend.backend;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -10,14 +11,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
+import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.persitence.entities.Category;
+import backend.backend.persitence.entities.Product;
 import backend.backend.persitence.entities.SingleProductPage;
 import backend.backend.persitence.repository.CategoryRepository;
+import backend.backend.persitence.repository.ProductRepository;
 import backend.backend.persitence.repository.SingleProductPageRepository;
 import backend.backend.services.entityService.SingleProductPageService;
 
@@ -31,6 +33,8 @@ class BackendApplicationTests {
 	SingleProductPageRepository singleProductPageRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
+	@Autowired
+	ProductRepository productRepository;
 
 	@Test
 	@Transactional
@@ -57,10 +61,38 @@ class BackendApplicationTests {
 		Integer[] catagory = new Integer[2];
 		catagory[0] = 53;
 		catagory[1] = 57;
-		Page<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findByIdCategoryIn(catagory,
-				PageRequest.of(0, 4));
+		List<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findByIdCategoryIn(catagory);
 		for (SingleProductPage singleProductPage : allProductsOnThisPage) {
 			System.out.println(singleProductPage.getName());
 		}
+	}
+
+	@Test
+	@Transactional
+	void test4() {
+		List<SingleProductPage> listSingleProduct = singleProductPageRepository.findAll();
+		List<String> result = new ArrayList<>();
+		for (SingleProductPage productPage : listSingleProduct) {
+			result.add(productPage.getIdSingleProductPage().toString());
+		}
+		System.out.println(result);
+	}
+
+	@Test
+	@Transactional
+	void test5() {
+		Optional<SingleProductPage> singleProductPage = singleProductPageRepository.findByIdSingleProductPage(1);
+		CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+				singleProductPage.get().getName(), singleProductPage.get().getDescription(),
+				singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
+				singleProductPage.get().getTotalQuantity());
+		System.out.println(test);
+	}
+
+	@Test
+	@Transactional
+	void test6() {
+		List<Product> list = productRepository.findByIdSingleProductPage(1);
+		System.out.println(list.size());
 	}
 }

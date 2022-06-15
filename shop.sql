@@ -411,3 +411,7 @@ INSERT INTO Product VALUES(18,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành M
 INSERT INTO Product VALUES(19,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
 INSERT INTO Product VALUES(20,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
 INSERT INTO Product VALUES(21,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2',1,1,100.900,'');
+
+-- FUNCTION
+select p.id_product from Product p
+where p.id_single_product_page=1
