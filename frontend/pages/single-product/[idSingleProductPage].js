@@ -211,16 +211,21 @@ export default function SingleProduct({
                     <h6 className="information-heading u-s-m-b-8">
                       {trans.detail.variants}:
                     </h6>
-                    <div>
+                    <div style={{ display: "flex", rowGap: "5px", "flexWrap": "wrap" }}>
                       {/* <button>
                         áo xanh
                       </button> */}
                       {listProduct.map((element, index) => {
-                        return <button key={index} onClick={() => {
-                          setProduct(element);
-                        }}>
+                        return (<button className="button button-outline-secondary u-s-m-l-6" style={product === element ? { backgroundColor: "gainsboro", borderRadius: "0px" } : { borderRadius: "0px" }} key={index}
+                          onClick={() => {
+                            if (element === product) {
+                              setProduct(null);
+                            } else {
+                              setProduct(element);
+                            }
+                          }}>
                           {element.name}
-                        </button>;
+                        </button>);
                       })}
                     </div>
                     {/* <div className="color u-s-m-b-11">
@@ -358,6 +363,9 @@ export default function SingleProduct({
             </div>
             {/* Product-Detail /- */}
             {/* Detail-Tabs */}
+            <div>
+              <h1>Phải làm thằng này (Người bán)</h1>
+            </div>
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12">
                 <div className="detail-tabs-wrapper u-s-p-t-80">
@@ -406,7 +414,7 @@ export default function SingleProduct({
                           mascots across the chest, either as part of a uniform
                           or personal preference.
                         </p>
-                        <img
+                        {/* <img
                           className="desc-img img-fluid u-s-m-b-26"
                           src="/static/images/product/product@3x.jpg"
                           alt="Product"
@@ -417,14 +425,14 @@ export default function SingleProduct({
                           height={400}
                           src="/static/images/product/iframe-youtube.jpg"
                           allowFullScreen=""
-                        />
+                        /> */}
                       </div>
                     </div>
                     {/* Description-Tab /- */}
                     {/* Specifications-Tab */}
                     <div className="tab-pane fade" id="specification">
                       <div className="specification-whole-container">
-                        <div className="spec-ul u-s-m-b-50">
+                        {/* <div className="spec-ul u-s-m-b-50">
                           <h4 className="spec-heading">Key Features</h4>
                           <ul>
                             <li>Heather Grey</li>
@@ -446,14 +454,14 @@ export default function SingleProduct({
                               </tr>
                             </tbody>
                           </table>
-                        </div>
+                        </div> */}
                         <div className="spec-table u-s-m-b-50">
                           <h4 className="spec-heading">Product Information</h4>
                           <table>
                             <tbody>
                               <tr>
-                                <td>Main Material</td>
-                                <td>Cotton</td>
+                                <td>Danh mục</td>
+                                <td>Phải làm cái này</td>
                               </tr>
                               <tr>
                                 <td>Color</td>
