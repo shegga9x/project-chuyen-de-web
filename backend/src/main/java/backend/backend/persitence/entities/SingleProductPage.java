@@ -86,13 +86,18 @@ public class SingleProductPage implements Serializable {
         } catch (Exception e) {
             return "0-0";
         }
-
     }
 
     public Integer getTotalSoldCount() {
         return listOfProduct.stream().map(Product::getSoldCount).mapToInt(Integer::intValue).sum();
 
     }
+
+    public Integer getTotalQuantity() {
+        return listOfProduct.stream().map(Product::getQuantity).mapToInt(Integer::intValue).sum();
+
+    }
+
 
     public Integer getLastChildId() {
         List<Integer> prices = listOfProduct.stream().map(Product::getIdProduct).collect(Collectors.toList());

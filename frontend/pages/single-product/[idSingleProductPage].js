@@ -14,14 +14,22 @@ import {
   faRss,
   faMagnifyingGlass,
   faPlus
-} from "@fortawesome/free-solid-svg-icons";
-import Layout from "../components/layout";
-import useTrans from "../helpers/customHook/useTrans";
+}
+  from "@fortawesome/free-solid-svg-icons";
+import Layout from "../../components/layout";
+import useTrans from "../../helpers/customHook/useTrans";
+import { useRouter } from 'next/router';
+import instance from "../../helpers/axiosConfig";
 
-export default function SingleProduct() {
+export default function SingleProduct({ data }) {
 
+  const router = useRouter();
   const trans = useTrans();
 
+  if (router.isFallback) {
+    return <h1>Loading..</h1>
+  }
+  // return <h1>{JSON.stringify(data)}</h1>
   return (
     <>
       <Head>
@@ -133,7 +141,7 @@ export default function SingleProduct() {
                     <div className="product-title">
                       <h1>
                         <a href="single-product.html">
-                          Casual Hoodie Full Cotton
+                          {data.name}
                         </a>
                       </h1>
                     </div>
@@ -166,20 +174,14 @@ export default function SingleProduct() {
                       {trans.detail.description}:
                     </h6>
                     <p>
-                      This hoodie is full cotton. It includes a muff sewn onto
-                      the lower front, and (usually) a drawstring to adjust the
-                      hood opening. Throughout the U.S., it is common for
-                      middle-school, high-school, and college students to wear
-                      this sweatshirts—with or without hoods—that display their
-                      respective school names or mascots across the chest,
-                      either as part of a uniform or personal preference.
+                      {data.description}
                     </p>
                   </div>
                   <div className="section-3-price-original-discount u-s-p-y-14">
                     <div className="price">
-                      <h4>$55.00</h4>
+                      <h4>$ {data.priceRange}</h4>
                     </div>
-                    <div className="original-price">
+                    {/* <div className="original-price">
                       <span>{trans.detail.price}:</span>
                       <span>$60.00</span>
                     </div>
@@ -190,19 +192,19 @@ export default function SingleProduct() {
                     <div className="total-save">
                       <span>{trans.detail.save}:</span>
                       <span>$5</span>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="section-4-sku-information u-s-p-y-14">
                     <h6 className="information-heading u-s-m-b-8">
-                      Sku {trans.detail.information}:
+                       {trans.detail.information}:
                     </h6>
-                    <div className="availability">
+                    <div className="left">
                       <span>{trans.detail.availability}:</span>
-                      <span>In Stock</span>
+                      <span>{data.totalQuantity} </span>
                     </div>
                     <div className="left">
-                      <span>{trans.detail.only}:</span>
-                      <span>50 left</span>
+                      <span>{trans.detail.sold}:</span>
+                      <span>{data.totalSoldCount}</span>
                     </div>
                   </div>
                   <div className="section-5-product-variants u-s-p-y-14">
@@ -1184,4 +1186,37 @@ export default function SingleProduct() {
       </Layout>
     </>
   );
+}
+
+export async function getStaticPaths() {
+
+  const paths = [];
+  const res = await instance.get(`http://localhost:4000/api/product/loadAllSingleProductPage`);
+  if (res != undefined) {
+    const listSingleProductPagesID = res.data;
+    listSingleProductPagesID.forEach(element => {
+      paths.push({
+        params: {
+          idSingleProductPage: element
+        }
+      })
+    });
+  }
+  return {
+    paths,
+    fallback: true,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  const res = await instance.get(`http://localhost:4000/api/product/getSingleProductPagePerPage/${params.idSingleProductPage}`);
+  if (res != undefined) {
+    return { props: { data: res.data } };
+  }
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/404"
+    }
+  }
 }
