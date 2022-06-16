@@ -95,6 +95,7 @@ public class SingleProductPageService {
         }
 
         return new PageImpl<>(list.subList(lowerBound, upperBound), pageRequest, list.size());
+
     }
 
     public List<CategoryDto> loadCagetory() {
@@ -126,5 +127,6 @@ public class SingleProductPageService {
         System.out.println(result);
         return result;
     }
+
 
 }

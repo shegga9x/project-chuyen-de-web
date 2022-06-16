@@ -98,6 +98,7 @@ public class SingleProductPage implements Serializable {
 
     }
 
+
     public Integer getLastChildId() {
         List<Integer> prices = listOfProduct.stream().map(Product::getIdProduct).collect(Collectors.toList());
         Collections.sort(prices);
