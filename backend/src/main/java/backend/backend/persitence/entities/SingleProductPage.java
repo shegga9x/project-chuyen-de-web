@@ -92,6 +92,7 @@ public class SingleProductPage implements Serializable {
         return listOfProduct.stream().map(Product::getSoldCount).mapToInt(Integer::intValue).sum();
 
     }
+
     public Integer getTotalQuantity() {
         return listOfProduct.stream().map(Product::getQuantity).mapToInt(Integer::intValue).sum();
 

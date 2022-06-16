@@ -2,6 +2,7 @@ package backend.backend.services.entityService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.dto.SingleProductPageDTO;
+import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.PageSingleProductResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.entities.Category;
@@ -25,6 +27,8 @@ public class SingleProductPageService {
     SingleProductPageRepository singleProductPageRepository;
     @Autowired
     CategoryRepository categoryRepository;
+    @Autowired
+    // Productre categoryRepository;
 
     public PageSingleProductResponse loadAll(int page, int size, Integer[] catagory, Integer sorter) {
         PageSingleProductResponse responses = new PageSingleProductResponse();
@@ -91,6 +95,7 @@ public class SingleProductPageService {
         }
 
         return new PageImpl<>(list.subList(lowerBound, upperBound), pageRequest, list.size());
+
     }
 
     public List<CategoryDto> loadCagetory() {
@@ -102,5 +107,26 @@ public class SingleProductPageService {
         }
         return categoryDtos;
     }
+
+    public List<String> loadAllSingleProductPage() {
+        List<SingleProductPage> listSingleProduct = singleProductPageRepository.findAll();
+        List<String> result = new ArrayList<>();
+        for (SingleProductPage productPage : listSingleProduct) {
+            result.add(productPage.getIdSingleProductPage().toString());
+        }
+        return result;
+    }
+
+    public CustomSinglePage getSingleProductPagePerPage(int idSingleProduct) {
+        Optional<SingleProductPage> singleProductPage = singleProductPageRepository
+                .findByIdSingleProductPage(idSingleProduct);
+        CustomSinglePage result = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+                singleProductPage.get().getName(), singleProductPage.get().getDescription(),
+                singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
+                singleProductPage.get().getTotalQuantity());
+        System.out.println(result);
+        return result;
+    }
+
 
 }

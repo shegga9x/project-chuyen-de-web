@@ -47,12 +47,12 @@ export default {
         save: "Tiết kiệm",
         information: "Thông tin",
         availability: "Khả dụng",
-        only: "Chỉ còn",
         variants: "Kiểu mẫu khác",
         color: "Màu sẵn có",
         size: "Kích thước sẵn có",
         share: "chia sẻ",
         quantity: "Số lượng",
         addToCart: "Thêm vào giỏ hàng",
+        sold:"Đã bán",
     },
 };
