@@ -19,13 +19,19 @@ import Layout from "../../components/layout";
 import instance from "../../helpers/axiosConfig";
 import useTrans from "../../helpers/customHook/useTrans";
 import { useState } from 'react';
+import axios from "axios";
 
 export default function SingleProduct({
-  data: { singleProductPage: singleProductPage, listProduct: listProduct },
+  data: { singleProductPage: singleProductPage, listProduct: listProduct, listCategory: listCategory },
 }) {
   const router = useRouter();
   const trans = useTrans();
   const [product, setProduct] = useState(null);
+  let category = "Shop >"
+  listCategory.forEach(ele => {
+    category = category + ele.name + " > "
+  })
+  category += singleProductPage.name;
 
   if (router.isFallback) {
     return <h1>Loading..</h1>;
@@ -65,6 +71,9 @@ export default function SingleProduct({
         <div className="page-detail u-s-p-t-80">
           <div className="container">
             {/* Product-Detail */}
+            <div>
+              <p>{category}</p>
+            </div>
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12">
                 {/* Product-zoom-area */}
@@ -461,7 +470,7 @@ export default function SingleProduct({
                             <tbody>
                               <tr>
                                 <td>Danh mục</td>
-                                <td>Phải làm cái này</td>
+                                <td>{category}</td>
                               </tr>
                               <tr>
                                 <td>Color</td>
@@ -1216,20 +1225,28 @@ export async function getStaticProps({ params }) {
   const res = await instance.get(
     `http://localhost:4000/api/product/getSingleProductPagePerPage/${params.idSingleProductPage}`
   );
-  // Equivalent to `axios.get('https://httpbin.org/get?answer=42')`
-  // const res = await axios.get('https://httpbin.org/get', { params: { answer: 42 } });
   if (res != undefined) {
-    const res2 = await instance.get(
-      `http://localhost:4000/api/product/getListProductBySingleProductPage`,
-      { params: { idSingleProduct: res.data.idSingleProductPage } }
-    );
-    if (res2 != undefined) {
-      // console.log(res2.data)
+    let res1 = null;
+    let res2 = null;
+    await axios.all([
+      instance.get(
+        `http://localhost:4000/api/product/getListProductBySingleProductPage`,
+        { params: { idSingleProduct: res.data.idSingleProductPage } }),
+      instance.get(`http://localhost:4000/api/product/getListCategoryBySingleProductPage`,
+        { params: { idCategory: res.data.idCategory } })
+    ])
+      .then(axios.spread((data1, data2) => {
+        // output of req.
+        res1 = data1;
+        res2 = data2;
+      }))
+    if (res2 != null && res1 != null) {
       return {
         props: {
           data: {
             singleProductPage: res.data,
-            listProduct: res2.data,
+            listProduct: res1.data,
+            listCategory: res2.data
           },
         },
       };

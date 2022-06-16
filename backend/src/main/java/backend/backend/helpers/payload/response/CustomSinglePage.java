@@ -3,15 +3,17 @@ package backend.backend.helpers.payload.response;
 public class CustomSinglePage {
 
     int idSingleProductPage;
+    int idCategory;
     String name;
     String description;
     String priceRange;
     int totalSoldCount;
     int totalQuantity;
 
-    public CustomSinglePage(int idSingleProductPage, String name, String description, String priceRange,
-            int totalSoldCount, int totalQuantity) {
+    public CustomSinglePage(int idSingleProductPage, int idCategory, String name, String description, String priceRange,
+                            int totalSoldCount, int totalQuantity) {
         this.idSingleProductPage = idSingleProductPage;
+        this.idCategory = idCategory;
         this.name = name;
         this.description = description;
         this.priceRange = priceRange;
@@ -25,6 +27,14 @@ public class CustomSinglePage {
 
     public void setIdSingleProductPage(int idSingleProductPage) {
         this.idSingleProductPage = idSingleProductPage;
+    }
+
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 
     public String getName() {

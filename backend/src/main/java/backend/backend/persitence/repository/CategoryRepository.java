@@ -10,6 +10,9 @@ import backend.backend.persitence.entities.Category;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
+
+    Optional<Category> findByIdCategory(Integer id);
+
     Optional<Category> findByName(String name);
 
     List<Category> findByIdCategoryIn(List<Integer> ids);

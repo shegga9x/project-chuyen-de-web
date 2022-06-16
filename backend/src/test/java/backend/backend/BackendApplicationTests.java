@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import backend.backend.helpers.payload.response.CategoryResponse;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.utils.SubUtils;
 import org.junit.jupiter.api.Test;
@@ -85,7 +86,7 @@ class BackendApplicationTests {
     @Transactional
     void test5() {
         Optional<SingleProductPage> singleProductPage = singleProductPageRepository.findByIdSingleProductPage(1);
-        CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+        CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(), singleProductPage.get().getIdCategory(),
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
                 singleProductPage.get().getTotalQuantity());
@@ -98,9 +99,27 @@ class BackendApplicationTests {
         List<Product> list = productRepository.findByIdSingleProductPage(1);
         List<ProductResponse> l = new ArrayList<>();
         for (Product product : list) {
-             ProductResponse p = (ProductResponse) SubUtils.mapperObject(product,new ProductResponse());
-             l.add(p);
+            ProductResponse p = (ProductResponse) SubUtils.mapperObject(product, new ProductResponse());
+            l.add(p);
         }
         System.out.println(l);
+    }
+
+    @Test
+    @Transactional
+    void test7() {
+        List<CategoryResponse> result = new ArrayList<>();
+        Optional<Category> optional = categoryRepository.findByIdCategory(51);
+        if (optional.isPresent()) {
+            result.add((CategoryResponse) SubUtils.mapperObject(optional.get(), new CategoryResponse()));
+        }
+        while (true) {
+            optional = categoryRepository.findByIdCategory(optional.get().getIdCategoryParent());
+            if(optional.isEmpty()){
+                break;
+            }
+            result.add((CategoryResponse) SubUtils.mapperObject(optional.get(), new CategoryResponse()));
+        }
+        System.out.println(result);
     }
 }
