@@ -11,5 +11,5 @@ import backend.backend.persitence.entities.Product;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findByIdSingleProductPage(Integer idSingleProductPage);
-    
+
 }

@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import backend.backend.helpers.payload.response.ProductResponse;
+import backend.backend.helpers.utils.SubUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,72 +29,78 @@ import backend.backend.services.entityService.SingleProductPageService;
 
 @SpringBootTest
 class BackendApplicationTests {
-	@Autowired
-	SingleProductPageService singleProductPageService;
-	@Autowired
-	SingleProductPageRepository singleProductPageRepository;
-	@Autowired
-	CategoryRepository categoryRepository;
-	@Autowired
-	ProductRepository productRepository;
+    @Autowired
+    SingleProductPageService singleProductPageService;
+    @Autowired
+    SingleProductPageRepository singleProductPageRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
+    @Autowired
+    ProductRepository productRepository;
+    private List<Product> byIdSingleProductPage;
 
-	@Test
-	@Transactional
-	void test1() {
-		Category category = categoryRepository.findByName("Áo").get();
-		List<SingleProductPage> result = category.getListOfSingleProductPageFromChild();
-		System.out.println(Arrays.toString(result.toArray()));
-	}
+    @Test
+    @Transactional
+    void test1() {
+        Category category = categoryRepository.findByName("Áo").get();
+        List<SingleProductPage> result = category.getListOfSingleProductPageFromChild();
+        System.out.println(Arrays.toString(result.toArray()));
+    }
 
-	@Test
-	@Transactional
-	void test2() {
-		List<Category> categories = categoryRepository.findByIdCategoryParent(null);
-		List<CategoryDto> categoryDtos = new ArrayList<>();
-		for (Category category : categories) {
-			CategoryDto categoryDto = new CategoryDto(category.getIdCategory(), category.getName(), new ArrayList<>());
-			categoryDtos.add(category.getListOfCategoryFromChildZ(categoryDto));
-		}
-	}
+    @Test
+    @Transactional
+    void test2() {
+        List<Category> categories = categoryRepository.findByIdCategoryParent(null);
+        List<CategoryDto> categoryDtos = new ArrayList<>();
+        for (Category category : categories) {
+            CategoryDto categoryDto = new CategoryDto(category.getIdCategory(), category.getName(), new ArrayList<>());
+            categoryDtos.add(category.getListOfCategoryFromChildZ(categoryDto));
+        }
+    }
 
-	@Test
-	@Transactional
-	void test3() {
-		Integer[] catagory = new Integer[2];
-		catagory[0] = 53;
-		catagory[1] = 57;
-		List<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findByIdCategoryIn(catagory);
-		for (SingleProductPage singleProductPage : allProductsOnThisPage) {
-			System.out.println(singleProductPage.getName());
-		}
-	}
+    @Test
+    @Transactional
+    void test3() {
+        Integer[] catagory = new Integer[2];
+        catagory[0] = 53;
+        catagory[1] = 57;
+        List<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findByIdCategoryIn(catagory);
+        for (SingleProductPage singleProductPage : allProductsOnThisPage) {
+            System.out.println(singleProductPage.getName());
+        }
+    }
 
-	@Test
-	@Transactional
-	void test4() {
-		List<SingleProductPage> listSingleProduct = singleProductPageRepository.findAll();
-		List<String> result = new ArrayList<>();
-		for (SingleProductPage productPage : listSingleProduct) {
-			result.add(productPage.getIdSingleProductPage().toString());
-		}
-		System.out.println(result);
-	}
+    @Test
+    @Transactional
+    void test4() {
+        List<SingleProductPage> listSingleProduct = singleProductPageRepository.findAll();
+        List<String> result = new ArrayList<>();
+        for (SingleProductPage productPage : listSingleProduct) {
+            result.add(productPage.getIdSingleProductPage().toString());
+        }
+        System.out.println(result);
+    }
 
-	@Test
-	@Transactional
-	void test5() {
-		Optional<SingleProductPage> singleProductPage = singleProductPageRepository.findByIdSingleProductPage(1);
-		CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
-				singleProductPage.get().getName(), singleProductPage.get().getDescription(),
-				singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
-				singleProductPage.get().getTotalQuantity());
-		System.out.println(test);
-	}
+    @Test
+    @Transactional
+    void test5() {
+        Optional<SingleProductPage> singleProductPage = singleProductPageRepository.findByIdSingleProductPage(1);
+        CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+                singleProductPage.get().getName(), singleProductPage.get().getDescription(),
+                singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
+                singleProductPage.get().getTotalQuantity());
+        System.out.println(test);
+    }
 
-	@Test
-	@Transactional
-	void test6() {
-		List<Product> list = productRepository.findByIdSingleProductPage(1);
-		System.out.println(list.size());
-	}
+    @Test
+    @Transactional
+    void test6() {
+        List<Product> list = productRepository.findByIdSingleProductPage(1);
+        List<ProductResponse> l = new ArrayList<>();
+        for (Product product : list) {
+             ProductResponse p = (ProductResponse) SubUtils.mapperObject(product,new ProductResponse());
+             l.add(p);
+        }
+        System.out.println(l);
+    }
 }

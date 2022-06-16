@@ -196,7 +196,7 @@ export default function SingleProduct({ data }) {
                   </div>
                   <div className="section-4-sku-information u-s-p-y-14">
                     <h6 className="information-heading u-s-m-b-8">
-                       {trans.detail.information}:
+                      {trans.detail.information}:
                     </h6>
                     <div className="left">
                       <span>{trans.detail.availability}:</span>
@@ -1210,8 +1210,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await instance.get(`http://localhost:4000/api/product/getSingleProductPagePerPage/${params.idSingleProductPage}`);
+  // Equivalent to `axios.get('https://httpbin.org/get?answer=42')`
+  // const res = await axios.get('https://httpbin.org/get', { params: { answer: 42 } });
   if (res != undefined) {
-    return { props: { data: res.data } };
+    const res2 = await instance.get(`http://localhost:4000/api/product/getListProductBySingleProductPage`, { params: { idSingleProduct: res.data.idSingleProductPage } });
+    if (res2 != undefined) {
+      console.log(res2.data)
+      return { props: { data: res.data } };
+    }
   }
   return {
     redirect: {
@@ -1219,4 +1225,4 @@ export async function getStaticProps({ params }) {
       destination: "/404"
     }
   }
-}
+} 

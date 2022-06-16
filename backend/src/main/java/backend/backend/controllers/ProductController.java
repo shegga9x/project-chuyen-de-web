@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import backend.backend.services.entityService.SingleProductPageService;
 
+import javax.validation.constraints.NotNull;
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/api/product")
@@ -39,5 +41,10 @@ public class ProductController {
     @GetMapping({ "/getSingleProductPagePerPage/{idSingleProduct}" })
     public ResponseEntity<?> getSingleProductPagePerPage(@PathVariable(value = "idSingleProduct") String idSingleProduct) {
         return ResponseEntity.ok(singleProductPageService.getSingleProductPagePerPage(Integer.parseInt(idSingleProduct)));
+    }
+
+    @GetMapping({ "/getListProductBySingleProductPage" })
+    public ResponseEntity<?> getListProductBySingleProductPage(@NotNull @RequestParam("idSingleProduct") String idSingleProduct) {
+        return ResponseEntity.ok(singleProductPageService.getListProductBySingleProductPage(Integer.parseInt(idSingleProduct)));
     }
 }

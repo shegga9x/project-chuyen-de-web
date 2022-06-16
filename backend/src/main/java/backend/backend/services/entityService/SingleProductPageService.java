@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import backend.backend.helpers.payload.response.ProductResponse;
+import backend.backend.persitence.entities.Product;
+import backend.backend.persitence.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -28,7 +31,7 @@ public class SingleProductPageService {
     @Autowired
     CategoryRepository categoryRepository;
     @Autowired
-    // Productre categoryRepository;
+    ProductRepository productRepository;
 
     public PageSingleProductResponse loadAll(int page, int size, Integer[] catagory, Integer sorter) {
         PageSingleProductResponse responses = new PageSingleProductResponse();
@@ -128,5 +131,13 @@ public class SingleProductPageService {
         return result;
     }
 
-
+    public List<ProductResponse> getListProductBySingleProductPage(int idSingleProduct){
+        List<Product> list = productRepository.findByIdSingleProductPage(1);
+        List<ProductResponse> result = new ArrayList<>();
+        for (Product product : list) {
+            ProductResponse p = (ProductResponse) SubUtils.mapperObject(product,new ProductResponse());
+            result.add(p);
+        }
+        return result;
+    }
 }
