@@ -1,35 +1,37 @@
-import Head from "next/head";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookF,
-  faTwitter,
   faGooglePlusG,
   faPinterest,
+  faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import {
-  faAngleDown,
+  faEnvelope,
   faHeart,
   faHome,
-  faEnvelope,
-  faRss,
   faMagnifyingGlass,
-  faPlus
-}
-  from "@fortawesome/free-solid-svg-icons";
+  faPlus,
+  faRss,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import Layout from "../../components/layout";
-import useTrans from "../../helpers/customHook/useTrans";
-import { useRouter } from 'next/router';
 import instance from "../../helpers/axiosConfig";
+import useTrans from "../../helpers/customHook/useTrans";
+import { useState } from 'react';
 
-export default function SingleProduct({ data }) {
-
+export default function SingleProduct({
+  data: { singleProductPage: singleProductPage, listProduct: listProduct },
+}) {
   const router = useRouter();
   const trans = useTrans();
+  const [product, setProduct] = useState(null);
 
   if (router.isFallback) {
-    return <h1>Loading..</h1>
+    return <h1>Loading..</h1>;
   }
   // return <h1>{JSON.stringify(data)}</h1>
+
   return (
     <>
       <Head>
@@ -141,7 +143,7 @@ export default function SingleProduct({ data }) {
                     <div className="product-title">
                       <h1>
                         <a href="single-product.html">
-                          {data.name}
+                          {singleProductPage.name}
                         </a>
                       </h1>
                     </div>
@@ -173,13 +175,11 @@ export default function SingleProduct({ data }) {
                     <h6 className="information-heading u-s-m-b-8">
                       {trans.detail.description}:
                     </h6>
-                    <p>
-                      {data.description}
-                    </p>
+                    <p>{singleProductPage.description}</p>
                   </div>
                   <div className="section-3-price-original-discount u-s-p-y-14">
                     <div className="price">
-                      <h4>$ {data.priceRange}</h4>
+                      <h4>$ {product == null ? singleProductPage.priceRange : product.price}</h4>
                     </div>
                     {/* <div className="original-price">
                       <span>{trans.detail.price}:</span>
@@ -200,11 +200,11 @@ export default function SingleProduct({ data }) {
                     </h6>
                     <div className="left">
                       <span>{trans.detail.availability}:</span>
-                      <span>{data.totalQuantity} </span>
+                      <span>{product == null ? singleProductPage.totalQuantity : product.quantity} </span>
                     </div>
                     <div className="left">
                       <span>{trans.detail.sold}:</span>
-                      <span>{data.totalSoldCount}</span>
+                      <span>{singleProductPage.totalSoldCount}</span>
                     </div>
                   </div>
                   <div className="section-5-product-variants u-s-p-y-14">
@@ -212,21 +212,16 @@ export default function SingleProduct({ data }) {
                       {trans.detail.variants}:
                     </h6>
                     <div>
-                      <button>
+                      {/* <button>
                         áo xanh
-                      </button>
-                      <button>
-                        áo xanh
-                      </button>
-                      <button>
-                        áo xanh
-                      </button>
-                      <button>
-                        áo xanh
-                      </button>
-                      <button>
-                        áo xanh
-                      </button>
+                      </button> */}
+                      {listProduct.map((element, index) => {
+                        return <button key={index} onClick={() => {
+                          setProduct(element);
+                        }}>
+                          {element.name}
+                        </button>;
+                      })}
                     </div>
                     {/* <div className="color u-s-m-b-11">
                       <span>{trans.detail.color}:</span>
@@ -1189,17 +1184,18 @@ export default function SingleProduct({ data }) {
 }
 
 export async function getStaticPaths() {
-
   const paths = [];
-  const res = await instance.get(`http://localhost:4000/api/product/loadAllSingleProductPage`);
+  const res = await instance.get(
+    `http://localhost:4000/api/product/loadAllSingleProductPage`
+  );
   if (res != undefined) {
     const listSingleProductPagesID = res.data;
-    listSingleProductPagesID.forEach(element => {
+    listSingleProductPagesID.forEach((element) => {
       paths.push({
         params: {
-          idSingleProductPage: element
-        }
-      })
+          idSingleProductPage: element,
+        },
+      });
     });
   }
   return {
@@ -1209,20 +1205,32 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await instance.get(`http://localhost:4000/api/product/getSingleProductPagePerPage/${params.idSingleProductPage}`);
+  const res = await instance.get(
+    `http://localhost:4000/api/product/getSingleProductPagePerPage/${params.idSingleProductPage}`
+  );
   // Equivalent to `axios.get('https://httpbin.org/get?answer=42')`
   // const res = await axios.get('https://httpbin.org/get', { params: { answer: 42 } });
   if (res != undefined) {
-    const res2 = await instance.get(`http://localhost:4000/api/product/getListProductBySingleProductPage`, { params: { idSingleProduct: res.data.idSingleProductPage } });
+    const res2 = await instance.get(
+      `http://localhost:4000/api/product/getListProductBySingleProductPage`,
+      { params: { idSingleProduct: res.data.idSingleProductPage } }
+    );
     if (res2 != undefined) {
-      console.log(res2.data)
-      return { props: { data: res.data } };
+      // console.log(res2.data)
+      return {
+        props: {
+          data: {
+            singleProductPage: res.data,
+            listProduct: res2.data,
+          },
+        },
+      };
     }
   }
   return {
     redirect: {
       permanent: false,
-      destination: "/404"
-    }
-  }
-} 
+      destination: "/404",
+    },
+  };
+}
