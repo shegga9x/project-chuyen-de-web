@@ -147,12 +147,12 @@ export default function Header() {
                                     <ul className="g-dropdown" style={{ width: 70 }}>
                                         {/* className="u-c-brand"  */}
                                         <li>
-                                            <a className={router.locale === 'en' ? 'u-c-brand' : ''} onClick={() => { changeLanguage(router.route, "en", router) }}>
+                                            <a className={router.locale === 'en' ? 'u-c-brand' : ''} onClick={() => { changeLanguage(router.asPath, "en", router) }}>
                                                 ENG
                                             </a>
                                         </li>
                                         <li>
-                                            <a className={router.locale === 'vi' ? 'u-c-brand' : ''} onClick={() => { changeLanguage(router.route, "vi", router) }}>VI</a>
+                                            <a className={router.locale === 'vi' ? 'u-c-brand' : ''} onClick={() => { changeLanguage(router.asPath, "vi", router) }}>VI</a>
                                         </li>
                                     </ul>
                                 </li>

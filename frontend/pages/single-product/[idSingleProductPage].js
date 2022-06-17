@@ -20,6 +20,7 @@ import instance from "../../helpers/axiosConfig";
 import useTrans from "../../helpers/customHook/useTrans";
 import { useState } from 'react';
 import axios from "axios";
+import { changeRoute } from "../../helpers/customFunction/changeRoute";
 
 export default function SingleProduct({
   data: { singleProductPage: singleProductPage, listProduct: listProduct, listCategory: listCategory },
@@ -27,11 +28,6 @@ export default function SingleProduct({
   const router = useRouter();
   const trans = useTrans();
   const [product, setProduct] = useState(null);
-  let category = "Shop >"
-  listCategory.forEach(ele => {
-    category = category + ele.name + " > "
-  })
-  category += singleProductPage.name;
 
   if (router.isFallback) {
     return <h1>Loading..</h1>;
@@ -71,8 +67,14 @@ export default function SingleProduct({
         <div className="page-detail u-s-p-t-80">
           <div className="container">
             {/* Product-Detail */}
-            <div>
-              <p>{category}</p>
+            <div style={{ display: "flex", marginBottom: "5px" }}>
+              {listCategory.map((ele, i) => {
+                const url = i == 0 ? "/shop" : `/shop?page=1&size=8&catagory=${ele.idCategory}`;
+                return (<><a style={{ color: "red" }} onClick={() => { changeRoute(url, router) }}>{i == 0 ? `Shop` : `${ele.name}`}</a>
+                  <span style={{ marginLeft: "3px", marginRight: "3px" }}>{">"}</span>
+                </>)
+              })}
+              <span>{singleProductPage.name}</span>
             </div>
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12">
@@ -225,6 +227,7 @@ export default function SingleProduct({
                         áo xanh
                       </button> */}
                       {listProduct.map((element, index) => {
+
                         return (<button className="button button-outline-secondary u-s-m-l-6" style={product === element ? { backgroundColor: "gainsboro", borderRadius: "0px" } : { borderRadius: "0px" }} key={index}
                           onClick={() => {
                             if (element === product) {
@@ -470,7 +473,14 @@ export default function SingleProduct({
                             <tbody>
                               <tr>
                                 <td>Danh mục</td>
-                                <td>{category}</td>
+                                <td> <div style={{ display: "flex", marginBottom: "5px" }}>
+                                  {listCategory.map((ele, i, arr) => {
+                                    const url = i == 0 ? "/shop" : `/shop?page=1&size=8&catagory=${ele.idCategory}`;
+                                    return (<><a style={{ color: "red" }} onClick={() => { changeRoute(url, router) }}>{i == 0 ? `Shop` : `${ele.name}`}</a>
+                                      <span style={arr.length - 1 !== i ? { marginLeft: "3px", marginRight: "3px" } : { display: "none" }}>{">"}</span>
+                                    </>)
+                                  })}
+                                </div></td>
                               </tr>
                               <tr>
                                 <td>Color</td>
@@ -1200,7 +1210,7 @@ export default function SingleProduct({
   );
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }) {
   const paths = [];
   const res = await instance.get(
     `http://localhost:4000/api/product/loadAllSingleProductPage`
@@ -1208,11 +1218,9 @@ export async function getStaticPaths() {
   if (res != undefined) {
     const listSingleProductPagesID = res.data;
     listSingleProductPagesID.forEach((element) => {
-      paths.push({
-        params: {
-          idSingleProductPage: element,
-        },
-      });
+      paths.push(
+        { params: { idSingleProductPage: element }, locale: 'en' },
+        { params: { idSingleProductPage: element }, locale: 'vi' });
     });
   }
   return {
