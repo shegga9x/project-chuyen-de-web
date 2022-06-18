@@ -29,18 +29,55 @@ import instance from "../../helpers/axiosConfig";
 import { useRouter } from 'next/router'
 import { changeLanguage } from "../../helpers/customFunction/changeLanguage";
 import { changeRoute } from "../../helpers/customFunction/changeRoute";
+import { useEffect, useState } from 'react';
 
-export default function Header() {
+export default function Header({ updateCartHeader }) {
 
     const router = useRouter()
 
     const [session, loading] = useSession();
 
+    const [loadingCart, setLoadingCart] = useState(false);
+
+    const [userCart, setUserCart] = useState(null);
+
+    useEffect(() => {
+        setLoadingCart(true);
+        if (session) {
+            const getCartByIdUser = async () => {
+                // You can await here
+                const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id } });
+                if (response) {
+                    console.log({ response });
+                    setUserCart(response.data);
+                    setLoadingCart(false)
+                }
+            }
+
+            getCartByIdUser().catch(err => {
+                console.log({ err })
+                if (err.message == "Network Error") {
+                    console.log("chua mo backend");
+                }
+            });
+        }
+
+    }, [updateCartHeader, loading]);
+
+
+    const getTotalCart = () => {
+        const result = 0;
+        userCart.forEach(ele => {
+            result += (ele.product.price * ele.quantity)
+        })
+        return result;
+    }
+
     // console.log(session)
-    const test = async () => {
-        // await axios.get("http://localhost:4000/test/getJWT", { headers: { Authorization:`Bearer ${session.user.jwtToken}` }});
-        await instance.get("http://localhost:4000/api/test/getJWT");
-    };
+    // const test = async () => {
+    //     // await axios.get("http://localhost:4000/test/getJWT", { headers: { Authorization:`Bearer ${session.user.jwtToken}` }});
+    //     await instance.get("http://localhost:4000/api/test/getJWT");
+    // };
 
     return (
         <>
@@ -101,7 +138,7 @@ export default function Header() {
                                             </a>
                                         </li>
                                         {!loading && !session && <li>
-                                            <a onClick={() => { changeRoute('/', router) }}>
+                                            <a onClick={() => { changeRoute('/account', router) }}>
                                                 <i className=" u-s-m-r-9">
                                                     <FontAwesomeIcon icon={faSignInAlt} />
                                                 </i>Login / Signup
@@ -227,7 +264,7 @@ export default function Header() {
                                 <nav>
                                     <ul className="mid-nav g-nav">
                                         <li className="u-d-none-lg">
-                                            <a onClick={test}>
+                                            <a>
                                                 <i className="u-c-brand">
                                                     <FontAwesomeIcon icon={faHome} />
                                                 </i>
@@ -240,15 +277,17 @@ export default function Header() {
                                                 </i>
                                             </a>
                                         </li>
-                                        <li>
-                                            <a id="mini-cart-trigger">
-                                                <i>
-                                                    <FontAwesomeIcon icon={faBasketShopping} />
-                                                </i>
-                                                <span className="item-counter">4</span>
-                                                <span className="item-price">$220.00</span>
-                                            </a>
-                                        </li>
+                                        {
+                                            session && <li>
+                                                <a id="mini-cart-trigger">
+                                                    <i>
+                                                        <FontAwesomeIcon icon={faBasketShopping} />
+                                                    </i>
+                                                    <span className="item-counter">4</span>
+                                                    <span className="item-price">$220.00</span>
+                                                </a>
+                                            </li>
+                                        }
                                     </ul>
                                 </nav>
                             </div>
@@ -274,86 +313,67 @@ export default function Header() {
                 </div>
                 {/* Responsive-Buttons /- */}
                 {/* Mini Cart */}
-                <div className="mini-cart-wrapper">
-                    <div className="mini-cart">
-                        <div className="mini-cart-header">
-                            YOUR CART
-                            <button
-                                type="button"
-                                className="button ion ion-md-close"
-                                id="mini-cart-close"
-                            >
-                                <i>
-                                    <FontAwesomeIcon icon={faClose} />
-                                </i>
-                            </button>
-                        </div>
-                        <ul className="mini-cart-list">
-                            <li className="clearfix">
-                                <a href="single-product.html">
-                                    <img
-                                        src="/static/images/product/product@1x.jpg"
-                                        alt="Product"
-                                    />
-                                    <span className="mini-item-name">
-                                        Casual Hoodie Full Cotton
-                                    </span>
-                                    <span className="mini-item-price">$55.00</span>
-                                    <span className="mini-item-quantity"> x 1 </span>
-                                </a>
-                            </li>
-                            <li className="clearfix">
-                                <a href="single-product.html">
-                                    <img
-                                        src="/static/images/product/product@1x.jpg"
-                                        alt="Product"
-                                    />
-                                    <span className="mini-item-name">
-                                        Black Rock Dress with High Jewelery Necklace
-                                    </span>
-                                    <span className="mini-item-price">$55.00</span>
-                                    <span className="mini-item-quantity"> x 1 </span>
-                                </a>
-                            </li>
-                            <li className="clearfix">
-                                <a href="single-product.html">
-                                    <img
-                                        src="/static/images/product/product@1x.jpg"
-                                        alt="Product"
-                                    />
-                                    <span className="mini-item-name">
-                                        Xiaomi Note 2 Black Color
-                                    </span>
-                                    <span className="mini-item-price">$55.00</span>
-                                    <span className="mini-item-quantity"> x 1 </span>
-                                </a>
-                            </li>
-                            <li className="clearfix">
-                                <a href="single-product.html">
-                                    <img
-                                        src="/static/images/product/product@1x.jpg"
-                                        alt="Product"
-                                    />
-                                    <span className="mini-item-name">Dell Inspiron 15</span>
-                                    <span className="mini-item-price">$55.00</span>
-                                    <span className="mini-item-quantity"> x 1 </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div className="mini-shop-total clearfix">
-                            <span className="mini-total-heading float-left">Total:</span>
-                            <span className="mini-total-price float-right">$220.00</span>
-                        </div>
-                        <div className="mini-action-anchors">
-                            <a href="cart.html" className="cart-anchor">
-                                View Cart
-                            </a>
-                            <a href="checkout.html" className="checkout-anchor">
-                                Checkout
-                            </a>
+                {
+                    session && <div className="mini-cart-wrapper">
+                        <div className="mini-cart">
+                            <div className="mini-cart-header">
+                                YOUR CART
+                                <button
+                                    type="button"
+                                    className="button ion ion-md-close"
+                                    id="mini-cart-close"
+                                >
+                                    <i>
+                                        <FontAwesomeIcon icon={faClose} />
+                                    </i>
+                                </button>
+                            </div>
+                            {
+                                loadingCart == false ? (
+                                    <>
+                                        <ul className="mini-cart-list">
+                                            {
+                                                userCart.map((ele, i) => {
+                                                    return (
+                                                        <li className="clearfix" key={i}>
+                                                            <a>
+                                                                <img
+                                                                    src={ele.product.imgUrl}
+                                                                    alt="Product"
+                                                                />
+                                                                <span className="mini-item-name">
+                                                                    {ele.product.name}
+                                                                </span>
+                                                                <span className="mini-item-price">${ele.product.price}</span>
+                                                                <span className="mini-item-quantity"> x {ele.quantity} </span>
+                                                            </a>
+                                                        </li>
+                                                    )
+                                                })
+                                            }
+                                        </ul>
+                                        <div className="mini-shop-total clearfix">
+                                            <span className="mini-total-heading float-left">Total:</span>
+                                            <span className="mini-total-price float-right">${getTotalCart()}</span>
+                                        </div>
+                                        <div className="mini-action-anchors">
+                                            <a href="cart.html" className="cart-anchor">
+                                                View Cart
+                                            </a>
+                                            <a href="checkout.html" className="checkout-anchor">
+                                                Checkout
+                                            </a>
+                                        </div>
+                                    </>) : (
+                                    <>
+                                        <div style={{ textAlign: "center", lineHeight: "500px", fontSize: "22px" }}>
+                                            Loading...
+                                        </div>
+                                    </>)
+                            }
                         </div>
                     </div>
-                </div>
+                }
                 {/* Mini Cart /- */}
                 {/* Bottom-Header */}
                 <div className="full-layer-bottom-header">

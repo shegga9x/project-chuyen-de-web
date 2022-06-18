@@ -7,9 +7,11 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import backend.backend.helpers.payload.response.CategoryResponse;
+import backend.backend.helpers.payload.response.CartItemResponse;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.utils.SubUtils;
+import backend.backend.persitence.entities.*;
+import backend.backend.persitence.repository.CartItemRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.response.CustomSinglePage;
-import backend.backend.persitence.entities.Category;
-import backend.backend.persitence.entities.Product;
-import backend.backend.persitence.entities.SingleProductPage;
 import backend.backend.persitence.repository.CategoryRepository;
 import backend.backend.persitence.repository.ProductRepository;
 import backend.backend.persitence.repository.SingleProductPageRepository;
@@ -38,7 +37,8 @@ class BackendApplicationTests {
     CategoryRepository categoryRepository;
     @Autowired
     ProductRepository productRepository;
-    private List<Product> byIdSingleProductPage;
+    @Autowired
+    CartItemRepository cartItemRepository;
 
     @Test
     @Transactional
@@ -108,18 +108,9 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        List<CategoryResponse> result = new ArrayList<>();
-        Optional<Category> optional = categoryRepository.findByIdCategory(51);
-        if (optional.isPresent()) {
-            result.add((CategoryResponse) SubUtils.mapperObject(optional.get(), new CategoryResponse()));
-        }
-        while (true) {
-            optional = categoryRepository.findByIdCategory(optional.get().getIdCategoryParent());
-            if(optional.isEmpty()){
-                break;
-            }
-            result.add((CategoryResponse) SubUtils.mapperObject(optional.get(), new CategoryResponse()));
-        }
-        System.out.println(result);
+//        List<CartItemResponse> result = new ArrayList<>();
+//        for (CartItem cartItem : cartItemRepository.findByIdCustomer(1)) {
+//            result.add((CartItemResponse) SubUtils.mapperObject(cartItem, new CartItemResponse()));
+//        }
     }
 }

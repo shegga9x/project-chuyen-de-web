@@ -1,5 +1,5 @@
 import axios from "axios";
-import {getSession} from "next-auth/client"; 
+import { getSession } from "next-auth/client";
 
 const InstanceAxios = () => {
     const instance = axios.create()
@@ -16,10 +16,11 @@ const InstanceAxios = () => {
 
     instance.interceptors.response.use(
         (response) => {
-            return response
+            return response;
         },
         (error) => {
-            console.log(`error`, error)
+            // console.log(`error`, error)
+            return Promise.reject(error);
         }
     )
 
