@@ -129,7 +129,7 @@ public class SingleProductPageService {
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
                 singleProductPage.get().getTotalQuantity());
-        System.out.println(result);
+        // System.out.println(result);
         return result;
     }
 
