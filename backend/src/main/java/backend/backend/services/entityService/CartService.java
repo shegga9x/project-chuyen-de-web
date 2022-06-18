@@ -23,7 +23,8 @@ public class CartService {
     public List<CartItemResponse> getCartItemsByIdCustomer(int idCustomer) {
         List<CartItemResponse> result = new ArrayList<>();
         for (CartItem cartItem : cartItemRepository.findByIdCustomer(idCustomer)) {
-            ProductResponse productResponse = (ProductResponse) SubUtils.mapperObject(cartItem.getProduct(), new ProductResponse());
+            ProductResponse productResponse = (ProductResponse) SubUtils.mapperObject(cartItem.getProduct(),
+                    new ProductResponse());
             result.add(new CartItemResponse(cartItem.getIdCustomer(), productResponse, cartItem.getQuantity()));
         }
         return result;
@@ -31,10 +32,14 @@ public class CartService {
 
     public String addToCart(CartItemRequest cartItem) {
         int idUser = SubUtils.getCurrentUser().getId();
-        Optional<CartItem> optional = cartItemRepository.findById(new CartItemId(idUser, cartItem.getProduct().getIdProduct()));
+        Optional<CartItem> optional = cartItemRepository
+                .findById(new CartItemId(idUser, cartItem.getProduct().getIdProduct()));
         if (optional.isPresent()) {
             CartItem cartItem1 = optional.get();
-            cartItem1.setQuantity(cartItem.getQuantity() + cartItem1.getQuantity());
+            int quantity = cartItem.getQuantity() + cartItem1.getQuantity();
+            if (quantity > 0) {
+                cartItem1.setQuantity(quantity);
+            }
             cartItemRepository.save(cartItem1);
         } else {
             CartItem cartItem1 = new CartItem();
@@ -46,9 +51,11 @@ public class CartService {
         return "ok";
     }
 
-    public void deleteCartItem(int userId, int productId) {
-//       Cart
-        
+    public String deleteCartItem(CartItemRequest cartItem) {
+        int idUser = SubUtils.getCurrentUser().getId();
+        Optional<CartItem> optional = cartItemRepository
+                .findById(new CartItemId(idUser, cartItem.getProduct().getIdProduct()));
+        cartItemRepository.delete(optional.get());
+        return "ok";
     }
-
 }

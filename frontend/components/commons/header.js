@@ -31,8 +31,8 @@ import { changeLanguage } from "../../helpers/customFunction/changeLanguage";
 import { changeRoute } from "../../helpers/customFunction/changeRoute";
 import { useEffect, useState } from 'react';
 
-export default function Header({ updateCartHeader }) {
-
+export default function Header({ updateCartHeader, isPageCart }) {
+    
     const router = useRouter()
 
     const [session, loading] = useSession();
@@ -66,11 +66,11 @@ export default function Header({ updateCartHeader }) {
 
 
     const getTotalCart = () => {
-        const result = 0;
+        let result = 0;
         userCart.forEach(ele => {
             result += (ele.product.price * ele.quantity)
         })
-        return result;
+        return result.toFixed(2);
     }
 
     // console.log(session)
@@ -278,7 +278,7 @@ export default function Header({ updateCartHeader }) {
                                             </a>
                                         </li>
                                         {
-                                            session && <li>
+                                            (session && isPageCart != true) && <li>
                                                 <a id="mini-cart-trigger">
                                                     <i>
                                                         <FontAwesomeIcon icon={faBasketShopping} />
@@ -314,7 +314,7 @@ export default function Header({ updateCartHeader }) {
                 {/* Responsive-Buttons /- */}
                 {/* Mini Cart */}
                 {
-                    session && <div className="mini-cart-wrapper">
+                    (session && isPageCart != true) && <div className="mini-cart-wrapper">
                         <div className="mini-cart">
                             <div className="mini-cart-header">
                                 YOUR CART

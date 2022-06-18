@@ -2,7 +2,7 @@
 import { Footer, Header, DummySelectBox, ResponsiveSearch, NewsletterModule, QuickViewModal } from './commons'
 import Head from "next/head";
 import Script from "next/script";
-export default function Layout({ children, home, shop, updateCartHeader }) {
+export default function Layout({ children, home, shop, updateCartHeader, isPageCart }) {
     return (
         <>
             <Head>
@@ -36,7 +36,7 @@ export default function Layout({ children, home, shop, updateCartHeader }) {
                 <link rel="stylesheet" href="/static/css/bundle.css" />
             </Head>
             <div id="app">
-                <Header updateCartHeader={updateCartHeader} />
+                <Header updateCartHeader={updateCartHeader} isPageCart={isPageCart} />
                 {children}
                 <Footer />
                 <DummySelectBox />
