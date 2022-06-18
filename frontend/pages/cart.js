@@ -8,6 +8,7 @@ import {
 import Layout from "../components/layout";
 import { getSession, useSession } from 'next-auth/client';
 import instance from "../helpers/axiosConfig";
+import axios from "axios";
 
 export default function Cart({ cart }) {
 
@@ -414,12 +415,12 @@ export default function Cart({ cart }) {
   // );
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   if (session) {
     console.log(session.user.id)
-    const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id } })
-      // .catch(error => console.log(error))
+    const response = await axios.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id }, headers: { Authorization: `Email ${session.user.email}` } })
+    console.log(response)
     return {
       props: {
         cart: response.data
