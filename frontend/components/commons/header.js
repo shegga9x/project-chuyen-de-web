@@ -283,8 +283,8 @@ export default function Header({ updateCartHeader }) {
                                                     <i>
                                                         <FontAwesomeIcon icon={faBasketShopping} />
                                                     </i>
-                                                    <span className="item-counter">4</span>
-                                                    <span className="item-price">$220.00</span>
+                                                    <span className="item-counter">{userCart?.length}</span>
+                                                    {/* <span className="item-price">$220.00</span> */}
                                                 </a>
                                             </li>
                                         }
