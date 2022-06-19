@@ -6,7 +6,7 @@ import {
   faSync,
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
-import { getSession, useSession } from 'next-auth/client';
+import { getSession } from 'next-auth/client';
 import instance from "../helpers/axiosConfig";
 import axios from "axios";
 import { useState, useRef } from 'react';

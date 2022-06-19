@@ -6,15 +6,20 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Head from "next/head";
 import Layout from "../components/layout";
+import { getSession } from 'next-auth/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState, useRef } from 'react';
+import axios from "axios";
 import {
     faHome,
     faTrash,
     faSync,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default function Order() {
-    const [value, setValue] = React.useState('1');
+export default function Order(props) {
+
+    const [order, setOrder] = useState(props.order);
+    const [value, setValue] = useState('1');
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -52,6 +57,9 @@ export default function Order() {
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            {
+                                                
+                                            }
                                             <tr>
                                                 <td>
                                                     <div className="cart-anchor-image">
@@ -86,40 +94,15 @@ export default function Order() {
                                                 </td>
                                             </tr>
                                         </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Tổng tiền: 1.695.000</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
                                     </table>
                                 </div>
-                                <div className="calculation u-s-m-b-60">
-                                <div className="table-wrapper-2">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th colSpan={2}>Cart Totals</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <h3 className="calc-h3 u-s-m-b-0">Subtotal</h3>
-                                                </td>
-                                                <td>
-                                                    
-                                                </td>
-                                                <td>
-                                                    <span className="calc-text">123123</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <h3 className="calc-h3 u-s-m-b-0">Total</h3>
-                                                </td>
-                                                <td>
-                                                    <span className="calc-text">123123</span>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
                             </div>
 
                         </TabPanel>
@@ -329,4 +312,23 @@ export default function Order() {
         </>
     );
 
+}
+
+export async function getServerSideProps({ req }) {
+    const session = await getSession({ req });
+    if (session) {
+        const response = await axios.get("http://localhost:4000/api/order/getOrderItemByIdCustomer", { headers: { Authorization: `Email ${session.user.email}` } })
+        return {
+            props: {
+                order: response.data,
+                user: session.user
+            },
+        }
+    }
+    return {
+        redirect: {
+            permanent: false,
+            destination: "/account"
+        }
+    }
 }

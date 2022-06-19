@@ -11,7 +11,7 @@ import backend.backend.helpers.payload.response.CartItemResponse;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.entities.*;
-import backend.backend.persitence.repository.CartItemRepository;
+import backend.backend.persitence.repository.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.response.CustomSinglePage;
-import backend.backend.persitence.repository.CategoryRepository;
-import backend.backend.persitence.repository.ProductRepository;
-import backend.backend.persitence.repository.SingleProductPageRepository;
 import backend.backend.services.entityService.SingleProductPageService;
 
 @RunWith(SpringRunner.class)
@@ -39,6 +36,8 @@ class BackendApplicationTests {
     ProductRepository productRepository;
     @Autowired
     CartItemRepository cartItemRepository;
+    @Autowired
+    OrderItemRepository orderItemRepository;
 
     @Test
     @Transactional
@@ -108,9 +107,10 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-//        List<CartItemResponse> result = new ArrayList<>();
-//        for (CartItem cartItem : cartItemRepository.findByIdCustomer(1)) {
-//            result.add((CartItemResponse) SubUtils.mapperObject(cartItem, new CartItemResponse()));
-//        }
+        List<OrderItem> listOrderItem = orderItemRepository.findByIdCustomer(1);
+        System.out.println(listOrderItem);
+        for (OrderItem orderItem : listOrderItem) {
+            System.out.println(orderItem);
+        }
     }
 }
