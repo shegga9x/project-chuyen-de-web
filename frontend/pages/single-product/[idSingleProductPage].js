@@ -34,7 +34,13 @@ export default function SingleProduct({ data }) {
   const checkAddToCart = async () => {
     if (product != null) {
       document.getElementById("buttonAddToCart").disabled = true;
-      const req = await instance.post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: productQuantity.current.value }).catch(() => { alert("không thể thêm vào cart") });
+      const req = await instance.post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: productQuantity.current.value })
+        .catch((err) => {
+          document.getElementById("buttonAddToCart").disabled = false;
+          if (err.message != "Network Error") {
+            alert(err.response.data.message);
+          }
+        });
       if (req) {
         document.getElementById("buttonAddToCart").disabled = false;
         errDiv.current.style.display = "none"

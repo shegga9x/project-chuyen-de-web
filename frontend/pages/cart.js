@@ -23,9 +23,45 @@ export default function Cart(props) {
     return result.toFixed(2);
   }
 
+  const onlyNumberKey = (evt) => {
+    const filteredInput1 = evt.target.value.replace(/(^0)/, "");
+    const filteredInput2 = filteredInput1.replace(/[^0-9]+/g, "");
+    evt.target.value = filteredInput2;
+    // evt.target.value.replace(/[^0-9]+/g, "");
+  }
+
+  const changeQuantityCart = async (event, currentQuantity, product) => {
+    const target = event.target;
+    if (target.value == "" || target.value == currentQuantity) {
+      target.value = currentQuantity;
+    } else {
+      disableClick(product.idProduct);
+      const res = await instance.post(`http://localhost:4000/api/cart/updateProduct`, { product, quantity: target.value })
+        .catch((err) => {
+          removeDisableClick(product.idProduct);
+          if (err.message != "Network Error") {
+            alert(err.response.data.message);
+          }
+        });
+      if (res) {
+        const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
+        if (response) {
+          removeDisableClick(product.idProduct);
+          setCart(response.data);
+        }
+      }
+    }
+  }
+
   const addToCart = async (quantity, product) => {
     disableClick(product.idProduct);
-    const res = await instance.post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: quantity }).catch(() => { alert("không thể thêm vào cart") });
+    const res = await instance.post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: quantity })
+      .catch((err) => {
+        removeDisableClick(product.idProduct);
+        if (err.message != "Network Error") {
+          alert(err.response.data.message);
+        }
+      });
     if (res) {
       const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
       if (response) {
@@ -36,7 +72,7 @@ export default function Cart(props) {
   }
 
   const deletCart = async (quantity, product) => {
-    const res = await instance.post(`http://localhost:4000/api/cart/deleteCartItem`, { product, quantity: quantity }).catch(() => { alert("không thể delete product") });
+    const res = await instance.post(`http://localhost:4000/api/cart/deleteCartItem`, product).catch(() => { alert("không thể delete product") });
     if (res) {
       const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
       if (response) {
@@ -124,6 +160,8 @@ export default function Cart(props) {
                                 <div className="cart-quantity">
                                   <div className="quantity" id={element.product.idProduct}>
                                     <input
+                                      onBlur={(event) => { changeQuantityCart(event, element.quantity, element.product) }}
+                                      onChange={(event) => { onlyNumberKey(event) }}
                                       type="text"
                                       className="quantity-text-field"
                                       defaultValue={element.quantity}

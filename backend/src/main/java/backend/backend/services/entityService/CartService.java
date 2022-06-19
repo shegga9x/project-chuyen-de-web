@@ -1,6 +1,8 @@
 package backend.backend.services.entityService;
 
+import backend.backend.helpers.advice.CustomException;
 import backend.backend.helpers.payload.request.CartItemRequest;
+import backend.backend.helpers.payload.request.ProductRequest;
 import backend.backend.helpers.payload.response.CartItemResponse;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.utils.SubUtils;
@@ -37,11 +39,17 @@ public class CartService {
         if (optional.isPresent()) {
             CartItem cartItem1 = optional.get();
             int quantity = cartItem.getQuantity() + cartItem1.getQuantity();
+            if (quantity > cartItem1.getProduct().getQuantity()) {
+                throw new CustomException("vượt quá giới hạn tồn kho");
+            }
             if (quantity > 0) {
                 cartItem1.setQuantity(quantity);
             }
             cartItemRepository.save(cartItem1);
         } else {
+            if (cartItem.getQuantity() > cartItem.getProduct().getQuantity()) {
+                throw new CustomException("vượt quá giới hạn tồn kho");
+            }
             CartItem cartItem1 = new CartItem();
             cartItem1.setIdCustomer(idUser);
             cartItem1.setIdProduct(cartItem.getProduct().getIdProduct());
@@ -51,11 +59,23 @@ public class CartService {
         return "ok";
     }
 
-    public String deleteCartItem(CartItemRequest cartItem) {
+    public String deleteCartItem(ProductRequest productRequest) {
+        int idUser = SubUtils.getCurrentUser().getId();
+        Optional<CartItem> optional = cartItemRepository
+                .findById(new CartItemId(idUser, productRequest.getIdProduct()));
+        cartItemRepository.delete(optional.get());
+        return "ok";
+    }
+
+    public String updateProduct(CartItemRequest cartItem) {
         int idUser = SubUtils.getCurrentUser().getId();
         Optional<CartItem> optional = cartItemRepository
                 .findById(new CartItemId(idUser, cartItem.getProduct().getIdProduct()));
-        cartItemRepository.delete(optional.get());
+        CartItem cartItem1 = optional.get();
+        if (cartItem.getProduct().getQuantity() > cartItem1.getProduct().getQuantity()) {
+            throw new CustomException("vượt quá giới hạn tồn kho");
+        }
+        cartItemRepository.save(cartItem1);
         return "ok";
     }
 }
