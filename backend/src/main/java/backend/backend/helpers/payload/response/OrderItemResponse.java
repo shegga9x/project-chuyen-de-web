@@ -2,12 +2,12 @@ package backend.backend.helpers.payload.response;
 
 public class OrderItemResponse {
     private int idOrderItem;
-    private ProductResponse productResponse;
+    private ProductResponse product;
     private Byte status;
 
-    public OrderItemResponse(int idOrderItem,ProductResponse productResponse,Byte status) {
+    public OrderItemResponse(int idOrderItem, ProductResponse product, Byte status) {
         this.idOrderItem = idOrderItem;
-        this.productResponse = productResponse;
+        this.product = product;
         this.status = status;
     }
 
@@ -19,12 +19,12 @@ public class OrderItemResponse {
         this.idOrderItem = idOrderItem;
     }
 
-    public ProductResponse getProductResponse() {
-        return productResponse;
+    public ProductResponse getProduct() {
+        return product;
     }
 
-    public void setProductResponse(ProductResponse productResponse) {
-        this.productResponse = productResponse;
+    public void setProduct(ProductResponse product) {
+        this.product = product;
     }
 
     public Byte getStatus() {

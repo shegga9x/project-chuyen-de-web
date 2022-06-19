@@ -10,9 +10,12 @@ import { getSession } from 'next-auth/client';
 import instance from "../helpers/axiosConfig";
 import axios from "axios";
 import { useState, useRef } from 'react';
+import { changeRoute } from "../helpers/customFunction/changeRoute";
+import { useRouter } from "next/router";
 
 export default function Cart(props) {
 
+  const router = useRouter();
   const [cart, setCart] = useState(props.cart);
 
   const getTotalCart = () => {
@@ -78,6 +81,13 @@ export default function Cart(props) {
       if (response) {
         setCart(response.data);
       }
+    }
+  }
+
+  const addCartItemToOrder = async () => {
+    const res = await instance.get(`http://localhost:4000/api/order/addCartItemToOrder`).catch((err) => { console.log({err}) })
+    if (res) {
+      changeRoute("/order", router)
     }
   }
 
@@ -219,7 +229,7 @@ export default function Cart(props) {
                       <a href="shop-v1-root-category.html" className="continue">
                         Continue Shopping
                       </a>
-                      <a href="checkout.html" className="checkout">
+                      <a onClick={() => { addCartItemToOrder() }} className="checkout">
                         Proceed to Checkout
                       </a>
                     </div>

@@ -85,7 +85,8 @@ class BackendApplicationTests {
     @Transactional
     void test5() {
         Optional<SingleProductPage> singleProductPage = singleProductPageRepository.findByIdSingleProductPage(1);
-        CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(), singleProductPage.get().getIdCategory(),
+        CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+                singleProductPage.get().getIdCategory(),
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
                 singleProductPage.get().getTotalQuantity());
@@ -107,10 +108,18 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        List<OrderItem> listOrderItem = orderItemRepository.findByIdCustomer(1);
-        System.out.println(listOrderItem);
-        for (OrderItem orderItem : listOrderItem) {
-            System.out.println(orderItem);
+        // int idUser = SubUtils.getCurrentUser().getId();
+        List<CartItem> listCartItem = cartItemRepository.findByIdCustomer(1);
+        List<OrderItem> listOrderItem = new ArrayList<>();
+        for (CartItem cartItem : listCartItem) {
+            OrderItem orderItem = new OrderItem();
+            orderItem.setIdCustomer(1);
+            orderItem.setIdProduct(cartItem.getProduct().getIdProduct());
+            orderItem.setStatus((byte) 1);
+            listOrderItem.add(orderItem);
         }
+        System.out.println(orderItemRepository);
+        orderItemRepository.saveAll(listOrderItem);
+
     }
 }

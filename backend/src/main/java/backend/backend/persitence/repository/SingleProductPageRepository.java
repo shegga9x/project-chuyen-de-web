@@ -3,7 +3,6 @@ package backend.backend.persitence.repository;
 import java.util.List;
 import java.util.Optional;
 
-import backend.backend.persitence.entities.Category;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 

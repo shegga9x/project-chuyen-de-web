@@ -21,4 +21,8 @@ public class OrderController {
         return ResponseEntity.ok(orderService.getOrderItemByIdCustomer());
     }
 
+    @GetMapping("/addCartItemToOrder")
+    public ResponseEntity<?> addCartItemToOrder() {
+        return ResponseEntity.ok(orderService.addCartItemToOrder());
+    }
 }

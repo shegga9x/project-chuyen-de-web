@@ -32,7 +32,7 @@ public class OrderItem implements Serializable {
 
     // --- ENTITY PRIMARY KEY
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_order_item", nullable = false)
     private Integer idOrderItem;
 
