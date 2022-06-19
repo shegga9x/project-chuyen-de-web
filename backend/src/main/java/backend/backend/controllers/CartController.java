@@ -2,6 +2,7 @@ package backend.backend.controllers;
 
 import javax.validation.constraints.NotNull;
 
+import backend.backend.helpers.payload.request.ProductRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,7 +36,12 @@ public class CartController {
     }
 
     @PostMapping("/deleteCartItem")
-    public ResponseEntity<?> deleteCartItem(@NotNull @RequestBody CartItemRequest cartItemRequest) {
-        return ResponseEntity.ok(cartService.deleteCartItem(cartItemRequest));
+    public ResponseEntity<?> deleteCartItem(@NotNull @RequestBody ProductRequest productRequest) {
+        return ResponseEntity.ok(cartService.deleteCartItem(productRequest));
+    }
+
+    @PostMapping("/updateProduct")
+    public ResponseEntity<?> updateProduct(@NotNull @RequestBody CartItemRequest cartItemRequest) {
+        return ResponseEntity.ok(cartService.updateProduct(cartItemRequest));
     }
 }

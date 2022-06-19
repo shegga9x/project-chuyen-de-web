@@ -416,5 +416,6 @@ INSERT INTO Product VALUES(21,N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành M
 select p.id_product from Product p
 where p.id_single_product_page=1
 
+delete from Cart_Item
 select * from Cart_Item
 select * from Product
