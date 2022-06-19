@@ -9,7 +9,7 @@ import Layout from "../components/layout";
 import { getSession, useSession } from 'next-auth/client';
 import instance from "../helpers/axiosConfig";
 import axios from "axios";
-import { useEffect, useState } from 'react';
+import { useState, useRef } from 'react';
 
 export default function Cart(props) {
 
@@ -24,7 +24,19 @@ export default function Cart(props) {
   }
 
   const addToCart = async (quantity, product) => {
+    disableClick(product.idProduct);
     const res = await instance.post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: quantity }).catch(() => { alert("không thể thêm vào cart") });
+    if (res) {
+      const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
+      if (response) {
+        removeDisableClick(product.idProduct);
+        setCart(response.data);
+      }
+    }
+  }
+
+  const deletCart = async (quantity, product) => {
+    const res = await instance.post(`http://localhost:4000/api/cart/deleteCartItem`, { product, quantity: quantity }).catch(() => { alert("không thể delete product") });
     if (res) {
       const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
       if (response) {
@@ -33,14 +45,14 @@ export default function Cart(props) {
     }
   }
 
-  const deletCart = async (quantity, product) => {
-    const res = await instance.post(`http://localhost:4000/api/cart/deleteCartItem`, { product, quantity: quantity }).catch(() => { alert("không thể thêm vào cart") });
-    if (res) {
-      const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
-      if (response) {
-        setCart(response.data);
-      }
-    }
+  const disableClick = (productId) => {
+    let ele1 = document.getElementById(productId);
+    ele1.style.pointerEvents = 'none';
+  }
+
+  const removeDisableClick = (productId) => {
+    let ele1 = document.getElementById(productId);
+    ele1.style.removeProperty('pointer-events');
   }
 
   // return <h1>{JSON.stringify(cart)}</h1>
@@ -110,7 +122,7 @@ export default function Cart(props) {
                               </td>
                               <td>
                                 <div className="cart-quantity">
-                                  <div className="quantity">
+                                  <div className="quantity" id={element.product.idProduct}>
                                     <input
                                       type="text"
                                       className="quantity-text-field"
