@@ -37,7 +37,6 @@ class BackendApplicationTests {
     CategoryRepository categoryRepository;
     @Autowired
     ProductRepository productRepository;
-    private List<Product> byIdSingleProductPage;
 
     @Test
     @Transactional
@@ -98,8 +97,8 @@ class BackendApplicationTests {
         List<Product> list = productRepository.findByIdSingleProductPage(1);
         List<ProductResponse> l = new ArrayList<>();
         for (Product product : list) {
-             ProductResponse p = (ProductResponse) SubUtils.mapperObject(product,new ProductResponse());
-             l.add(p);
+            ProductResponse p = (ProductResponse) SubUtils.mapperObject(product, new ProductResponse());
+            l.add(p);
         }
         System.out.println(l);
     }
