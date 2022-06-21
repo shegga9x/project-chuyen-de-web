@@ -6,8 +6,102 @@ import {
   faSync,
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
+import { getSession } from 'next-auth/client';
+import instance from "../helpers/axiosConfig";
+import axios from "axios";
+import { useState, useRef } from 'react';
+import { changeRoute } from "../helpers/customFunction/changeRoute";
+import { useRouter } from "next/router";
 
-export default function Cart() {
+export default function Cart(props) {
+
+  const router = useRouter();
+  const [cart, setCart] = useState(props.cart);
+
+  const getTotalCart = () => {
+    let result = 0;
+    cart.forEach(ele => {
+      result += (ele.product.price * ele.quantity)
+    })
+    return result.toFixed(2);
+  }
+
+  const onlyNumberKey = (evt) => {
+    const filteredInput1 = evt.target.value.replace(/(^0)/, "");
+    const filteredInput2 = filteredInput1.replace(/[^0-9]+/g, "");
+    evt.target.value = filteredInput2;
+    // evt.target.value.replace(/[^0-9]+/g, "");
+  }
+
+  const changeQuantityCart = async (event, currentQuantity, product) => {
+    const target = event.target;
+    if (target.value == "" || target.value == currentQuantity) {
+      target.value = currentQuantity;
+    } else {
+      disableClick(product.idProduct);
+      const res = await instance.post(`http://localhost:4000/api/cart/updateProduct`, { product, quantity: target.value })
+        .catch((err) => {
+          removeDisableClick(product.idProduct);
+          if (err.message != "Network Error") {
+            alert(err.response.data.message);
+          }
+        });
+      if (res) {
+        const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
+        if (response) {
+          removeDisableClick(product.idProduct);
+          setCart(response.data);
+        }
+      }
+    }
+  }
+
+  const addToCart = async (quantity, product) => {
+    disableClick(product.idProduct);
+    const res = await instance.post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: quantity })
+      .catch((err) => {
+        removeDisableClick(product.idProduct);
+        if (err.message != "Network Error") {
+          alert(err.response.data.message);
+        }
+      });
+    if (res) {
+      const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
+      if (response) {
+        removeDisableClick(product.idProduct);
+        setCart(response.data);
+      }
+    }
+  }
+
+  const deletCart = async (quantity, product) => {
+    const res = await instance.post(`http://localhost:4000/api/cart/deleteCartItem`, product).catch(() => { alert("không thể delete product") });
+    if (res) {
+      const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
+      if (response) {
+        setCart(response.data);
+      }
+    }
+  }
+
+  const addCartItemToOrder = async () => {
+    const res = await instance.get(`http://localhost:4000/api/order/addCartItemToOrder`).catch((err) => { console.log({err}) })
+    if (res) {
+      changeRoute("/order", router)
+    }
+  }
+
+  const disableClick = (productId) => {
+    let ele1 = document.getElementById(productId);
+    ele1.style.pointerEvents = 'none';
+  }
+
+  const removeDisableClick = (productId) => {
+    let ele1 = document.getElementById(productId);
+    ele1.style.removeProperty('pointer-events');
+  }
+
+  // return <h1>{JSON.stringify(cart)}</h1>
   return (
     <>
       <Head>
@@ -16,7 +110,7 @@ export default function Cart() {
           DVDs & more
         </title>
       </Head>
-      <Layout>
+      <Layout isPageCart={true}>
         {/* Page Introduction Wrapper */}
         <div className="page-style-a">
           <div className="container">
@@ -42,7 +136,7 @@ export default function Cart() {
           <div className="container">
             <div className="row">
               <div className="col-lg-12">
-                <form>
+                <>
                   {/* Products-List-Wrapper */}
                   <div className="table-wrapper u-s-m-b-60">
                     <table>
@@ -54,173 +148,60 @@ export default function Cart() {
                           <th>Subtotal</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div className="cart-anchor-image">
-                              <a href="single-product.html">
-                                <img
-                                  src="/static/images/product/product@1x.jpg"
-                                  alt="Product"
-                                />
-                                <h6>Casual Hoodie Full Cotton</h6>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="cart-price">$55.00</div>
-                          </td>
-                          <td>
-                            <div className="cart-quantity">
-                              <div className="quantity">
-                                <input
-                                  type="text"
-                                  className="quantity-text-field"
-                                  defaultValue={1}
-                                />
-                                <a className="plus-a" data-max={1000}>
-                                  +
-                                </a>
-                                <a className="minus-a" data-min={1}>
-                                  -
-                                </a>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="action-wrapper">
-                              <button className="button button-outline-secondary fas fa-sync" >
-                                <i className="F-icon" >
-                                  <FontAwesomeIcon icon={faSync} />
-                                </i>
-                              </button>
-                              <button className="button button-outline-secondary fas fa-trash" >
-                                <i className="F-icon" >
-                                  <FontAwesomeIcon style={{ margin: '0' }} icon={faTrash} />
-                                </i>
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="cart-anchor-image">
-                              <a href="single-product.html">
-                                <img
-                                  src="/static/images/product/product@1x.jpg"
-                                  alt="Product"
-                                />
-                                <h6>
-                                  Black Rock Dress with High Jewelery Necklace
-                                </h6>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="cart-price">$55.00</div>
-                          </td>
-                          <td>
-                            <div className="cart-quantity">
-                              <div className="quantity">
-                                <input
-                                  type="text"
-                                  className="quantity-text-field"
-                                  defaultValue={1}
-                                />
-                                <a className="plus-a" data-max={1000}>
-                                  +
-                                </a>
-                                <a className="minus-a" data-min={1}>
-                                  -
-                                </a>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="action-wrapper">
-                              <button className="button button-outline-secondary fas fa-sync" />
-                              <button className="button button-outline-secondary fas fa-trash" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="cart-anchor-image">
-                              <a href="single-product.html">
-                                <img
-                                  src="/static/images/product/product@1x.jpg"
-                                  alt="Product"
-                                />
-                                <h6>Xiaomi Note 2 Black Color</h6>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="cart-price">$55.00</div>
-                          </td>
-                          <td>
-                            <div className="cart-quantity">
-                              <div className="quantity">
-                                <input
-                                  type="text"
-                                  className="quantity-text-field"
-                                  defaultValue={1}
-                                />
-                                <a className="plus-a" data-max={1000}>
-                                  +
-                                </a>
-                                <a className="minus-a" data-min={1}>
-                                  -
-                                </a>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="action-wrapper">
-                              <button className="button button-outline-secondary fas fa-sync" />
-                              <button className="button button-outline-secondary fas fa-trash" />
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="cart-anchor-image">
-                              <a href="single-product.html">
-                                <img
-                                  src="/static/images/product/product@1x.jpg"
-                                  alt="Product"
-                                />
-                                <h6>Dell Inspiron 15</h6>
-                              </a>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="cart-price">$55.00</div>
-                          </td>
-                          <td>
-                            <div className="cart-quantity">
-                              <div className="quantity">
-                                <input
-                                  type="text"
-                                  className="quantity-text-field"
-                                  defaultValue={1}
-                                />
-                                <a className="plus-a" data-max={1000}>
-                                  +
-                                </a>
-                                <a className="minus-a" data-min={1}>
-                                  -
-                                </a>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="action-wrapper">
-                              <button className="button button-outline-secondary fas fa-sync" />
-                              <button className="button button-outline-secondary fas fa-trash" />
-                            </div>
-                          </td>
-                        </tr>
+                      <tbody >
+                        {cart.map((element, i) => {
+                          return (
+                            <tr key={i} >
+                              <td>
+                                <div className="cart-anchor-image">
+                                  <a href="single-product.html">
+                                    <img
+                                      src="/static/images/product/product@1x.jpg"
+                                      alt="Product"
+                                    />
+                                    <h6>{element.product.name}</h6>
+                                  </a>
+                                </div>
+                              </td>
+                              <td>
+                                <div className="cart-price">{element.product.price}</div>
+                              </td>
+                              <td>
+                                <div className="cart-quantity">
+                                  <div className="quantity" id={element.product.idProduct}>
+                                    <input
+                                      onBlur={(event) => { changeQuantityCart(event, element.quantity, element.product) }}
+                                      onChange={(event) => { onlyNumberKey(event) }}
+                                      type="text"
+                                      className="quantity-text-field"
+                                      defaultValue={element.quantity}
+                                    />
+                                    <a className="plus-a" data-max={1000} onClick={() => { addToCart(1, element.product) }}>
+                                      +
+                                    </a>
+                                    <a className="minus-a" data-min={1} onClick={() => { addToCart(-1, element.product) }}>
+                                      -
+                                    </a>
+                                  </div>
+                                </div>
+                              </td>
+                              <td>
+                                <div className="action-wrapper">
+                                  <button className="button button-outline-secondary fas fa-sync" >
+                                    <i className="F-icon" >
+                                      <FontAwesomeIcon icon={faSync} />
+                                    </i>
+                                  </button>
+                                  <button className="button button-outline-secondary fas fa-trash" >
+                                    <i className="F-icon" onClick={() => { deletCart(element.quantity, element.product) }} >
+                                      <FontAwesomeIcon style={{ margin: '0' }} icon={faTrash} />
+                                    </i>
+                                  </button>
+                                </div>
+                              </td>
+                            </tr>
+                          )
+                        })}
                       </tbody>
                     </table>
                   </div>
@@ -248,13 +229,13 @@ export default function Cart() {
                       <a href="shop-v1-root-category.html" className="continue">
                         Continue Shopping
                       </a>
-                      <a href="checkout.html" className="checkout">
+                      <a onClick={() => { addCartItemToOrder() }} className="checkout">
                         Proceed to Checkout
                       </a>
                     </div>
                   </div>
                   {/* Coupon /- */}
-                </form>
+                </>
                 {/* Billing */}
                 <div className="calculation u-s-m-b-60">
                   <div className="table-wrapper-2">
@@ -270,7 +251,7 @@ export default function Cart() {
                             <h3 className="calc-h3 u-s-m-b-0">Subtotal</h3>
                           </td>
                           <td>
-                            <span className="calc-text">$222.00</span>
+                            <span className="calc-text">${getTotalCart()}</span>
                           </td>
                         </tr>
                         <tr>
@@ -290,7 +271,7 @@ export default function Cart() {
                               Calculate Shipping
                             </a>
                             <div className="collapse" id="shipping-calculation">
-                              <form>
+                              <>
                                 <div className="select-country-wrapper u-s-m-b-8">
                                   <div className="select-box-wrapper">
                                     <label
@@ -370,7 +351,7 @@ export default function Cart() {
                                     Update Totals
                                   </button>
                                 </div>
-                              </form>
+                              </>
                             </div>
                           </td>
                           <td></td>
@@ -391,7 +372,7 @@ export default function Cart() {
                             <h3 className="calc-h3 u-s-m-b-0">Total</h3>
                           </td>
                           <td>
-                            <span className="calc-text">$220.00</span>
+                            <span className="calc-text">${getTotalCart()}</span>
                           </td>
                         </tr>
                       </tbody>
@@ -407,4 +388,25 @@ export default function Cart() {
       </Layout>
     </>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (session) {
+    // console.log(session.user.id)
+    const response = await axios.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id }, headers: { Authorization: `Email ${session.user.email}` } })
+    // console.log(response)
+    return {
+      props: {
+        cart: response.data,
+        user: session.user
+      },
+    }
+  }
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/account"
+    }
+  }
 }

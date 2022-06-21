@@ -127,12 +127,11 @@ const nextAuthOptions = (req, res) => {
     ],
     session: {
       jwt: true,
-      maxAge: 60 * 30,
-      updateAge: 60 * 30,
+      maxAge: 2 * 24 * 60 * 60
     },
     jwt: {
       secret: "asdcvbtjhm",
-      maxAge: 60 * 30,
+      maxAge:  2 * 24 * 60 * 60
     },
     callbacks: {
       async jwt(token, user, account) {

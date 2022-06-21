@@ -50,7 +50,6 @@ public class AuthController {
     public ResponseEntity<?> authenticate(@Valid @RequestBody AuthenticateRequest model,
                                           HttpServletResponse servletResponse) {
         var response = accountService.authenticate(model, controlerUtils.ipAddress());
-        System.out.println(response.getRefreshToken());
         return ResponseEntity.ok(response);
     }
 

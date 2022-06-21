@@ -1,16 +1,9 @@
 import {
-  faFacebookF,
-  faGooglePlusG,
-  faPinterest,
-  faTwitter,
-} from "@fortawesome/free-brands-svg-icons";
-import {
   faEnvelope,
   faHeart,
   faHome,
   faMagnifyingGlass,
-  faPlus,
-  faRss,
+  faPlus
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
@@ -18,14 +11,45 @@ import { useRouter } from "next/router";
 import Layout from "../../components/layout";
 import instance from "../../helpers/axiosConfig";
 import useTrans from "../../helpers/customHook/useTrans";
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import axios from "axios";
+import { changeRoute } from "../../helpers/customFunction/changeRoute";
 
-export default function SingleProduct({
-  data: { singleProductPage: singleProductPage, listProduct: listProduct },
-}) {
+export default function SingleProduct({ data }) {
+
   const router = useRouter();
   const trans = useTrans();
+
+
+  //use State
   const [product, setProduct] = useState(null);
+
+  const [updateCartHeader, setUpdateCartHeader] = useState(0);
+
+  //use Ref
+  const errDiv = useRef();
+  const productQuantity = useRef();
+
+
+  const checkAddToCart = async () => {
+    if (product != null) {
+      document.getElementById("buttonAddToCart").disabled = true;
+      const req = await instance.post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: productQuantity.current.value })
+        .catch((err) => {
+          document.getElementById("buttonAddToCart").disabled = false;
+          if (err.message != "Network Error") {
+            alert(err.response.data.message);
+          }
+        });
+      if (req) {
+        document.getElementById("buttonAddToCart").disabled = false;
+        errDiv.current.style.display = "none"
+        setUpdateCartHeader(updateCartHeader + 1);
+      }
+    } else {
+      errDiv.current.style.display = "block"
+    }
+  }
 
   if (router.isFallback) {
     return <h1>Loading..</h1>;
@@ -40,7 +64,7 @@ export default function SingleProduct({
           DVDs & more
         </title>
       </Head>
-      <Layout shop>
+      <Layout shop updateCartHeader={updateCartHeader}>
         {/* Page Introduction Wrapper */}
         <div className="page-style-a">
           <div className="container">
@@ -65,6 +89,18 @@ export default function SingleProduct({
         <div className="page-detail u-s-p-t-80">
           <div className="container">
             {/* Product-Detail */}
+            <div style={{ display: "flex", marginBottom: "5px" }}>
+              <a style={{ color: "red" }} onClick={() => { changeRoute("/shop", router) }}>Shop</a>
+              <span style={{ marginLeft: "3px", marginRight: "3px" }}>{">"}</span>
+              {data.listCategory.map((ele, i) => {
+                const url = `/shop?page=1&size=8&catagory=${ele.idCategory}`;
+                return (<div key={i + "map1"}>
+                  <a style={{ color: "red" }} onClick={() => { changeRoute(url, router) }}>{ele.name}</a>
+                  <span style={{ marginLeft: "3px", marginRight: "3px" }}>{">"}</span>
+                </div>)
+              })}
+              <span>{data.singleProductPage.name}</span>
+            </div>
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12">
                 {/* Product-zoom-area */}
@@ -143,7 +179,7 @@ export default function SingleProduct({
                     <div className="product-title">
                       <h1>
                         <a href="single-product.html">
-                          {singleProductPage.name}
+                          {data.singleProductPage.name}
                         </a>
                       </h1>
                     </div>
@@ -175,11 +211,11 @@ export default function SingleProduct({
                     <h6 className="information-heading u-s-m-b-8">
                       {trans.detail.description}:
                     </h6>
-                    <p>{singleProductPage.description}</p>
+                    <p>{data.singleProductPage.description}</p>
                   </div>
                   <div className="section-3-price-original-discount u-s-p-y-14">
                     <div className="price">
-                      <h4>$ {product == null ? singleProductPage.priceRange : product.price}</h4>
+                      <h4>$ {product == null ? data.singleProductPage.priceRange : product.price}</h4>
                     </div>
                     {/* <div className="original-price">
                       <span>{trans.detail.price}:</span>
@@ -200,27 +236,32 @@ export default function SingleProduct({
                     </h6>
                     <div className="left">
                       <span>{trans.detail.availability}:</span>
-                      <span>{product == null ? singleProductPage.totalQuantity : product.quantity} </span>
+                      <span>{product == null ? data.singleProductPage.totalQuantity : product.quantity} </span>
                     </div>
                     <div className="left">
                       <span>{trans.detail.sold}:</span>
-                      <span>{singleProductPage.totalSoldCount}</span>
+                      <span>{data.singleProductPage.totalSoldCount}</span>
                     </div>
                   </div>
                   <div className="section-5-product-variants u-s-p-y-14">
                     <h6 className="information-heading u-s-m-b-8">
                       {trans.detail.variants}:
                     </h6>
-                    <div>
+                    <div style={{ display: "flex", rowGap: "5px", "flexWrap": "wrap" }}>
                       {/* <button>
                         áo xanh
                       </button> */}
-                      {listProduct.map((element, index) => {
-                        return <button key={index} onClick={() => {
-                          setProduct(element);
-                        }}>
+                      {data.listProduct.map((element, index) => {
+                        return (<button className="button button-outline-secondary u-s-m-l-6" style={product === element ? { backgroundColor: "gainsboro", borderRadius: "0px" } : { borderRadius: "0px" }} key={index}
+                          onClick={() => {
+                            if (element === product) {
+                              setProduct(null);
+                            } else {
+                              setProduct(element);
+                            }
+                          }}>
                           {element.name}
-                        </button>;
+                        </button>);
                       })}
                     </div>
                     {/* <div className="color u-s-m-b-11">
@@ -279,78 +320,80 @@ export default function SingleProduct({
                     </div> */}
                   </div>
                   <div className="section-6-social-media-quantity-actions u-s-p-y-14">
-                    <form action="#" className="post-form">
-                      <div className="quick-social-media-wrapper u-s-m-b-22">
-                        <span>{trans.detail.share}:</span>
-                        <ul className="social-media-list">
-                          <li>
-                            <a href="#">
-                              <i>
-                                <FontAwesomeIcon icon={faFacebookF} />
-                              </i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i>
-                                <FontAwesomeIcon icon={faTwitter} />
-                              </i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i>
-                                <FontAwesomeIcon icon={faGooglePlusG} />
-                              </i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i>
-                                <FontAwesomeIcon icon={faRss} />
-                              </i>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <i>
-                                <FontAwesomeIcon icon={faPinterest} />
-                              </i>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="quantity-wrapper u-s-m-b-22">
-                        <span>{trans.detail.quantity}:</span>
-                        <div className="quantity">
-                          <input
-                            type="text"
-                            className="quantity-text-field"
-                            defaultValue={1}
-                          />
-                          <a className="plus-a" data-max={1000}>
-                            +
+                    {/* <div className="quick-social-media-wrapper u-s-m-b-22">
+                      <span>{trans.detail.share}:</span>
+                      <ul className="social-media-list">
+                        <li>
+                          <a href="#">
+                            <i>
+                              <FontAwesomeIcon icon={faFacebookF} />
+                            </i>
                           </a>
-                          <a className="minus-a" data-min={1}>
-                            -
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i>
+                              <FontAwesomeIcon icon={faTwitter} />
+                            </i>
                           </a>
-                        </div>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i>
+                              <FontAwesomeIcon icon={faGooglePlusG} />
+                            </i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i>
+                              <FontAwesomeIcon icon={faRss} />
+                            </i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i>
+                              <FontAwesomeIcon icon={faPinterest} />
+                            </i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div> */}
+                    <div className="quantity-wrapper u-s-m-b-22">
+                      <span>{trans.detail.quantity}:</span>
+                      <div className="quantity">
+                        <input
+                          ref={productQuantity}
+                          type="text"
+                          className="quantity-text-field"
+                          defaultValue={1}
+                        />
+                        <a className="plus-a" data-max={1000}>
+                          +
+                        </a>
+                        <a className="minus-a" data-min={1}>
+                          -
+                        </a>
                       </div>
-                      <div>
-                        <button
-                          className="button button-outline-secondary"
-                          type="submit"
-                        >
-                          {trans.detail.addToCart}
-                        </button>
-                        <button className="button button-outline-secondary  u-s-m-l-6">
-                          <FontAwesomeIcon icon={faHeart} />
-                        </button>
-                        <button className="button button-outline-secondary u-s-m-l-6">
-                          <FontAwesomeIcon icon={faEnvelope} />
-                        </button>
-                      </div>
-                    </form>
+                    </div>
+                    <div ref={errDiv} style={{ display: "none" }}>
+                      <p style={{ color: "red" }}>Vui lòng chọn loại sản phẩm</p>
+                    </div>
+                    <div>
+                      <button id="buttonAddToCart"
+                        className="button button-outline-secondary"
+                        onClick={checkAddToCart}
+                      >
+                        {trans.detail.addToCart}
+                      </button>
+                      <button className="button button-outline-secondary  u-s-m-l-6">
+                        <FontAwesomeIcon icon={faHeart} />
+                      </button>
+                      <button className="button button-outline-secondary u-s-m-l-6">
+                        <FontAwesomeIcon icon={faEnvelope} />
+                      </button>
+                    </div>
                   </div>
                 </div>
                 {/* Product-details /- */}
@@ -358,6 +401,9 @@ export default function SingleProduct({
             </div>
             {/* Product-Detail /- */}
             {/* Detail-Tabs */}
+            <div>
+              <h1>Phải làm thằng này (Người bán)</h1>
+            </div>
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12">
                 <div className="detail-tabs-wrapper u-s-p-t-80">
@@ -406,7 +452,7 @@ export default function SingleProduct({
                           mascots across the chest, either as part of a uniform
                           or personal preference.
                         </p>
-                        <img
+                        {/* <img
                           className="desc-img img-fluid u-s-m-b-26"
                           src="/static/images/product/product@3x.jpg"
                           alt="Product"
@@ -417,14 +463,14 @@ export default function SingleProduct({
                           height={400}
                           src="/static/images/product/iframe-youtube.jpg"
                           allowFullScreen=""
-                        />
+                        /> */}
                       </div>
                     </div>
                     {/* Description-Tab /- */}
                     {/* Specifications-Tab */}
                     <div className="tab-pane fade" id="specification">
                       <div className="specification-whole-container">
-                        <div className="spec-ul u-s-m-b-50">
+                        {/* <div className="spec-ul u-s-m-b-50">
                           <h4 className="spec-heading">Key Features</h4>
                           <ul>
                             <li>Heather Grey</li>
@@ -446,14 +492,24 @@ export default function SingleProduct({
                               </tr>
                             </tbody>
                           </table>
-                        </div>
+                        </div> */}
                         <div className="spec-table u-s-m-b-50">
                           <h4 className="spec-heading">Product Information</h4>
                           <table>
                             <tbody>
                               <tr>
-                                <td>Main Material</td>
-                                <td>Cotton</td>
+                                <td>Danh mục</td>
+                                <td> <div style={{ display: "flex", marginBottom: "5px" }}>
+                                  <a style={{ color: "red" }} onClick={() => { changeRoute("/shop", router) }}>Shop</a>
+                                  <span style={{ marginLeft: "3px", marginRight: "3px" }}>{">"}</span>
+                                  {data.listCategory.map((ele, i, arr) => {
+                                    const url = `/shop?page=1&size=8&catagory=${ele.idCategory}`;
+                                    return (<div key={i + "map2"}>
+                                      <a style={{ color: "red" }} onClick={() => { changeRoute(url, router) }}>{ele.name}</a>
+                                      <span style={arr.length - 1 !== i ? { marginLeft: "3px", marginRight: "3px" } : { display: "none" }}>{">"}</span>
+                                    </div>)
+                                  })}
+                                </div></td>
                               </tr>
                               <tr>
                                 <td>Color</td>
@@ -897,7 +953,7 @@ export default function SingleProduct({
                             <a className="item-addwishlist" href="">
                               Add to Wishlist
                             </a>
-                            <a className="item-addCart" href="">
+                            <a className="item-addCart" onClick={() => { setCart("update") }}>
                               Add to Cart
                             </a>
                           </div>
@@ -1183,7 +1239,7 @@ export default function SingleProduct({
   );
 }
 
-export async function getStaticPaths() {
+export async function getStaticPaths({ locales }) {
   const paths = [];
   const res = await instance.get(
     `http://localhost:4000/api/product/loadAllSingleProductPage`
@@ -1191,11 +1247,9 @@ export async function getStaticPaths() {
   if (res != undefined) {
     const listSingleProductPagesID = res.data;
     listSingleProductPagesID.forEach((element) => {
-      paths.push({
-        params: {
-          idSingleProductPage: element,
-        },
-      });
+      paths.push(
+        { params: { idSingleProductPage: element }, locale: 'en' },
+        { params: { idSingleProductPage: element }, locale: 'vi' });
     });
   }
   return {
@@ -1208,20 +1262,28 @@ export async function getStaticProps({ params }) {
   const res = await instance.get(
     `http://localhost:4000/api/product/getSingleProductPagePerPage/${params.idSingleProductPage}`
   );
-  // Equivalent to `axios.get('https://httpbin.org/get?answer=42')`
-  // const res = await axios.get('https://httpbin.org/get', { params: { answer: 42 } });
   if (res != undefined) {
-    const res2 = await instance.get(
-      `http://localhost:4000/api/product/getListProductBySingleProductPage`,
-      { params: { idSingleProduct: res.data.idSingleProductPage } }
-    );
-    if (res2 != undefined) {
-      // console.log(res2.data)
+    let res1 = null;
+    let res2 = null;
+    await axios.all([
+      instance.get(
+        `http://localhost:4000/api/product/getListProductBySingleProductPage`,
+        { params: { idSingleProduct: res.data.idSingleProductPage } }),
+      instance.get(`http://localhost:4000/api/product/getListCategoryBySingleProductPage`,
+        { params: { idCategory: res.data.idCategory } })
+    ])
+      .then(axios.spread((data1, data2) => {
+        // output of req.
+        res1 = data1;
+        res2 = data2;
+      }))
+    if (res2 != null && res1 != null) {
       return {
         props: {
           data: {
             singleProductPage: res.data,
-            listProduct: res2.data,
+            listProduct: res1.data,
+            listCategory: res2.data
           },
         },
       };

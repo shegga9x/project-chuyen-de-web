@@ -291,6 +291,3 @@ export function getServerSideProps({ req, res, query }) {
     }
     return { props: {} }
 }
-
-
-//controller

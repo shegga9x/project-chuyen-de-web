@@ -16,4 +16,6 @@ public interface SingleProductPageRepository extends PagingAndSortingRepository<
     List<SingleProductPage> findAll();
 
     Optional<SingleProductPage> findByIdSingleProductPage(Integer idSingleProductPage);
+
+
 }

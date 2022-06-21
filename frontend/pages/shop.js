@@ -20,12 +20,14 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import CheckboxTree from "react-checkbox-tree";
 import Layout from "../components/layout";
+import { changeRoute } from "../helpers/customFunction/changeRoute";
 import "../node_modules/react-checkbox-tree/lib/react-checkbox-tree.css";
 
 export default function Shop(props) {
   const [checked, setChecked] = useState(props.catagory);
   const [expanded, setExpanded] = useState([]);
   const router = useRouter();
+
   function handleChange(event) {
     event.preventDefault();
     router.push(event.target.value);
@@ -33,6 +35,7 @@ export default function Shop(props) {
   function handleChangeCategories(url) {
     router.push(url);
   }
+
   return (
     <>
       <Head>
@@ -99,13 +102,13 @@ export default function Shop(props) {
                           setChecked(checked);
                           handleChangeCategories(
                             "shop?page=" +
-                              props.currentPage +
-                              "&size=" +
-                              props.currentSize +
-                              (checked.length != 0
-                                ? "&catagory=" + checked.toString()
-                                : "") +
-                              (props.sorter ? "&sorter=" + props.sorter : "")
+                            props.currentPage +
+                            "&size=" +
+                            props.currentSize +
+                            (checked.length != 0
+                              ? "&catagory=" + checked.toString()
+                              : "") +
+                            (props.sorter ? "&sorter=" + props.sorter : "")
                           );
                         }
                       }}
@@ -325,7 +328,7 @@ export default function Shop(props) {
                               <div className="image-container">
                                 <a
                                   className="item-img-wrapper-link"
-                                  href="single-product.html"
+                                  onClick={() => { changeRoute(`/single-product/${d.idSingleProductPage}`, router) }}
                                 >
                                   <img
                                     className="img-fluid"
@@ -377,7 +380,7 @@ export default function Shop(props) {
                                     </li>
                                   </ul>
                                   <h6 className="item-title">
-                                    <a href="single-product.html">{d.name}</a>
+                                    <a onClick={() => { changeRoute(`/single-product/${d.idSingleProductPage}`, router) }}>{d.name}</a>
                                   </h6>
                                   <div className="item-description">
                                     <p>
@@ -472,13 +475,11 @@ export async function getServerSideProps({ query }) {
       query.catagory == null ? "" : `&catagory=${query.catagory}`;
     const sorter = query.sorter == null ? "" : `&sorter=${query.sorter}`;
     const res = await fetch(
-      `http://localhost:4000/api/product/loadAll?page=${
-        page - 1
+      `http://localhost:4000/api/product/loadAll?page=${page - 1
       }&size=${size}${catagory}${sorter}`
     );
     const res2 = await fetch(`http://localhost:4000/api/product/loadCagetory`);
     const data = await res.json();
-    console.log(data);
     const data2 = await res2.json();
     const data3 = JSON.parse(
       JSON.stringify(data2).replaceAll(',"children":[]', "")

@@ -1,10 +1,12 @@
 package backend.backend.services.entityService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import backend.backend.helpers.payload.response.CategoryResponse;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.persitence.entities.Product;
 import backend.backend.persitence.repository.ProductRepository;
@@ -53,7 +55,7 @@ public class SingleProductPageService {
     }
 
     private Page<SingleProductPage> getSortFromSorter(Integer sorter, PageRequest pageRequest,
-            Integer[] catagory) {
+                                                      Integer[] catagory) {
         List<SingleProductPage> list = new ArrayList<>();
         if (catagory != null) {
             list = singleProductPageRepository.findByIdCategoryIn(catagory);
@@ -123,11 +125,11 @@ public class SingleProductPageService {
     public CustomSinglePage getSingleProductPagePerPage(int idSingleProduct) {
         Optional<SingleProductPage> singleProductPage = singleProductPageRepository
                 .findByIdSingleProductPage(idSingleProduct);
-        CustomSinglePage result = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+        CustomSinglePage result = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(), singleProductPage.get().getIdCategory(),
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
                 singleProductPage.get().getTotalQuantity());
-        System.out.println(result);
+        // System.out.println(result);
         return result;
     }
 
@@ -138,6 +140,23 @@ public class SingleProductPageService {
             ProductResponse p = (ProductResponse) SubUtils.mapperObject(product, new ProductResponse());
             result.add(p);
         }
+        return result;
+    }
+
+    public List<CategoryResponse> getListCategoryBySingleProductPage(int idCategory) {
+        List<CategoryResponse> result = new ArrayList<>();
+        Optional<Category> optional = categoryRepository.findByIdCategory(51);
+        if (optional.isPresent()) {
+            result.add((CategoryResponse) SubUtils.mapperObject(optional.get(), new CategoryResponse()));
+        }
+        while (true) {
+            optional = categoryRepository.findByIdCategory(optional.get().getIdCategoryParent());
+            if(optional.isEmpty()){
+                break;
+            }
+            result.add((CategoryResponse) SubUtils.mapperObject(optional.get(), new CategoryResponse()));
+        }
+        Collections.reverse(result);
         return result;
     }
 }
