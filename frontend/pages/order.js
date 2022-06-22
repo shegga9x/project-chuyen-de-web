@@ -6,7 +6,6 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Head from "next/head";
 import Layout from "../components/layout";
-import Canvas from '../components/order/canvas';
 import OrderProgress from '../components/order/orderProgress';
 import { getSession } from 'next-auth/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,7 +16,6 @@ import {
     faTrash,
     faSync,
 } from "@fortawesome/free-solid-svg-icons";
-import { set } from 'react-hook-form';
 
 export default function Order(props) {
 
@@ -31,6 +29,14 @@ export default function Order(props) {
             document.body.classList.toggle('modal-visibile');
             const model = document.getElementsByClassName('modal-load')[0];
             model.classList.toggle('visible');
+            document.getElementsByClassName('el-input_name')[0].value = "";
+            ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+            document.getElementsByClassName('step2')[0].classList.remove('active');
+            document.getElementsByClassName('step3')[0].classList.remove('active');
+            document.getElementsByClassName('content_step1')[0].style.display = "block"
+            document.getElementsByClassName('content_step2')[0].style.display = "none"
+            document.getElementsByClassName('content_step3')[0].style.display = "none"
+            document.getElementsByClassName('content_step3_inside')[0].style.display = "none"
         }, 500)
     }
 

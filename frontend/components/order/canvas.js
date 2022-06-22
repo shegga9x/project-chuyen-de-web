@@ -24,8 +24,7 @@ export default function Canvas() {
             <input type="button" id="btn1" defaultValue="Solid" />
             <input type="button" id="btn2" defaultValue="Clear" />
             <input type="button" id="btn3" defaultValue="Save" />
-            <input type="button" id="btn4" defaultValue="Submit" onClick={() => { bt4nOnClick() }} /><br />
-            <canvas id="canvas" width={500} height={500} />
+            <canvas id="canvas" width={200} height={200} />
             <img id="image" alt="" />
             <Script
                 strategy="afterInteractive"

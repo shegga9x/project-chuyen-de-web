@@ -1,13 +1,19 @@
 import Head from "next/head";
-import { useEffect } from 'react';
+import Script from 'next/script';
+import instance from "../../helpers/axiosConfig";
+import { useEffect, useState } from 'react';
 export default function OrderProgress({ open, closeModal }) {
 
+    const [userName, setUserName] = useState(null);
+    const [saveImg, setSaveImg] = useState(false);
 
     useEffect(() => {
         if (open) {
             const popup = document.getElementById("popup");
             popup.style.opacity = 1;
         } else {
+            setUserName(null);
+            setSaveImg(false);
             const popup = document.getElementById("popup");
             popup.style.opacity = 0;
         }
@@ -18,11 +24,36 @@ export default function OrderProgress({ open, closeModal }) {
     }
 
     const continueStep1 = () => {
-
+        const inputText = document.getElementsByClassName('el-input_name')[0];
+        if (inputText.value != "" && inputText.value.length >= 6) {
+            document.getElementsByClassName('step2')[0].classList.add('active');
+            document.getElementsByClassName('content_step1')[0].style.display = "none"
+            document.getElementsByClassName('content_step2')[0].style.display = "block"
+        }
     }
 
-    const continueStep2 = () => {
+    const continueStep2 = async () => {
+        let img = document.getElementById("image");
+        if (saveImg == true) {
+            document.getElementsByClassName('step3')[0].classList.add('active');
+            document.getElementsByClassName('content_step2')[0].style.display = "none"
+            document.getElementsByClassName('content_step3')[0].style.display = "block"
+            const res = await instance.post(`http://localhost:4000/api/digitalSignature/signing`, img.src, { headers: { 'Content-Type': 'text/plain' }, responseType: 'blob' }).catch((err) => { console.log({ err }) });
+            if (res) {
+                let url = window.URL.createObjectURL(res.data);
+                let a = document.createElement('a');
+                a.href = url;
+                a.download = "test.pdf";
+                a.click();
+                document.getElementsByClassName('content_step3_inside')[0].style.display = "block";
+            }
+        }
+    }
 
+    const isSaveImg = () => {
+        if (isCanvasBlank() == false) {
+            setSaveImg(true);
+        }
     }
 
 
@@ -86,7 +117,7 @@ export default function OrderProgress({ open, closeModal }) {
                     outline: none;
                 }
         
-                ​ .header-tabs {
+                .header-tabs {
                     margin-top: 10px;
                 }
         
@@ -160,12 +191,13 @@ export default function OrderProgress({ open, closeModal }) {
                         bạn</span>
                     <div className="el-form">
                         <div style={{ display: 'flex' }}>
-                            <canvas style={{ border: '1px solid #e68a00', width: '250px', height: '100px' }} />
+                            <canvas id="mycanvas" style={{ border: '1px solid #e68a00' }} width={250} height={100} />
+                            <img id="image" alt="" style={{ display: "none" }} />
                             <div style={{ marginLeft: '10px' }}>
                                 {/* <button class="button_submit"
                             style="font-size: 14px;display: block;margin-top: 4px;">Start</button> */}
-                                <button className="button_submit" style={{ fontSize: '14px', display: 'block', marginTop: '20px' }}>Clear</button>
-                                <button className="button_submit" style={{ fontSize: '14px', display: 'block', marginTop: '10px' }}>Save</button>
+                                <button id="btn2" className="button_submit" style={{ fontSize: '14px', display: 'block', marginTop: '20px' }}>Clear</button>
+                                <button onClick={isSaveImg} id="btn3" className="button_submit" style={{ fontSize: '14px', display: 'block', marginTop: '10px' }}>Save</button>
                             </div>
                         </div>
                         <button onClick={closeModal1} className="button_submit" style={{ float: 'right', marginTop: '10px' }}>
@@ -177,13 +209,13 @@ export default function OrderProgress({ open, closeModal }) {
                     </div>
                 </div>
                 <div className="content_step3" style={{ display: 'none' }}>
-                    <span style={{ fontFamily: 'Muli,Sarabun', fontWeight: 700, fontSize: '14px' }}>Cảm ơn bạn đã hoàn tất thủ tục, Xin hãy đợi</span>
-                    <div style={{ display: "none" }}>
-                        <div className="el-form" style={{ textAlign: 'center' }}>
+                    <span style={{ fontFamily: 'Muli,Sarabun', fontWeight: 700, fontSize: '14px' }}>Cảm ơn bạn đã hoàn tất thủ tục, Xin hãy đợi ...</span>
+                    <div className="content_step3_inside" style={{ display: "none" }}>
+                        {/* <div className="el-form" style={{ textAlign: 'center' }}>
                             <button className="button_submit" style={{ marginTop: '10px', width: '180px' }}>
                                 Download file PDF
                             </button>
-                        </div>
+                        </div> */}
                         <div className="el-form">
                             <button onClick={closeModal1} className="button_submit" style={{ float: 'right', marginTop: '10px' }}>
                                 Thoát
@@ -192,6 +224,86 @@ export default function OrderProgress({ open, closeModal }) {
                     </div>
                 </div>
             </div>
+            <Script
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+                    var mycanvas = document.getElementById("mycanvas");
+                    var ctx = mycanvas.getContext("2d");
+            
+                    var previousMouseX = null;
+                    var isDrawing = false;
+            
+            
+                    function getMousePosition(mycanvas, evt) {
+            
+                        let rect = mycanvas.getBoundingClientRect();
+            
+                        if (evt.clientX !== undefined && evt.clientY !== undefined) {
+                            return {
+                                x: evt.clientX - rect.left,
+                                y: evt.clientY - rect.top
+                            };
+                        }
+                    }
+            
+                    /* BUTTONS */
+                    $("#btn2").on("click", function () {
+                        console.log('????');
+                        ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+                        //ctx.strokeStyle = "#009933";
+                    });
+            
+                    $("#btn3").on("click", function () {
+                        let img = document.getElementById("image");
+                        img.src = mycanvas.toDataURL();
+                        console.log(img.src);
+                    });
+            
+                        
+                    $("#mycanvas").on("mousedown", function (e) {
+                        isDrawing = true;
+                        let pos = getMousePosition(mycanvas, e);
+                        move(pos.x, pos.y);
+            
+                    });
+            
+                    $("#mycanvas").on("mousemove", function (e) {
+                        if (isDrawing) {
+                            let pos = getMousePosition(mycanvas, e);
+                            stroke(pos.x, pos.y);
+                        }
+                    });
+            
+                    $("#mycanvas").on("mouseup", function () {
+                        isDrawing = false;
+                    });
+            
+                    function stroke(mouseX, mouseY) {
+                        ctx.globalCompositeOperation = "source-over";
+                        ctx.lineJoin = ctx.lineCap = "round";
+                        ctx.lineWidth = 10;
+                        ctx.beginPath();
+                        ctx.moveTo(previousMouseX, previousMouseY);
+                        ctx.lineTo(mouseX, mouseY);
+                        ctx.closePath();
+                        ctx.stroke();
+                        move(mouseX, mouseY);
+                    }
+            
+                    function move(mouseX, mouseY) {
+                        previousMouseX = mouseX;
+                        previousMouseY = mouseY;
+                    }
+
+                    function isCanvasBlank() {
+                        return !mycanvas.getContext('2d')
+                          .getImageData(0, 0, mycanvas.width, mycanvas.height).data
+                          .some(channel => channel !== 0);
+                    }
+                        `,
+                }}
+            />
         </>
     )
 } 

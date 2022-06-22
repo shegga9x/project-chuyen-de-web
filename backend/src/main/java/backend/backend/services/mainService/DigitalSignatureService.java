@@ -39,7 +39,8 @@ public class DigitalSignatureService {
         byte[] result = null;
         String realImageBase64 = imageBase64.split(",")[1];
         byte[] bytes = Base64.getMimeDecoder().decode(realImageBase64);
-        int idUser = SubUtils.getCurrentUser().getId();
+//        int idUser = SubUtils.getCurrentUser().getId();
+        int idUser = 1;
         Account account = accountRepository.getById(idUser);
         List<OrderItem> orderItems = orderItemRepository.findByIdCustomer(idUser);
         final String uuid = UUID.randomUUID().toString();
