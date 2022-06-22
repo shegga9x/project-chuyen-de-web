@@ -1,7 +1,7 @@
 // import axios from "axios";
 import Head from "next/head";
 import Script from 'next/script';
-import instance from "../helpers/axiosConfig";
+import instance from "../../helpers/axiosConfig";
 export default function Canvas() {
 
     const bt4nOnClick = async () => {

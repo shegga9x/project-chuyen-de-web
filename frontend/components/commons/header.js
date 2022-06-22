@@ -30,9 +30,10 @@ import { useRouter } from 'next/router'
 import { changeLanguage } from "../../helpers/customFunction/changeLanguage";
 import { changeRoute } from "../../helpers/customFunction/changeRoute";
 import { useEffect, useState } from 'react';
+import Logout from "../../pages/logout";
 
 export default function Header({ updateCartHeader, isPageCart }) {
-    
+
     const router = useRouter()
 
     const [session, loading] = useSession();
@@ -64,7 +65,9 @@ export default function Header({ updateCartHeader, isPageCart }) {
 
     }, [updateCartHeader, loading]);
 
-
+    function handleChange(event) {
+        router.push("/logout");
+    }
     const getTotalCart = () => {
         let result = 0;
         userCart.forEach(ele => {
@@ -145,10 +148,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                             </a>
                                         </li>}
                                         {session && <li>
-                                            <a onClick={(e) => {
-                                                e.preventDefault();
-                                                signOut()
-                                            }}>
+                                            <a onClick={() => { changeRoute('/logout', router) }}>
                                                 <i className=" u-s-m-r-9" >
                                                     <FontAwesomeIcon icon={faRightFromBracket} />
                                                 </i>Sign out

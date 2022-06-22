@@ -7,13 +7,11 @@ import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfo;
 import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfoParser;
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.OrderItem;
-import backend.backend.persitence.model.UserDetailCustom;
 import backend.backend.persitence.repository.AccountRepository;
 import backend.backend.persitence.repository.OrderItemRepository;
 import org.apache.pdfbox.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
@@ -44,7 +42,6 @@ public class DigitalSignatureService {
         int idUser = SubUtils.getCurrentUser().getId();
         Account account = accountRepository.getById(idUser);
         List<OrderItem> orderItems = orderItemRepository.findByIdCustomer(idUser);
-//        byte[] bytes = IOUtils.toByteArray(new FileInputStream("sig2.png"));
         final String uuid = UUID.randomUUID().toString();
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -54,9 +51,6 @@ public class DigitalSignatureService {
                     "phung vip", uuid, qrcode);
             result = bos.toByteArray();
             bos.close();
-//            BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(uuid + ".pdf"));
-//            FileCopyUtils.copy(new ByteArrayInputStream(bos.toByteArray()), stream);
-//            stream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,18 +1,6 @@
 import {
-  faAngleDown,
-  faCartPlus,
-  faCheckSquare,
-  faChevronDown,
-  faChevronRight,
-  faEnvelope,
-  faHeart,
-  faHome,
-  faMinusSquare,
-  faPlusSquare,
-  faSearch,
-  faSquare,
-  faTh,
-  faThList,
+  faAngleDown, faCartPlus, faCheckSquare, faChevronDown, faChevronRight,
+  faEnvelope, faHeart, faHome, faMinusSquare, faPlusSquare, faSearch, faSquare, faTh, faThList,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Head from "next/head";
@@ -22,6 +10,7 @@ import CheckboxTree from "react-checkbox-tree";
 import Layout from "../components/layout";
 import { changeRoute } from "../helpers/customFunction/changeRoute";
 import "../node_modules/react-checkbox-tree/lib/react-checkbox-tree.css";
+import { getSession } from "next-auth/client"
 
 export default function Shop(props) {
   const [checked, setChecked] = useState(props.catagory);
@@ -35,7 +24,12 @@ export default function Shop(props) {
   function handleChangeCategories(url) {
     router.push(url);
   }
-
+  function generateURL(page, size, cagetoryCheck, sorter) {
+    return "shop?page=" + page
+      + "&size=" + size
+      + (cagetoryCheck.length != 0 ? "&catagory=" + cagetoryCheck.toString() : "")
+      + (sorter ? "&sorter=" + sorter : "")
+  }
   return (
     <>
       <Head>
@@ -55,14 +49,10 @@ export default function Shop(props) {
                   <ul className="bread-crumb">
                     <li className="has-separator">
                       {/* <i className="ion ion-md-home" /> */}
-                      <i>
-                        <FontAwesomeIcon icon={faHome} />
-                      </i>
+                      <i> <FontAwesomeIcon icon={faHome} /> </i>
                       <a href="home.html">Home</a>
                     </li>
-                    <li className="is-marked">
-                      <a href="shop-v1-root-category.html">Shop</a>
-                    </li>
+                    <li className="is-marked"> <a href="shop-v1-root-category.html">Shop</a> </li>
                   </ul>
                 </div>
               </div>
@@ -81,42 +71,21 @@ export default function Shop(props) {
                   {/* Shop-Left-Side-Bar-Wrapper */}
                   <div className="col-lg-3 col-md-3 col-sm-12">
                     <h3 className="title-name">Browse Categories</h3>
-                    <CheckboxTree
-                      nodes={props.nodes}
-                      icons={{
-                        check: <FontAwesomeIcon icon={faCheckSquare} />,
-                        uncheck: <FontAwesomeIcon icon={faSquare} />,
-                        halfCheck: <FontAwesomeIcon icon={faMinusSquare} />,
-                        expandClose: <FontAwesomeIcon icon={faChevronRight} />,
-                        expandOpen: <FontAwesomeIcon icon={faChevronDown} />,
-                        expandAll: <FontAwesomeIcon icon={faPlusSquare} />,
-                        collapseAll: <FontAwesomeIcon icon={faMinusSquare} />,
-                        parentClose: null,
-                        parentOpen: null,
-                        leaf: null,
-                      }}
-                      checked={checked}
-                      expanded={expanded}
-                      onCheck={(checked) => {
-                        {
-                          setChecked(checked);
-                          handleChangeCategories(
-                            "shop?page=" +
-                            props.currentPage +
-                            "&size=" +
-                            props.currentSize +
-                            (checked.length != 0
-                              ? "&catagory=" + checked.toString()
-                              : "") +
-                            (props.sorter ? "&sorter=" + props.sorter : "")
-                          );
-                        }
-                      }}
-                      onExpand={(expanded) => {
-                        setExpanded(expanded);
-                      }}
+                    <CheckboxTree nodes={props.nodes} icons={{
+                      check: <FontAwesomeIcon icon={faCheckSquare} />,
+                      uncheck: <FontAwesomeIcon icon={faSquare} />,
+                      halfCheck: <FontAwesomeIcon icon={faMinusSquare} />,
+                      expandClose: <FontAwesomeIcon icon={faChevronRight} />,
+                      expandOpen: <FontAwesomeIcon icon={faChevronDown} />,
+                      expandAll: <FontAwesomeIcon icon={faPlusSquare} />,
+                      collapseAll: <FontAwesomeIcon icon={faMinusSquare} />,
+                      parentClose: null, parentOpen: null, leaf: null,
+                    }} checked={checked} expanded={expanded} onCheck={(checked) => {
+                      { setChecked(checked); handleChangeCategories(generateURL(props.currentPage, props.currentSize, checked, props.sorter)); }
+                    }}
+                      onExpand={(expanded) => { setExpanded(expanded); }}
                     />
-                    {/* Fetch-Categories-from-Root-Category  /- */}
+                    {/* Fetch-Categories-from-Root-Category /- */}
                   </div>
                   {/* Shop-Left-Side-Bar-Wrapper /- */}
                   {/* Shop-Right-Wrapper */}
@@ -127,196 +96,71 @@ export default function Shop(props) {
                         {/* <a id="list-anchor" className="active"> */}
                         <a id="list-anchor" className="active">
                           {/* <i className="fas fa-th-list" /> */}
-                          <i>
-                            <FontAwesomeIcon icon={faThList} />
-                          </i>
+                          <i> <FontAwesomeIcon icon={faThList} /> </i>
                         </a>
                         <a id="grid-anchor">
                           {/* <i className="fas fa-th" /> */}
-                          <i>
-                            <FontAwesomeIcon icon={faTh} />
-                          </i>
+                          <i> <FontAwesomeIcon icon={faTh} /> </i>
                         </a>
                       </div>
-                      {/* Toolbar Sorter 1  */}
+                      {/* Toolbar Sorter 1 */}
                       <div className="toolbar-sorter">
                         <div className="select-box-wrapper">
                           <label className="sr-only" htmlFor="sort-by">
                             Sort By
                           </label>
-
-                          <select
-                            className="select-box"
-                            id="sort-by"
-                            onChange={(event) => handleChange(event)}
-                          >
-                            <option
-                              value={
-                                "shop?page=" +
-                                props.currentPage +
-                                "&size=" +
-                                props.currentSize +
-                                (checked.length != 0
-                                  ? "&catagory=" + checked.toString()
-                                  : "") +
-                                "&sorter=" +
-                                1
-                              }
-                              selected={props.sorter == 1 ? true : false}
-                            >
-                              {" "}
-                              Sort By: Best Selling{" "}
+                          <select className="select-box" id="sort-by" onChange={(event) => handleChange(event)}>
+                            <option value={generateURL(props.currentPage, props.currentSize, checked, 1)}
+                              defaultValue={props.sorter == 1 ? true : false}>
+                              Sort By: Best Selling
                             </option>
-                            <option
-                              value={
-                                "shop?page=" +
-                                props.currentPage +
-                                "&size=" +
-                                props.currentSize +
-                                (checked.length != 0
-                                  ? "&catagory=" + checked.toString()
-                                  : "") +
-                                "&sorter=" +
-                                2
-                              }
-                              selected={props.sorter == 2 ? true : false}
-                            >
+                            <option value={generateURL(props.currentPage, props.currentSize, checked, 2)}
+                              defaultValue={props.sorter == 2 ? true : false}>
                               Sort By: Latest
                             </option>
-                            <option
-                              value={
-                                "shop?page=" +
-                                props.currentPage +
-                                "&size=" +
-                                props.currentSize +
-                                (checked.length != 0
-                                  ? "&catagory=" + checked.toString()
-                                  : "") +
-                                "&sorter=" +
-                                3
-                              }
-                              selected={props.sorter == 3 ? true : false}
-                            >
+                            <option value={generateURL(props.currentPage, props.currentSize, checked, 3)}
+                              defaultValue={props.sorter == 3 ? true : false}>
                               Sort By: Lowest Price
                             </option>
-                            <option
-                              value={
-                                "shop?page=" +
-                                props.currentPage +
-                                "&size=" +
-                                props.currentSize +
-                                (checked.length != 0
-                                  ? "&catagory=" + checked.toString()
-                                  : "") +
-                                "&sorter=" +
-                                4
-                              }
-                              selected={props.sorter == 4 ? true : false}
-                            >
+                            <option value={generateURL(props.currentPage, props.currentSize, checked, 4)}
+                              defaultValue={props.sorter == 4 ? true : false}>
                               Sort By: Highest Price
                             </option>
-                            <option
-                              value={
-                                "shop?page=" +
-                                props.currentPage +
-                                "&size=" +
-                                props.currentSize +
-                                (checked.length != 0
-                                  ? "&catagory=" + checked.toString()
-                                  : "") +
-                                "&sorter=" +
-                                5
-                              }
-                              selected={props.sorter == 5 ? true : false}
-                            >
+                            <option value={generateURL(props.currentPage, props.currentSize, checked, 5)}
+                              defaultValue={props.sorter == 5 ? true : false}>
                               Sort By: Best Rating
                             </option>
                           </select>
-                          <i
-                            style={{
-                              fontSize: 8,
-                              position: "absolute",
-                              right: 8,
-                              top: "50%",
-                              transform: "translateY(-50%)",
-                            }}
-                          >
+                          <i style={{ fontSize: 8, position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", }}>
                             <FontAwesomeIcon icon={faAngleDown} />
                           </i>
                         </div>
                       </div>
-                      {/* //end Toolbar Sorter 1  */}
-                      {/* Toolbar Sorter 2  */}
+                      {/* //end Toolbar Sorter 1 */}
+                      {/* Toolbar Sorter 2 */}
                       <div className="toolbar-sorter-2">
                         <div className="select-box-wrapper">
                           <label className="sr-only" htmlFor="show-records">
                             Show Records Per Page
                           </label>
-                          <select
-                            className="select-box"
-                            id="show-records"
-                            onChange={(event) => handleChange(event)}
-                          >
-                            <option
-                              value={
-                                "shop?page=" +
-                                props.currentPage +
-                                "&size=" +
-                                8 +
-                                (checked.length != 0
-                                  ? "&catagory=" + checked.toString()
-                                  : "") +
-                                (props.sorter ? "&sorter=" + props.sorter : "")
-                              }
-                              selected={props.currentSize == 8 ? true : false}
-                            >
+                          <select className="select-box" id="show-records" onChange={(event) => handleChange(event)}>
+                            <option value={generateURL(props.currentPage, 8, checked, props.sorter)}
+                              defaultValue={props.currentSize == 8 ? true : false}>
                               Show: 8
                             </option>
-                            <option
-                              value={
-                                "shop?page=" +
-                                props.currentPage +
-                                "&size=" +
-                                16 +
-                                (checked.length != 0
-                                  ? "&catagory=" + checked.toString()
-                                  : "") +
-                                (props.sorter ? "&sorter=" + props.sorter : "")
-                              }
-                              selected={props.currentSize == 16 ? true : false}
-                            >
+                            <option value={generateURL(props.currentPage, 16, checked, props.sorter)}
+                              defaultValue={props.currentSize == 16 ? true : false}>
                               Show: 16
                             </option>
-                            <option
-                              value={
-                                "shop?page=" +
-                                props.currentPage +
-                                "&size=" +
-                                28 +
-                                (checked.length != 0
-                                  ? "&catagory=" + checked.toString()
-                                  : "") +
-                                (props.sorter ? "&sorter=" + props.sorter : "")
-                              }
-                              selected={props.currentSize == 28 ? true : false}
-                            >
+                            <option value={generateURL(props.currentPage, 28, checked, props.sorter)}
+                              defaultValue={props.currentSize == 28 ? true : false}>
                               Show: 28
                             </option>
                           </select>
-                          <i
-                            style={{
-                              fontSize: 8,
-                              position: "absolute",
-                              right: 8,
-                              top: "50%",
-                              transform: "translateY(-50%)",
-                            }}
-                          >
-                            <FontAwesomeIcon icon={faAngleDown} />
-                          </i>
+                          <i style={{ fontSize: 8, position: "absolute", right: 8, top: "50%", transform: "translateY(-50%)", }}> <FontAwesomeIcon icon={faAngleDown} /> </i>
                         </div>
                       </div>
-                      {/* //end Toolbar Sorter 2  */}
+                      {/* //end Toolbar Sorter 2 */}
                     </div>
                     {/* Page-Bar /- */}
                     {/* Row-of-Product-Container */}
@@ -326,57 +170,27 @@ export default function Shop(props) {
                           <div className="product-item col-lg-4 col-md-6 col-sm-6">
                             <div className="item">
                               <div className="image-container">
-                                <a
-                                  className="item-img-wrapper-link"
-                                  onClick={() => { changeRoute(`/single-product/${d.idSingleProductPage}`, router) }}
-                                >
-                                  <img
-                                    className="img-fluid"
-                                    src={
-                                      "/static/images/product/" +
-                                      (d.imgURL == ""
-                                        ? "product@3x.jpg"
-                                        : d.imgURL)
-                                    }
-                                    alt="Product"
-                                  />
+                                <a className="item-img-wrapper-link" onClick={() => { changeRoute(`/single-product/${d.idSingleProductPage}`, router) }} >
+                                  <img className="img-fluid" src={"/static/images/product/" + (d.imgURL == "" ? "product@3x.jpg" : d.imgURL)} alt="Product" />
                                 </a>
                                 <div className="item-action-behaviors">
-                                  <a
-                                    className="item-quick-look"
-                                    data-toggle="modal"
-                                    href="#quick-view"
-                                  >
-                                    <FontAwesomeIcon icon={faSearch} />
-                                  </a>
-                                  <a className="item-mail" href="">
-                                    <FontAwesomeIcon icon={faEnvelope} />
-                                  </a>
-                                  <a className="item-addwishlist" href="">
-                                    <FontAwesomeIcon icon={faHeart} />
-                                  </a>
-                                  <a className="item-addCart" href="">
-                                    <FontAwesomeIcon icon={faCartPlus} />
-                                  </a>
+                                  <a className="item-quick-look" data-toggle="modal" href="#quick-view"> <FontAwesomeIcon icon={faSearch} /> </a>
+                                  <a className="item-mail" href=""> <FontAwesomeIcon icon={faEnvelope} /> </a>
+                                  <a className="item-addwishlist" href=""> <FontAwesomeIcon icon={faHeart} /> </a>
+                                  <a className="item-addCart" href=""> <FontAwesomeIcon icon={faCartPlus} /> </a>
                                 </div>
                               </div>
                               <div className="item-content">
                                 <div className="what-product-is">
                                   <ul className="bread-crumb">
                                     <li className="has-separator">
-                                      <a href="shop-v1-root-category.html">
-                                        Men's
-                                      </a>
+                                      <a href="shop-v1-root-category.html"> Men's </a>
                                     </li>
                                     <li className="has-separator">
-                                      <a href="shop-v2-sub-category.html">
-                                        Tops
-                                      </a>
+                                      <a href="shop-v2-sub-category.html"> Tops </a>
                                     </li>
                                     <li>
-                                      <a href="shop-v3-sub-sub-category.html">
-                                        Hoodies
-                                      </a>
+                                      <a href="shop-v3-sub-sub-category.html"> Hoodies </a>
                                     </li>
                                   </ul>
                                   <h6 className="item-title">
@@ -397,22 +211,15 @@ export default function Shop(props) {
                                     </p>
                                   </div>
                                   <div className="item-stars">
-                                    <div
-                                      className="star"
-                                      title="4.5 out of 5 - based on 23 Reviews"
-                                    >
+                                    <div className="star" title="4.5 out of 5 - based on 23 Reviews">
                                       <span style={{ width: 67 }} />
                                     </div>
                                     <span>(23)</span>
                                   </div>
                                 </div>
                                 <div className="price-template">
-                                  <div className="item-new-price">
-                                    ${d.priceRange}
-                                  </div>
-                                  <div className="item-old-price">
-                                    ${d.priceRange}
-                                  </div>
+                                  <div className="item-new-price"> ${d.priceRange} </div>
+                                  <div className="item-old-price"> ${d.priceRange} </div>
                                 </div>
                               </div>
                               <div className="tag new">
@@ -431,22 +238,10 @@ export default function Shop(props) {
                     <div className="pagination-number">
                       <ul>
                         {Array.apply(null, { length: props.data.totalPage })
-                          .map(Number.call, Number)
-                          .map((item) => {
+                          .map(Number.call, Number).map((item) => {
                             return (
-                              <li
-                                className={
-                                  props.currentPage == item + 1 ? "active" : ""
-                                }
-                              >
-                                <a
-                                  href={
-                                    "shop?page=" +
-                                    (item + 1) +
-                                    "&size=" +
-                                    props.currentSize
-                                  }
-                                >
+                              <li className={props.currentPage == item + 1 ? "active" : ""}>
+                                <a href={"shop?page=" + (item + 1) + " &size=" + props.currentSize} >
                                   {item + 1}
                                 </a>
                               </li>
@@ -467,42 +262,39 @@ export default function Shop(props) {
   );
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps(context) {
   try {
-    const page = query.page == null ? 1 : query.page;
-    const size = query.size == null ? 8 : query.size;
+    const page = context.query.page == null ? 1 : context.query.page;
+    const size = context.query.size == null ? 8 : context.query.size;
     const catagory =
-      query.catagory == null ? "" : `&catagory=${query.catagory}`;
-    const sorter = query.sorter == null ? "" : `&sorter=${query.sorter}`;
-    const res = await fetch(
-      `http://localhost:4000/api/product/loadAll?page=${page - 1
-      }&size=${size}${catagory}${sorter}`
-    );
-    const res2 = await fetch(`http://localhost:4000/api/product/loadCagetory`);
+      context.query.catagory == null ? "" : `&catagory=${context.query.catagory}`;
+    const sorter = context.query.sorter == null ? "" : `&sorter=${context.query.sorter}`;
+    const session = await getSession(context)
+    const res = await fetch(`http://localhost:4000/api/product/loadAll?page=${page - 1}&size=${size}${catagory}${sorter}`, {
+      method: 'get',
+      headers: new Headers({ 'Authorization': 'Bearer ' + session.user.jwt })
+    });
+    const res2 = await fetch(`http://localhost:4000/api/product/loadCagetory`, {
+      method: 'get',
+      headers: new Headers({ 'Authorization': 'Bearer ' + session.user.jwt })
+    });
+    console.log(res2)
     const data = await res.json();
     const data2 = await res2.json();
+    // console.log(data)
     const data3 = JSON.parse(
-      JSON.stringify(data2).replaceAll(',"children":[]', "")
-    );
+      JSON.stringify(data2).replaceAll('," children":[]', ""));
     if (data.page != null) {
       return {
-        props: {
+        props:
+        {
           data: data,
           nodes: data3,
           currentPage: page,
-          currentSize: size,
-          sorter: query.sorter == null ? null : query.sorter,
-          catagory: catagory ? catagory.split("=")[1].split(",") : [],
+          currentSize: size, sorter: context.query.sorter == null ? null : context.query.sorter,
+          catagory: catagory ? catagory.split("=")[1].split(" ,") : [],
         },
       };
     }
-  } catch (error) {
-    console.log(error);
-  }
-  return {
-    redirect: {
-      permanent: false,
-      destination: "/500",
-    },
-  };
+  } catch (error) { console.log(error); } return { redirect: { permanent: false, destination: "/500", }, };
 }

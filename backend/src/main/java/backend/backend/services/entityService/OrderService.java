@@ -23,7 +23,8 @@ public class OrderService {
     private CartItemRepository cartItemRepository;
 
     public List<OrderItemResponse> getOrderItemByIdCustomer() {
-        int idUser = SubUtils.getCurrentUser().getId();
+//        int idUser = SubUtils.getCurrentUser().getId();
+        int idUser = 1;
         List<OrderItem> listOrderItem = orderItemRepository.findByIdCustomer(idUser);
         List<OrderItemResponse> result = new ArrayList<>();
         for (OrderItem orderItem : listOrderItem) {

@@ -6,7 +6,8 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Head from "next/head";
 import Layout from "../components/layout";
-import Canvas from '../components/canvas';
+import Canvas from '../components/order/canvas';
+import OrderProgress from '../components/order/orderProgress';
 import { getSession } from 'next-auth/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useRef } from 'react';
@@ -16,11 +17,30 @@ import {
     faTrash,
     faSync,
 } from "@fortawesome/free-solid-svg-icons";
+import { set } from 'react-hook-form';
 
 export default function Order(props) {
 
+    const [open, setOpen] = useState(false);
     const [order, setOrder] = useState(props.order);
     const [value, setValue] = useState('1');
+
+    const closeModal = () => {
+        setOpen(false);
+        setTimeout(() => {
+            document.body.classList.toggle('modal-visibile');
+            const model = document.getElementsByClassName('modal-load')[0];
+            model.classList.toggle('visible');
+        }, 500)
+    }
+
+
+    const openModal = () => {
+        document.body.classList.toggle('modal-visibile');
+        const model = document.getElementsByClassName('modal-load')[0];
+        model.classList.toggle('visible');
+        setOpen(true);
+    }
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -112,6 +132,30 @@ export default function Order(props) {
                                             </tr>
                                         </tfoot>
                                     </table>
+                                </div>
+                                <div className="coupon-continue-checkout u-s-m-b-60">
+                                    {/* <div className="coupon-area">
+                                        <h6>Enter your coupon code if you have one.</h6>
+                                        <div className="coupon-field">
+                                            <label className="sr-only" htmlFor="coupon-code">
+                                                Apply Coupon
+                                            </label>
+                                            <input
+                                                id="coupon-code"
+                                                type="text"
+                                                className="text-field"
+                                                placeholder="Coupon Code"
+                                            />
+                                            <button type="submit" className="button">
+                                                Apply Coupon
+                                            </button>
+                                        </div>
+                                    </div> */}
+                                    <div className="button-area">
+                                        <a onClick={openModal} className="checkout">
+                                            Xác Nhận Order
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </TabPanel>
@@ -287,8 +331,8 @@ export default function Order(props) {
                             <h1>Cac</h1>
                         </TabPanel>
                     </TabContext>
-                    <div>
-                        <Canvas></Canvas>
+                    <div className="modal-load">
+                        <OrderProgress open={open} closeModal={closeModal}></OrderProgress>
                     </div>
                 </div>
             </Layout>
