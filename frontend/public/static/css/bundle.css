@@ -94,8 +94,8 @@ Text Domain: Groover
   overflow: hidden;
   pointer-events: all;
 
-  /* make the background white, but also with 80% opacity */
-  background: rgba(222, 222, 222, 0.8);
+  /* make the background white, but also with 50% opacity */
+  background: rgba(222, 222, 222, 0.5);
 }
 
 .modal-load.visible {
