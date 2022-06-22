@@ -1,14 +1,14 @@
 import axios from "axios";
 import { getSession } from "next-auth/client";
 
-const InstanceAxios = () => {
+const InstanceAxios = (props) => {
     const instance = axios.create()
     instance.interceptors.request.use(async (request) => {
         const session = await getSession()
-
+     
         if (session) {
             request.headers.common = {
-                Authorization: `Email ${session.user.email}`
+                Authorization: `Bearer ${session.user.jwt}`
             }
         }
         return request
@@ -20,7 +20,7 @@ const InstanceAxios = () => {
         },
         (error) => {
             // console.log(`error`, error)
-            return Promise.reject(error);
+            // return Promise.reject(error);
         }
     )
 

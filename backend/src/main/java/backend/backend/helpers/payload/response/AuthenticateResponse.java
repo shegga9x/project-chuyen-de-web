@@ -14,9 +14,8 @@ public class AuthenticateResponse {
     public Date updated;
     public boolean isVerified;
     public String jwtToken;
-
+    public Date expireToken;
     public String refreshToken;
-
 
     public String getIdAccount() {
         return this.idAccount;
@@ -25,7 +24,7 @@ public class AuthenticateResponse {
     public void setIdAccount(String idAccount) {
         this.idAccount = idAccount;
     }
-  
+
     public String getTitle() {
         return this.title;
     }
@@ -108,6 +107,14 @@ public class AuthenticateResponse {
 
     public void setRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
+    }
+
+    public Date getExpireToken() {
+        return this.expireToken;
+    }
+
+    public void setExpireToken(Date expireToken) {
+        this.expireToken = expireToken;
     }
 
     @Override

@@ -1,11 +1,16 @@
+const version = require('../../../package.json').version
+
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
 import axios from "axios";
+import Cookies from 'cookies'
 
 const nextAuthOptions = (req, res) => {
+  const cookiesSetter = new Cookies(req, res)
+
   return {
     providers: [
       GoogleProvider({
@@ -13,59 +18,32 @@ const nextAuthOptions = (req, res) => {
         clientSecret: process.env.GOOGLE_SECRET,
         profileUrl: "https://www.googleapis.com/oauth2/v1/userinfo?alt=json",
         profile: async (profile) => {
-          //bước này lấy được profile account google và mình tùy chỉnh theo ý mình
-          // => gọi api check user ở bước này là oke lun
-
-          const accountGoogleRequest = {
-            id: profile.id,
-            providerId: profile.id,
-            name: profile.name,
-            firstName: profile.family_name,
-            lastName: profile.given_name,
-            email: profile.email,
-            imgUrl: profile.picture,
-          };
-
-          // gọi api check user, không cần dữ liệu trả về
-          await axios.post("http://localhost:4000/api/accounts/check-user-login-google", accountGoogleRequest).catch(
-            e => {
-              console.log(e)
-              const errorMessage = e.response === undefined ? 'error connect' : 'e.response.data.message'
-              accountGoogleRequest.error = errorMessage;
-            }
-          )
-
-          console.log("profile google")
-
-          //console.log(accountGoogleRequest);
-
-          return {
-            ...accountGoogleRequest,
-          };
+          const accountGoogleRequest = { id: profile.id, providerId: profile.id, name: profile.name, firstName: profile.family_name, lastName: profile.given_name, email: profile.email, imgUrl: profile.picture, };
+          const response = await axios.post(process.env.BE_AUTH + "authenticate-google-with-jwt", accountGoogleRequest).
+            catch(error => { throw new Error(error.response.data.message); });
+          const cookies = response.headers['set-cookie']
+          cookiesSetter.set(cookies)
+          if (response) {
+            const name = response.data.firstName && response.data.lastName
+              ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, };
+          }
         },
       }),
       GithubProvider({
         clientId: process.env.GITHUB_ID,
         clientSecret: process.env.GITHUB_SECRET,
         profile: async (profile) => {
-          console.log(profile)
           const accountGithubRequest = { id: profile.id, providerId: profile.id, name: profile.login, email: profile.email, imgUrl: profile.avatar_url };
-          // gọi api check user, không cần dữ liệu trả về
-          await axios.post("http://localhost:4000/api/accounts/check-user-login-github", accountGithubRequest).catch(
-            e => {
-              console.log(e)
-              const errorMessage = e.response === undefined ? 'error connect' : 'e.response.data.message'
-              accountGithubRequest.error = errorMessage;
-            }
-          )
-
-          //console.log('profile github')
-
-          //console.log(accountGithubRequest);
-
-          return {
-            ...accountGithubRequest,
-          };
+          const response = await axios.post(process.env.BE_AUTH + "authenticate-github-with-jwt", accountGithubRequest)
+            .catch(error => { throw new Error(error.response.data.message); });
+          const cookies = response.headers['set-cookie']
+          cookiesSetter.set(cookies)
+          if (response) {
+            const name = response.data.firstName && response.data.lastName
+              ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, };
+          }
         },
       }),
       FacebookProvider({
@@ -73,124 +51,71 @@ const nextAuthOptions = (req, res) => {
         clientSecret: process.env.FACEBOOK_SECRET,
         profile: async (profile) => {
           const accountFacebookRequest = { id: profile.id, providerId: profile.id, name: profile.name, email: profile.email, imgUrl: profile.picture.data.url };
-          // gọi api check user, không cần dữ liệu trả về
-          await axios.post("http://localhost:4000/api/accounts/check-user-login-facebook", accountFacebookRequest).catch(
-            e => {
-              console.log(e)
-              const errorMessage = e.response === undefined ? 'error connect' : 'e.response.data.message'
-              accountFacebookRequest.error = errorMessage;
-            }
-          )
-
-          console.log('profile facebook')
-
-          //console.log(accountFacebookRequest);
-
-          return {
-            ...accountFacebookRequest,
-          };
+          const response = await axios.post(process.env.BE_AUTH + "authenticate-facebook-with-jwt", accountFacebookRequest)
+            .catch(error => { throw new Error(error.response.data.message); });
+          if (response) {
+            const name = response.data.firstName && response.data.lastName
+              ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, };
+          }
         },
       }),
       CredentialsProvider({
         name: "Credentials",
         authorize: async (credentials) => {
-          try {
-            const response = await axios.post(
-              "http://localhost:4000/api/accounts/authenticate",
-              {
-                password: credentials.password,
-                email: credentials.email,
-              }
-            );
-
-            if (response) {
-              // //console.log('----user----')
-              // //console.log(user)
-              const name =
-                response.data.firstName && response.data.lastName
-                  ? `${response.data.firstName} ${response.data.lastName}`
-                  : `${response.data.email}`;
-              return {
-                id: response.data.idAccount,
-                name: name,
-                email: response.data.email,
-              };
-            }
-          } catch (e) {
-            console.log(e);
-            const errorMessage = e.response === undefined ? 'system error' : e.response.data.message
-            // Redirecting to the login page with error message in the URL
-            throw new Error(errorMessage)
+          const response = await axios.post(process.env.BE_AUTH + "authenticate", { password: credentials.password, email: credentials.email })
+            .catch(error => { throw new Error(error.response.data.message); });
+          const cookies = response.headers['set-cookie']
+          cookiesSetter.set(cookies)
+          if (response) {
+            const name = response.data.firstName && response.data.lastName
+              ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, };
           }
         },
       }),
     ],
-    session: {
-      jwt: true,
-      maxAge: 2 * 24 * 60 * 60
-    },
-    jwt: {
-      secret: "asdcvbtjhm",
-      maxAge:  2 * 24 * 60 * 60
-    },
+    session: { maxAge: process.env.jwtRefreshExpirationMs },
     callbacks: {
-      async jwt(token, user, account) {
-        // có thể lấy jwt ở đây
-        // chỉ chạy lúc đăng nhập
-        if (account) {
-          console.log('----user----')
-          console.log(user)
-          if (user.error !== undefined) {
-            throw new Error(user.error + '&email=' + user.email);
-          }
-          if (account.provider === 'google') {
-            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-google-with-jwt', { ...user }, { withCredentials: true })
-              .catch(e => {
-                const errorMessage = e.response.data.message
-                throw new Error(errorMessage + '&email=' + account.email)
-              })
-            const name = (userGetFormApi.data.firstName && userGetFormApi.data.lastName) ? `${userGetFormApi.data.firstName} ${userGetFormApi.data.lastName}` : `${userGetFormApi.data.email}`
-            user = { id: userGetFormApi.data.idAccount, name: name, email: userGetFormApi.data.email };
-          } else if (account.provider === 'github') {
-            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-github-with-jwt', { ...user }, { withCredentials: true })
-              .catch(e => {
-                const errorMessage = e.response.data.message
-                throw new Error(errorMessage + '&email=' + account.email)
-              })
-            user = { id: userGetFormApi.data.idAccount, name: userGetFormApi.name, email: userGetFormApi.data.email };
-          } else if (account.provider === 'facebook') {
-            const userGetFormApi = await axios.post('http://localhost:4000/api/accounts/authenticate-facebook-with-jwt', { ...user }, { withCredentials: true })
-              .catch(e => {
-                const errorMessage = e.response.data.message
-                throw new Error(errorMessage + '&email=' + account.email)
-              })
-            user = { id: userGetFormApi.data.idAccount, name: userGetFormApi.name, email: userGetFormApi.data.email };
-          }
-        }
-
-        // chỉ chạy lúc đăng nhập
+      async jwt(token, user) {
         if (user) {
-          token.id = user.id
+          return { jwtExpires: Date.now() + process.env.jwtExpirationMs, ...user }
         }
-
-        return token;
+        if (Date.now() < token.jwtExpires) {
+          return token
+        }
+        return refreshAccessToken(token, cookiesSetter)
       },
       async session(session, token) {
-        // có thể lấy jwt ở đây
-        // chạy lại mỗi request
-        //console.log(token)
-        session.user.id = token.id;
-        // //console.log(session.user);
+        session.user = token
         return session;
       },
     },
     pages: {
-      error: "/account", // Changing the error redirect page to home page
+      signIn: '/account',
+      error: "/account",
     },
   };
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
+async function refreshAccessToken(token, cookiesSetter) {
+  try {
+    const response = await axios.post(process.env.BE_AUTH + "refresh-token", {}, {
+      headers: { Cookie: "refreshToken=" + cookiesSetter.get('refreshToken') + ";" }
+    });
+    const cookies = response.headers['set-cookie']
+    cookiesSetter.set(cookies)
+
+    return {
+      ...token,
+      id: response.data.idAccount,
+      jwtExpires: Date.now() + process.env.jwtExpirationMs,
+      jwt: response.data.jwtToken,
+    }
+  } catch (error) {
+    throw new Error("Refresh Token error");
+  }
+}
 export default (req, res) => {
   return NextAuth(req, res, nextAuthOptions(req, res));
 };

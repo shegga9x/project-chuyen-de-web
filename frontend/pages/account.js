@@ -29,15 +29,15 @@ export default function Account(props) {
     const [password, setPassword] = useState("");
 
     const loginWithGoogle = () => {
-        signIn('google');
+        signIn('google', { callbackUrl: '/' });
     }
 
     const loginWithGithub = () => {
-        signIn('github');
+        signIn('github', { callbackUrl: '/' });
     }
 
     const loginWithFacebook = () => {
-        signIn('facebook');
+        signIn('facebook', { callbackUrl: '/' });
     }
 
     const submit = (e) => {
@@ -287,7 +287,7 @@ export function getServerSideProps({ req, res, query }) {
             }
         } else {
             return { props: { error: query.error } }
-        }   
+        }
     }
     return { props: {} }
 }
