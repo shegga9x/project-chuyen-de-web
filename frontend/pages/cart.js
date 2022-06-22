@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
 import { getSession } from 'next-auth/client';
-import instance from "../helpers/axiosConfig";
+import instance from "../helpers/axiosConfigtest";
 import axios from "axios";
 import { useState, useRef } from 'react';
 import { changeRoute } from "../helpers/customFunction/changeRoute";
@@ -392,21 +392,23 @@ export default function Cart(props) {
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
-  if (session) {
-    // console.log(session.user.id)
-    const response = await axios.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id }, headers: { Authorization: `Email ${session.user.email}` } })
-    // console.log(response)
-    return {
-      props: {
-        cart: response.data,
-        user: session.user
-      },
-    }
-  }
-  return {
-    redirect: {
-      permanent: false,
-      destination: "/account"
-    }
-  }
+  // console.log(req)
+  // if (session) {
+  //   // console.log(session.user.id)
+  //   const response = await axios.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id }, headers: { Authorization: `Email ${session.user.email}` } })
+  //   // console.log(response)
+  //   return {
+  //     props: {
+  //       cart: response.data,
+  //       user: session.user
+  //     },
+  //   }
+  // }
+  // return {
+  //   redirect: {
+  //     permanent: false,
+  //     destination: "/account"
+  //   }
+  // }
+    const response = await instance(req).get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id }, headers: { Authorization: `Email ${session.user.email}` } })
 }

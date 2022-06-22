@@ -173,6 +173,8 @@ const nextAuthOptions = (req, res) => {
           token.id = user.id
         }
 
+        //////
+
         return token;
       },
       async session(session, token) {

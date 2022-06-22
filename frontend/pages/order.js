@@ -6,6 +6,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Head from "next/head";
 import Layout from "../components/layout";
+import Canvas from '../components/canvas';
 import { getSession } from 'next-auth/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useRef } from 'react';
@@ -42,7 +43,7 @@ export default function Order(props) {
                 </title>
             </Head>
             <Layout >
-                <Box sx={{ width: '100%', typography: 'body1' }} >
+                <div className='container'>
                     <TabContext value={value} >
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                             <TabList onChange={handleChange} aria-label="lab API tabs example" centered>
@@ -54,6 +55,67 @@ export default function Order(props) {
                             </TabList>
                         </Box>
                         <TabPanel value="1">
+                            <div className='container' >
+                                <div className="table-wrapper u-s-m-b-60">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {order.map((element, i) => {
+                                                return (
+                                                    <tr key={i}>
+                                                        <td>
+                                                            <input type="checkbox"></input>
+                                                        </td>
+                                                        <td>
+                                                            <div className="cart-anchor-image">
+                                                                <a href="single-product.html">
+                                                                    <img
+                                                                        src="/static/images/product/product@1x.jpg"
+                                                                        alt="Product"
+                                                                    />
+                                                                    <h6>{element.product.name}</h6>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div className="cart-price">{element.product.price}</div>
+                                                        </td>
+                                                        <td>
+                                                            <div className="cart-quantity">
+                                                                <div className="quantity" >
+                                                                    <input
+                                                                        type="text"
+                                                                        className="quantity-text-field"
+                                                                        defaultValue="1"
+                                                                        disabled
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <th>Tổng tiền: {getTotalCart()}</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </TabPanel>
+                        <TabPanel value="2">
                             <div className='container' >
                                 <div className="table-wrapper u-s-m-b-60">
                                     <table>
@@ -109,64 +171,8 @@ export default function Order(props) {
                                 </div>
                             </div>
                         </TabPanel>
-                        <TabPanel value="2">
-                        <div className='container' >
-                                <div className="table-wrapper u-s-m-b-60">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {order.map((element, i) => {
-                                                return (
-                                                    <tr key={i}>
-                                                        <td>
-                                                            <div className="cart-anchor-image">
-                                                                <a href="single-product.html">
-                                                                    <img
-                                                                        src="/static/images/product/product@1x.jpg"
-                                                                        alt="Product"
-                                                                    />
-                                                                    <h6>{element.product.name}</h6>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-price">{element.product.price}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-quantity">
-                                                                <div className="quantity" >
-                                                                    <input
-                                                                        type="text"
-                                                                        className="quantity-text-field"
-                                                                        defaultValue="1"
-                                                                        disabled
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })}
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th>Tổng tiền: {getTotalCart()}</th>
-                                                <th></th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
-                        </TabPanel>
                         <TabPanel value="3">
-                        <div className='container' >
+                            <div className='container' >
                                 <div className="table-wrapper u-s-m-b-60">
                                     <table>
                                         <thead>
@@ -222,7 +228,7 @@ export default function Order(props) {
                             </div>
                         </TabPanel>
                         <TabPanel value="4">
-                        <div className='container' >
+                            <div className='container' >
                                 <div className="table-wrapper u-s-m-b-60">
                                     <table>
                                         <thead>
@@ -278,63 +284,13 @@ export default function Order(props) {
                             </div>
                         </TabPanel>
                         <TabPanel value="5">
-                        <div className='container' >
-                                <div className="table-wrapper u-s-m-b-60">
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {order.map((element, i) => {
-                                                return (
-                                                    <tr key={i}>
-                                                        <td>
-                                                            <div className="cart-anchor-image">
-                                                                <a href="single-product.html">
-                                                                    <img
-                                                                        src="/static/images/product/product@1x.jpg"
-                                                                        alt="Product"
-                                                                    />
-                                                                    <h6>{element.product.name}</h6>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-price">{element.product.price}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-quantity">
-                                                                <div className="quantity" >
-                                                                    <input
-                                                                        type="text"
-                                                                        className="quantity-text-field"
-                                                                        defaultValue="1"
-                                                                        disabled
-                                                                    />
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                )
-                                            })}
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th></th>
-                                                <th>Tổng tiền: {getTotalCart()}</th>
-                                                <th></th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-                            </div>
+                            <h1>Cac</h1>
                         </TabPanel>
                     </TabContext>
-                </Box>
+                    <div>
+                        <Canvas></Canvas>
+                    </div>
+                </div>
             </Layout>
         </>
     );

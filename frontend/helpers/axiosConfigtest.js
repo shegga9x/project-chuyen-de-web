@@ -1,7 +1,9 @@
 import axios from "axios";
 import { getSession } from "next-auth/client";
 
-const InstanceAxios = () => {
+const InstanceAxios = (req) => {
+
+    console.log(req);
     
     const instance = axios.create()
 
@@ -29,4 +31,4 @@ const InstanceAxios = () => {
     return instance
 }
 
-export default InstanceAxios();
+export default InstanceAxios;
