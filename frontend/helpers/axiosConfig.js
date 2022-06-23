@@ -3,6 +3,7 @@ import { getSession } from "next-auth/client";
 
 const InstanceAxios = (context) => {
     const instance = axios.create()
+
     instance.interceptors.request.use(async (request) => {
         const session = context ? await getSession(context) : await getSession()
         if (session) {

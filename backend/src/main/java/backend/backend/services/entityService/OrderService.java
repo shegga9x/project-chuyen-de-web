@@ -48,6 +48,7 @@ public class OrderService {
             // orderItem.setIdOrderItem(1);
             listOrderItem.add(orderItem);
         }
+        cartItemRepository.deleteAll(listCartItem);
         orderItemRepository.saveAll(listOrderItem);
         return "ok";
     }

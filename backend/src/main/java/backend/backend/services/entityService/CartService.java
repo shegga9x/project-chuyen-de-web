@@ -72,8 +72,10 @@ public class CartService {
         Optional<CartItem> optional = cartItemRepository
                 .findById(new CartItemId(idUser, cartItem.getProduct().getIdProduct()));
         CartItem cartItem1 = optional.get();
-        if (cartItem.getProduct().getQuantity() > cartItem1.getProduct().getQuantity()) {
+        if (cartItem.getQuantity() > cartItem1.getProduct().getQuantity()) {
             throw new CustomException("vượt quá giới hạn tồn kho");
+        } else {
+            cartItem1.setQuantity(cartItem.getQuantity());
         }
         cartItemRepository.save(cartItem1);
         return "ok";
