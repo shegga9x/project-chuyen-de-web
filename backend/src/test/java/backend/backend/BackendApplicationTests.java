@@ -7,11 +7,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import backend.backend.helpers.payload.response.CartItemResponse;
-import backend.backend.helpers.payload.response.ProductResponse;
-import backend.backend.helpers.utils.SubUtils;
-import backend.backend.persitence.entities.*;
-import backend.backend.persitence.repository.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +15,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.response.CustomSinglePage;
+import backend.backend.helpers.payload.response.ProductResponse;
+import backend.backend.helpers.utils.SubUtils;
+import backend.backend.persitence.entities.Category;
+import backend.backend.persitence.entities.Product;
+import backend.backend.persitence.entities.SingleProductPage;
+import backend.backend.persitence.repository.CartItemRepository;
+import backend.backend.persitence.repository.CategoryRepository;
+import backend.backend.persitence.repository.OrderItemRepository;
+import backend.backend.persitence.repository.ProductRepository;
+import backend.backend.persitence.repository.SingleProductPageRepository;
 import backend.backend.services.entityService.SingleProductPageService;
 
 @RunWith(SpringRunner.class)

@@ -34,7 +34,7 @@ export default function SingleProduct({ data }) {
   const checkAddToCart = async () => {
     if (product != null) {
       document.getElementById("buttonAddToCart").disabled = true;
-      const req = await instance.post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: productQuantity.current.value })
+      const req = await instance().post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: productQuantity.current.value })
         .catch((err) => {
           document.getElementById("buttonAddToCart").disabled = false;
           if (err.message != "Network Error") {
@@ -1241,7 +1241,7 @@ export default function SingleProduct({ data }) {
 
 export async function getStaticPaths({ locales }) {
   const paths = [];
-  const res = await instance.get(
+  const res = await instance().get(
     `http://localhost:4000/api/product/loadAllSingleProductPage`
   );
   if (res != undefined) {
@@ -1259,17 +1259,17 @@ export async function getStaticPaths({ locales }) {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await instance.get(
+  const res = await instance().get(
     `http://localhost:4000/api/product/getSingleProductPagePerPage/${params.idSingleProductPage}`
   );
   if (res != undefined) {
     let res1 = null;
     let res2 = null;
     await axios.all([
-      instance.get(
+      instance().get(
         `http://localhost:4000/api/product/getListProductBySingleProductPage`,
         { params: { idSingleProduct: res.data.idSingleProductPage } }),
-      instance.get(`http://localhost:4000/api/product/getListCategoryBySingleProductPage`,
+      instance().get(`http://localhost:4000/api/product/getListCategoryBySingleProductPage`,
         { params: { idCategory: res.data.idCategory } })
     ])
       .then(axios.spread((data1, data2) => {

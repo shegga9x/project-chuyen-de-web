@@ -7,7 +7,6 @@ export default function Logout() {
   useEffect(() => { signOut({ callbackUrl: "/" }) })
   return (<> </>);
 }
-
 export async function getServerSideProps(context) {
   try {
     const session = await getSession(context)
@@ -17,7 +16,7 @@ export async function getServerSideProps(context) {
     });
     cookiesSetter.set('refreshToken', { maxAge: 0 });
   } catch (error) {
-    return { redirect: { permanent: false, destination: "/", }, }
+    // return { redirect: { permanent: false, destination: "/", }, }  
   }
   return { props: { data: 1 }, };
 }

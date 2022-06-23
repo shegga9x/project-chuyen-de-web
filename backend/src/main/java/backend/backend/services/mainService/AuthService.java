@@ -172,7 +172,6 @@ public class AuthService {
     }
 
     public void revokeToken(String token, String ipAddress) {
-        System.out.println(token+"okokokoko");
         RefreshToken refreshToken = refreshTokenRepository.findByToken(token).get();
         if (!refreshToken.IsActive()) {
             throw new CustomException("Token is UnActive");

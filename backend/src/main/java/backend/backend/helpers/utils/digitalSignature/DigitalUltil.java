@@ -5,19 +5,19 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
-import backend.backend.helpers.payload.response.OrderItemResponse;
-import backend.backend.helpers.utils.SubUtils;
-import backend.backend.persitence.entities.Account;
-import backend.backend.persitence.entities.OrderItem;
-import backend.backend.persitence.model.UserDetailCustom;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
+import backend.backend.helpers.payload.response.OrderItemResponse;
+import backend.backend.persitence.entities.Account;
+
+@SuppressWarnings("deprecated")
 public class DigitalUltil {
 
-//    static String[][] headerContent = {{"ProductName", "CustomerId", "Email", "ToTalPrice"}};
+    // static String[][] headerContent = {{"ProductName", "CustomerId", "Email",
+    // "ToTalPrice"}};
 
     public static String[][] append(String[][] a, String[][] b) {
         String[][] result = new String[a.length + b.length][];
@@ -27,18 +27,17 @@ public class DigitalUltil {
     }
 
     public static String[][] createContent(List<OrderItemResponse> orderItems, Account account) {
-        String[][] result = {{"ProductId", "CustomerId", "Email", "ToTalPrice"}};
+        String[][] result = { { "ProductId", "CustomerId", "Email", "ToTalPrice" } };
         // insert mấy trường dài quá như product name là bị lỗi, éo bít sửa sao
         for (OrderItemResponse orderItem : orderItems) {
-            String[][] data = {{orderItem.getProduct().getIdProduct().toString(),
+            String[][] data = { { orderItem.getProduct().getIdProduct().toString(),
                     account.getIdAccount().toString(),
                     account.getEmail(),
-                    orderItem.getProduct().getPrice().toString()}};
+                    orderItem.getProduct().getPrice().toString() } };
             result = append(result, data);
         }
         return result;
     }
-
 
     public static ByteArrayInputStream createPDF(List<OrderItemResponse> orderItems, Account account) throws Exception {
         try (PDDocument doc = new PDDocument()) {
@@ -53,7 +52,7 @@ public class DigitalUltil {
                 cont.showText("Order Report");
                 cont.endText();
 
-                //create Content
+                // create Content
                 String[][] content = createContent(orderItems, account);
                 System.out.println(content[0][0]);
 
@@ -70,9 +69,9 @@ public class DigitalUltil {
 
     public static void drawTable(PDPage page,
 
-                                 PDPageContentStream contentStream, float y, float margin,
+            PDPageContentStream contentStream, float y, float margin,
 
-                                 String[][] content) throws IOException {
+            String[][] content) throws IOException {
 
         final int rows = content.length;
 
@@ -88,8 +87,7 @@ public class DigitalUltil {
 
         final float cellMargin = 2f;
 
-
-// draw the rows
+        // draw the rows
 
         float nexty = y;
 
@@ -101,7 +99,7 @@ public class DigitalUltil {
 
         }
 
-// draw the columns
+        // draw the columns
 
         float nextx = margin;
 
@@ -113,7 +111,7 @@ public class DigitalUltil {
 
         }
 
-// now add the text
+        // now add the text
 
         contentStream.setFont(PDType1Font.HELVETICA_BOLD, 8);
 

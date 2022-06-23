@@ -42,7 +42,9 @@ export default function OrderProgress({ open, closeModal, listOrder }) {
             document.getElementsByClassName('step3')[0].classList.add('active');
             document.getElementsByClassName('content_step2')[0].style.display = "none"
             document.getElementsByClassName('content_step3')[0].style.display = "block"
-            const res = await instance.post(`http://localhost:4000/api/digitalSignature/signing`, { listOrderItem: listOrder, imageBase64: img.src, userName: userName }, { headers: { 'Content-Type': 'application/json' }, responseType: 'blob' }).catch((err) => { console.log({ err }) });
+            const res = await instance().post(`http://localhost:4000/api/digitalSignature/signing`,
+             { listOrderItem: listOrder, imageBase64: img.src, userName: userName }, 
+             { headers: { 'Content-Type': 'application/json' }, responseType: 'blob' }).catch((err) => { console.log({ err }) });
             if (res) {
                 let url = window.URL.createObjectURL(res.data);
                 let a = document.createElement('a');
@@ -288,7 +290,7 @@ export default function OrderProgress({ open, closeModal, listOrder }) {
                     function stroke(mouseX, mouseY) {
                         ctx.globalCompositeOperation = "source-over";
                         ctx.lineJoin = ctx.lineCap = "round";
-                        ctx.lineWidth = 10;
+                        ctx.lineWidth = 3;
                         ctx.beginPath();
                         ctx.moveTo(previousMouseX, previousMouseY);
                         ctx.lineTo(mouseX, mouseY);

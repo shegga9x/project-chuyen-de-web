@@ -10,7 +10,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,7 +79,6 @@ public class AuthController {
         String token = controlerUtils.getSingleFormCookie("refreshToken");
         if (SubUtils.isNullOrBlank(token))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Token is required"));
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
         UserDetailCustom currentAccount = SubUtils.getCurrentUser();
         List<String> roles = currentAccount.getAuthorities().stream().map(item -> item.getAuthority())
                 .collect(Collectors.toList()).stream().filter(x -> x.equals("Admin")).collect(Collectors.toList());

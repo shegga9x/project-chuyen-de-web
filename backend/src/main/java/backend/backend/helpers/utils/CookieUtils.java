@@ -24,7 +24,6 @@ public class CookieUtils {
 
     public void setTokenCookie(HttpServletResponse servletResponse, String token) {
         Cookie cookie = new Cookie("refreshToken", token);
-        System.out.println(token);
         cookie.setHttpOnly(true);
         cookie.setMaxAge(jwtRefreshExpirationMs);
         servletResponse.addCookie(cookie);

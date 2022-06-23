@@ -1,16 +1,13 @@
 import axios from "axios";
 import { getSession } from "next-auth/client";
 
-const InstanceAxios = () => {
+const InstanceAxios = (context) => {
     const instance = axios.create()
 
     instance.interceptors.request.use(async (request) => {
-        const session = await getSession()
-     
+        const session = context ? await getSession(context) : await getSession()
         if (session) {
-            request.headers.common = {
-                Authorization: `Bearer ${session.user.jwt}`
-            }
+            request.headers.common = { Authorization: `Bearer ${session.user.jwt}` }
         }
         return request
     })
@@ -28,4 +25,4 @@ const InstanceAxios = () => {
     return instance
 }
 
-export default InstanceAxios();
+export default InstanceAxios;

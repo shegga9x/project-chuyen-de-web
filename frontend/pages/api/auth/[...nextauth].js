@@ -1,5 +1,3 @@
-const version = require('../../../package.json').version
-
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
@@ -40,9 +38,8 @@ const nextAuthOptions = (req, res) => {
           const cookies = response.headers['set-cookie']
           cookiesSetter.set(cookies)
           if (response) {
-            const name = response.data.firstName && response.data.lastName
-              ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
-            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, };
+            const name = response.data.firstName && response.data.lastName ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email };
           }
         },
       }),
@@ -93,7 +90,7 @@ const nextAuthOptions = (req, res) => {
     },
     pages: {
       signIn: '/account',
-      error: "/account",
+      error: '/account',
     },
   };
 };
@@ -106,7 +103,6 @@ async function refreshAccessToken(token, cookiesSetter) {
     });
     const cookies = response.headers['set-cookie']
     cookiesSetter.set(cookies)
-
     return {
       ...token,
       id: response.data.idAccount,

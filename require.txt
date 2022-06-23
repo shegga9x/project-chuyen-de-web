@@ -1,0 +1,28 @@
+Người dùng
+--Quan ly ca nhan
+    + Ho So (tat ca truong account)
+    + Mat Khau
+    + Dia chi
+    + Ngan Hang
+    + Vi
+Shop
+-- Shop List
+   + cagetory
+   + ....
+-- Thong Ke
+-- Quan ly Shop
+   + quan ly san pham 
+     ++ duyet don hang gui admin
+   + quan ly don hang
+     ++ Duyet Don Hang
+   + Vi
+   + Ho So (tat ca truong shop)
+Admin
+-- Quan ly entities
+-- Duyet San Pham
+
+Comment 
+Voucher, Sale 
+Chat (WebSocket) 
+Pay Online 
+Ship

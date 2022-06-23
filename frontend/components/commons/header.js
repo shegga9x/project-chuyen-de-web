@@ -24,13 +24,12 @@ import {
     faTvAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useSession, signOut } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import instance from "../../helpers/axiosConfig";
 import { useRouter } from 'next/router'
 import { changeLanguage } from "../../helpers/customFunction/changeLanguage";
 import { changeRoute } from "../../helpers/customFunction/changeRoute";
 import { useEffect, useState } from 'react';
-import Logout from "../../pages/logout";
 
 export default function Header({ updateCartHeader, isPageCart }) {
 
@@ -47,9 +46,8 @@ export default function Header({ updateCartHeader, isPageCart }) {
         if (session) {
             const getCartByIdUser = async () => {
                 // You can await here
-                const response = await instance.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id } });
+                const response = await instance().get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id } });
                 if (response) {
-                    console.log({ response });
                     setUserCart(response.data);
                     setLoadingCart(false)
                 }
@@ -79,7 +77,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
     // console.log(session)
     // const test = async () => {
     //     // await axios.get("http://localhost:4000/test/getJWT", { headers: { Authorization:`Bearer ${session.user.jwtToken}` }});
-    //     await instance.get("http://localhost:4000/api/test/getJWT");
+    //     await instance().get("http://localhost:4000/api/test/getJWT");
     // };
 
     return (
