@@ -48,7 +48,8 @@ export default function Order(props) {
         setOpen(true);
     }
 
-    const handleChange = (newValue) => {
+    const handleChange = (event,newValue) => {
+        console.log(newValue);
         setValue(newValue);
     };
 

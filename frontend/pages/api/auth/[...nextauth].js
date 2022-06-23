@@ -79,7 +79,7 @@ const nextAuthOptions = (req, res) => {
     callbacks: {
       async jwt(token, user) {
         if (user) {
-          return { jwtExpires: Date.now() + process.env.jwtExpirationMs, ...user }
+          return { jwtExpires: Date.now() + parseInt(process.env.jwtExpirationMs), ...user }
         }
         if (Date.now() < token.jwtExpires) {
           return token
@@ -99,6 +99,7 @@ const nextAuthOptions = (req, res) => {
 };
 
 async function refreshAccessToken(token, cookiesSetter) {
+  console.log(2);
   try {
     const response = await axios.post(process.env.BE_AUTH + "refresh-token", {}, {
       headers: { Cookie: "refreshToken=" + cookiesSetter.get('refreshToken') + ";" }
@@ -109,7 +110,7 @@ async function refreshAccessToken(token, cookiesSetter) {
     return {
       ...token,
       id: response.data.idAccount,
-      jwtExpires: Date.now() + process.env.jwtExpirationMs,
+      jwtExpires: Date.now() + parseInt(process.env.jwtExpirationMs),
       jwt: response.data.jwtToken,
     }
   } catch (error) {
