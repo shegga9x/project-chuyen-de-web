@@ -39,13 +39,13 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 if (!userDetails.getLastExpireds().toInstant().toString().equals(lastExpires)) {
                     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Old Token");
                 } else {
-                 
                     UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                             userDetails, null, userDetails.getAuthorities());
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
+            
         } catch (Exception e) {
             logger.error("Cannot set user authentication: {}", e);
         }

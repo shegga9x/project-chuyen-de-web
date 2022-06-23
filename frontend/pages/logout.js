@@ -7,7 +7,6 @@ export default function Logout() {
   useEffect(() => { signOut({ callbackUrl: "/" }) })
   return (<> </>);
 }
-
 export async function getServerSideProps(context) {
   try {
     const session = await getSession(context)

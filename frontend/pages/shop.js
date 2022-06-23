@@ -10,8 +10,7 @@ import CheckboxTree from "react-checkbox-tree";
 import Layout from "../components/layout";
 import { changeRoute } from "../helpers/customFunction/changeRoute";
 import "../node_modules/react-checkbox-tree/lib/react-checkbox-tree.css";
-import { getSession } from "next-auth/client"
-
+import InstanceAxios from "../helpers/axiosConfig"
 export default function Shop(props) {
   const [checked, setChecked] = useState(props.catagory);
   const [expanded, setExpanded] = useState([]);
@@ -237,16 +236,13 @@ export default function Shop(props) {
                   <div className="pagination-area">
                     <div className="pagination-number">
                       <ul>
-                        {Array.apply(null, { length: props.data.totalPage })
-                          .map(Number.call, Number).map((item) => {
-                            return (
-                              <li className={props.currentPage == item + 1 ? "active" : ""}>
-                                <a href={"shop?page=" + (item + 1) + " &size=" + props.currentSize} >
-                                  {item + 1}
-                                </a>
-                              </li>
-                            );
-                          })}
+                        {Array.apply(null, { length: props.data.totalPage }).map(Number.call, Number).map((item) => {
+                          return (
+                            <li className={props.currentPage == item + 1 ? "active" : ""}>
+                              <a href={"shop?page=" + (item + 1) + " &size=" + props.currentSize} > {item + 1} </a>
+                            </li>
+                          );
+                        })}
                       </ul>
                     </div>
                   </div>
@@ -266,35 +262,25 @@ export async function getServerSideProps(context) {
   try {
     const page = context.query.page == null ? 1 : context.query.page;
     const size = context.query.size == null ? 8 : context.query.size;
-    const catagory =
-      context.query.catagory == null ? "" : `&catagory=${context.query.catagory}`;
+    const catagory = context.query.catagory == null ? "" : `&catagory=${context.query.catagory}`;
     const sorter = context.query.sorter == null ? "" : `&sorter=${context.query.sorter}`;
-    const session = await getSession(context)
-    const res = await fetch(`http://localhost:4000/api/product/loadAll?page=${page - 1}&size=${size}${catagory}${sorter}`, {
-      method: 'get',
-      headers: new Headers({ 'Authorization': 'Bearer ' + session.user.jwt })
-    });
-    const res2 = await fetch(`http://localhost:4000/api/product/loadCagetory`, {
-      method: 'get',
-      headers: new Headers({ 'Authorization': 'Bearer ' + session.user.jwt })
-    });
-    console.log(res2)
-    const data = await res.json();
-    const data2 = await res2.json();
-    // console.log(data)
-    const data3 = JSON.parse(
-      JSON.stringify(data2).replaceAll('," children":[]', ""));
+    const res = await InstanceAxios(context).get(`http://localhost:4000/api/product/loadAll?page=${page - 1}&size=${size}${catagory}${sorter}`)
+    const res2 = await InstanceAxios(context).get(`http://localhost:4000/api/product/loadCagetory`)
+    const data = await res.data;
+    const data2 = await res2.data;
+    const data3 = JSON.parse(JSON.stringify(data2).replaceAll(',"children":[]', ""));
     if (data.page != null) {
       return {
-        props:
-        {
-          data: data,
-          nodes: data3,
-          currentPage: page,
+        props: {
+          data: data, nodes: data3, currentPage: page,
           currentSize: size, sorter: context.query.sorter == null ? null : context.query.sorter,
           catagory: catagory ? catagory.split("=")[1].split(" ,") : [],
         },
       };
     }
-  } catch (error) { console.log(error); } return { redirect: { permanent: false, destination: "/500", }, };
+  } catch (error) { console.log(error); }
+  return {
+    redirect:
+      { permanent: false, destination: "/500", },
+  };
 }

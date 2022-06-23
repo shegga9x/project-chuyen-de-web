@@ -40,9 +40,8 @@ const nextAuthOptions = (req, res) => {
           const cookies = response.headers['set-cookie']
           cookiesSetter.set(cookies)
           if (response) {
-            const name = response.data.firstName && response.data.lastName
-              ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
-            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, };
+            const name = response.data.firstName && response.data.lastName ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email };
           }
         },
       }),
@@ -78,12 +77,8 @@ const nextAuthOptions = (req, res) => {
     session: { maxAge: process.env.jwtRefreshExpirationMs },
     callbacks: {
       async jwt(token, user) {
-        if (user) {
-          return { jwtExpires: Date.now() + process.env.jwtExpirationMs, ...user }
-        }
-        if (Date.now() < token.jwtExpires) {
-          return token
-        }
+        if (user) { return { jwtExpires: Date.now() + process.env.jwtExpirationMs, ...user } }
+        if (Date.now() < token.jwtExpires) { return token }
         return refreshAccessToken(token, cookiesSetter)
       },
       async session(session, token) {
@@ -93,7 +88,7 @@ const nextAuthOptions = (req, res) => {
     },
     pages: {
       signIn: '/account',
-      error: "/account",
+      error: '/account',
     },
   };
 };
@@ -105,7 +100,6 @@ async function refreshAccessToken(token, cookiesSetter) {
     });
     const cookies = response.headers['set-cookie']
     cookiesSetter.set(cookies)
-
     return {
       ...token,
       id: response.data.idAccount,
