@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import backend.backend.helpers.payload.response.OrderItemResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.OrderItem;
@@ -25,22 +26,21 @@ public class DigitalUltil {
         return result;
     }
 
-    public static String[][] createContent(List<OrderItem> orderItems, Account account) {
+    public static String[][] createContent(List<OrderItemResponse> orderItems, Account account) {
         String[][] result = {{"ProductId", "CustomerId", "Email", "ToTalPrice"}};
         // insert mấy trường dài quá như product name là bị lỗi, éo bít sửa sao
-        for (OrderItem orderItem : orderItems) {
+        for (OrderItemResponse orderItem : orderItems) {
             String[][] data = {{orderItem.getProduct().getIdProduct().toString(),
                     account.getIdAccount().toString(),
                     account.getEmail(),
                     orderItem.getProduct().getPrice().toString()}};
             result = append(result, data);
-
         }
         return result;
     }
 
 
-    public static ByteArrayInputStream createPDF(List<OrderItem> orderItems, Account account) throws Exception {
+    public static ByteArrayInputStream createPDF(List<OrderItemResponse> orderItems, Account account) throws Exception {
         try (PDDocument doc = new PDDocument()) {
             PDPage myPage = new PDPage();
             doc.addPage(myPage);

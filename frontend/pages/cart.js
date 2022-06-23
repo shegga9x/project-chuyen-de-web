@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Layout from "../components/layout";
 import { getSession } from 'next-auth/client';
-import instance from "../helpers/axiosConfigtest";
+import instance from '../helpers/axiosConfig';
 import axios from "axios";
 import { useState, useRef } from 'react';
 import { changeRoute } from "../helpers/customFunction/changeRoute";
@@ -41,8 +41,10 @@ export default function Cart(props) {
       disableClick(product.idProduct);
       const res = await instance.post(`http://localhost:4000/api/cart/updateProduct`, { product, quantity: target.value })
         .catch((err) => {
+          console.log(err);
           removeDisableClick(product.idProduct);
           if (err.message != "Network Error") {
+            target.value = currentQuantity;
             alert(err.response.data.message);
           }
         });
@@ -56,12 +58,14 @@ export default function Cart(props) {
     }
   }
 
-  const addToCart = async (quantity, product) => {
+  const addToCart = async (quantity, currentQuantity, product) => {
+    const target = document.getElementById(`product-id-${product.idProduct}`);
     disableClick(product.idProduct);
     const res = await instance.post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: quantity })
       .catch((err) => {
         removeDisableClick(product.idProduct);
         if (err.message != "Network Error") {
+          target.value = currentQuantity;
           alert(err.response.data.message);
         }
       });
@@ -175,11 +179,12 @@ export default function Cart(props) {
                                       type="text"
                                       className="quantity-text-field"
                                       defaultValue={element.quantity}
+                                      id={`product-id-${element.product.idProduct}`}
                                     />
-                                    <a className="plus-a" data-max={1000} onClick={() => { addToCart(1, element.product) }}>
+                                    <a className="plus-a" data-max={1000} onClick={() => { addToCart(1, element.quantity, element.product) }}>
                                       +
                                     </a>
-                                    <a className="minus-a" data-min={1} onClick={() => { addToCart(-1, element.product) }}>
+                                    <a className="minus-a" data-min={1} onClick={() => { addToCart(-1, element.quantity, element.product) }}>
                                       -
                                     </a>
                                   </div>
@@ -392,23 +397,21 @@ export default function Cart(props) {
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
-  // console.log(req)
-  // if (session) {
-  //   // console.log(session.user.id)
-  //   const response = await axios.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id }, headers: { Authorization: `Email ${session.user.email}` } })
-  //   // console.log(response)
-  //   return {
-  //     props: {
-  //       cart: response.data,
-  //       user: session.user
-  //     },
-  //   }
-  // }
-  // return {
-  //   redirect: {
-  //     permanent: false,
-  //     destination: "/account"
-  //   }
-  // }
-    const response = await instance(req).get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id }, headers: { Authorization: `Email ${session.user.email}` } })
+  if (session) {
+    // console.log(session.user.id)
+    const response = await axios.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id }, headers: { Authorization: `Bearer ${session.user.jwt}` } })
+    // console.log(response)
+    return {
+      props: {
+        cart: response.data,
+        user: session.user
+      },
+    }
+  }
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/account"
+    }
+  }
 }

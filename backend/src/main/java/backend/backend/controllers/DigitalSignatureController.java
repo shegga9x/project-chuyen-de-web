@@ -1,10 +1,13 @@
 package backend.backend.controllers;
 import java.io.IOException;
 
+import backend.backend.helpers.payload.request.DigitalSignatureRequest;
 import backend.backend.services.mainService.DigitalSignatureService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.constraints.NotNull;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -15,8 +18,8 @@ public class DigitalSignatureController {
     DigitalSignatureService digitalSignatureService;
 
     @PostMapping({"/signing"})
-    public ResponseEntity<?> signing(@RequestBody String imageBase64) throws IOException {
-        return ResponseEntity.ok(digitalSignatureService.signing(imageBase64));
+    public ResponseEntity<?> signing(@NotNull  @RequestBody DigitalSignatureRequest digitalSignatureRequest) throws IOException {
+        return ResponseEntity.ok(digitalSignatureService.signing(digitalSignatureRequest));
     }
 
     @GetMapping({"/verifying"})

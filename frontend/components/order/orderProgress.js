@@ -2,7 +2,8 @@ import Head from "next/head";
 import Script from 'next/script';
 import instance from "../../helpers/axiosConfig";
 import { useEffect, useState } from 'react';
-export default function OrderProgress({ open, closeModal }) {
+
+export default function OrderProgress({ open, closeModal, listOrder }) {
 
     const [userName, setUserName] = useState(null);
     const [saveImg, setSaveImg] = useState(false);
@@ -26,6 +27,7 @@ export default function OrderProgress({ open, closeModal }) {
     const continueStep1 = () => {
         const inputText = document.getElementsByClassName('el-input_name')[0];
         if (inputText.value != "" && inputText.value.length >= 6) {
+            setUserName(inputText.value);
             document.getElementsByClassName('step2')[0].classList.add('active');
             document.getElementsByClassName('content_step1')[0].style.display = "none"
             document.getElementsByClassName('content_step2')[0].style.display = "block"
@@ -40,7 +42,7 @@ export default function OrderProgress({ open, closeModal }) {
             document.getElementsByClassName('step3')[0].classList.add('active');
             document.getElementsByClassName('content_step2')[0].style.display = "none"
             document.getElementsByClassName('content_step3')[0].style.display = "block"
-            const res = await instance.post(`http://localhost:4000/api/digitalSignature/signing`, img.src, { headers: { 'Content-Type': 'text/plain' }, responseType: 'blob' }).catch((err) => { console.log({ err }) });
+            const res = await instance.post(`http://localhost:4000/api/digitalSignature/signing`, { listOrderItem: listOrder, imageBase64: img.src, userName: userName }, { headers: { 'Content-Type': 'application/json' }, responseType: 'blob' }).catch((err) => { console.log({ err }) });
             if (res) {
                 let url = window.URL.createObjectURL(res.data);
                 let a = document.createElement('a');

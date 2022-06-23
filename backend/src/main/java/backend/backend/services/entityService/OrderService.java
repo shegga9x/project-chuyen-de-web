@@ -23,8 +23,7 @@ public class OrderService {
     private CartItemRepository cartItemRepository;
 
     public List<OrderItemResponse> getOrderItemByIdCustomer() {
-//        int idUser = SubUtils.getCurrentUser().getId();
-        int idUser = 1;
+        int idUser = SubUtils.getCurrentUser().getId();
         List<OrderItem> listOrderItem = orderItemRepository.findByIdCustomer(idUser);
         List<OrderItemResponse> result = new ArrayList<>();
         for (OrderItem orderItem : listOrderItem) {
@@ -49,6 +48,7 @@ public class OrderService {
             // orderItem.setIdOrderItem(1);
             listOrderItem.add(orderItem);
         }
+        cartItemRepository.deleteAll(listCartItem);
         orderItemRepository.saveAll(listOrderItem);
         return "ok";
     }

@@ -8,17 +8,12 @@ import Head from "next/head";
 import Layout from "../components/layout";
 import OrderProgress from '../components/order/orderProgress';
 import { getSession } from 'next-auth/client';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import axios from "axios";
-import {
-    faHome,
-    faTrash,
-    faSync,
-} from "@fortawesome/free-solid-svg-icons";
 
 export default function Order(props) {
 
+    const [listOrder, setListOrder] = useState([]);
     const [open, setOpen] = useState(false);
     const [order, setOrder] = useState(props.order);
     const [value, setValue] = useState('1');
@@ -46,9 +41,6 @@ export default function Order(props) {
         }, 500)
     }
 
-
-
-
     const openModal = () => {
         document.body.classList.toggle('modal-visibile');
         const model = document.getElementsByClassName('modal-load')[0];
@@ -56,14 +48,30 @@ export default function Order(props) {
         setOpen(true);
     }
 
-    const handleChange = (event, newValue) => {
+    const handleChange = (newValue) => {
         setValue(newValue);
     };
 
-    const getTotalCart = () => {
+    const addItemToListOrder = (event, ele) => {
+        const target = event.target;
+        if (target.checked) {
+            listOrder.push(ele);
+        } else {
+            const result = listOrder.filter(element => element != ele);
+            setListOrder(result);
+        }
+    }
+
+    const test = () => {
+        console.log(listOrder);
+    }
+
+    const getTotalCart = (status) => {
         let result = 0;
         order.forEach(ele => {
-            result += (ele.product.price)
+            if (ele.status == status) {
+                result += (ele.product.price)
+            }
         })
         return result.toFixed(2);
     }
@@ -102,74 +110,52 @@ export default function Order(props) {
                                         </thead>
                                         <tbody>
                                             {order.map((element, i) => {
-                                                return (
-                                                    <tr key={i}>
-                                                        <td>
-                                                            <input type="checkbox"></input>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-anchor-image">
-                                                                <a href="single-product.html">
-                                                                    <img
-                                                                        src="/static/images/product/product@1x.jpg"
-                                                                        alt="Product"
-                                                                    />
-                                                                    <h6>{element.product.name}</h6>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-price">{element.product.price}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-quantity">
-                                                                <div className="quantity" >
-                                                                    <input
-                                                                        type="text"
-                                                                        className="quantity-text-field"
-                                                                        defaultValue="1"
-                                                                        disabled
-                                                                    />
+                                                if (element.status == 1) {
+                                                    return (
+                                                        <tr key={i}>
+                                                            <td>
+                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-anchor-image">
+                                                                    <a href="single-product.html">
+                                                                        <img
+                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            alt="Product"
+                                                                        />
+                                                                        <h6>{element.product.name}</h6>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                )
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-price">{element.product.price}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-quantity">
+                                                                    <div className="quantity" >
+                                                                        <input
+                                                                            type="text"
+                                                                            className="quantity-text-field"
+                                                                            defaultValue="1"
+                                                                            disabled
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                }
                                             })}
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th></th>
                                                 <th></th>
-                                                <th>Tổng tiền: {getTotalCart()}</th>
+                                                <th>Tổng tiền: {getTotalCart(1)}</th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
                                     </table>
-                                </div>
-                                <div className="coupon-continue-checkout u-s-m-b-60">
-                                    {/* <div className="coupon-area">
-                                        <h6>Enter your coupon code if you have one.</h6>
-                                        <div className="coupon-field">
-                                            <label className="sr-only" htmlFor="coupon-code">
-                                                Apply Coupon
-                                            </label>
-                                            <input
-                                                id="coupon-code"
-                                                type="text"
-                                                className="text-field"
-                                                placeholder="Coupon Code"
-                                            />
-                                            <button type="submit" className="button">
-                                                Apply Coupon
-                                            </button>
-                                        </div>
-                                    </div> */}
-                                    <div className="button-area">
-                                        <a onClick={openModal} className="checkout">
-                                            Xác Nhận Order
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
                         </TabPanel>
@@ -186,42 +172,47 @@ export default function Order(props) {
                                         </thead>
                                         <tbody>
                                             {order.map((element, i) => {
-                                                return (
-                                                    <tr key={i}>
-                                                        <td>
-                                                            <div className="cart-anchor-image">
-                                                                <a href="single-product.html">
-                                                                    <img
-                                                                        src="/static/images/product/product@1x.jpg"
-                                                                        alt="Product"
-                                                                    />
-                                                                    <h6>{element.product.name}</h6>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-price">{element.product.price}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-quantity">
-                                                                <div className="quantity" >
-                                                                    <input
-                                                                        type="text"
-                                                                        className="quantity-text-field"
-                                                                        defaultValue="1"
-                                                                        disabled
-                                                                    />
+                                                if (element.status == 2) {
+                                                    return (
+                                                        <tr key={i}>
+                                                            <td>
+                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-anchor-image">
+                                                                    <a href="single-product.html">
+                                                                        <img
+                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            alt="Product"
+                                                                        />
+                                                                        <h6>{element.product.name}</h6>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                )
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-price">{element.product.price}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-quantity">
+                                                                    <div className="quantity" >
+                                                                        <input
+                                                                            type="text"
+                                                                            className="quantity-text-field"
+                                                                            defaultValue="1"
+                                                                            disabled
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                }
                                             })}
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th></th>
-                                                <th>Tổng tiền: {getTotalCart()}</th>
+                                                <th>Tổng tiền: {getTotalCart(2)}</th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
@@ -242,42 +233,47 @@ export default function Order(props) {
                                         </thead>
                                         <tbody>
                                             {order.map((element, i) => {
-                                                return (
-                                                    <tr key={i}>
-                                                        <td>
-                                                            <div className="cart-anchor-image">
-                                                                <a href="single-product.html">
-                                                                    <img
-                                                                        src="/static/images/product/product@1x.jpg"
-                                                                        alt="Product"
-                                                                    />
-                                                                    <h6>{element.product.name}</h6>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-price">{element.product.price}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-quantity">
-                                                                <div className="quantity" >
-                                                                    <input
-                                                                        type="text"
-                                                                        className="quantity-text-field"
-                                                                        defaultValue="1"
-                                                                        disabled
-                                                                    />
+                                                if (element.status == 3) {
+                                                    return (
+                                                        <tr key={i}>
+                                                            <td>
+                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-anchor-image">
+                                                                    <a href="single-product.html">
+                                                                        <img
+                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            alt="Product"
+                                                                        />
+                                                                        <h6>{element.product.name}</h6>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                )
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-price">{element.product.price}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-quantity">
+                                                                    <div className="quantity" >
+                                                                        <input
+                                                                            type="text"
+                                                                            className="quantity-text-field"
+                                                                            defaultValue="1"
+                                                                            disabled
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                }
                                             })}
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th></th>
-                                                <th>Tổng tiền: {getTotalCart()}</th>
+                                                <th>Tổng tiền: {getTotalCart(3)}</th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
@@ -298,42 +294,47 @@ export default function Order(props) {
                                         </thead>
                                         <tbody>
                                             {order.map((element, i) => {
-                                                return (
-                                                    <tr key={i}>
-                                                        <td>
-                                                            <div className="cart-anchor-image">
-                                                                <a href="single-product.html">
-                                                                    <img
-                                                                        src="/static/images/product/product@1x.jpg"
-                                                                        alt="Product"
-                                                                    />
-                                                                    <h6>{element.product.name}</h6>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-price">{element.product.price}</div>
-                                                        </td>
-                                                        <td>
-                                                            <div className="cart-quantity">
-                                                                <div className="quantity" >
-                                                                    <input
-                                                                        type="text"
-                                                                        className="quantity-text-field"
-                                                                        defaultValue="1"
-                                                                        disabled
-                                                                    />
+                                                if (element.status == 4) {
+                                                    return (
+                                                        <tr key={i}>
+                                                            <td>
+                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-anchor-image">
+                                                                    <a href="single-product.html">
+                                                                        <img
+                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            alt="Product"
+                                                                        />
+                                                                        <h6>{element.product.name}</h6>
+                                                                    </a>
                                                                 </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                )
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-price">{element.product.price}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-quantity">
+                                                                    <div className="quantity" >
+                                                                        <input
+                                                                            type="text"
+                                                                            className="quantity-text-field"
+                                                                            defaultValue="1"
+                                                                            disabled
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                }
                                             })}
                                         </tbody>
                                         <tfoot>
                                             <tr>
                                                 <th></th>
-                                                <th>Tổng tiền: {getTotalCart()}</th>
+                                                <th>Tổng tiền: {getTotalCart(4)}</th>
                                                 <th></th>
                                             </tr>
                                         </tfoot>
@@ -342,11 +343,79 @@ export default function Order(props) {
                             </div>
                         </TabPanel>
                         <TabPanel value="5">
-                            <h1>Cac</h1>
+                            <div className='container' >
+                                <div className="table-wrapper u-s-m-b-60">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Price</th>
+                                                <th>Quantity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {order.map((element, i) => {
+                                                if (element.status == 5) {
+                                                    return (
+                                                        <tr key={i}>
+                                                            <td>
+                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-anchor-image">
+                                                                    <a href="single-product.html">
+                                                                        <img
+                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            alt="Product"
+                                                                        />
+                                                                        <h6>{element.product.name}</h6>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-price">{element.product.price}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-quantity">
+                                                                    <div className="quantity" >
+                                                                        <input
+                                                                            type="text"
+                                                                            className="quantity-text-field"
+                                                                            defaultValue="1"
+                                                                            disabled
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                }
+                                            })}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th></th>
+                                                <th>Tổng tiền: {getTotalCart(5)}</th>
+                                                <th></th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
                         </TabPanel>
                     </TabContext>
+                    <div className="coupon-continue-checkout u-s-m-b-60">
+                        <div className="button-area">
+                            <a onClick={test} className="checkout">
+                                test
+                            </a>
+                            <a onClick={openModal} className="checkout">
+                                Xác Nhận Order
+                            </a>
+                        </div>
+                    </div>
                     <div className="modal-load">
-                        <OrderProgress open={open} closeModal={closeModal}></OrderProgress>
+                        <OrderProgress open={open} closeModal={closeModal} listOrder={listOrder}></OrderProgress>
                     </div>
                 </div>
             </Layout>
@@ -358,7 +427,7 @@ export default function Order(props) {
 export async function getServerSideProps({ req }) {
     const session = await getSession({ req });
     if (session) {
-        const response = await axios.get("http://localhost:4000/api/order/getOrderItemByIdCustomer", { headers: { Authorization: `Email ${session.user.email}` } })
+        const response = await axios.get("http://localhost:4000/api/order/getOrderItemByIdCustomer", { headers: { Authorization: `Bearer ${session.user.jwt}` } })
         // console.log(response.data)
         return {
             props: {

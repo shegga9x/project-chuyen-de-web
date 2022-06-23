@@ -1,7 +1,7 @@
 import axios from "axios";
 import { getSession } from "next-auth/client";
 
-const InstanceAxios = (props) => {
+const InstanceAxios = () => {
     const instance = axios.create()
 
     instance.interceptors.request.use(async (request) => {
@@ -21,7 +21,7 @@ const InstanceAxios = (props) => {
         },
         (error) => {
             // console.log(`error`, error)
-            // return Promise.reject(error);
+            return Promise.reject(error);
         }
     )
 

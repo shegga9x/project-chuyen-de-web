@@ -1,5 +1,6 @@
 package backend.backend.services.mainService;
 
+import backend.backend.helpers.payload.request.DigitalSignatureRequest;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.helpers.utils.digitalSignature.DigitalUltil;
 import backend.backend.helpers.utils.digitalSignature.algorim.Signer;
@@ -35,21 +36,19 @@ public class DigitalSignatureService {
     @Value("${signer.docsUrlPrefix}")
     private String docsUrlPrefix;
 
-    public byte[] signing(String imageBase64) {
+    public byte[] signing(DigitalSignatureRequest digitalSignatureRequest) {
         byte[] result = null;
-        String realImageBase64 = imageBase64.split(",")[1];
+        String realImageBase64 = digitalSignatureRequest.getImageBase64().split(",")[1];
         byte[] bytes = Base64.getMimeDecoder().decode(realImageBase64);
-//        int idUser = SubUtils.getCurrentUser().getId();
-        int idUser = 1;
+        int idUser = SubUtils.getCurrentUser().getId();
         Account account = accountRepository.getById(idUser);
-        List<OrderItem> orderItems = orderItemRepository.findByIdCustomer(idUser);
         final String uuid = UUID.randomUUID().toString();
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             String qrcode = docsUrlPrefix + uuid;
-            signer.sign(DigitalUltil.createPDF(orderItems,account), bos, "phung vip",
-                    "phung vip", "phung vip", bytes, "phung vip",
-                    "phung vip", uuid, qrcode);
+            signer.sign(DigitalUltil.createPDF(digitalSignatureRequest.getListOrderItem(), account), bos, digitalSignatureRequest.getUserName(),
+                    "phung vip", "ký kết mua hàng tại shop", bytes, digitalSignatureRequest.getUserName(),
+                    "ký kết mua hàng tại shop", uuid, qrcode);
             result = bos.toByteArray();
             bos.close();
         } catch (Exception e) {
