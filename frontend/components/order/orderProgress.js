@@ -199,11 +199,6 @@ export default function OrderProgress({ open, closeModal }) {
                             <canvas id="mycanvas" style={{ border: '1px solid #e68a00' }} width={250} height={100} />
                             <img id="image" alt="" style={{ display: "none" }} />
                             <div style={{ marginLeft: '10px' }}>
-<<<<<<< HEAD
-=======
-                                {/* <button class="button_submit"
-                            style="font-size: 14px;display: block;margin-top: 4px;">Start</button> */}
->>>>>>> 8863ca17e809760484055ffc82353d45350d7b80
                                 <button id="btn2" className="button_submit" style={{ fontSize: '14px', display: 'block', marginTop: '20px' }}>Clear</button>
                                 <button onClick={isSaveImg} id="btn3" className="button_submit" style={{ fontSize: '14px', display: 'block', marginTop: '10px' }}>Save</button>
                             </div>
