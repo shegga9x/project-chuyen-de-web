@@ -35,9 +35,9 @@ CREATE TABLE ACCOUNT
     password_hash nvarchar(255) NOT NULL,
     provider varchar(255) NOT NULL,
     provider_id varchar(255),
-    [created] [datetime2](7) ,
-    [updated] [datetime2](7) ,
-    [last_expires] [datetime2](7) ,
+    [created] [datetime2](7),
+    [updated] [datetime2](7),
+    [last_expires] [datetime2](7),
     [accept_terms] [bit]
 )
 CREATE TABLE ACCOUNT_Has_Role

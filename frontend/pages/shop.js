@@ -80,7 +80,10 @@ export default function Shop(props) {
                       collapseAll: <FontAwesomeIcon icon={faMinusSquare} />,
                       parentClose: null, parentOpen: null, leaf: null,
                     }} checked={checked} expanded={expanded} onCheck={(checked) => {
-                      { setChecked(checked); handleChangeCategories(generateURL(props.currentPage, props.currentSize, checked, props.sorter)); }
+                      {
+                        setChecked(checked);
+                        handleChangeCategories(generateURL(props.currentPage, props.currentSize, checked, props.sorter));
+                      }
                     }}
                       onExpand={(expanded) => { setExpanded(expanded); }}
                     />

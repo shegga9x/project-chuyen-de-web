@@ -1,5 +1,16 @@
 package backend.backend.services.mainService;
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.util.Base64;
+import java.util.List;
+import java.util.UUID;
+
+import org.apache.pdfbox.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import backend.backend.helpers.payload.request.DigitalSignatureRequest;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.helpers.utils.digitalSignature.DigitalUltil;
@@ -7,19 +18,8 @@ import backend.backend.helpers.utils.digitalSignature.algorim.Signer;
 import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfo;
 import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfoParser;
 import backend.backend.persitence.entities.Account;
-import backend.backend.persitence.entities.OrderItem;
 import backend.backend.persitence.repository.AccountRepository;
 import backend.backend.persitence.repository.OrderItemRepository;
-import org.apache.pdfbox.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.util.Base64;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 public class DigitalSignatureService {

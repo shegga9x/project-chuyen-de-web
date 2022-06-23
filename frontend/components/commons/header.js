@@ -77,7 +77,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
     // console.log(session)
     // const test = async () => {
     //     // await axios.get("http://localhost:4000/test/getJWT", { headers: { Authorization:`Bearer ${session.user.jwtToken}` }});
-    //     await instance.get("http://localhost:4000/api/test/getJWT");
+    //     await instance().get("http://localhost:4000/api/test/getJWT");
     // };
 
     return (
