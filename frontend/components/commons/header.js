@@ -378,7 +378,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                     <div className="container">
                         <div className="row align-items-center">
                             <div className="col-lg-3">
-                                <div className="v-menu v-close">
+                                {/* <div className="v-menu v-close">
                                     <span className="v-title">
                                         <i style={{ color: "white" }} className="ion-md-menu">
                                             <FontAwesomeIcon icon={faBars} />
@@ -919,7 +919,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                                 </ul>
                                                             </div>
                                                         </div>
-                                                        {/* Remember layer image should be place on empty space and its not overlap your list items because user could not read your list items. */}
                                                         <div
                                                             className="v-image"
                                                             style={{ bottom: 0, right: "-25px" }}
@@ -936,7 +935,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-md-phone-portrait" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faMobileAndroidAlt} />
                                                         </i>
@@ -945,7 +943,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-md-tv" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faTvAlt} />
                                                         </i>
@@ -954,7 +951,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-ios-book" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faBookOpen} />
                                                         </i>
@@ -963,7 +959,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-md-heart" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faHeartbeat} />
                                                         </i>
@@ -972,13 +967,11 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li className="v-none" style={{ display: "none" }}>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-md-easel" /> */}
                                                         Furniture Home &amp; Office
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a className="v-more">
-                                                        {/* <i className="ion ion-md-add" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faPlus} />
                                                         </i>
@@ -988,7 +981,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                             </ul>
                                         </div>
                                     </nav>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="col-lg-9">
                                 <ul className="bottom-nav g-nav u-d-none-lg">
