@@ -1,6 +1,7 @@
 import Layout from "../../components/layout"
 import Head from "next/head";
 import { useRouter } from 'next/router'
+import { getSession } from 'next-auth/client';
 import AccountProfile from "../../components/account/accountProfile";
 import AccountAddress from "../../components/account/accountAddress";
 import AccountShopXu from "../../components/account/accountShopXu";
@@ -11,7 +12,7 @@ export default function Profile({ keyword }) {
     const router = useRouter()
 
     const changeRoute = (href) => {
-        router.push(href, href, { locale: router.locale});
+        router.push(href, href, { locale: router.locale });
     }
 
     const childListOpen = (eleOrderNumber) => {
@@ -145,9 +146,18 @@ export default function Profile({ keyword }) {
     )
 }
 
-export function getServerSideProps({ query }) {
-    if (query.keyword != undefined) {
-        return { props: { keyword: query.keyword } }
+export async function getServerSideProps({ req, query }) {
+    const session = await getSession({ req });
+    if (session) {
+        if (query.keyword != undefined) {
+            return { props: { keyword: query.keyword } }
+        }
+        return { props: { keyword: "profile" } }
     }
-    return { props: { keyword: "profile" } }
+    return {
+        redirect: {
+            permanent: false,
+            destination: "/account"
+        }
+    }
 }

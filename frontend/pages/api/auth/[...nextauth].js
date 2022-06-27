@@ -96,7 +96,6 @@ const nextAuthOptions = (req, res) => {
 };
 
 async function refreshAccessToken(token, cookiesSetter) {
-  console.log(2);
   try {
     const response = await axios.post(process.env.BE_AUTH + "refresh-token", {}, {
       headers: { Cookie: "refreshToken=" + cookiesSetter.get('refreshToken') + ";" }

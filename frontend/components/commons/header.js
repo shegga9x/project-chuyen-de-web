@@ -1,27 +1,17 @@
 import {
     faAngleDown,
-    faAngleRight,
-    faBars,
     faBasketShopping,
-    faBookOpen,
     faChevronDown,
     faCircleCheck,
     faClose,
     faCog,
     faEnvelope,
     faHeart,
-    faHeartbeat,
     faHome,
-    faMobileAndroidAlt,
-    faPersonDress,
     faPhoneFlip,
-    faPlus,
     faRightFromBracket,
-    faRocket,
     faSearch,
-    faShirt,
     faSignInAlt,
-    faTvAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/client";
@@ -63,9 +53,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
 
     }, [updateCartHeader, loading]);
 
-    function handleChange(event) {
-        router.push("/logout");
-    }
     const getTotalCart = () => {
         let result = 0;
         userCart.forEach(ele => {
@@ -73,12 +60,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
         })
         return result.toFixed(2);
     }
-
-    // console.log(session)
-    // const test = async () => {
-    //     // await axios.get("http://localhost:4000/test/getJWT", { headers: { Authorization:`Bearer ${session.user.jwtToken}` }});
-    //     await instance().get("http://localhost:4000/api/test/getJWT");
-    // };
 
     return (
         <>
@@ -117,27 +98,24 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                         </i>
                                     </a>
                                     <ul className="g-dropdown" style={{ width: 200 }}>
-                                        <li>
-                                            <a>
-                                                <i className=" u-s-m-r-9">
-                                                    <FontAwesomeIcon icon={faCog} />
-                                                </i>My Cart
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <i className=" u-s-m-r-9" >
-                                                    <FontAwesomeIcon icon={faHeart} />
-                                                </i>My Wishlist
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <i className="u-s-m-r-9">
-                                                    <FontAwesomeIcon icon={faCircleCheck} />
-                                                </i>Checkout
-                                            </a>
-                                        </li>
+                                        {
+                                            session ? (<>
+                                                <li onClick={() => { changeRoute('/account/profile', router) }}>
+                                                    <a>
+                                                        <i className=" u-s-m-r-9">
+                                                            <FontAwesomeIcon icon={faCog} />
+                                                        </i>My Profile
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a>
+                                                        <i className="u-s-m-r-9">
+                                                            <FontAwesomeIcon icon={faCircleCheck} />
+                                                        </i>Checkout
+                                                    </a>
+                                                </li>
+                                            </>) : (<></>)
+                                        }
                                         {!loading && !session && <li>
                                             <a onClick={() => { changeRoute('/account', router) }}>
                                                 <i className=" u-s-m-r-9">

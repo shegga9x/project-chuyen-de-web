@@ -1,4 +1,11 @@
+import { useEffect } from "react"
+
 export default function AccountProfile() {
+
+    useEffect(() => {
+      //get account profile
+    }, [])
+
     return (
         <>
             <div className="right_container_header" style={{ padding: '18px 0px 18px 0px', borderBottom: '0.0625rem solid #efefef' }}>

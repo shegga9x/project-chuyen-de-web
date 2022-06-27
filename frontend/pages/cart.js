@@ -85,7 +85,7 @@ export default function Cart(props) {
   }
 
   const addCartItemToOrder = async () => {
-    const res = await instance().get(`http://localhost:4000/api/order/addCartItemToOrder`).catch((err) => { console.log({ err }) })
+    const res = await instance().get(`http://localhost:4000/api/order/addCartItemToOrder`).catch((err) => { alert(err.response.data.message) })
     if (res) {
       changeRoute("/order", router)
     }

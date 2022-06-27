@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import backend.backend.persitence.repository.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,6 @@ import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.entities.Category;
 import backend.backend.persitence.entities.Product;
 import backend.backend.persitence.entities.SingleProductPage;
-import backend.backend.persitence.repository.CartItemRepository;
-import backend.backend.persitence.repository.CategoryRepository;
-import backend.backend.persitence.repository.OrderItemRepository;
-import backend.backend.persitence.repository.ProductRepository;
-import backend.backend.persitence.repository.SingleProductPageRepository;
 import backend.backend.services.entityService.SingleProductPageService;
 
 @RunWith(SpringRunner.class)
@@ -43,6 +39,8 @@ class BackendApplicationTests {
     CartItemRepository cartItemRepository;
     @Autowired
     OrderItemRepository orderItemRepository;
+    @Autowired
+    WalletCustomerRepository walletCustomerRepository;
 
     @Test
     @Transactional
@@ -113,8 +111,7 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        String[][] content = {{}};
-        System.out.println(content.length);
-
+        Optional<Double> total = walletCustomerRepository.getMoneyByIdCustomer(1);
+        System.out.println(total.isPresent());
     }
 }

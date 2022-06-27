@@ -21,6 +21,8 @@ public class OrderService {
     private OrderItemRepository orderItemRepository;
     @Autowired
     private CartItemRepository cartItemRepository;
+    @Autowired
+    private WalletCustomerService walletCustomerService;
 
     public List<OrderItemResponse> getOrderItemByIdCustomer() {
         int idUser = SubUtils.getCurrentUser().getId();
@@ -39,13 +41,18 @@ public class OrderService {
     public String addCartItemToOrder() {
         int idUser = SubUtils.getCurrentUser().getId();
         List<CartItem> listCartItem = cartItemRepository.findByIdCustomer(idUser);
+        double totalCart = 0;
+        for (CartItem cartItem : listCartItem) {
+            totalCart += cartItem.getQuantity() * cartItem.getProduct().getPrice();
+        }
+        // remove money
+        walletCustomerService.removeMoneyFormCustomerWallet(totalCart);
         List<OrderItem> listOrderItem = new ArrayList<>();
         for (CartItem cartItem : listCartItem) {
             OrderItem orderItem = new OrderItem();
             orderItem.setIdCustomer(idUser);
             orderItem.setIdProduct(cartItem.getProduct().getIdProduct());
             orderItem.setStatus((byte) 1);
-            // orderItem.setIdOrderItem(1);
             listOrderItem.add(orderItem);
         }
         cartItemRepository.deleteAll(listCartItem);

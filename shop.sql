@@ -581,7 +581,10 @@ from Product p
 where p.id_single_product_page=1
 
 delete from Cart_Item
+delete from Order_Item
 select *
 from Cart_Item
 select *
 from Product
+select * from Wallet_Customer
+delete from Wallet_Customer
