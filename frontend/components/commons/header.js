@@ -107,7 +107,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                         </i>My Profile
                                                     </a>
                                                 </li>
-                                                <li>
+                                                <li onClick={() => { changeRoute('/order', router) }}>
                                                     <a>
                                                         <i className="u-s-m-r-9">
                                                             <FontAwesomeIcon icon={faCircleCheck} />
@@ -333,10 +333,10 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                             <span className="mini-total-price float-right">${getTotalCart()}</span>
                                         </div>
                                         <div className="mini-action-anchors">
-                                            <a href="cart.html" className="cart-anchor">
+                                            <a onClick={() => { changeRoute('/cart', router) }} className="cart-anchor">
                                                 View Cart
                                             </a>
-                                            <a href="checkout.html" className="checkout-anchor">
+                                            <a onClick={() => { changeRoute('/order', router) }} className="checkout-anchor">
                                                 Checkout
                                             </a>
                                         </div>
