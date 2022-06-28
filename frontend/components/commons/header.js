@@ -314,7 +314,8 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                         <li className="clearfix" key={i}>
                                                             <a>
                                                                 <img
-                                                                    src={ele.product.imgUrl}
+                                                                    // src={ele.product.imgUrl}
+                                                                    src="images/product/product@1x.jpg"
                                                                     alt="Product"
                                                                 />
                                                                 <span className="mini-item-name">

@@ -1,4 +1,4 @@
-import ModalShopXu from "./modalShopXu";
+import ModalShopXu from "./modal/modalShopXu";
 import { useState, useEffect } from 'react';
 import instance from '../../helpers/axiosConfig';
 
@@ -30,6 +30,7 @@ export default function AccountShopXu() {
     }
 
     const closeModal = () => {
+        console.log('?????');
         setOpen(false);
         setTimeout(() => {
             document.body.classList.toggle('modal-visibile');

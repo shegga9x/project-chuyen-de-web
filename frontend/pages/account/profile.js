@@ -2,12 +2,27 @@ import Layout from "../../components/layout"
 import Head from "next/head";
 import { useRouter } from 'next/router'
 import { getSession } from 'next-auth/client';
+import { useState, useEffect } from "react";
+import instance from '../../helpers/axiosConfig';
 import AccountProfile from "../../components/account/accountProfile";
 import AccountAddress from "../../components/account/accountAddress";
 import AccountShopXu from "../../components/account/accountShopXu";
 import AccountPayment from "../../components/account/accountPayment"
 
-export default function Profile({ keyword }) {
+export default function Profile({ keyword, customer }) {
+
+    const [customerState, setCustomerState] = useState(customer);
+    const [firstRender, setFirstRender] = useState(0);
+
+    useEffect(() => {
+        const changeInformationCustomer = async () => {
+            await instance().post("http://localhost:4000/api/customer/changeInformationCustomer", customerState);
+            console.log('done');
+        }
+        if (firstRender != 0) {
+            changeInformationCustomer().catch(err => { console.log({ err }) });
+        }
+    }, [customerState])
 
     const router = useRouter()
 
@@ -74,12 +89,12 @@ export default function Profile({ keyword }) {
                     <div className="container" style={{ display: 'flex', padding: '20px 0px 20px 0px' }}>
                         <div className="left_container" style={{ width: '20%', paddingTop: '10px' }}>
                             <div className="left_container_image" style={{ display: 'flex', padding: '6px 0px 6px 0px' }}>
-                                <img src="https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png" width="55px" height="50px" />
+                                <div style={{ backgroundImage: `${customerState.imgUrl}`, borderRadius: "50%", backgroundPosition: "50%", backgroundSize: "cover", backgroundRepeat: "no-repeat", width: "55px", height: "50px" }}></div>
                                 <div style={{ marginLeft: '6px' }}>
-                                    <div style={{ marginTop: '2px', fontWeight: 600 }}>emlama123456</div>
+                                    <div style={{ marginTop: '2px', fontWeight: 600 }}>{customerState.name}</div>
                                     <div style={{ fontSize: '13px' }}>
                                         <a href="#" style={{ color: '#888' }}>
-                                            <svg width={12} height={12} viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '4px', marginBottom: '3px' }}>
+                                            <svg width={12} height={12} viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '4px' }}>
                                                 <path d="M8.54 0L6.987 1.56l3.46 3.48L12 3.48M0 8.52l.073 3.428L3.46 12l6.21-6.18-3.46-3.48" fill="#9B9B9B" fillRule="evenodd" />
                                             </svg>Sửa Hồ Sơ
                                         </a>
@@ -126,7 +141,7 @@ export default function Profile({ keyword }) {
                                     {
                                         (() => {
                                             if (keyword == 'profile') {
-                                                return <AccountProfile></AccountProfile>
+                                                return <AccountProfile customer={customerState} setCustomer={setCustomerState} setFirstRender={setFirstRender}></AccountProfile>
                                             } else if (keyword == 'address') {
                                                 return <AccountAddress></AccountAddress>
                                             } else if (keyword == 'payment') {
@@ -147,13 +162,27 @@ export default function Profile({ keyword }) {
 }
 
 export async function getServerSideProps({ req, query }) {
+    // session.user.email
     const session = await getSession({ req });
     if (session) {
+        const res = await instance({ req }).get("http://localhost:4000/api/customer/getCurrentCustomer")
+        const customer = res.data;
         if (query.keyword != undefined) {
-            return { props: { keyword: query.keyword } }
+            return {
+                props: {
+                    keyword: query.keyword,
+                    customer: customer
+                }
+            }
         }
-        return { props: { keyword: "profile" } }
+        return {
+            props: {
+                keyword: "profile",
+                customer: customer
+            }
+        }
     }
+
     return {
         redirect: {
             permanent: false,

@@ -263,10 +263,10 @@ VALUES
     (1, null, getdate())
 -- Customer
 INSERT INTO Customer
-VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '', '334/35/12 Nguyễn Văn Nghi F7 Gò Vấp');
+VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '', N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp');
 -- Shop
 INSERT INTO Shop
-VALUES(1, N'shop của Phùng', '0378876395', N'', '334/35/12 Nguyễn Văn Nghi F7 Gò Vấp', N'Shop ác nhất hành tinh');
+VALUES(1, N'shop của Phùng', '0378876395', N'', N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp', N'Shop ác nhất hành tinh');
 -- Shop_Category
 INSERT INTO Shop_Category
 VALUES(1, N'Điện Thoại');
@@ -580,6 +580,8 @@ select p.id_product
 from Product p
 where p.id_single_product_page=1
 
+select * from Verification_Token
+select * from Customer
 delete from Cart_Item
 delete from Order_Item
 select *
@@ -588,3 +590,6 @@ select *
 from Product
 select * from Wallet_Customer
 delete from Wallet_Customer
+--UPDATE Customer
+--SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
+--WHERE id_customer = 1;

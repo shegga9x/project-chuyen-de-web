@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import backend.backend.persitence.entities.*;
 import backend.backend.persitence.repository.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -18,9 +19,6 @@ import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.utils.SubUtils;
-import backend.backend.persitence.entities.Category;
-import backend.backend.persitence.entities.Product;
-import backend.backend.persitence.entities.SingleProductPage;
 import backend.backend.services.entityService.SingleProductPageService;
 
 @RunWith(SpringRunner.class)
@@ -41,6 +39,8 @@ class BackendApplicationTests {
     OrderItemRepository orderItemRepository;
     @Autowired
     WalletCustomerRepository walletCustomerRepository;
+    @Autowired
+    CustomerRepository customerRepository;
 
     @Test
     @Transactional
@@ -111,7 +111,7 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        Optional<Double> total = walletCustomerRepository.getMoneyByIdCustomer(1);
-        System.out.println(total.isPresent());
+        Optional<Customer> optional = customerRepository.findByEmailCustomer("sa@gmail.com");
+        System.out.println(optional.get());
     }
 }

@@ -401,7 +401,7 @@ export async function getServerSideProps({ req }) {
       props: {
         cart: response.data,
         user: session.user
-      },
+      }
     }
   }
   return {
