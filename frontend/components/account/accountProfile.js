@@ -43,8 +43,8 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
             imgUrl: imgUrl,
             address: customer.address
         }
-        setCustomer(newCustomer);
         setFirstRender(1);
+        setCustomer(newCustomer);
     }
 
     const resetAll = () => {

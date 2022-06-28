@@ -75,6 +75,22 @@ CREATE TABLE Reset_Token
     [password_reset] [datetime2](7) NULL,
     PRIMARY KEY (ID_ACCOUNT)
 )
+CREATE TABLE Reset_Phone_Token
+(
+    ID_ACCOUNT int NOT NULL FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,
+    [reset_token_content] [nvarchar](6) NULL,
+    [reset_token_expires] [datetime2](7) NULL,
+    [phone_reset] [datetime2](7) NULL,
+    PRIMARY KEY (ID_ACCOUNT)
+)
+CREATE TABLE Reset_Email_Token
+(
+    ID_ACCOUNT int NOT NULL FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,
+    [reset_token_content] [nvarchar](6) NULL,
+    [reset_token_expires] [datetime2](7) NULL,
+    [email_reset] [datetime2](7) NULL,
+    PRIMARY KEY (ID_ACCOUNT)
+)
 CREATE TABLE Customer
 (
     id_customer int FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,
@@ -575,6 +591,9 @@ VALUES(20, N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMO
 INSERT INTO Product
 VALUES(21, N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2', 1, 1, 100.900, '');
 
+--reset Phone Token
+insert into Reset_Phone_Token values(1,'123456','25/08/2000','25/08/2001')
+
 -- FUNCTION
 select p.id_product
 from Product p
@@ -585,7 +604,8 @@ select * from Customer
 delete from Cart_Item
 delete from Order_Item
 select *
-from Cart_Item
+from Reset_Phone_Token
+delete from Reset_Phone_Token
 select *
 from Product
 select * from Wallet_Customer

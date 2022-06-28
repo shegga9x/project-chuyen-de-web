@@ -1,8 +1,11 @@
 import Head from "next/head"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import instance from '../../../helpers/axiosConfig';
+import axios from "axios";
 
-export default function ModalProfilePhone({ open, closeModal}) {
+export default function ModalProfilePhone({ open, closeModal }) {
+
+    const [phoneNumber, setPhoneNumber] = useState(null);
 
     useEffect(() => {
         if (open) {
@@ -14,6 +17,30 @@ export default function ModalProfilePhone({ open, closeModal}) {
             popup.style.transform = 'translate(-50%, -50%) scale(0.0)';
         }
     }, [open])
+
+
+    const sendSMS = async () => {
+        console.log('?????');
+        const phoneNumber = document.getElementsByClassName('PhoneNumber')[0].value
+        const res = await instance().get('http://localhost:4000/api/customer/sendPhoneSMS')
+        if (res) {
+            const sms = res.data;
+            const apiLink = `http://my.zitasms.com/services/send.php?key=c1313d3e986a27f76bf0bf272386f4f16dc9b07c&number=%2B${phoneNumber}&message=${sms}&devices=1593&type=sms&prioritize=1`;
+            await axios.get(apiLink).catch(err => {console.log({err})})
+            setPhoneNumber(phoneNumber);
+        }
+    }
+
+    const checkSMS = async () => {
+        const sms = document.getElementsByClassName('smsNumber')[0].value;
+        const res = await instance().get('http://localhost:4000/api/customer/checkPhoneSMS', { params: { sms: sms, phoneNumber: phoneNumber } })
+            .catch(err => {
+                alert(err.response.data.message);
+            })
+        if (res) {
+            closeModal('phone');
+        }
+    }
 
     return (
         <>
@@ -45,18 +72,18 @@ export default function ModalProfilePhone({ open, closeModal}) {
                         <div>
                             <div style={{ display: 'flex' }}>
                                 <input className="PhoneNumber" type="text" placeholder="Số Điện Thoại" style={{ flex: 1, padding: '0.625rem', outline: 'none', border: '1px solid rgba(0, 0, 0, 0.14)', height: '2.5rem' }} />
-                                <button style={{ border: '1px solid rgba(0, 0, 0, 0.5)', backgroundColor: '#fbfbfb', padding: '0 0.625rem' }}>Gửi
+                                <button onClick={() => { sendSMS() }} style={{ border: '1px solid rgba(0, 0, 0, 0.5)', backgroundColor: '#fbfbfb', padding: '0 0.625rem' }}>Gửi
                                     Mã xác
                                     minh</button>
                             </div>
                             <div style={{ display: 'flex', marginTop: '30px' }}>
-                                <input className="CodeNumber" type="text" placeholder="Mã xác minh" style={{ flex: 1, padding: '0.625rem', outline: 'none', border: '1px solid rgba(0, 0, 0, 0.14)', height: '2.5rem' }} />
+                                <input className="smsNumber" type="text" placeholder="Mã xác minh" style={{ flex: 1, padding: '0.625rem', outline: 'none', border: '1px solid rgba(0, 0, 0, 0.14)', height: '2.5rem' }} />
                             </div>
                         </div>
                         <div style={{ margin: '1.375rem 0', justifyContent: 'flex-end', display: 'flex' }}>
                             <button onClick={() => { closeModal('phone') }} style={{ minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', background: 'none', borderRadius: '0.125rem', height: '2.5rem' }}>Trở
                                 Lại</button>
-                            <button style={{ marginLeft: '0.625rem', minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', backgroundColor: 'red', borderRadius: '0.125rem', height: '2.5rem' }}>OK</button>
+                            <button onClick={() => { checkSMS() }} style={{ marginLeft: '0.625rem', minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', backgroundColor: 'red', borderRadius: '0.125rem', height: '2.5rem' }}>OK</button>
                         </div>
                     </div>
                 </div>

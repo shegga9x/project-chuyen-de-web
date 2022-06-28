@@ -1,58 +1,26 @@
-import { useState, useEffect } from "react";
-import Head from "next/head";
-export default function Test() {
+import axios from "axios";
+import { useEffect } from "react";
 
-    const [del, setDelete] = useState(false);
-
-    const test = () => {
-        const ele = document.getElementById('test');
-        ele.style.removeProperty('height');
-        ele.style.maxHeight = 100 + "px";
-        setDelete(true);
-    }
-
-    return (
-        <>
-            <Head>
-                <style dangerouslySetInnerHTML={{
-                    __html: `
-                    ul {
-                        list-style-type: none;
-                    }
-            
-                    #test {
-                        overflow: hidden;
-                        transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-                    }
-                    ` }} />
-            </Head>
-            <div className="container" style={{ border: '1px solid red' }}>
-                <ul>
-                    <li onClick={test}>
-                        List A
-                        <div id="test" style={{ maxHeight: 0 }}>
-                            <ul id="wrapper">
-                                <li>List A sub</li>
-                                <li>List A sub</li>
-                                <li>List A sub</li>
-                                <li>List A sub</li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li>
-                        List B
-                        <ul>
-                            <li>List B sub</li>
-                            <li>List B sub</li>
-                            <li>List B sub</li>
-                            <li>List B sub</li>
-                        </ul>
-                    </li>
-                    <div>
-                        {del && <h1>bun</h1>}
-                    </div>
-                </ul>
-            </div>
-        </>
-    );
+export default function test() {
+    useEffect(() => {
+        const options = {
+            method: 'POST',
+            url: 'https://d7sms.p.rapidapi.com/secure/send',
+            headers: {
+              'content-type': 'application/json',
+              Authorization: 'Basic cXZrdzg3OTM6UDdsSEp4MjU=',
+              'X-RapidAPI-Key': '67e6658240mshf5ac4f57584ca2bp1be28cjsn1f4fe1a07f3b',
+              'X-RapidAPI-Host': 'd7sms.p.rapidapi.com'
+            },
+            data: '{"content":"Test Message","from":"D7-Rapid","to":84983464047}'
+          };
+          
+          axios.request(options).then(function (response) {
+              console.log(response.data);
+          }).catch(function (error) {
+              console.error(error);
+          });
+    })
+    return (<></>)
 }
+

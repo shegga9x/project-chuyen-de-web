@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotNull;
 import java.text.ParseException;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -24,5 +25,15 @@ public class CustomerController {
     @PostMapping("/changeInformationCustomer")
     public ResponseEntity<?> changeInformationCustomer(@RequestBody CustomerRequest customerRequest) throws ParseException {
         return ResponseEntity.ok(customerService.changeInformationCustomer(customerRequest));
+    }
+
+    @GetMapping("/sendPhoneSMS")
+    public ResponseEntity<?> sendPhoneSMS() {
+        return ResponseEntity.ok(customerService.sendPhoneSMS());
+    }
+
+    @GetMapping("/checkPhoneSMS")
+    public ResponseEntity<?> checkPhoneSMS(@NotNull @RequestParam String sms,@NotNull @RequestParam String phoneNumber) {
+        return ResponseEntity.ok(customerService.checkPhoneSMS(sms,phoneNumber));
     }
 }

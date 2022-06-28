@@ -35,7 +35,6 @@ import backend.backend.persitence.model.enumModel.AuthProvider;
  * JPA entity class for "Account"
  *
  * @author Telosys
- *
  */
 @Entity
 @Table(name = "ACCOUNT", schema = "dbo", catalog = "shop")
@@ -87,6 +86,15 @@ public class Account implements Serializable {
     @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
     private ResetToken resetToken;
+
+    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    private ResetPhoneToken resetPhoneToken;
+
+    @PrimaryKeyJoinColumn
+    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    private ResetEmailToken resetEmailToken;
+
 
     @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
@@ -187,6 +195,14 @@ public class Account implements Serializable {
         return this.resetToken;
     }
 
+    public ResetPhoneToken getPhoneResetToken() {
+        return this.resetPhoneToken;
+    }
+
+    public ResetEmailToken getEmailResetToken() {
+        return this.resetEmailToken;
+    }
+
     public VerificationToken getVerificationToken() {
         return this.verificationToken;
     }
@@ -219,6 +235,16 @@ public class Account implements Serializable {
     public void setResetToken(ResetToken resetToken) {
         this.resetToken = resetToken;
         resetToken.setAccount(this);
+    }
+
+    public void setResetPhoneToken(ResetPhoneToken resetPhoneToken) {
+        this.resetPhoneToken = resetPhoneToken;
+        resetPhoneToken.setAccount(this);
+    }
+
+    public void setResetEmailToken(ResetEmailToken resetEmailToken) {
+        this.resetEmailToken = resetEmailToken;
+        resetEmailToken.setAccount(this);
     }
 
     public void setListOfRole(List<Role> listOfRole) {

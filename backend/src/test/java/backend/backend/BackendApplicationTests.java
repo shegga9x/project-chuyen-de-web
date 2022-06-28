@@ -41,6 +41,8 @@ class BackendApplicationTests {
     WalletCustomerRepository walletCustomerRepository;
     @Autowired
     CustomerRepository customerRepository;
+    @Autowired
+    ResetPhoneTokenRepository resetPhoneTokenRepository;
 
     @Test
     @Transactional
@@ -111,7 +113,7 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        Optional<Customer> optional = customerRepository.findByEmailCustomer("sa@gmail.com");
-        System.out.println(optional.get());
+       Optional<ResetPhoneToken> optional = resetPhoneTokenRepository.findById(1);
+       System.out.println(optional.get());
     }
 }
