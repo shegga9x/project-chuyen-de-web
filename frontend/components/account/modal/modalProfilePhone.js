@@ -33,7 +33,7 @@ export default function ModalProfilePhone({ open, closeModal }) {
 
     const checkSMS = async () => {
         const sms = document.getElementsByClassName('smsNumber')[0].value;
-        const res = await instance().get('http://localhost:4000/api/customer/checkPhoneSMS', { params: { sms: sms, phoneNumber: phoneNumber } })
+        const res = await instance().get('http://localhost:4000/api/customer/checkPhoneSMS', { params: { sms: sms, phoneNumber: '84778647898' } })
             .catch(err => {
                 alert(err.response.data.message);
             })

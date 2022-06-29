@@ -88,11 +88,11 @@ public class Account implements Serializable {
     private ResetToken resetToken;
 
     @PrimaryKeyJoinColumn
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "account", cascade = CascadeType.MERGE)
     private ResetPhoneToken resetPhoneToken;
 
     @PrimaryKeyJoinColumn
-    @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "account", cascade = CascadeType.MERGE)
     private ResetEmailToken resetEmailToken;
 
 
@@ -207,6 +207,8 @@ public class Account implements Serializable {
         return this.verificationToken;
     }
 
+    public Customer getCustomer() {return this.customer;}
+
     // --- toString specific method
     @Override
     public String toString() {
@@ -249,6 +251,10 @@ public class Account implements Serializable {
 
     public void setListOfRole(List<Role> listOfRole) {
         this.listOfRole = listOfRole;
+    }
+
+    public void setCustomer(Customer customer){
+        this.customer = customer;
     }
 
     public void addToListOfRefreshToken(RefreshToken refreshToken) {

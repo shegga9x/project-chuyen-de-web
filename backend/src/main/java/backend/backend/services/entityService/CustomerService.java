@@ -79,11 +79,11 @@ public class CustomerService {
             if (resetPhoneToken.getResetTokenExpires().before(new Date())) {
                 throw new CustomException("SMS đã hết hạn");
             }
-            Customer customer = customerRepository.findByIdCustomer(idCustomer).get();
-            customer.setPhoneNumber(phoneNumber);
             ///
             Account account = resetPhoneToken.getAccount();
             account.setResetPhoneToken(new ResetPhoneToken(idCustomer, new Date(), null, null));
+            Customer customer = account.getCustomer();
+            customer.setPhoneNumber(phoneNumber);
             ///
             customerRepository.save(customer);
             accountRepository.save(account);

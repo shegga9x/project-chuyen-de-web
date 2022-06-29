@@ -592,7 +592,7 @@ INSERT INTO Product
 VALUES(21, N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2', 1, 1, 100.900, '');
 
 --reset Phone Token
-insert into Reset_Phone_Token values(1,'123456','25/08/2000','25/08/2001')
+insert into Reset_Phone_Token values(1,'123456','30/06/2022',NULL);
 
 -- FUNCTION
 select p.id_product
