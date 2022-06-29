@@ -146,7 +146,7 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
             </div>
             <div className="modal-load">
                 <ModalProfileEmail open={openEmail} closeModal={closeModal}></ModalProfileEmail>
-                <ModalProfilePhone open={openPhone} closeModal={closeModal}></ModalProfilePhone>
+                <ModalProfilePhone open={openPhone} closeModal={closeModal} customer={customer} setCustomer={setCustomer} setFirstRender={setFirstRender}></ModalProfilePhone>
             </div>
         </>)
 }
