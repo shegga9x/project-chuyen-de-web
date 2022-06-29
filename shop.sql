@@ -591,25 +591,25 @@ VALUES(20, N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMO
 INSERT INTO Product
 VALUES(21, N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2', 1, 1, 100.900, '');
 
---reset Phone Token
-insert into Reset_Phone_Token values(1,'123456','30/06/2022',NULL);
+----reset Phone Token
+--insert into Reset_Phone_Token values(1,'123456','30/06/2022',NULL);
 
--- FUNCTION
-select p.id_product
-from Product p
-where p.id_single_product_page=1
+---- FUNCTION
+--select p.id_product
+--from Product p
+--where p.id_single_product_page=1
 
-select * from Verification_Token
-select * from Customer
-delete from Cart_Item
-delete from Order_Item
-select *
-from Reset_Phone_Token
-delete from Reset_Phone_Token
-select *
-from Product
-select * from Wallet_Customer
-delete from Wallet_Customer
---UPDATE Customer
---SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
---WHERE id_customer = 1;
+--select * from Verification_Token
+--select * from Customer
+--delete from Cart_Item
+--delete from Order_Item
+--select *
+--from Reset_Phone_Token
+--delete from Reset_Phone_Token
+--select *
+--from Product
+--select * from Wallet_Customer
+--delete from Wallet_Customer
+UPDATE Customer
+SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
+WHERE id_customer = 1;
