@@ -31,7 +31,10 @@
     "react-checkbox-tree": "^1.7.3",
     "react-dom": "18.0.0",
     "react-hook-form": "^7.30.0",
-    "rxjs": "^7.5.5"
+    "rxjs": "^7.5.5",
+    "chart.js": "2.9.4",
+    "datatables.net-bs4": "1.10.24",
+    "jquery.easing": "^1.4.1"
   },
   "devDependencies": {
     "eslint": "8.13.0",
