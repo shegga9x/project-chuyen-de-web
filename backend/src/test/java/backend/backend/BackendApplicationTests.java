@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import backend.backend.persitence.entities.*;
+import backend.backend.persitence.repository.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,14 +23,6 @@ import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.payload.response.SalerOrderItemResponse;
 import backend.backend.helpers.utils.SubUtils;
-import backend.backend.persitence.entities.Category;
-import backend.backend.persitence.entities.Product;
-import backend.backend.persitence.entities.SingleProductPage;
-import backend.backend.persitence.repository.CartItemRepository;
-import backend.backend.persitence.repository.CategoryRepository;
-import backend.backend.persitence.repository.OrderItemRepository;
-import backend.backend.persitence.repository.ProductRepository;
-import backend.backend.persitence.repository.SingleProductPageRepository;
 import backend.backend.services.entityService.SingleProductPageService;
 import backend.backend.services.mainService.SalerService;
 
@@ -49,7 +43,11 @@ class BackendApplicationTests {
     @Autowired
     OrderItemRepository orderItemRepository;
     @Autowired
-    SalerService salerService;
+    WalletCustomerRepository walletCustomerRepository;
+    @Autowired
+    CustomerRepository customerRepository;
+    @Autowired
+    ResetPhoneTokenRepository resetPhoneTokenRepository;
 
     @Test
     @Transactional
@@ -121,20 +119,7 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        String[][] content = { {} };
-        System.out.println(content.length);
-    }
-
-    @Test
-    @Transactional
-    void test8() {
-        SalerOrderItemResponse salerOrderItemResponse = singleProductPageService.orderSalerList(1, 0, 3, 1, null);
-        System.out.println(salerOrderItemResponse.getTotalPage());
-        for (Entry<String, OrderMapValue> entry : salerOrderItemResponse.getMap()
-                .entrySet()) {
-            for (OrderItemDTO iterable_element : entry.getValue().getItemDTOs()) {
-                System.out.println(iterable_element);
-            }
-        }
+       Optional<ResetPhoneToken> optional = resetPhoneTokenRepository.findById(1);
+       System.out.println(optional.get());
     }
 }

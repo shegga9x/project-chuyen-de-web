@@ -75,6 +75,22 @@ CREATE TABLE Reset_Token
     [password_reset] [datetime2](7) NULL,
     PRIMARY KEY (ID_ACCOUNT)
 )
+CREATE TABLE Reset_Phone_Token
+(
+    ID_ACCOUNT int NOT NULL FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,
+    [reset_token_content] [nvarchar](6) NULL,
+    [reset_token_expires] [datetime2](7) NULL,
+    [phone_reset] [datetime2](7) NULL,
+    PRIMARY KEY (ID_ACCOUNT)
+)
+CREATE TABLE Reset_Email_Token
+(
+    ID_ACCOUNT int NOT NULL FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,
+    [reset_token_content] [nvarchar](6) NULL,
+    [reset_token_expires] [datetime2](7) NULL,
+    [email_reset] [datetime2](7) NULL,
+    PRIMARY KEY (ID_ACCOUNT)
+)
 CREATE TABLE Customer
 (
     id_customer int FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,

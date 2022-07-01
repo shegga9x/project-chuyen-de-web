@@ -1,27 +1,17 @@
 import {
     faAngleDown,
-    faAngleRight,
-    faBars,
     faBasketShopping,
-    faBookOpen,
     faChevronDown,
     faCircleCheck,
     faClose,
     faCog,
     faEnvelope,
     faHeart,
-    faHeartbeat,
     faHome,
-    faMobileAndroidAlt,
-    faPersonDress,
     faPhoneFlip,
-    faPlus,
     faRightFromBracket,
-    faRocket,
     faSearch,
-    faShirt,
     faSignInAlt,
-    faTvAlt
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSession } from "next-auth/client";
@@ -63,9 +53,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
 
     }, [updateCartHeader, loading]);
 
-    function handleChange(event) {
-        router.push("/logout");
-    }
     const getTotalCart = () => {
         let result = 0;
         userCart.forEach(ele => {
@@ -73,12 +60,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
         })
         return result.toFixed(2);
     }
-
-    // console.log(session)
-    // const test = async () => {
-    //     // await axios.get("http://localhost:4000/test/getJWT", { headers: { Authorization:`Bearer ${session.user.jwtToken}` }});
-    //     await instance().get("http://localhost:4000/api/test/getJWT");
-    // };
 
     return (
         <>
@@ -117,27 +98,24 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                         </i>
                                     </a>
                                     <ul className="g-dropdown" style={{ width: 200 }}>
-                                        <li>
-                                            <a>
-                                                <i className=" u-s-m-r-9">
-                                                    <FontAwesomeIcon icon={faCog} />
-                                                </i>My Cart
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <i className=" u-s-m-r-9" >
-                                                    <FontAwesomeIcon icon={faHeart} />
-                                                </i>My Wishlist
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a>
-                                                <i className="u-s-m-r-9">
-                                                    <FontAwesomeIcon icon={faCircleCheck} />
-                                                </i>Checkout
-                                            </a>
-                                        </li>
+                                        {
+                                            session ? (<>
+                                                <li onClick={() => { changeRoute('/account/profile', router) }}>
+                                                    <a>
+                                                        <i className=" u-s-m-r-9">
+                                                            <FontAwesomeIcon icon={faCog} />
+                                                        </i>My Profile
+                                                    </a>
+                                                </li>
+                                                <li onClick={() => { changeRoute('/order', router) }}>
+                                                    <a>
+                                                        <i className="u-s-m-r-9">
+                                                            <FontAwesomeIcon icon={faCircleCheck} />
+                                                        </i>Checkout
+                                                    </a>
+                                                </li>
+                                            </>) : (<></>)
+                                        }
                                         {!loading && !session && <li>
                                             <a onClick={() => { changeRoute('/account', router) }}>
                                                 <i className=" u-s-m-r-9">
@@ -336,7 +314,8 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                         <li className="clearfix" key={i}>
                                                             <a>
                                                                 <img
-                                                                    src={ele.product.imgUrl}
+                                                                    // src={ele.product.imgUrl}
+                                                                    src="images/product/product@1x.jpg"
                                                                     alt="Product"
                                                                 />
                                                                 <span className="mini-item-name">
@@ -355,10 +334,10 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                             <span className="mini-total-price float-right">${getTotalCart()}</span>
                                         </div>
                                         <div className="mini-action-anchors">
-                                            <a href="cart.html" className="cart-anchor">
+                                            <a onClick={() => { changeRoute('/cart', router) }} className="cart-anchor">
                                                 View Cart
                                             </a>
-                                            <a href="checkout.html" className="checkout-anchor">
+                                            <a onClick={() => { changeRoute('/order', router) }} className="checkout-anchor">
                                                 Checkout
                                             </a>
                                         </div>
@@ -378,7 +357,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                     <div className="container">
                         <div className="row align-items-center">
                             <div className="col-lg-3">
-                                <div className="v-menu v-close">
+                                {/* <div className="v-menu v-close">
                                     <span className="v-title">
                                         <i style={{ color: "white" }} className="ion-md-menu">
                                             <FontAwesomeIcon icon={faBars} />
@@ -919,7 +898,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                                 </ul>
                                                             </div>
                                                         </div>
-                                                        {/* Remember layer image should be place on empty space and its not overlap your list items because user could not read your list items. */}
                                                         <div
                                                             className="v-image"
                                                             style={{ bottom: 0, right: "-25px" }}
@@ -936,7 +914,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-md-phone-portrait" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faMobileAndroidAlt} />
                                                         </i>
@@ -945,7 +922,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-md-tv" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faTvAlt} />
                                                         </i>
@@ -954,7 +930,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-ios-book" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faBookOpen} />
                                                         </i>
@@ -963,7 +938,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-md-heart" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faHeartbeat} />
                                                         </i>
@@ -972,13 +946,11 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 </li>
                                                 <li className="v-none" style={{ display: "none" }}>
                                                     <a href="shop-v1-root-category.html">
-                                                        {/* <i className="ion ion-md-easel" /> */}
                                                         Furniture Home &amp; Office
                                                     </a>
                                                 </li>
                                                 <li>
                                                     <a className="v-more">
-                                                        {/* <i className="ion ion-md-add" /> */}
                                                         <i>
                                                             <FontAwesomeIcon icon={faPlus} />
                                                         </i>
@@ -988,7 +960,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                             </ul>
                                         </div>
                                     </nav>
-                                </div>
+                                </div> */}
                             </div>
                             <div className="col-lg-9">
                                 <ul className="bottom-nav g-nav u-d-none-lg">

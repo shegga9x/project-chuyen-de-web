@@ -10,6 +10,7 @@ import OrderProgress from '../components/order/orderProgress';
 import { getSession } from 'next-auth/client';
 import { useState } from 'react';
 import axios from "axios";
+import instance from "../helpers/axiosConfig";
 
 export default function Order(props) {
 
@@ -426,11 +427,10 @@ export default function Order(props) {
 
 }
 
-export async function getServerSideProps({ req }) {
-    const session = await getSession({ req });
+export async function getServerSideProps(context) {
+    const session = await getSession(context);
     if (session) {
-        const response = await axios.get("http://localhost:4000/api/order/getOrderItemByIdCustomer", { headers: { Authorization: `Bearer ${session.user.jwt}` } })
-        // console.log(response.data)
+        const response = await instance(context).get("http://localhost:4000/api/order/getOrderItemByIdCustomer")
         return {
             props: {
                 order: response.data,
