@@ -1,8 +1,9 @@
-package backend.backend.controllers;
+package backend.backend.controllers.subControllers;
 import java.io.IOException;
 
 import backend.backend.helpers.payload.request.DigitalSignatureRequest;
-import backend.backend.services.mainService.DigitalSignatureService;
+import backend.backend.services.subService.DigitalSignatureService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

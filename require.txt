@@ -17,9 +17,12 @@ Shop
      ++ Duyet Don Hang
    + Vi
    + Ho So (tat ca truong shop)
+   + voucher promote
+Sale
+
 Admin
 -- Quan ly entities
--- Duyet San Pham
+-- Duyet San Pham 
 
 Comment 
 Voucher, Sale 

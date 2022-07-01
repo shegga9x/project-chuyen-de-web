@@ -146,7 +146,6 @@ public class AuthService {
         }
         if (!refreshToken.IsActive()) {
             throw new CustomException("Token is UnActive !!!");
-
         }
         RefreshToken newRefreshToken = tokenUtils.rotateRefreshToken(refreshToken, ipAddress);
         refreshToken = tokenUtils.revokeRefreshToken(refreshToken, ipAddress, "Replaced by new token",

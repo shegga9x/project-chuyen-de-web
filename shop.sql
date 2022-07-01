@@ -4,7 +4,7 @@ USE shop
 SET DATEFORMAT DMY
 GO
 
-
+        
 CREATE SEQUENCE [dbo].[hibernate_sequence] 
  AS [bigint]
  START WITH 10000000
@@ -118,6 +118,7 @@ CREATE TABLE Single_Product_Page
     id_shop_category int FOREIGN KEY REFERENCES Shop_Category (id_shop_category),
     name nvarchar(max),
     description nvarchar(max),
+    status tinyint,
     PRIMARY KEY (id_single_product_page)
 )
 CREATE TABLE Product
@@ -166,6 +167,7 @@ CREATE TABLE Order_Item
     id_customer int FOREIGN KEY REFERENCES Customer (id_customer),
     id_product int FOREIGN KEY REFERENCES Product (id_product),
     status tinyint,
+	quantity int,
     PRIMARY KEY (id_order_item)
 )
 CREATE TABLE Wallet_Shop
@@ -263,10 +265,10 @@ VALUES
     (1, null, getdate())
 -- Customer
 INSERT INTO Customer
-VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '', '334/35/12 Nguyễn Văn Nghi F7 Gò Vấp');
+VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '', N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp');
 -- Shop
 INSERT INTO Shop
-VALUES(1, N'shop của Phùng', '0378876395', N'', '334/35/12 Nguyễn Văn Nghi F7 Gò Vấp', N'Shop ác nhất hành tinh');
+VALUES(1, N'shop của Phùng', '0378876395', N'', N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp', N'Shop ác nhất hành tinh');
 -- Shop_Category
 INSERT INTO Shop_Category
 VALUES(1, N'Điện Thoại');
@@ -433,51 +435,52 @@ from Category
 
 
 
+
 INSERT INTO Single_Product_Page
-VALUES(1, 51, 1, N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2', '');
+VALUES(1, 51, 1, N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 52, 3, N'nón Beanie vành tròn phong cách Retro Hàn Quốc Nam/Nữ', '');
+VALUES(1, 52, 3, N'nón Beanie vành tròn phong cách Retro Hàn Quốc Nam/Nữ', '',3);
 INSERT INTO Single_Product_Page
-VALUES(1, 53, 2, N'Mũ nón Miki kiểu Thủy Thủ Không Vành Founded 1986 N04', '');
+VALUES(1, 53, 2, N'Mũ nón Miki kiểu Thủy Thủ Không Vành Founded 1986 N04', '',4);
 INSERT INTO Single_Product_Page
-VALUES(1, 54, 1, N'Mũ thủy thủ không vành vải canvas loại 1 nhiều màu phong cách hiphop M01', '');
+VALUES(1, 54, 1, N'Mũ thủy thủ không vành vải canvas loại 1 nhiều màu phong cách hiphop M01', '',3);
 INSERT INTO Single_Product_Page
-VALUES(1, 55, 2, N'Áo khoác nữ', '');
+VALUES(1, 55, 2, N'Áo khoác nữ', '',4);
 INSERT INTO Single_Product_Page
-VALUES(1, 56, 3, N'Sửa chữa nhà cửa', '');
+VALUES(1, 56, 3, N'Sửa chữa nhà cửa', '',3);
 INSERT INTO Single_Product_Page
-VALUES(1, 57, 3, N'Ống Kính - Ống Ngắm', '');
+VALUES(1, 57, 3, N'Ống Kính - Ống Ngắm', '',1);
 
 
 INSERT INTO Single_Product_Page
-VALUES(1, 51, 1, N'Cá, thuỷ hải sản', '');
+VALUES(1, 51, 1, N'Cá, thuỷ hải sản', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 52, 3, N'Combo 2 hộp chia ngăn sắp xếp quần áo phong cách Nhật Bản VINAVU - Có Nắp - Kem Trơn', '');
+VALUES(1, 52, 3, N'Combo 2 hộp chia ngăn sắp xếp quần áo phong cách Nhật Bản VINAVU - Có Nắp - Kem Trơn', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 53, 2, N'Áo thun hình gấu teddy cho chó mèo ( một cái, màu giao ngẫu nhiên ) - XXL', '');
+VALUES(1, 53, 2, N'Áo thun hình gấu teddy cho chó mèo ( một cái, màu giao ngẫu nhiên ) - XXL', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 54, 1, N'Bộ bàn ăn mặt đá ceramic bóng kết hợp ghế Nelson - Bàn 1m4 + 4 ghế', '');
+VALUES(1, 54, 1, N'Bộ bàn ăn mặt đá ceramic bóng kết hợp ghế Nelson - Bàn 1m4 + 4 ghế', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 55, 2, N'Hộp vải đựng quần áo SETHOME đa năng giỏ đựng đồ lót sách vở đồ cá nhân thùng đựng mỹ phẩm cao cấp dễ dang gấp gọn - Chữ nhật - Be', '');
+VALUES(1, 55, 2, N'Hộp vải đựng quần áo SETHOME đa năng giỏ đựng đồ lót sách vở đồ cá nhân thùng đựng mỹ phẩm cao cấp dễ dang gấp gọn - Chữ nhật - Be', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 56, 3, N'Bộ bàn ăn mặt mặt đá cẩm thạch nhân tạo kết hợp 4 ghế 6 ghế 8 ghế Nelson - Bàn 1m4 + 4 ghế - Ghế màu trắng ghi', '');
+VALUES(1, 56, 3, N'Bộ bàn ăn mặt mặt đá cẩm thạch nhân tạo kết hợp 4 ghế 6 ghế 8 ghế Nelson - Bàn 1m4 + 4 ghế - Ghế màu trắng ghi', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 57, 3, N'Mũ đi biển vành tròn gắn tag chư M nón móc len sợi rộng vành đi chơi siêu đẹp dành cho nữ.', '');
+VALUES(1, 57, 3, N'Mũ đi biển vành tròn gắn tag chư M nón móc len sợi rộng vành đi chơi siêu đẹp dành cho nữ.', '',1);
 
 INSERT INTO Single_Product_Page
-VALUES(1, 51, 1, N'Nón Beanie vành tròn ️ Mũ tròn phong cách Retro Hàn Quốc form Unisex nam nữ N04', '');
+VALUES(1, 51, 1, N'Nón Beanie vành tròn ️ Mũ tròn phong cách Retro Hàn Quốc form Unisex nam nữ N04', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 52, 3, N'Mũ tròn Miki màu trơn phong cách cổ điển độc đáo – thêu chữ kiểu dáng đơn giản', '');
+VALUES(1, 52, 3, N'Mũ tròn Miki màu trơn phong cách cổ điển độc đáo – thêu chữ kiểu dáng đơn giản', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 53, 2, N'Mũ nón bucket nam nữ trơn tròn vành nhiều màu siêu đẹp MN20', '');
+VALUES(1, 53, 2, N'Mũ nón bucket nam nữ trơn tròn vành nhiều màu siêu đẹp MN20', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 54, 1, N'Điện thoại Samsung Galaxy S22 Ultra 5G (12GB/512GB) - Hàng Chính Hãng', '');
+VALUES(1, 54, 1, N'Điện thoại Samsung Galaxy S22 Ultra 5G (12GB/512GB) - Hàng Chính Hãng', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 55, 2, N'Tã Quần Huggies Dry Tràm Trà Tự Nhiên Gói Cực Đại XL62/XXL56 + Tặng 6 miếng', '');
+VALUES(1, 55, 2, N'Tã Quần Huggies Dry Tràm Trà Tự Nhiên Gói Cực Đại XL62/XXL56 + Tặng 6 miếng', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 56, 3, N'Combo 2 TúI Nước Giặt Omo Matic Cho Máy Giặt Cửa Trước Bền Đẹp Bền Màu Sau 100 Lần Giặt 3.6Kg', '');
+VALUES(1, 56, 3, N'Combo 2 TúI Nước Giặt Omo Matic Cho Máy Giặt Cửa Trước Bền Đẹp Bền Màu Sau 100 Lần Giặt 3.6Kg', '',1);
 INSERT INTO Single_Product_Page
-VALUES(1, 57, 3, N'Apple iPhone 11', '');
+VALUES(1, 57, 3, N'Apple iPhone 11', '',1);
 
 
 INSERT INTO Product
@@ -576,12 +579,28 @@ INSERT INTO Product
 VALUES(21, N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMOG 2', 1, 1, 100.900, '');
 
 -- FUNCTION
-select p.id_product
-from Product p
-where p.id_single_product_page=1
+    
 
-delete from Cart_Item
-select *
-from Cart_Item
-select *
-from Product
+INSERT INTO Order_Item VALUES(1, 1, 1,1);
+INSERT INTO Order_Item VALUES(1, 1, 1,1);
+INSERT INTO Order_Item VALUES(1, 1, 1,1);
+INSERT INTO Order_Item VALUES(1, 1, 1,1);
+INSERT INTO Order_Item VALUES(1, 1, 1,1);
+INSERT INTO Order_Item VALUES(1, 1, 1,1);
+INSERT INTO Order_Item VALUES(1, 1, 1,1);
+INSERT INTO Order_Item VALUES(1, 1, 1,1);
+INSERT INTO Order_Item VALUES(1, 1, 1,1);
+
+INSERT INTO Order_Item VALUES(1, 1, 2,1);
+INSERT INTO Order_Item VALUES(1, 1, 3,1);
+INSERT INTO Order_Item VALUES(1, 1, 4,1);
+INSERT INTO Order_Item VALUES(1, 1, 5,1);
+INSERT INTO Order_Item VALUES(1, 1, 6,1);
+
+use shop
+select * from Order_Item
+SELECT * FROM Single_Product_Page t WHERE t.id_category in (51) AND t.status = 1
+
+SELECT * FROM Order_Item o JOIN Product p on  o.id_product = p.id_product 
+						   JOIN Single_Product_Page spg on spg.id_single_product_page = p.id_single_product_page
+		WHERE spg.id_shop =  1 AND o.status = 1

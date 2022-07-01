@@ -3,6 +3,7 @@ package backend.backend;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -14,8 +15,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
+import backend.backend.helpers.payload.dto.OrderItemDTO;
+import backend.backend.helpers.payload.dto.OrderMapValue;
 import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.ProductResponse;
+import backend.backend.helpers.payload.response.SalerOrderItemResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.entities.Category;
 import backend.backend.persitence.entities.Product;
@@ -26,6 +30,7 @@ import backend.backend.persitence.repository.OrderItemRepository;
 import backend.backend.persitence.repository.ProductRepository;
 import backend.backend.persitence.repository.SingleProductPageRepository;
 import backend.backend.services.entityService.SingleProductPageService;
+import backend.backend.services.mainService.SalerService;
 
 @RunWith(SpringRunner.class)
 
@@ -43,6 +48,8 @@ class BackendApplicationTests {
     CartItemRepository cartItemRepository;
     @Autowired
     OrderItemRepository orderItemRepository;
+    @Autowired
+    SalerService salerService;
 
     @Test
     @Transactional
@@ -69,7 +76,8 @@ class BackendApplicationTests {
         Integer[] catagory = new Integer[2];
         catagory[0] = 53;
         catagory[1] = 57;
-        List<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findByIdCategoryIn(catagory);
+        List<SingleProductPage> allProductsOnThisPage = singleProductPageRepository
+                .findByIdCategoryInAndStatus(catagory, (byte) 1);
         for (SingleProductPage singleProductPage : allProductsOnThisPage) {
             System.out.println(singleProductPage.getName());
         }
@@ -113,8 +121,20 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        String[][] content = {{}};
+        String[][] content = { {} };
         System.out.println(content.length);
+    }
 
+    @Test
+    @Transactional
+    void test8() {
+        SalerOrderItemResponse salerOrderItemResponse = singleProductPageService.orderSalerList(1, 0, 3, 1, null);
+        System.out.println(salerOrderItemResponse.getTotalPage());
+        for (Entry<String, OrderMapValue> entry : salerOrderItemResponse.getMap()
+                .entrySet()) {
+            for (OrderItemDTO iterable_element : entry.getValue().getItemDTOs()) {
+                System.out.println(iterable_element);
+            }
+        }
     }
 }

@@ -96,14 +96,13 @@ const nextAuthOptions = (req, res) => {
 };
 
 async function refreshAccessToken(token, cookiesSetter) {
-  console.log(2);
   try {
     const response = await axios.post(process.env.BE_AUTH + "refresh-token", {}, {
       headers: { Cookie: "refreshToken=" + cookiesSetter.get('refreshToken') + ";" }
     });
     const cookies = response.headers['set-cookie']
     cookiesSetter.set(cookies)
-    return {
+    return {  
       ...token,
       id: response.data.idAccount,
       jwtExpires: Date.now() + parseInt(process.env.jwtExpirationMs),
