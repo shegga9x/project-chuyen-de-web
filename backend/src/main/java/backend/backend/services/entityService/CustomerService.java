@@ -6,13 +6,17 @@ import backend.backend.helpers.payload.response.CustomerResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.Customer;
+import backend.backend.persitence.entities.ResetEmailToken;
 import backend.backend.persitence.entities.ResetPhoneToken;
 import backend.backend.persitence.repository.AccountRepository;
 import backend.backend.persitence.repository.CustomerRepository;
+import backend.backend.persitence.repository.ResetEmailTokenRepository;
 import backend.backend.persitence.repository.ResetPhoneTokenRepository;
+import backend.backend.services.subService.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +34,13 @@ public class CustomerService {
 
     @Autowired
     private ResetPhoneTokenRepository resetPhoneTokenRepository;
+
+    @Autowired
+    private ResetEmailTokenRepository resetEmailTokenRepository;
+
+    @Autowired
+    EmailService emailService;
+
 
     public CustomerResponse getCurrentCustomer() {
         int idCustomer = SubUtils.getCurrentUser().getId();
@@ -93,7 +104,46 @@ public class CustomerService {
         return "ok";
     }
 
-    private static String get6RandomNumber() {
+    public String sendEmailSMS(String email) throws MessagingException {
+        int idCustomer = SubUtils.getCurrentUser().getId();
+        Account account = accountRepository.getById(idCustomer);
+        //
+        ResetEmailToken resetEmailToken = account.getEmailResetToken();
+        if (resetEmailToken == null) {
+            resetEmailToken = new ResetEmailToken();
+            resetEmailToken.setAccount(account);
+        }
+        // create reset token that expires after 1 day
+        String emailSMS = get6RandomNumber();
+        resetEmailToken.setResetTokenContent(emailSMS);
+        resetEmailToken.setResetTokenExpires(new Date(new Date().getTime() + 86400000));
+        resetEmailTokenRepository.save(resetEmailToken);
+        // send email
+        emailService.sendEmailSMS(email, emailSMS);
+        return "ok";
+    }
+
+    public String checkEmailSMS(String sms, String email) {
+        int idCustomer = SubUtils.getCurrentUser().getId();
+        Optional<ResetEmailToken> optinal = resetEmailTokenRepository.findByResetTokenContent(sms);
+        if (optinal.isPresent()) {
+            ResetEmailToken resetEmailToken = optinal.get();
+            if (resetEmailToken.getResetTokenExpires().before(new Date())) {
+                throw new CustomException("SMS đã hết hạn");
+            }
+            ///
+            Account account = resetEmailToken.getAccount();
+            account.setResetEmailToken(new ResetEmailToken(account.getIdAccount(), new Date(), null, null));
+            account.setEmail(email);
+            ///
+            accountRepository.save(account);
+        } else {
+            throw new CustomException("SMS không đúng hoặc không hợp lệ");
+        }
+        return "ok";
+    }
+
+    private String get6RandomNumber() {
         Random rnd = new Random();
         int number = rnd.nextInt(999999);
         return String.format("%06d", number);

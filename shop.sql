@@ -600,12 +600,13 @@ VALUES(21, N'Mũ Nón Miki Kiểu Thủy Thủ Không Vành Miki Hat DEGEEN DOMO
 --where p.id_single_product_page=1
 
 --select * from Verification_Token
---select * from Customer
+select * from ACCOUNT
+select * from Customer
 --delete from Cart_Item
 --delete from Order_Item
 --select *
---from Reset_Phone_Token
---delete from Reset_Phone_Token
+--from Reset_Email_Token
+--delete from Reset_Email_Token
 --select *
 --from Product
 --select * from Wallet_Customer

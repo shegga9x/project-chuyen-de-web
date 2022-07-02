@@ -182,7 +182,6 @@ export async function getServerSideProps({ req, query }) {
             }
         }
     }
-
     return {
         redirect: {
             permanent: false,

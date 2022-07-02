@@ -11,4 +11,6 @@ public interface ResetEmailTokenRepository extends JpaRepository<ResetEmailToken
 
     @Override
     Optional<ResetEmailToken> findById(Integer integer);
+
+    Optional<ResetEmailToken> findByResetTokenContent(String sms);
 }
