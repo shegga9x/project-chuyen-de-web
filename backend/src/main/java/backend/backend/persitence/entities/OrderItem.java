@@ -18,6 +18,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import backend.backend.helpers.payload.dto.CustomerDTO;
+import backend.backend.helpers.payload.dto.ProductDTO;
+import backend.backend.helpers.payload.dto.SingleProductPageDTO;
+import backend.backend.helpers.utils.SubUtils;
+
 /**
  * JPA entity class for "OrderItem"
  *
@@ -46,6 +51,8 @@ public class OrderItem implements Serializable {
     @Column(name = "status")
     private Byte status;
 
+    @Column(name = "quantity")
+    private Integer quantity;
     // --- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
     @JoinColumn(name = "id_product", referencedColumnName = "id_product", insertable = false, updatable = false)
@@ -103,6 +110,14 @@ public class OrderItem implements Serializable {
         return this.status;
     }
 
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getQuantity() {
+        return this.quantity;
+    }
+
     // --- GETTERS FOR LINKS
     public Product getProduct() {
         return this.product;
@@ -110,6 +125,21 @@ public class OrderItem implements Serializable {
 
     public Customer getCustomer() {
         return this.customer;
+    }
+
+    // --- GETTERS FOR DTO
+
+    public ProductDTO getProductDTO() {
+        return (ProductDTO) SubUtils.mapperObject(this.product, new ProductDTO());
+    }
+
+    public SingleProductPageDTO getSingleProductPageDTO() {
+        return (SingleProductPageDTO) SubUtils.mapperObject(this.product.getSingleProductPage(),
+                new SingleProductPageDTO());
+    }
+
+    public CustomerDTO getCustomerDTO() {
+        return (CustomerDTO) SubUtils.mapperObject(this.customer, new CustomerDTO());
     }
 
     // --- toString specific method

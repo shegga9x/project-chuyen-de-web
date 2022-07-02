@@ -19,6 +19,7 @@ export default function Order(props) {
     const [order, setOrder] = useState(props.order);
     const [value, setValue] = useState('1');
 
+
     const resetAll = () => {
         document.getElementsByClassName('el-input_name')[0].value = "";
         ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);

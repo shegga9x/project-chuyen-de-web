@@ -5,6 +5,7 @@
 package backend.backend.persitence.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import backend.backend.helpers.payload.dto.ProductDTO;
+import backend.backend.helpers.utils.SubUtils;
 
 /**
  * JPA entity class for "SingleProductPage"
@@ -53,6 +57,9 @@ public class SingleProductPage implements Serializable {
     @Column(name = "description", length = 2147483647)
     private String description;
 
+    @Column(name = "status")
+    private Byte status;
+
     // --- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
     @JoinColumn(name = "id_category", referencedColumnName = "id_category", insertable = false, updatable = false)
@@ -77,6 +84,13 @@ public class SingleProductPage implements Serializable {
     }
 
     // util method
+    public List<ProductDTO> getProductDTOs() {
+        List<ProductDTO> dtos = new ArrayList<>();
+        for (Product product : this.listOfProduct) {
+            dtos.add((ProductDTO) SubUtils.mapperObject(product, new ProductDTO()));
+        }
+        return dtos;
+    }
 
     public String getPriceRange() {
         try {
@@ -88,6 +102,10 @@ public class SingleProductPage implements Serializable {
         }
     }
 
+    public String getImgURL() {
+        return this.getFirstURLImage();
+    }
+
     public Integer getTotalSoldCount() {
         return listOfProduct.stream().map(Product::getSoldCount).mapToInt(Integer::intValue).sum();
 
@@ -97,7 +115,6 @@ public class SingleProductPage implements Serializable {
         return listOfProduct.stream().map(Product::getQuantity).mapToInt(Integer::intValue).sum();
 
     }
-
 
     public Integer getLastChildId() {
         List<Integer> prices = listOfProduct.stream().map(Product::getIdProduct).collect(Collectors.toList());
@@ -187,6 +204,14 @@ public class SingleProductPage implements Serializable {
 
     public List<Product> getListOfProduct() {
         return this.listOfProduct;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    public Byte getStatus() {
+        return this.status;
     }
 
     // --- toString specific method

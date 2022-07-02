@@ -11,11 +11,16 @@ import backend.backend.persitence.entities.SingleProductPage;
 @Repository
 public interface SingleProductPageRepository extends PagingAndSortingRepository<SingleProductPage, Integer> {
 
-    List<SingleProductPage> findByIdCategoryIn(Integer[] ids);
-
     List<SingleProductPage> findAll();
 
-    Optional<SingleProductPage> findByIdSingleProductPage(Integer idSingleProductPage);
+    List<SingleProductPage> findByIdShop(Integer idShop);
 
+    List<SingleProductPage> findByIdShopAndStatus(Integer idShop, Byte status);
+
+    List<SingleProductPage> findByStatus(Byte status);
+
+    List<SingleProductPage> findByIdCategoryInAndStatus(Integer[] ids, Byte status);
+
+    Optional<SingleProductPage> findByIdSingleProductPage(Integer idSingleProductPage);
 
 }

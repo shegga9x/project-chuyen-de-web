@@ -102,7 +102,7 @@ async function refreshAccessToken(token, cookiesSetter) {
     });
     const cookies = response.headers['set-cookie']
     cookiesSetter.set(cookies)
-    return {
+    return {  
       ...token,
       id: response.data.idAccount,
       jwtExpires: Date.now() + parseInt(process.env.jwtExpirationMs),

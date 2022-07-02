@@ -277,4 +277,41 @@ public class Account implements Serializable {
     public void setProviderId(String providerId) {
         this.providerId = providerId;
     }
+
+    public Boolean isAcceptTerms() {
+        return this.acceptTerms;
+    }
+
+    public Shop getShop() {
+        return this.shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
+    public Customer getCustomer() {
+        return this.customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public List<Chat> getListOfChat() {
+        return this.listOfChat;
+    }
+
+    public void setListOfChat(List<Chat> listOfChat) {
+        this.listOfChat = listOfChat;
+    }
+
+    public List<Chat> getListOfChat2() {
+        return this.listOfChat2;
+    }
+
+    public void setListOfChat2(List<Chat> listOfChat2) {
+        this.listOfChat2 = listOfChat2;
+    }
+
 }

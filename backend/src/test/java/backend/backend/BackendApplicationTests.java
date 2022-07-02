@@ -3,6 +3,7 @@ package backend.backend;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map.Entry;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -16,10 +17,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
+import backend.backend.helpers.payload.dto.OrderItemDTO;
+import backend.backend.helpers.payload.dto.OrderMapValue;
 import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.ProductResponse;
+import backend.backend.helpers.payload.response.SalerOrderItemResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.services.entityService.SingleProductPageService;
+import backend.backend.services.mainService.SalerService;
 
 @RunWith(SpringRunner.class)
 
@@ -69,7 +74,8 @@ class BackendApplicationTests {
         Integer[] catagory = new Integer[2];
         catagory[0] = 53;
         catagory[1] = 57;
-        List<SingleProductPage> allProductsOnThisPage = singleProductPageRepository.findByIdCategoryIn(catagory);
+        List<SingleProductPage> allProductsOnThisPage = singleProductPageRepository
+                .findByIdCategoryInAndStatus(catagory, (byte) 1);
         for (SingleProductPage singleProductPage : allProductsOnThisPage) {
             System.out.println(singleProductPage.getName());
         }

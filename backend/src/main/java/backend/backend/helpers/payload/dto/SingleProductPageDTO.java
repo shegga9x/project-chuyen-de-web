@@ -1,6 +1,8 @@
 
 package backend.backend.helpers.payload.dto;
 
+import java.util.List;
+
 public class SingleProductPageDTO {
 
     private Integer idSingleProductPage;
@@ -18,6 +20,9 @@ public class SingleProductPageDTO {
     private String priceRange;
 
     private String imgURL;
+    private Byte status;
+
+    private List<ProductDTO> productDTOs;
 
     public Integer getIdSingleProductPage() {
         return this.idSingleProductPage;
@@ -81,6 +86,37 @@ public class SingleProductPageDTO {
 
     public void setImgURL(String imgURL) {
         this.imgURL = imgURL;
+    }
+
+    public List<ProductDTO> getProductDTOs() {
+        return this.productDTOs;
+    }
+
+    public void setProductDTOs(List<ProductDTO> productDTOs) {
+        this.productDTOs = productDTOs;
+    }
+
+    public Byte getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                " idSingleProductPage='" + getIdSingleProductPage() + "'" +
+                ", idShop='" + getIdShop() + "'" +
+                ", idCategory='" + getIdCategory() + "'" +
+                ", idShopCategory='" + getIdShopCategory() + "'" +
+                ", name='" + getName() + "'" +
+                ", description='" + getDescription() + "'" +
+                ", priceRange='" + getPriceRange() + "'" +
+                ", imgURL='" + getImgURL() + "'" +
+                ", productDTOs='" + getProductDTOs() + "'" +
+                "}";
     }
 
 }
