@@ -1,4 +1,9 @@
+import { changeRoute } from "../../../helpers/customFunction/changeRoute";
+import { useRouter } from 'next/router'
 export default function Sidebar() {
+
+    const router = useRouter()
+
     return (
         <>
             <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -25,14 +30,14 @@ export default function Sidebar() {
                 </div>
                 {/* Nav Item - Pages Collapse Menu */}
                 <li className="nav-item">
-                    <a className="nav-link" href="#" aria-expanded="true">
+                    <a className="nav-link" aria-expanded="true">
                         <i className="fas fa-fw fa-cog" />
                         <span>Quản lý Entities</span>
                     </a>
                 </li>
                 {/* Nav Item - Utilities Collapse Menu */}
                 <li className="nav-item">
-                    <a className="nav-link" href="#" aria-expanded="true">
+                    <a onClick={() => { changeRoute('/admin/browse-products', router) }} className="nav-link" aria-expanded="true">
                         <i className="fas fa-fw fa-cog" />
                         <span>Duyệt Sản Phẩm</span>
                     </a>
@@ -45,7 +50,7 @@ export default function Sidebar() {
                 </div>
                 {/* Sidebar Message */}
                 <div className="sidebar-card d-none d-lg-flex">
-                    <img className="sidebar-card-illustration mb-2" src="admin/img/undraw_rocket.svg" alt="..." />
+                    <img className="sidebar-card-illustration mb-2" src="/admin/img/undraw_rocket.svg" alt="..." />
                     <p className="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
                     <a className="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
                 </div>

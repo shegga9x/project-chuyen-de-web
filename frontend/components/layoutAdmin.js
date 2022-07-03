@@ -3,6 +3,7 @@ import { Footer, Topbar, Sidebar } from './admin/commons'
 import Head from "next/head";
 import Script from "next/script";
 import { Helmet } from 'react-helmet';
+
 export default function LayoutAdmin({ children }) {
     return (
         <>
@@ -17,7 +18,6 @@ export default function LayoutAdmin({ children }) {
                 <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
                 {/* Custom styles for this template*/}
                 <link href="/admin/css/sb-admin-2.min.css" rel="stylesheet" />
-                <link href="/admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
             </Head>
             <Helmet>
                 <body id="page-top" />
@@ -39,34 +39,21 @@ export default function LayoutAdmin({ children }) {
             </a>
             <Script
                 type="text/javascript"
-                src="admin/vendor/jquery/jquery.min.js"
+                src="/admin/vendor/jquery/jquery.min.js"
                 strategy="beforeInteractive"
             ></Script>
             <Script
                 type="text/javascript"
-                src="admin/vendor/bootstrap/js/bootstrap.bundle.min.js"
+                src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"
                 strategy="beforeInteractive"
             ></Script>
             <Script
                 type="text/javascript"
-                src="admin/vendor/jquery-easing/jquery.easing.min.js"
+                src="/admin/vendor/jquery-easing/jquery.easing.min.js"
             ></Script>
             <Script
                 type="text/javascript"
-                src="admin/js/sb-admin-2.min.js"
-            ></Script>
-            <Script
-                type="text/javascript"
-                src="admin/vendor/datatables/jquery.dataTables.min.js"
-                strategy="beforeInteractive"
-            ></Script>
-            <Script
-                type="text/javascript"
-                src="admin/vendor/datatables/dataTables.bootstrap4.min.js"
-            ></Script>
-            <Script
-                type="text/javascript"
-                src="admin/js/demo/datatables-demo.js"
+                src="/admin/js/sb-admin-2.min.js"
             ></Script>
         </>
     )

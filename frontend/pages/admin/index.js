@@ -1,7 +1,12 @@
 import Head from "next/head";
 import LayoutAdmin from "../../components/layoutAdmin";
-
+import { useEffect } from "react";
 export default function Admin() {
+
+  useEffect(() => {
+    setTimeout(() => { $('#dataTable').DataTable() }, 200);
+  }, [])
+
   return (
     <>
       <Head>
@@ -9,8 +14,6 @@ export default function Admin() {
       </Head>
       <LayoutAdmin>
         <div className="container-fluid">
-          {/* Page Heading */}
-          {/* <h1 className="h3 mb-2 text-gray-800">Tables</h1> */}
           <div className="card shadow mb-4">
             <div className="card-header py-3">
               <h6 className="m-0 font-weight-bold text-primary">DataTables Example</h6>
