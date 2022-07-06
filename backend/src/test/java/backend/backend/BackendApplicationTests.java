@@ -3,13 +3,10 @@ package backend.backend;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import backend.backend.persitence.entities.*;
-import backend.backend.persitence.repository.*;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +14,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
-import backend.backend.helpers.payload.dto.OrderItemDTO;
-import backend.backend.helpers.payload.dto.OrderMapValue;
 import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.ProductResponse;
-import backend.backend.helpers.payload.response.SalerOrderItemResponse;
 import backend.backend.helpers.utils.SubUtils;
+import backend.backend.persitence.entities.Category;
+import backend.backend.persitence.entities.Product;
+import backend.backend.persitence.entities.ResetPhoneToken;
+import backend.backend.persitence.entities.SingleProductPage;
+import backend.backend.persitence.repository.CartItemRepository;
+import backend.backend.persitence.repository.CategoryRepository;
+import backend.backend.persitence.repository.CustomerRepository;
+import backend.backend.persitence.repository.OrderItemRepository;
+import backend.backend.persitence.repository.ProductRepository;
+import backend.backend.persitence.repository.ResetPhoneTokenRepository;
+import backend.backend.persitence.repository.SingleProductPageRepository;
+import backend.backend.persitence.repository.WalletCustomerRepository;
 import backend.backend.services.entityService.SingleProductPageService;
-import backend.backend.services.mainService.SalerService;
 
 @RunWith(SpringRunner.class)
 

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import backend.backend.helpers.payload.dto.OrderItemDTO;
-import backend.backend.helpers.payload.request.SalerProductAddRequest;
+import backend.backend.helpers.payload.dto.SingleProductPageDTO;
 import backend.backend.helpers.payload.response.PageSingleProductResponse;
 import backend.backend.helpers.payload.response.SalerOrderItemResponse;
 import backend.backend.services.entityService.OrderService;
@@ -26,8 +26,8 @@ public class SalerService {
     }
 
     // // product add
-    public boolean productSalerUpdate(SalerProductAddRequest salerProductAddRequest) {
-        return singleProductPageService.productSalerUpdate(salerProductAddRequest);
+    public boolean productSalerUpdate(SingleProductPageDTO singleProductPageDTO) {
+        return singleProductPageService.productSalerUpdate(singleProductPageDTO);
     }
 
     // manage order

@@ -23,7 +23,7 @@ public class Product implements Serializable {
 
     // --- ENTITY PRIMARY KEY
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_product", nullable = false)
     private Integer idProduct;
 
@@ -74,6 +74,9 @@ public class Product implements Serializable {
     }
 
     // --- GETTERS & SETTERS FOR FIELDS
+    public void setSingleProductPage(SingleProductPage singleProductPage) {
+        this.singleProductPage = singleProductPage;
+    }
     public void setIdProduct(Integer idProduct) {
         this.idProduct = idProduct;
     }

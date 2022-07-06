@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +38,7 @@ public class SingleProductPage implements Serializable {
 
     // --- ENTITY PRIMARY KEY
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_single_product_page", nullable = false)
     private Integer idSingleProductPage;
 
@@ -73,7 +74,8 @@ public class SingleProductPage implements Serializable {
     @JoinColumn(name = "id_shop_category", referencedColumnName = "id_shop_category", insertable = false, updatable = false)
     private ShopCategory shopCategory;
 
-    @OneToMany(mappedBy = "singleProductPage")
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_single_product_page")
     private List<Product> listOfProduct;
 
     /**
@@ -90,6 +92,17 @@ public class SingleProductPage implements Serializable {
             dtos.add((ProductDTO) SubUtils.mapperObject(product, new ProductDTO()));
         }
         return dtos;
+    }
+
+    public void setProductDTOs(List<ProductDTO> productDTOs) {
+        List<Product> listOfProduct = new ArrayList<>();
+        for (ProductDTO productDTO : productDTOs) {
+            Product product = (Product) SubUtils.mapperObject(productDTO, new Product());
+            product.setSoldCount(0);
+            listOfProduct.add(product);
+        }
+
+        this.listOfProduct = listOfProduct;
     }
 
     public String getPriceRange() {

@@ -439,12 +439,47 @@ body.msb-x .msb {
 #addButton:hover {
   background-color: #d90429;
 }
+
 ol.go2441762052 li.go3842760039:before {
   border-radius: 1.2em;
   background-color: #ee4d2d;
 }
+
 ol.go2441762052 li.go433304200:before {
   border-radius: 1.2em;
   background-color: #ee4d2d;
 }
 
+
+.imgWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.imgWrapper img {
+  width: 100%;
+  height: auto;
+}
+
+.imgWrapper .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: transparent;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.imgWrapper .btn:hover {
+  border: 2px solid #ee4d2d;
+  border-style: dashed;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.imgWrapper i {
+  background: transparent;
+}

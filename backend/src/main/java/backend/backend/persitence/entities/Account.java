@@ -207,7 +207,7 @@ public class Account implements Serializable {
         return this.verificationToken;
     }
 
-    public Customer getCustomer() {return this.customer;}
+
 
     // --- toString specific method
     @Override
@@ -253,9 +253,7 @@ public class Account implements Serializable {
         this.listOfRole = listOfRole;
     }
 
-    public void setCustomer(Customer customer){
-        this.customer = customer;
-    }
+
 
     public void addToListOfRefreshToken(RefreshToken refreshToken) {
         this.listOfRefreshToken.add(refreshToken);

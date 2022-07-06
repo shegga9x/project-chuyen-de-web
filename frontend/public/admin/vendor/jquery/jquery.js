@@ -9297,7 +9297,7 @@ jQuery.extend( {
 		global: true,
 		processData: true,
 		async: true,
-		contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+		contentType: "application/x-www-form-urlencoded; charSet=UTF-8",
 
 		/*
 		timeout: 0,
@@ -10172,7 +10172,7 @@ jQuery.ajaxTransport( "script", function( s ) {
 			send: function( _, complete ) {
 				script = jQuery( "<script>" )
 					.attr( s.scriptAttrs || {} )
-					.prop( { charset: s.scriptCharset, src: s.url } )
+					.prop( { charSet: s.scriptCharset, src: s.url } )
 					.on( "load error", callback = function( evt ) {
 						script.remove();
 						callback = null;

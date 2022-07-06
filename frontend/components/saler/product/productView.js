@@ -55,8 +55,9 @@ export default function ProductView({ value, index, data, tabChange }) {
                                                         <tr>
                                                             <td >
                                                                 <div className="cart-anchor-image" style={{ maxWidth: "600px" }} >
-                                                                    <a href="">
-                                                                        <img src="/static/images/product/product@1x.jpg" alt="Product" />
+                                                                    <a >
+                                                                        <img className="img-fluid" src={(pageSingleProduct.imgURL == "" || pageSingleProduct.imgURL == null ?
+                                                                            "/static/images/product/" + "product@1x.jpg" : pageSingleProduct.imgURL)} alt="Product" />
                                                                         <h6>{pageSingleProduct.name}</h6>
                                                                     </a>
                                                                 </div>
