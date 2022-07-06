@@ -33,7 +33,7 @@ export default function Page404() {
                             <h1>Err 500!</h1>
                             <h5>Something go wrong please try again!</h5>
                             <div className="redirect-link-wrapper u-s-p-t-25">
-                                <a className="redirect-link" href="home.html">
+                                <a className="redirect-link" href="/">
                                     <span>Home</span>
                                 </a>
                             </div>

@@ -618,6 +618,21 @@ select * from product where id_product > 48
 
 SELECT * FROM Single_Product_Page where id_single_product_page > 5
 
+--select * from Verification_Token
+select * from ACCOUNT
+select * from Customer
+--delete from Cart_Item
+--delete from Order_Item
+--select *
+--from Reset_Email_Token
+--delete from Reset_Email_Token
+--select *
+--from Product
+--select * from Wallet_Customer
+--delete from Wallet_Customer
+UPDATE Customer
+SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
+WHERE id_customer = 1;
 SELECT * FROM Order_Item o JOIN Product p on  o.id_product = p.id_product 
 						   JOIN Single_Product_Page spg on spg.id_single_product_page = p.id_single_product_page
 		WHERE spg.id_shop =  1 AND o.status = 1

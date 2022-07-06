@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.constraints.NotNull;
 import java.text.ParseException;
 
@@ -33,7 +34,17 @@ public class CustomerController {
     }
 
     @GetMapping("/checkPhoneSMS")
-    public ResponseEntity<?> checkPhoneSMS(@NotNull @RequestParam String sms,@NotNull @RequestParam String phoneNumber) {
-        return ResponseEntity.ok(customerService.checkPhoneSMS(sms,phoneNumber));
+    public ResponseEntity<?> checkPhoneSMS(@NotNull @RequestParam String sms, @NotNull @RequestParam String phoneNumber) {
+        return ResponseEntity.ok(customerService.checkPhoneSMS(sms, phoneNumber));
+    }
+
+    @GetMapping("/sendGmailSMS")
+    public ResponseEntity<?> sendGmailSMS(@NotNull @RequestParam String email) throws MessagingException {
+        return ResponseEntity.ok(customerService.sendEmailSMS(email));
+    }
+
+    @GetMapping("/checkGmailSMS")
+    public ResponseEntity<?> checkGmailSMS(@NotNull @RequestParam String sms, @NotNull @RequestParam String email) {
+        return ResponseEntity.ok(customerService.checkEmailSMS(sms, email));
     }
 }

@@ -99,4 +99,8 @@ public class EmailService {
         }
     }
 
+    public void sendEmailSMS(String email, String emailSMS) throws MessagingException {
+        sendMail(email, "Verification Email SMS", emailSMS, null);
+    }
+
 }

@@ -46,11 +46,13 @@
 
   // Smooth scrolling using jQuery easing
   $(document).on('click', 'a.scroll-to-top', function(e) {
+    console.log('???');
     var $anchor = $(this);
-    $('html, body').stop().animate({
-      scrollTop: ($($anchor.attr('href')).offset().top)
-    }, 1000, 'easeInOutExpo');
-    e.preventDefault();
+    console.log($($anchor.attr('href')));
+    // $('html, body').stop().animate({
+    //   scrollTop: ($($anchor.attr('href')).offset().top)
+    // }, 1000, 'easeInOutExpo');
+    // e.preventDefault();
   });
 
 })(jQuery); // End of use strict

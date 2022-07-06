@@ -89,7 +89,7 @@ export default function Product() {
                                 </Box>
                             </div>
                         </div>
-                        <ProductAddModal open={modalIsOpen} closeModal={closeModal}   ></ProductAddModal>
+                        <ProductAddModal open={modalIsOpen} closeModal={closeModal}></ProductAddModal>
                     </>
                 }
             </Layout>

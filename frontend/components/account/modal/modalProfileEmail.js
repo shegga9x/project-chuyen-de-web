@@ -1,8 +1,10 @@
 import Head from "next/head"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import instance from '../../../helpers/axiosConfig';
 
-export default function ModalProfileEmail({ open, closeModal }) {
+export default function ModalProfileEmail({ open, closeModal, customer, setCustomer, setFirstRender }) {
+
+    const [email, setEmail] = useState(null);
 
     useEffect(() => {
         if (open) {
@@ -14,6 +16,38 @@ export default function ModalProfileEmail({ open, closeModal }) {
             popup.style.transform = 'translate(-50%, -50%) scale(0.0)';
         }
     }, [open])
+
+    const sendSMS = async () => {
+        const email = document.getElementsByClassName('Email')[0].value;
+        const res = await instance().get('http://localhost:4000/api/customer/sendGmailSMS', { params: { email: email } });
+        if (res) {
+            alert('email are ready send, please check');
+            setEmail(email);
+        }
+    }
+
+    const checkSMS = async () => {
+        const sms = document.getElementsByClassName('SMSEmailNumber')[0].value;
+        const res = await instance().get('http://localhost:4000/api/customer/checkGmailSMS', { params: { sms: sms, email: email } })
+            .catch(err => {
+                alert(err.response.data.message);
+            })
+        if (res) {
+            const newCustomer = {
+                idCustomer: customer.idCustomer,
+                name: customer.name,
+                email: email,
+                phoneNumber: customer.phoneNumber,
+                gender: customer.gender,
+                birthday: customer.birthday,
+                imgUrl: customer.imgUrl,
+                address: customer.address
+            }
+            setFirstRender(1);
+            setCustomer(newCustomer);
+            closeModal('email');
+        }
+    }
 
     return (
         <>
@@ -45,18 +79,18 @@ export default function ModalProfileEmail({ open, closeModal }) {
                         <div>
                             <div style={{ display: 'flex' }}>
                                 <input className="Email" type="text" placeholder="Email" style={{ flex: 1, padding: '0.625rem', outline: 'none', border: '1px solid rgba(0, 0, 0, 0.14)', height: '2.5rem' }} />
-                                <button style={{ border: '1px solid rgba(0, 0, 0, 0.5)', backgroundColor: '#fbfbfb', padding: '0 0.625rem' }}>Gửi
+                                <button onClick={() => { sendSMS() }} style={{ border: '1px solid rgba(0, 0, 0, 0.5)', backgroundColor: '#fbfbfb', padding: '0 0.625rem' }}>Gửi
                                     Mã xác
                                     minh</button>
                             </div>
                             <div style={{ display: 'flex', marginTop: '30px' }}>
-                                <input className="CodeNumber" type="text" placeholder="Mã xác minh" style={{ flex: 1, padding: '0.625rem', outline: 'none', border: '1px solid rgba(0, 0, 0, 0.14)', height: '2.5rem' }} />
+                                <input className="SMSEmailNumber" type="text" placeholder="Mã xác minh" style={{ flex: 1, padding: '0.625rem', outline: 'none', border: '1px solid rgba(0, 0, 0, 0.14)', height: '2.5rem' }} />
                             </div>
                         </div>
                         <div style={{ margin: '1.375rem 0', justifyContent: 'flex-end', display: 'flex' }}>
                             <button onClick={() => { closeModal('email') }} style={{ minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', background: 'none', borderRadius: '0.125rem', height: '2.5rem' }}>Trở
                                 Lại</button>
-                            <button style={{ marginLeft: '0.625rem', minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', backgroundColor: 'red', borderRadius: '0.125rem', height: '2.5rem' }}>OK</button>
+                            <button onClick={() => { checkSMS() }} style={{ marginLeft: '0.625rem', minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', backgroundColor: 'red', borderRadius: '0.125rem', height: '2.5rem' }}>OK</button>
                         </div>
                     </div>
                 </div>
