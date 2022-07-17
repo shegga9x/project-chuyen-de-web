@@ -100,6 +100,7 @@ CREATE TABLE Customer
     birthday date,
     img_url VARCHAR(MAX),
     address nvarchar(max),
+	pubkey nvarchar(max),
     PRIMARY KEY (id_customer)
 )
 CREATE TABLE Shop
@@ -281,7 +282,7 @@ VALUES
     (1, null, getdate())
 -- Customer
 INSERT INTO Customer
-VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '', N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp');
+VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '', N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp',null);
 -- Shop
 INSERT INTO Shop
 VALUES(1, N'shop của Phùng', '0378876395', N'', N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp', N'Shop ác nhất hành tinh');
@@ -469,7 +470,7 @@ VALUES(1, 57, 3, N'Ống Kính - Ống Ngắm', '',1);
 
 
 INSERT INTO Single_Product_Page
-VALUES(1, 51, 1, N'Cá, thuỷ hải sản', '',1);
+VALUES(1, 51, 1, N'Cá, thuỷ hải sản', '',2);
 INSERT INTO Single_Product_Page
 VALUES(1, 52, 3, N'Combo 2 hộp chia ngăn sắp xếp quần áo phong cách Nhật Bản VINAVU - Có Nắp - Kem Trơn', '',1);
 INSERT INTO Single_Product_Page
@@ -620,6 +621,7 @@ SELECT * FROM Single_Product_Page t WHERE t.id_category in (51) AND t.status = 1
 --select * from Verification_Token
 select * from ACCOUNT
 select * from Customer
+--delete from Customer
 --delete from Cart_Item
 --delete from Order_Item
 --select *

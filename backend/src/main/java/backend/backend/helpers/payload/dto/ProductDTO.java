@@ -53,4 +53,14 @@ public class ProductDTO {
         this.imgUrl = imgUrl;
     }
 
+    @Override
+    public String toString() {
+        return "ProductDTO{" +
+                "name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", soldCount=" + soldCount +
+                ", price=" + price +
+                ", imgUrl='" + imgUrl + '\'' +
+                '}';
+    }
 }

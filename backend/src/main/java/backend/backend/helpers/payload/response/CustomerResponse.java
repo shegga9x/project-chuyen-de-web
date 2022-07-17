@@ -66,7 +66,11 @@ public class CustomerResponse {
     }
 
     public void setBirthday(Date birthday) {
-        this.birthday = new SimpleDateFormat("yyyy-MM-dd").format(birthday);
+        if (birthday != null) {
+            this.birthday = new SimpleDateFormat("yyyy-MM-dd").format(birthday);
+        } else {
+            this.birthday = null;
+        }
     }
 
     public String getImgUrl() {

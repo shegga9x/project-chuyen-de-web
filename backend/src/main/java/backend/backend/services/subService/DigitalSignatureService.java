@@ -2,10 +2,18 @@ package backend.backend.services.subService;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
+import backend.backend.helpers.advice.CustomException;
+import backend.backend.helpers.payload.request.DigitalSignatureRequest2;
+import backend.backend.helpers.utils.digitalSignature.DigitalSignature;
+import backend.backend.persitence.entities.Customer;
+import backend.backend.persitence.repository.CustomerRepository;
 import org.apache.pdfbox.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +28,7 @@ import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfoPars
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.repository.AccountRepository;
 import backend.backend.persitence.repository.OrderItemRepository;
+import org.springframework.util.Base64Utils;
 
 @Service
 public class DigitalSignatureService {
@@ -32,6 +41,9 @@ public class DigitalSignatureService {
 
     @Autowired
     AccountRepository accountRepository;
+
+    @Autowired
+    CustomerRepository customerRepository;
 
     @Value("${signer.docsUrlPrefix}")
     private String docsUrlPrefix;
@@ -68,5 +80,38 @@ public class DigitalSignatureService {
         } catch (Exception e) {
         }
         return null;
+    }
+
+    public String verifying2(DigitalSignatureRequest2 digitalSignatureRequest2) {
+        int idUser = SubUtils.getCurrentUser().getId();
+        Customer customer = customerRepository.findByIdCustomer(idUser).get();
+        try {
+            boolean bool = DigitalSignature.decrypt(customer.getPubkey(), digitalSignatureRequest2);
+            if (bool) {
+                return "oke";
+            } else {
+                throw new CustomException("decry fail");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CustomException("decry error");
+        }
+    }
+
+    // RSA DSA DiffieHellman
+    public byte[] generateKeyPair() throws NoSuchAlgorithmException {
+        int keysize = 2048;
+        KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA");
+        kpg.initialize(keysize);
+        KeyPair kp = kpg.generateKeyPair();
+        //
+        String pubKeyEncode = Base64Utils.encodeToString(kp.getPublic().getEncoded());
+        int idCustomer = SubUtils.getCurrentUser().getId();
+        Customer customer = customerRepository.findByIdCustomer(idCustomer).get();
+        customer.setPubkey(pubKeyEncode);
+        customerRepository.save(customer);
+
+        //return priKey to customer
+        return kp.getPrivate().getEncoded();
     }
 }

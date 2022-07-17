@@ -3,13 +3,13 @@ package backend.backend;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import backend.backend.persitence.entities.*;
 import backend.backend.persitence.repository.*;
+import backend.backend.services.mainService.AdminService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +17,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
-import backend.backend.helpers.payload.dto.OrderItemDTO;
-import backend.backend.helpers.payload.dto.OrderMapValue;
 import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.ProductResponse;
-import backend.backend.helpers.payload.response.SalerOrderItemResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.services.entityService.SingleProductPageService;
-import backend.backend.services.mainService.SalerService;
 
 @RunWith(SpringRunner.class)
 
@@ -48,6 +44,8 @@ class BackendApplicationTests {
     CustomerRepository customerRepository;
     @Autowired
     ResetPhoneTokenRepository resetPhoneTokenRepository;
+    @Autowired
+    AdminService adminService;
 
     @Test
     @Transactional
@@ -118,8 +116,7 @@ class BackendApplicationTests {
 
     @Test
     @Transactional
-    void test7() {
-       Optional<ResetPhoneToken> optional = resetPhoneTokenRepository.findById(1);
-       System.out.println(optional.get());
+    void test7() throws Exception {
+
     }
 }

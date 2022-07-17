@@ -13,7 +13,6 @@ import javax.persistence.*;
  * JPA entity class for "Customer"
  *
  * @author Telosys
- *
  */
 @Entity
 @Table(name = "Customer", schema = "dbo", catalog = "shop")
@@ -45,6 +44,9 @@ public class Customer implements Serializable {
 
     @Column(name = "address", length = 2147483647)
     private String address;
+
+    @Column(name = "pubkey", length = 2147483647)
+    private String pubkey;
 
     // --- ENTITY LINKS ( RELATIONSHIP )
     @OneToMany(mappedBy = "customer")
@@ -128,6 +130,14 @@ public class Customer implements Serializable {
         return this.address;
     }
 
+    public void setPubkey(String pubkey) {
+        this.pubkey = pubkey;
+    }
+
+    public String getPubkey() {
+        return this.pubkey;
+    }
+
     // --- GETTERS FOR LINKS
     public List<Evaluate> getListOfEvaluate() {
         return this.listOfEvaluate;
@@ -149,6 +159,12 @@ public class Customer implements Serializable {
         return this.listOfCartItem;
     }
 
+    // --- SETTERS FOR LINKS
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     // --- toString specific method
     @Override
     public String toString() {
@@ -166,6 +182,8 @@ public class Customer implements Serializable {
         sb.append(imgUrl);
         sb.append("|");
         sb.append(address);
+        sb.append("|");
+        sb.append(pubkey);
         return sb.toString();
     }
 

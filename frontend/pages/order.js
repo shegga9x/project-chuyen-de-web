@@ -7,15 +7,18 @@ import TabPanel from '@mui/lab/TabPanel';
 import Head from "next/head";
 import Layout from "../components/layout";
 import OrderProgress from '../components/order/orderProgress';
+import DownToolProgress from '../components/order/downToolProgress';
+import VerificationProgress from '../components/order/verificationProgress';
 import { getSession } from 'next-auth/client';
 import { useState } from 'react';
-import axios from "axios";
 import instance from "../helpers/axiosConfig";
 
 export default function Order(props) {
 
     const [listOrder, setListOrder] = useState([]);
-    const [open, setOpen] = useState(false);
+    const [openOrderProgress, setOpenOrderProgress] = useState(false);
+    const [openDownToolProgress, setOpenDownToolProgress] = useState(false);
+    const [openVerificationProgress, setOpenVerificationProgress] = useState(false);
     const [order, setOrder] = useState(props.order);
     const [value, setValue] = useState('1');
 
@@ -33,21 +36,31 @@ export default function Order(props) {
         document.getElementsByClassName('errorStep2')[0].style.visibility = 'hidden';
     }
 
-    const closeModal = () => {
-        setOpen(false);
-        setTimeout(() => {
-            document.body.classList.toggle('modal-visibile');
-            const model = document.getElementsByClassName('modal-load')[0];
-            model.classList.toggle('visible');
-            resetAll();
-        }, 500)
-    }
-
-    const openModal = () => {
+    const closeModal = (modal) => {
+        if (modal == 'orderProgress') {
+            setOpenOrderProgress(false);
+        } else if (modal == 'downToolProgress') {
+            setOpenDownToolProgress(false);
+        } else {
+            setOpenVerificationProgress(false);
+        }
         document.body.classList.toggle('modal-visibile');
         const model = document.getElementsByClassName('modal-load')[0];
         model.classList.toggle('visible');
-        setOpen(true);
+        resetAll();
+    }
+
+    const openModal = (modal) => {
+        document.body.classList.toggle('modal-visibile');
+        const model = document.getElementsByClassName('modal-load')[0];
+        model.classList.toggle('visible');
+        if (modal == 'orderProgress') {
+            setOpenOrderProgress(true);
+        } else if (modal == 'downToolProgress') {
+            setOpenDownToolProgress(true);
+        } else {
+            setOpenVerificationProgress(true);
+        }
     }
 
     const handleChange = (event, newValue) => {
@@ -63,10 +76,6 @@ export default function Order(props) {
             const result = listOrder.filter(element => element != ele);
             setListOrder(result);
         }
-    }
-
-    const test = () => {
-        console.log(listOrder);
     }
 
     const getTotalCart = (status) => {
@@ -90,8 +99,13 @@ export default function Order(props) {
             <Layout >
                 <div className='container'>
                     <TabContext value={value} >
-                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                            <TabList onChange={handleChange} aria-label="lab API tabs example" centered>
+                        <Box sx={{ borderBottom: 1 }}>
+                            <TabList value={value}
+                                onChange={handleChange}
+                                textColor="inherit"
+                                indicatorColor="secondary"
+                                aria-label="inherit tabs example"
+                                centered>
                                 <Tab label="Chờ xác nhận" value="1" />
                                 <Tab label="Chờ lấy hàng" value="2" />
                                 <Tab label="Đang giao" value="3" />
@@ -409,16 +423,21 @@ export default function Order(props) {
                     </TabContext>
                     <div className="coupon-continue-checkout u-s-m-b-60">
                         <div className="button-area">
-                            <a onClick={test} className="checkout">
-                                test
+                            <a onClick={() => { openModal('downToolProgress') }} className="checkout">
+                                Tải tool
                             </a>
-                            <a onClick={openModal} className="checkout">
+                            <a onClick={() => { openModal('orderProgress') }} className="checkout">
                                 Xác Nhận Order
+                            </a>
+                            <a onClick={() => { openModal('verificationProgress') }} className="checkout">
+                                Verification
                             </a>
                         </div>
                     </div>
                     <div className="modal-load">
-                        <OrderProgress open={open} closeModal={closeModal} listOrder={listOrder}></OrderProgress>
+                        <OrderProgress open={openOrderProgress} closeModal={closeModal} listOrder={listOrder}></OrderProgress>
+                        <DownToolProgress open={openDownToolProgress} closeModal={closeModal}></DownToolProgress>
+                        <VerificationProgress open={openVerificationProgress} closeModal={closeModal}></VerificationProgress>
                     </div>
                 </div>
             </Layout>
