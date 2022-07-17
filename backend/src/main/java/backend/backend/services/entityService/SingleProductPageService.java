@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -20,8 +22,6 @@ import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.dto.OrderItemDTO;
 import backend.backend.helpers.payload.dto.OrderMapValue;
 import backend.backend.helpers.payload.dto.SingleProductPageDTO;
-import backend.backend.helpers.payload.request.SalerOrderAddRequest;
-import backend.backend.helpers.payload.request.SalerProductAddRequest;
 import backend.backend.helpers.payload.response.CategoryResponse;
 import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.PageSingleProductResponse;
@@ -32,6 +32,7 @@ import backend.backend.persitence.entities.Category;
 import backend.backend.persitence.entities.OrderItem;
 import backend.backend.persitence.entities.Product;
 import backend.backend.persitence.entities.SingleProductPage;
+import backend.backend.persitence.repository.AccountRepository;
 import backend.backend.persitence.repository.CategoryRepository;
 import backend.backend.persitence.repository.OrderItemRepository;
 import backend.backend.persitence.repository.ProductRepository;
@@ -47,6 +48,8 @@ public class SingleProductPageService {
     ProductRepository productRepository;
     @Autowired
     OrderItemRepository orderRepository;
+    @Autowired
+    AccountRepository accountRepository;
 
     public PageSingleProductResponse loadAll(int page, int size, Integer[] catagory, Integer sorter) {
         PageSingleProductResponse responses = new PageSingleProductResponse();
@@ -139,11 +142,13 @@ public class SingleProductPageService {
         responses.setTotalPage(allProductsOnThisPage.getTotalPages());
         return responses;
     }
-
-    public boolean productSalerUpdate(SalerProductAddRequest salerProductAddRequest) {
-        SingleProductPage singleProductPage = (SingleProductPage) SubUtils.mapperObject(
-                salerProductAddRequest.getSingleProductPageDTO(),
+    @Transactional
+    public boolean productSalerUpdate(SingleProductPageDTO singleProductPageDTO) {
+        SingleProductPage singleProductPage = (SingleProductPage) SubUtils.mapperObject(singleProductPageDTO,
                 new SingleProductPage());
+        singleProductPage.setStatus((byte) 1);
+        singleProductPage.setIdShop(accountRepository.getById(SubUtils.getCurrentUser().getId()).getShop().getIdShop());
+
         return (singleProductPageRepository.save(singleProductPage) != null);
     }
 

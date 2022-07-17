@@ -7,7 +7,8 @@ import InstanceAxios from "../../../helpers/axiosConfig.js";
 import "../../../node_modules/react-checkbox-tree/lib/react-checkbox-tree.css";
 import MultiStep from "react-multistep";
 import ImageUploading from 'react-images-uploading';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 Modal.setAppElement('body');
 const customStyles = {
@@ -21,27 +22,54 @@ const customStyles = {
     }
 }
 
+const validationSchema = Yup.object().shape({
+    name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+    description: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+    name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+});
 export default function ProductAddModal({ open, closeModal }) {
-    const [checked, setChecked] = useState([]);
+    const [checked1, setChecked] = useState([]);
     const [expanded, setExpanded] = useState([]);
     const [nodes, setNodes] = useState([]);
-    const [inputValues, setInputValues] = useState({});
-    const [counter, setCounter] = useState(0);
+    const [selectedCagetory, setSelectedCagetory] = useState(null);
+    const [counter, setCounter] = useState(1);
     const [images, setImages] = useState([]);
-    const maxNumber = 1;
     const onChange = (imageList, addUpdateIndex) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
+        formik.setFieldValue(`productDTOs[${addUpdateIndex}].imgUrl`, imageList[addUpdateIndex].data_url);
         setImages(imageList);
     };
-    const handleClick = () => {
-        setCounter(counter + 1);
-        console.log(counter);
+    const find = (array = [], id) => {
+        for (const item of array) {
+            const result = item.value === id ? item : find(item.children, id);
+            if (result) return result;
+        }
     };
-    const handleOnChange = (e) => {
-        const abc = {};
-        abc[e.target.className] = e.target.value;
-        setInputValues({ ...inputValues, ...abc });
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+            description: '',
+            productDTOs: [{
+                name: '',
+                price: 0,
+                quantity: 0,
+                imgUrl: ''
+            }],
+            cagetory: "",
+            idCategory: "",
+            shipping: ""
+        },
+        validationSchema,
+        onSubmit: values => {
+            InstanceAxios().post(`http://localhost:4000/api/saler/productSalerUpdate`, values)
+        },
+    });
+    const handleClick = () => {
+        if (counter != 0) {
+            const newProductArr = formik.values.productDTOs.push({ name: '', price: 0, quantity: 0, imgUrl: '' });
+            formik.setFieldValue(formik.values.productDTOs, newProductArr);
+        }
+        setCounter(counter + 1);
+
     };
     const step1 = (
         <CheckboxTree nodes={nodes} icons={{
@@ -53,7 +81,19 @@ export default function ProductAddModal({ open, closeModal }) {
             expandAll: <FontAwesomeIcon icon={faPlusSquare} />,
             collapseAll: <FontAwesomeIcon icon={faMinusSquare} />,
             parentClose: null, parentOpen: null, leaf: null,
-        }} checked={checked} expanded={expanded} onCheck={(checked) => { { setChecked(checked); } }} onExpand={(expanded) => { setExpanded(expanded); }} />
+        }} checked={checked1} expanded={expanded}
+            onlyLeafCheckboxes={true}
+            onCheck={(checked) => {
+                {
+                    const arr = checked.filter(item => item !== checked1[0])
+                    const cagetory = find(nodes, parseInt(arr[0]))
+                    setChecked(arr);
+                    setSelectedCagetory(cagetory)
+                    formik.setFieldValue(`cagetory`, cagetory.label);
+                    formik.setFieldValue(`idCategory`, cagetory.value);
+                }
+            }}
+            onExpand={(expanded) => { setExpanded(expanded); }} />
     );
     // (<input onChange={handleOnChange} key={c} className={index} type="text" ></input>
     const step2a = (c, index) => {
@@ -70,33 +110,37 @@ export default function ProductAddModal({ open, closeModal }) {
                         <div className="form-group">
                             <label htmlFor="name" className="col-sm-3 control-label">Loại</label>
                             <div className="col-sm-9">
-                                <input type="text" className="form-control" name="name" id="name" placeholder="" />
+                                <input type="text" className="form-control" name={`productDTOs[${index}].name`} placeholder="" onChange={formik.handleChange}
+                                    value={formik.values.productDTOs[index].name} />
                             </div>
                         </div> {/* form-group // */}
                         <div className="form-group">
                             <label htmlFor="qty" className="col-sm-3 control-label">Giá</label>
                             <div className="col-sm-3">
-                                <input type="number" className="form-control" name="name" id="name" placeholder="" />
+                                <input type="number" className="form-control" name={`productDTOs[${index}].price`} id="name" placeholder="" onChange={formik.handleChange}
+                                    value={formik.values.productDTOs[index].price} />
                             </div>
                         </div> {/* form-group // */}
                         <div className="form-group">
-                            <label htmlFor="qty" className="col-sm-3 control-label">Số Lượng</label>
+                            <label htmlFor="qty" className="col-sm-3 control-label" >Số Lượng</label>
                             <div className="col-sm-3">
-                                <input type="number" className="form-control" name="name" id="name" />
+                                <input type="number" className="form-control" name={`productDTOs[${index}].quantity`} id="name" onChange={formik.handleChange}
+                                    value={formik.values.productDTOs[index].quantity} />
                             </div>
                         </div> {/* form-group // */}
                         <div className="form-group">
                             <label className="col-sm-3 control-label">Ảnh</label>
-                            <div className="col-sm-3">
+                            <div className="col-sm-5">
                                 <div className="App">
-                                    <ImageUploading multiple value={images} onChange={onChange} maxNumber={maxNumber} dataURLKey="data_url" >
-                                        {({ imageList, onImageUpload, onImageRemoveAll, onImageUpdate, onImageRemove, isDragging, dragProps, }) => (
-                                            // write your building UI
+                                    <ImageUploading multiple value={images} onChange={onChange} maxNumber={counter} dataURLKey="data_url" >
+                                        {({ imageList, onImageUpload, onImageUpdate, isDragging, dragProps, }) => (
                                             <div className="upload__image-wrapper">
-                                                <button type="button" style={isDragging ? { color: 'red' } : undefined} onClick={onImageUpload} {...dragProps} > Click </button>
-                                                {imageList.map((image, index) => (
-                                                    <div key={index} className="image-item"> <img src={image['data_url']} alt="" width="100" /> </div>
-                                                ))}
+                                                <div className="imgWrapper">
+                                                    {< img src={(imageList[index]) ? imageList[index]['data_url'] : undefined} alt="" />}
+                                                    <button type="button" className="btn" style={(isDragging ? { color: 'red' } : undefined)} onClick={() => { imageList[index] ? onImageUpdate(index) : onImageUpload() }} {...dragProps} >
+                                                        <i className="fa fa-image" ></i>
+                                                    </button>
+                                                </div>
                                             </div>
                                         )}
                                     </ImageUploading>
@@ -105,9 +149,9 @@ export default function ProductAddModal({ open, closeModal }) {
 
                         </div> {/* form-group // */}
                         <hr />
-                    </div>{/* panel-body // */}
-                </section>{/* panel// */}
-            </div>
+                    </div > {/* panel-body // */}
+                </section > {/* panel// */}
+            </div >
         )
     }
     const step2 = (
@@ -117,7 +161,7 @@ export default function ProductAddModal({ open, closeModal }) {
                     <h3 className="panel-title">Panel heading</h3>
                 </div>
                 <div className="panel-body" >
-                    <form action="designer-finish.html" className="form-horizontal" role="form">
+                    <form onSubmit={formik.handleSubmit} className="form-horizontal" role="form">
                         <div className="form-group">
                             <label htmlFor="name" className="col-sm-3 control-label">Тип заказа</label>
                             <div className="col-sm-9">
@@ -130,16 +174,24 @@ export default function ProductAddModal({ open, closeModal }) {
                             </div>
                         </div> {/* form-group // */}
                         <div className="form-group">
-                            <label htmlFor="name" className="col-sm-3 control-label">Tên Sản Phẩm</label>
+                            <label htmlFor="name" className="col-sm-3 control-label" >Tên Sản Phẩm</label>
                             <div className="col-sm-9">
-                                <input type="text" className="form-control" name="name" id="name" placeholder="" />
+                                <input type="text" className="form-control" placeholder=""
+                                    name="name"
+                                    onChange={formik.handleChange}
+                                    value={formik.values.name} />
+                                {(formik.errors.name) && <div>{formik.errors.name}</div>}
+
                             </div>
                         </div> {/* form-group // */}
 
                         <div className="form-group">
-                            <label htmlFor="about" className="col-sm-3 control-label">Mô tả sản phẩm</label>
+                            <label htmlFor="about" className="col-sm-3 control-label" >Mô tả sản phẩm</label>
                             <div className="col-sm-9">
-                                <textarea className="form-control" defaultValue={""} />
+                                <textarea className="form-control"
+                                    name="description" onChange={formik.handleChange}
+                                    value={formik.values.description} />
+
                             </div>
                         </div> {/* form-group // */}
                         <div className="form-group">
@@ -153,7 +205,8 @@ export default function ProductAddModal({ open, closeModal }) {
                         <div className="form-group">
                             <label htmlFor="qty" className="col-sm-3 control-label">Loại</label>
                             <div className="col-sm-3">
-                                <input type="text" className="form-control" name="name" id="name" />
+                                <input type="text" name="cagetory" className="form-control" onChange={formik.handleChange} disabled
+                                    value={formik.values.cagetory} />
                             </div>
                         </div> {/* form-group // */}
                         <div className="form-group">
@@ -170,7 +223,10 @@ export default function ProductAddModal({ open, closeModal }) {
                         <hr />
                         <div className="form-group">
                             <div className="col-sm-offset-3 col-sm-9">
-                                <button type="submit" className="btn btn-primary">Lưu</button>
+                                <button type="submit" onClick={() => formik.validateForm().then((e) => {
+                                    (Object.keys(e).length !== 0 ? alert("Hay Hoan Thanh Form") : "")
+                                    console.log(e);
+                                })} className="btn btn-primary">Lưu</button>
                             </div>
                         </div> {/* form-group // */}
                     </form>
@@ -188,7 +244,6 @@ export default function ProductAddModal({ open, closeModal }) {
         InstanceAxios().get(`http://localhost:4000/api/product/loadCagetory`)
             .then((data) => {
                 const nodesReuslt = JSON.parse(JSON.stringify(data.data).replaceAll(',"children":[]', ""));
-                console.log(nodesReuslt);
                 setNodes(nodesReuslt);
             })
     }, [])
@@ -197,7 +252,7 @@ export default function ProductAddModal({ open, closeModal }) {
             {nodes &&
                 (
                     <Modal isOpen={open} onRequestClose={closeModal} style={customStyles}>
-                        <MultiStep steps={steps} />
+                        <MultiStep activeStep={0} showNavigation={true} steps={steps} />
                     </Modal>
                 )}
 

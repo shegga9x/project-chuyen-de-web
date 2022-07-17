@@ -20,6 +20,7 @@ public class SingleProductPageDTO {
     private String priceRange;
 
     private String imgURL;
+
     private Byte status;
 
     private List<ProductDTO> productDTOs;

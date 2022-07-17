@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
-
-import backend.backend.persitence.entities.*;
-import backend.backend.persitence.repository.*;
 import backend.backend.services.mainService.AdminService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +17,18 @@ import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.utils.SubUtils;
+import backend.backend.persitence.entities.Category;
+import backend.backend.persitence.entities.Product;
+import backend.backend.persitence.entities.ResetPhoneToken;
+import backend.backend.persitence.entities.SingleProductPage;
+import backend.backend.persitence.repository.CartItemRepository;
+import backend.backend.persitence.repository.CategoryRepository;
+import backend.backend.persitence.repository.CustomerRepository;
+import backend.backend.persitence.repository.OrderItemRepository;
+import backend.backend.persitence.repository.ProductRepository;
+import backend.backend.persitence.repository.ResetPhoneTokenRepository;
+import backend.backend.persitence.repository.SingleProductPageRepository;
+import backend.backend.persitence.repository.WalletCustomerRepository;
 import backend.backend.services.entityService.SingleProductPageService;
 
 @RunWith(SpringRunner.class)

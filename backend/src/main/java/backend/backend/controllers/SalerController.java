@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import backend.backend.helpers.advice.CustomException;
 import backend.backend.helpers.payload.dto.OrderItemDTO;
-import backend.backend.helpers.payload.request.SalerProductAddRequest;
+import backend.backend.helpers.payload.dto.SingleProductPageDTO;
 import backend.backend.helpers.payload.response.MessageResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.repository.AccountRepository;
@@ -41,8 +41,9 @@ public class SalerController {
     }
 
     @PostMapping({ "/productSalerUpdate" })
-    public ResponseEntity<?> productSalerUpdate(@RequestBody SalerProductAddRequest salerProductAddRequest) {
-        if (!salerService.productSalerUpdate(salerProductAddRequest))
+    public ResponseEntity<?> productSalerUpdate(@RequestBody SingleProductPageDTO singleProductPageDTO ) {
+        System.out.println(singleProductPageDTO);
+        if (!salerService.productSalerUpdate(singleProductPageDTO))
             throw new CustomException("Add Product Fail");
         return ResponseEntity.ok(new MessageResponse("Add Order Success"));
     }

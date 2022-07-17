@@ -615,8 +615,9 @@ INSERT INTO Order_Item VALUES(1, 1, 5,1);
 INSERT INTO Order_Item VALUES(1, 1, 6,1);
 
 use shop
-select * from Order_Item
-SELECT * FROM Single_Product_Page t WHERE t.id_category in (51) AND t.status = 1
+select * from product where id_product > 48
+
+SELECT * FROM Single_Product_Page where id_single_product_page > 5
 
 --select * from Verification_Token
 select * from ACCOUNT
