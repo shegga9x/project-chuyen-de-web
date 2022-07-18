@@ -628,8 +628,7 @@ select * from Customer
 --select *
 --from Reset_Email_Token
 --delete from Reset_Email_Token
---select *
---from Product
+--select * from Product
 --select * from Wallet_Customer
 --delete from Wallet_Customer
 UPDATE Customer

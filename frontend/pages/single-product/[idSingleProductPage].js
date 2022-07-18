@@ -37,8 +37,13 @@ export default function SingleProduct({ data }) {
       const req = await instance().post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: productQuantity.current.value })
         .catch((err) => {
           document.getElementById("buttonAddToCart").disabled = false;
+          console.log({ err })
           if (err.message != "Network Error") {
-            alert(err.response.data.message);
+            if (err.response.data.message) {
+              alert(err.response.data.message);
+            } else {
+              alert('ban can dang nhap');
+            }
           }
         });
       if (req) {
@@ -54,7 +59,6 @@ export default function SingleProduct({ data }) {
   if (router.isFallback) {
     return <h1>Loading..</h1>;
   }
-  // return <h1>{JSON.stringify(data)}</h1>
 
   return (
     <>
@@ -248,9 +252,6 @@ export default function SingleProduct({ data }) {
                       {trans.detail.variants}:
                     </h6>
                     <div style={{ display: "flex", rowGap: "5px", "flexWrap": "wrap" }}>
-                      {/* <button>
-                        áo xanh
-                      </button> */}
                       {data.listProduct.map((element, index) => {
                         return (<button className="button button-outline-secondary u-s-m-l-6" style={product === element ? { backgroundColor: "gainsboro", borderRadius: "0px" } : { borderRadius: "0px" }} key={index}
                           onClick={() => {
