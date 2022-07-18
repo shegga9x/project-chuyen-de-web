@@ -215,7 +215,7 @@ export default function SingleProduct({ data }) {
                   </div>
                   <div className="section-3-price-original-discount u-s-p-y-14">
                     <div className="price">
-                      <h4>$ {product == null ? data.singleProductPage.priceRange : product.price}</h4>
+                      <h4> {product == null ? data.singleProductPage.priceRange : product.price} VNĐ</h4>
                     </div>
                     {/* <div className="original-price">
                       <span>{trans.detail.price}:</span>
