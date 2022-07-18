@@ -161,7 +161,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://salt.tikicdn.com/cache/400x400/ts/product/0f/60/eb/dee9d336357c6dc31111173633eb1b17.PNG"
                                 alt="Product"
                               />
                             </a>
@@ -231,7 +231,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://salt.tikicdn.com/cache/w1200/ts/product/7e/44/a0/c33afe0467aefe0629846abae3a9ba76.PNG"
                                 alt="Product"
                               />
                             </a>
@@ -241,16 +241,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -298,7 +298,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://prices.vn/storage/photo/product/mu-non-miki-kieu-thuy-thu-khong-vanh-miki-hat-degeen-domog-2.png"
                                 alt="Product"
                               />
                             </a>
@@ -308,16 +308,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -365,7 +365,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://vn-test-11.slatic.net/p/1338ca544ce72cd9838866b0c2c1da62.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -375,16 +375,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -437,7 +437,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://cf.shopee.vn/file/b8f5947811ac89b25b403b886e85fb85"
                                 alt="Product"
                               />
                             </a>
@@ -447,16 +447,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -507,7 +507,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://salt.tikicdn.com/cache/400x400/ts/product/62/7e/c3/eb970de7928b70cd28f6bf6ba1d05b8a.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -517,16 +517,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -576,7 +576,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://salt.tikicdn.com/cache/525x525/ts/product/f2/14/70/d8dc2060343127892cbc7c330058f381.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -586,16 +586,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -645,7 +645,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://cf.shopee.vn/file/6c3c90bc8f504a6e12345d16ae17c28c'
                                 alt="Product"
                               />
                             </a>
@@ -655,16 +655,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -736,7 +736,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://salt.tikicdn.com/cache/400x400/ts/product/0f/60/eb/dee9d336357c6dc31111173633eb1b17.PNG'
                                 alt="Product"
                               />
                             </a>
@@ -746,16 +746,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -806,7 +806,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://salt.tikicdn.com/cache/w1200/ts/product/7e/44/a0/c33afe0467aefe0629846abae3a9ba76.PNG'
                                 alt="Product"
                               />
                             </a>
@@ -816,16 +816,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -875,7 +875,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://prices.vn/storage/photo/product/mu-non-miki-kieu-thuy-thu-khong-vanh-miki-hat-degeen-domog-2.png'
                                 alt="Product"
                               />
                             </a>
@@ -885,16 +885,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -944,7 +944,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://vn-test-11.slatic.net/p/1338ca544ce72cd9838866b0c2c1da62.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -954,16 +954,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1079,7 +1079,7 @@ export default function Home() {
                     >
                       <img
                         className="img-fluid"
-                        src="/static/images/product/product@3x.jpg"
+                        src='https://salt.tikicdn.com/cache/400x400/ts/product/0f/60/eb/dee9d336357c6dc31111173633eb1b17.PNG'
                         alt="Product"
                       />
                     </a>
@@ -1089,16 +1089,16 @@ export default function Home() {
                         data-toggle="modal"
                         href="#quick-view"
                       >
-                        Quick Look
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </a>
                       <a className="item-mail" href="">
-                        Mail
+                        <FontAwesomeIcon icon={faEnvelope} />
                       </a>
                       <a className="item-addwishlist" href="">
-                        Add to Wishlist
+                        <FontAwesomeIcon icon={faHeart} />
                       </a>
                       <a className="item-addCart" href="">
-                        Add to Cart
+                        <FontAwesomeIcon icon={faPlus} />
                       </a>
                     </div>
                   </div>
@@ -1147,7 +1147,7 @@ export default function Home() {
                     >
                       <img
                         className="img-fluid"
-                        src="/static/images/product/product@3x.jpg"
+                        src='https://salt.tikicdn.com/cache/w1200/ts/product/7e/44/a0/c33afe0467aefe0629846abae3a9ba76.PNG'
                         alt="Product"
                       />
                     </a>
@@ -1157,16 +1157,16 @@ export default function Home() {
                         data-toggle="modal"
                         href="#quick-view"
                       >
-                        Quick Look
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </a>
                       <a className="item-mail" href="">
-                        Mail
+                        <FontAwesomeIcon icon={faEnvelope} />
                       </a>
                       <a className="item-addwishlist" href="">
-                        Add to Wishlist
+                        <FontAwesomeIcon icon={faHeart} />
                       </a>
                       <a className="item-addCart" href="">
-                        Add to Cart
+                        <FontAwesomeIcon icon={faPlus} />
                       </a>
                     </div>
                   </div>
@@ -1215,7 +1215,7 @@ export default function Home() {
                     >
                       <img
                         className="img-fluid"
-                        src="/static/images/product/product@3x.jpg"
+                        src='https://prices.vn/storage/photo/product/mu-non-miki-kieu-thuy-thu-khong-vanh-miki-hat-degeen-domog-2.png'
                         alt="Product"
                       />
                     </a>
@@ -1225,16 +1225,16 @@ export default function Home() {
                         data-toggle="modal"
                         href="#quick-view"
                       >
-                        Quick Look
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </a>
                       <a className="item-mail" href="">
-                        Mail
+                        <FontAwesomeIcon icon={faEnvelope} />
                       </a>
                       <a className="item-addwishlist" href="">
-                        Add to Wishlist
+                        <FontAwesomeIcon icon={faHeart} />
                       </a>
                       <a className="item-addCart" href="">
-                        Add to Cart
+                        <FontAwesomeIcon icon={faPlus} />
                       </a>
                     </div>
                   </div>
@@ -1283,7 +1283,7 @@ export default function Home() {
                     >
                       <img
                         className="img-fluid"
-                        src="/static/images/product/product@3x.jpg"
+                        src='https://vn-test-11.slatic.net/p/1338ca544ce72cd9838866b0c2c1da62.jpg'
                         alt="Product"
                       />
                     </a>
@@ -1293,16 +1293,16 @@ export default function Home() {
                         data-toggle="modal"
                         href="#quick-view"
                       >
-                        Quick Look
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </a>
                       <a className="item-mail" href="">
-                        Mail
+                        <FontAwesomeIcon icon={faEnvelope} />
                       </a>
                       <a className="item-addwishlist" href="">
-                        Add to Wishlist
+                        <FontAwesomeIcon icon={faHeart} />
                       </a>
                       <a className="item-addCart" href="">
-                        Add to Cart
+                        <FontAwesomeIcon icon={faPlus} />
                       </a>
                     </div>
                   </div>
@@ -1434,6 +1434,7 @@ export default function Home() {
                         className="products-slider owl-carousel"
                         data-item={4}
                       >
+
                         <div className="item">
                           <div className="image-container">
                             <a
@@ -1442,7 +1443,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://media3.scdn.vn/img3/2019/5_3/R9i8FI_simg_de2fe0_500x500_maxb.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1452,88 +1453,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Women's
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Tops</a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    Dresses
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  White Solitude Dress with mid heel &amp; Bag
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag new">
-                            <span>NEW</span>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1583,7 +1512,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://bumshop.com.vn/wp-content/uploads/2019/06/shop-ao-khoac-nu-dep-tphcm-1.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1593,16 +1522,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1652,7 +1581,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://quanaoxuongmay.com/wp-content/uploads/13136-clean-z2087169383359-5f33b1da3f66b1480f4093f6a1320590.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1662,16 +1591,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1725,7 +1654,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://prices.vn/storage/photo/product/mu-non-miki-kieu-thuy-thu-khong-vanh-miki-hat-degeen-domog-2.png'
                                 alt="Product"
                               />
                             </a>
@@ -1735,16 +1664,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1797,7 +1726,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://dientukhietan.com/wp-content/uploads/2020/08/2020-07-29_0-50-16.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1807,16 +1736,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1866,7 +1795,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://media.loveitopcdn.com/3040/upload/images/ong-ngam-sung-hoi-1512795599.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1876,16 +1805,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1937,7 +1866,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='http://upload2.webbnc.vn/uploadv2/web/67/6703/product/2017/06/15/07/12/1497510699_148637085251.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1947,16 +1876,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2031,7 +1960,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://vn-test-11.slatic.net/p/b30332e6d104b83c5e2b5eea59c8d394.jpg_340x340q80.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -2041,16 +1970,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2103,7 +2032,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://haisanthanglong.com/upload/photo/untitled-122-88820.png'
                                 alt="Product"
                               />
                             </a>
@@ -2113,16 +2042,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2172,7 +2101,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://salt.tikicdn.com/ts/product/e1/68/94/fc902ed4e684fd4bdc49ad7093d7f757.png'
                                 alt="Product"
                               />
                             </a>
@@ -2182,16 +2111,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2243,7 +2172,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://salt.tikicdn.com/cache/w1200/ts/product/a1/5b/56/52f2cdc3c39526d91fcb149d7497f93b.jpeg'
                                 alt="Product"
                               />
                             </a>
@@ -2253,16 +2182,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2472,7 +2401,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://noithatgiakho.com/upload/sanpham/large/bo-ban-an-mat-da-ceramic-bong-ket-hop-ghe-spot-229-1.jpg'
                                         alt="Product"
                                       />
                                     </a>
@@ -2482,16 +2411,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -2545,7 +2474,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://cf.shopee.vn/file/261cad5954be11b9ba8d414d9e64528c'
                                         alt="Product"
                                       />
                                     </a>
@@ -2555,16 +2484,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -2615,7 +2544,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://cf.shopee.vn/file/b68f5acafc4a6e7a4675ac222a6adb88'
                                         alt="Product"
                                       />
                                     </a>
@@ -2625,16 +2554,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -2688,7 +2617,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://i2.wp.com/noli.vn/wp-content/uploads/2019/06/Hoc-cach-moc-mu-vanh-cup-no-lien-cua-tac-gia-nha-nha.jpg?fit=800%2C696&ssl=1'
                                         alt="Product"
                                       />
                                     </a>
@@ -2698,16 +2627,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -2783,7 +2712,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://vn-test-11.slatic.net/p/d8a1826b67bb5613fdf6fd41a2a4a821.jpg'
                                         alt="Product"
                                       />
                                     </a>
@@ -2793,16 +2722,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -2856,7 +2785,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://image.voso.vn/users/vosoimage/images/30ca1625c5f340b2b6730ffa5c17107a?t%5B0%5D=compress%3Alevel%3D100&accessToken=f8601762a34874664a8a88a0e62c93ec0a945e912d995b23a22664e477200af5'
                                         alt="Product"
                                       />
                                     </a>
@@ -2866,16 +2795,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -2926,7 +2855,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://24hstore.vn/upload_images/images/SEO/iphone-11-mau-xanh-phien-ban-mau-sac-ban-chay-nhat-2020-4.jpg'
                                         alt="Product"
                                       />
                                     </a>
@@ -2936,16 +2865,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -2999,7 +2928,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://cdn.tgdd.vn/Files/2019/09/11/1197017/yellow_980x551-800-resize.jpg'
                                         alt="Product"
                                       />
                                     </a>
@@ -3009,16 +2938,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -3169,7 +3098,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://24hstore.vn/upload_images/images/SEO/iphone-11-mau-xanh-phien-ban-mau-sac-ban-chay-nhat-2020-4.jpg'
                     alt="Brand Logo 1"
                   />
                 </a>
@@ -3177,7 +3106,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://cdn.tgdd.vn/Files/2021/01/31/1324283/iphone-12-mini-128gb-282320-042317_800x533.jpg'
                     alt="Brand Logo 2"
                   />
                 </a>
@@ -3185,7 +3114,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://cdn.tgdd.vn/Files/2019/09/11/1197017/yellow_980x551-800-resize.jpg'
                     alt="Brand Logo 3"
                   />
                 </a>
@@ -3193,7 +3122,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://ss-images.saostar.vn/pc/1596849920066/iphone-12.jpg'
                     alt="Brand Logo 5"
                   />
                 </a>
@@ -3201,7 +3130,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://24hstore.vn/upload_images/images/SEO/iphone-11-mau-xanh-phien-ban-mau-sac-ban-chay-nhat-2020-4.jpg'
                     alt="Brand Logo 6"
                   />
                 </a>
@@ -3209,7 +3138,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://cdn.tgdd.vn/Files/2021/01/31/1324283/iphone-12-mini-128gb-282320-042317_800x533.jpg'
                     alt="Brand Logo 7"
                   />
                 </a>
