@@ -35,8 +35,6 @@ export default function Home() {
           <div className="slider-main owl-carousel">
             <div className="bg-image one">
               <div className="slide-content slide-animation">
-                {/* <h1>Casual Clothing</h1>
-                <h2>lifestyle / clothing / hype</h2> */}
                 <div className="image-banner">
                   <a
                     href="shop-v1-root-category.html"
@@ -46,7 +44,8 @@ export default function Home() {
                       // className="img-fluid"
                       // src="/static/images/banners/bannerlayer-1.jpg"
                       src="https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img1.jpg?v=82"
-                      width="auto" height="720"
+                    // width="auto" height="720"
+                    // style={{ maxHeight: '720px' }}
                     />
                   </a>
                 </div>
@@ -54,9 +53,6 @@ export default function Home() {
             </div>
             <div className="bg-image two">
               <div className="slide-content slide-animation">
-                {/* <h2 className="slide-2-h2-a">Hiking</h2>
-                <h2 className="slide-2-h2-b">Collection</h2>
-                <h1>2018</h1> */}
                 <div className="image-banner">
                   <a
                     href="shop-v1-root-category.html"
@@ -65,10 +61,29 @@ export default function Home() {
                     <img
                       // className="img-fluid"
                       // src="/static/images/banners/bannerlayer-1.jpg"
-                      // src="https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img2.jpg?v=82"
                       src=" https://file.hstatic.net/200000182297/file/bia_0b7834ad50be430ab6175f6a1b703f23.jpg"
                       alt="Winter Season Banner"
-                      width="auto" height="720"
+                    // width="auto" height="720"
+                    // style={{ maxHeight: '720px' }}
+                    />
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="bg-image three">
+              <div className="slide-content slide-animation">
+                <div className="image-banner">
+                  <a
+                    href="shop-v1-root-category.html"
+                    className="mx-auto banner-hover effect-dark-opacity"
+                  >
+                    <img
+                      // className="img-fluid"
+                      // src="/static/images/banners/bannerlayer-1.jpg"
+                      src="https://file.hstatic.net/200000182297/file/cover_ao_phong_8656dc83e6134cd4ac53d186cdbe5f97.jpg"
+                      alt="Winter Season Banner"
+                    // width="auto" height="720"
+                    // style={{ maxHeight: '720px' }}
                     />
                   </a>
                 </div>
