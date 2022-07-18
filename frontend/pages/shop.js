@@ -179,7 +179,7 @@ export default function Shop(props) {
                                   <a className="item-quick-look" data-toggle="modal" href="#quick-view"> <FontAwesomeIcon icon={faSearch} /> </a>
                                   <a className="item-mail" href=""> <FontAwesomeIcon icon={faEnvelope} /> </a>
                                   <a className="item-addwishlist" href=""> <FontAwesomeIcon icon={faHeart} /> </a>
-                                  <a className="item-addCart" href=""> <FontAwesomeIcon icon={faCartPlus} /> </a>
+                                  {/* <a className="item-addCart" href=""> <FontAwesomeIcon icon={faCartPlus} /> </a> */}
                                 </div>
                               </div>
                               <div className="item-content">
@@ -220,8 +220,8 @@ export default function Shop(props) {
                                   </div>
                                 </div>
                                 <div className="price-template">
-                                  <div className="item-new-price"> ${d.priceRange} </div>
-                                  <div className="item-old-price"> ${d.priceRange} </div>
+                                  <div className="item-new-price"> {d.priceRange} VNĐ </div>
+                                  <div className="item-old-price"> {d.priceRange} VNĐ </div>
                                 </div>
                               </div>
                               <div className="tag new">

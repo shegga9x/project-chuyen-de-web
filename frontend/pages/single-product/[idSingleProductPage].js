@@ -108,15 +108,22 @@ export default function SingleProduct({ data }) {
             <div className="row">
               <div className="col-lg-6 col-md-6 col-sm-12">
                 {/* Product-zoom-area */}
+                {/* {data.listProduct.map((element, index) => {
+                  console.log(element.imgURL)
+                  return ( */}
                 <div className="zoom-area">
                   <img
                     id="zoom-pro"
                     className="img-fluid"
-                    src="/static/images/product/product@4x.jpg"
-                    data-zoom-image="/static/images/product/product@4x.jpg"
+                    // src="/static/images/product/product@4x.jpg"
+                    src={data.listProduct[0].imgUrl}
+                    data-zoom-image={data.listProduct[0].imgUrl}
                     alt="Zoom Image"
                   />
                   <div id="gallery" className="u-s-m-t-10">
+                    {/* {data.listProduct.map((element, index) => {
+                  console.log(element.imgURL)
+                  return ( */}
                     <a
                       className="active"
                       data-image="/static/images/product/product@4x.jpg"
@@ -200,6 +207,18 @@ export default function SingleProduct({ data }) {
                       <li className="is-marked">
                         <a href="shop-v3-sub-sub-category.html">Hoodies</a>
                       </li>
+                      {/* <div style={{ display: "flex", marginBottom: "5px" }}>
+                        <a style={{ color: "red" }} onClick={() => { changeRoute("/shop", router) }}>Shop</a>
+                        <span style={{ marginLeft: "3px", marginRight: "3px" }}>{">"}</span>
+                        {data.listCategory.map((ele, i) => {
+                          const url = `/shop?page=1&size=8&catagory=${ele.idCategory}`;
+                          return (<div key={i + "map1"}>
+                            <a style={{ color: "red" }} onClick={() => { changeRoute(url, router) }}>{ele.name}</a>
+                            <span style={{ marginLeft: "3px", marginRight: "3px" }}>{">"}</span>
+                          </div>)
+                        })}
+                        <span>{data.singleProductPage.name}</span>
+                      </div> */}
                     </ul>
                     <div className="product-rating">
                       <div
@@ -219,7 +238,7 @@ export default function SingleProduct({ data }) {
                   </div>
                   <div className="section-3-price-original-discount u-s-p-y-14">
                     <div className="price">
-                      <h4>$ {product == null ? data.singleProductPage.priceRange : product.price}</h4>
+                      <h4> {product == null ? data.singleProductPage.priceRange : product.price} VNĐ</h4>
                     </div>
                     {/* <div className="original-price">
                       <span>{trans.detail.price}:</span>

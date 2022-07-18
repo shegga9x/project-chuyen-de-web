@@ -35,24 +35,58 @@ export default function Home() {
           <div className="slider-main owl-carousel">
             <div className="bg-image one">
               <div className="slide-content slide-animation">
-                <h1>Casual Clothing</h1>
-                <h2>lifestyle / clothing / hype</h2>
+                <div className="image-banner">
+                  <a
+                    href="shop-v1-root-category.html"
+                    className="mx-auto banner-hover effect-dark-opacity"
+                  >
+                    <img
+                      // className="img-fluid"
+                      // src="/static/images/banners/bannerlayer-1.jpg"
+                      src="https://theme.hstatic.net/200000182297/1000887316/14/ms_banner_img1.jpg?v=82"
+                    // width="auto" height="720"
+                    // style={{ maxHeight: '720px' }}
+                    />
+                  </a>
+                </div>
               </div>
             </div>
             <div className="bg-image two">
-              <div className="slide-content-2 slide-animation">
-                <h2 className="slide-2-h2-a">Hiking</h2>
-                <h2 className="slide-2-h2-b">Collection</h2>
-                <h1>2018</h1>
+              <div className="slide-content slide-animation">
+                <div className="image-banner">
+                  <a
+                    href="shop-v1-root-category.html"
+                    className="mx-auto banner-hover effect-dark-opacity"
+                  >
+                    <img
+                      // className="img-fluid"
+                      // src="/static/images/banners/bannerlayer-1.jpg"
+                      src=" https://file.hstatic.net/200000182297/file/bia_0b7834ad50be430ab6175f6a1b703f23.jpg"
+                      alt="Winter Season Banner"
+                    // width="auto" height="720"
+                    // style={{ maxHeight: '720px' }}
+                    />
+                  </a>
+                </div>
               </div>
             </div>
             <div className="bg-image three">
               <div className="slide-content slide-animation">
-                <h1>
-                  Tech
-                  <span style={{ color: "#333" }}>Deals</span>
-                </h1>
-                <h2 style={{ color: "#333" }}># shopping</h2>
+                <div className="image-banner">
+                  <a
+                    href="shop-v1-root-category.html"
+                    className="mx-auto banner-hover effect-dark-opacity"
+                  >
+                    <img
+                      // className="img-fluid"
+                      // src="/static/images/banners/bannerlayer-1.jpg"
+                      src="https://file.hstatic.net/200000182297/file/cover_ao_phong_8656dc83e6134cd4ac53d186cdbe5f97.jpg"
+                      alt="Winter Season Banner"
+                    // width="auto" height="720"
+                    // style={{ maxHeight: '720px' }}
+                    />
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -67,9 +101,11 @@ export default function Home() {
                 className="mx-auto banner-hover effect-dark-opacity"
               >
                 <img
-                  className="img-fluid"
-                  src="/static/images/banners/bannerlayer-1.jpg"
+                  // className="img-fluid"
+                  // src="/static/images/banners/bannerlayer-1.jpg"
+                  src="https://file.hstatic.net/200000182297/file/4.7.1_5e799a1c1b2f4e53868eb7cba03c2421.jpg"
                   alt="Winter Season Banner"
+                  style={{ maxWidth: '1110px' }}
                 />
               </a>
             </div>
@@ -140,7 +176,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://salt.tikicdn.com/cache/400x400/ts/product/0f/60/eb/dee9d336357c6dc31111173633eb1b17.PNG"
                                 alt="Product"
                               />
                             </a>
@@ -210,7 +246,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://salt.tikicdn.com/cache/w1200/ts/product/7e/44/a0/c33afe0467aefe0629846abae3a9ba76.PNG"
                                 alt="Product"
                               />
                             </a>
@@ -220,16 +256,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -277,7 +313,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://prices.vn/storage/photo/product/mu-non-miki-kieu-thuy-thu-khong-vanh-miki-hat-degeen-domog-2.png"
                                 alt="Product"
                               />
                             </a>
@@ -287,16 +323,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -344,7 +380,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://vn-test-11.slatic.net/p/1338ca544ce72cd9838866b0c2c1da62.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -354,16 +390,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -416,7 +452,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://cf.shopee.vn/file/b8f5947811ac89b25b403b886e85fb85"
                                 alt="Product"
                               />
                             </a>
@@ -426,16 +462,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -486,7 +522,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://salt.tikicdn.com/cache/400x400/ts/product/62/7e/c3/eb970de7928b70cd28f6bf6ba1d05b8a.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -496,16 +532,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -555,7 +591,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src="https://salt.tikicdn.com/cache/525x525/ts/product/f2/14/70/d8dc2060343127892cbc7c330058f381.jpg"
                                 alt="Product"
                               />
                             </a>
@@ -565,16 +601,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -624,7 +660,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://cf.shopee.vn/file/6c3c90bc8f504a6e12345d16ae17c28c'
                                 alt="Product"
                               />
                             </a>
@@ -634,16 +670,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -715,7 +751,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://salt.tikicdn.com/cache/400x400/ts/product/0f/60/eb/dee9d336357c6dc31111173633eb1b17.PNG'
                                 alt="Product"
                               />
                             </a>
@@ -725,16 +761,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -785,7 +821,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://salt.tikicdn.com/cache/w1200/ts/product/7e/44/a0/c33afe0467aefe0629846abae3a9ba76.PNG'
                                 alt="Product"
                               />
                             </a>
@@ -795,16 +831,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -854,7 +890,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://prices.vn/storage/photo/product/mu-non-miki-kieu-thuy-thu-khong-vanh-miki-hat-degeen-domog-2.png'
                                 alt="Product"
                               />
                             </a>
@@ -864,16 +900,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -923,7 +959,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://vn-test-11.slatic.net/p/1338ca544ce72cd9838866b0c2c1da62.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -933,16 +969,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1058,7 +1094,7 @@ export default function Home() {
                     >
                       <img
                         className="img-fluid"
-                        src="/static/images/product/product@3x.jpg"
+                        src='https://salt.tikicdn.com/cache/400x400/ts/product/0f/60/eb/dee9d336357c6dc31111173633eb1b17.PNG'
                         alt="Product"
                       />
                     </a>
@@ -1068,16 +1104,16 @@ export default function Home() {
                         data-toggle="modal"
                         href="#quick-view"
                       >
-                        Quick Look
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </a>
                       <a className="item-mail" href="">
-                        Mail
+                        <FontAwesomeIcon icon={faEnvelope} />
                       </a>
                       <a className="item-addwishlist" href="">
-                        Add to Wishlist
+                        <FontAwesomeIcon icon={faHeart} />
                       </a>
                       <a className="item-addCart" href="">
-                        Add to Cart
+                        <FontAwesomeIcon icon={faPlus} />
                       </a>
                     </div>
                   </div>
@@ -1126,7 +1162,7 @@ export default function Home() {
                     >
                       <img
                         className="img-fluid"
-                        src="/static/images/product/product@3x.jpg"
+                        src='https://salt.tikicdn.com/cache/w1200/ts/product/7e/44/a0/c33afe0467aefe0629846abae3a9ba76.PNG'
                         alt="Product"
                       />
                     </a>
@@ -1136,16 +1172,16 @@ export default function Home() {
                         data-toggle="modal"
                         href="#quick-view"
                       >
-                        Quick Look
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </a>
                       <a className="item-mail" href="">
-                        Mail
+                        <FontAwesomeIcon icon={faEnvelope} />
                       </a>
                       <a className="item-addwishlist" href="">
-                        Add to Wishlist
+                        <FontAwesomeIcon icon={faHeart} />
                       </a>
                       <a className="item-addCart" href="">
-                        Add to Cart
+                        <FontAwesomeIcon icon={faPlus} />
                       </a>
                     </div>
                   </div>
@@ -1194,7 +1230,7 @@ export default function Home() {
                     >
                       <img
                         className="img-fluid"
-                        src="/static/images/product/product@3x.jpg"
+                        src='https://prices.vn/storage/photo/product/mu-non-miki-kieu-thuy-thu-khong-vanh-miki-hat-degeen-domog-2.png'
                         alt="Product"
                       />
                     </a>
@@ -1204,16 +1240,16 @@ export default function Home() {
                         data-toggle="modal"
                         href="#quick-view"
                       >
-                        Quick Look
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </a>
                       <a className="item-mail" href="">
-                        Mail
+                        <FontAwesomeIcon icon={faEnvelope} />
                       </a>
                       <a className="item-addwishlist" href="">
-                        Add to Wishlist
+                        <FontAwesomeIcon icon={faHeart} />
                       </a>
                       <a className="item-addCart" href="">
-                        Add to Cart
+                        <FontAwesomeIcon icon={faPlus} />
                       </a>
                     </div>
                   </div>
@@ -1262,7 +1298,7 @@ export default function Home() {
                     >
                       <img
                         className="img-fluid"
-                        src="/static/images/product/product@3x.jpg"
+                        src='https://vn-test-11.slatic.net/p/1338ca544ce72cd9838866b0c2c1da62.jpg'
                         alt="Product"
                       />
                     </a>
@@ -1272,16 +1308,16 @@ export default function Home() {
                         data-toggle="modal"
                         href="#quick-view"
                       >
-                        Quick Look
+                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                       </a>
                       <a className="item-mail" href="">
-                        Mail
+                        <FontAwesomeIcon icon={faEnvelope} />
                       </a>
                       <a className="item-addwishlist" href="">
-                        Add to Wishlist
+                        <FontAwesomeIcon icon={faHeart} />
                       </a>
                       <a className="item-addCart" href="">
-                        Add to Cart
+                        <FontAwesomeIcon icon={faPlus} />
                       </a>
                     </div>
                   </div>
@@ -1336,10 +1372,15 @@ export default function Home() {
                 href="shop-v1-root-category.html"
                 className="mx-auto banner-hover effect-dark-opacity"
               >
+                {/* <div className="img-fluid" style={{ backgroundImage: 'url("https://file.hstatic.net/200000182297/file/banner_-_sweater_ac9931fc221846bcad04a948fe06cbaa.jpg")', width: '1110px', height: '236px', backgroundPosition: "50%", backgroundSize: "cover", backgroundRepeat: "no-repeat" }}>
+
+                </div> */}
                 <img
-                  className="img-fluid"
-                  src="/static/images/banners/ban-men.jpg"
+                  // className="img-fluid"
+                  // src="/static/images/banners/ban-men.jpg"
+                  src="https://file.hstatic.net/200000182297/file/banner_-_sweater_ac9931fc221846bcad04a948fe06cbaa.jpg"
                   alt="Banner Image"
+                  style={{ maxWidth: '1110px' }}
                 />
               </a>
             </div>
@@ -1408,6 +1449,7 @@ export default function Home() {
                         className="products-slider owl-carousel"
                         data-item={4}
                       >
+
                         <div className="item">
                           <div className="image-container">
                             <a
@@ -1416,7 +1458,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://media3.scdn.vn/img3/2019/5_3/R9i8FI_simg_de2fe0_500x500_maxb.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1426,88 +1468,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Women's
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">Tops</a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    Dresses
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  White Solitude Dress with mid heel &amp; Bag
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag new">
-                            <span>NEW</span>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1557,7 +1527,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://bumshop.com.vn/wp-content/uploads/2019/06/shop-ao-khoac-nu-dep-tphcm-1.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1567,16 +1537,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1626,7 +1596,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://quanaoxuongmay.com/wp-content/uploads/13136-clean-z2087169383359-5f33b1da3f66b1480f4093f6a1320590.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1636,16 +1606,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1699,7 +1669,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://prices.vn/storage/photo/product/mu-non-miki-kieu-thuy-thu-khong-vanh-miki-hat-degeen-domog-2.png'
                                 alt="Product"
                               />
                             </a>
@@ -1709,16 +1679,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1771,7 +1741,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://dientukhietan.com/wp-content/uploads/2020/08/2020-07-29_0-50-16.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1781,16 +1751,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1840,7 +1810,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://media.loveitopcdn.com/3040/upload/images/ong-ngam-sung-hoi-1512795599.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1850,16 +1820,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -1911,7 +1881,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='http://upload2.webbnc.vn/uploadv2/web/67/6703/product/2017/06/15/07/12/1497510699_148637085251.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -1921,16 +1891,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2005,7 +1975,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://vn-test-11.slatic.net/p/b30332e6d104b83c5e2b5eea59c8d394.jpg_340x340q80.jpg'
                                 alt="Product"
                               />
                             </a>
@@ -2015,16 +1985,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2077,7 +2047,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://haisanthanglong.com/upload/photo/untitled-122-88820.png'
                                 alt="Product"
                               />
                             </a>
@@ -2087,16 +2057,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2146,7 +2116,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://salt.tikicdn.com/ts/product/e1/68/94/fc902ed4e684fd4bdc49ad7093d7f757.png'
                                 alt="Product"
                               />
                             </a>
@@ -2156,16 +2126,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2217,7 +2187,7 @@ export default function Home() {
                             >
                               <img
                                 className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
+                                src='https://salt.tikicdn.com/cache/w1200/ts/product/a1/5b/56/52f2cdc3c39526d91fcb149d7497f93b.jpeg'
                                 alt="Product"
                               />
                             </a>
@@ -2227,16 +2197,16 @@ export default function Home() {
                                 data-toggle="modal"
                                 href="#quick-view"
                               >
-                                Quick Look
+                                <FontAwesomeIcon icon={faMagnifyingGlass} />
                               </a>
                               <a className="item-mail" href="">
-                                Mail
+                                <FontAwesomeIcon icon={faEnvelope} />
                               </a>
                               <a className="item-addwishlist" href="">
-                                Add to Wishlist
+                                <FontAwesomeIcon icon={faHeart} />
                               </a>
                               <a className="item-addCart" href="">
-                                Add to Cart
+                                <FontAwesomeIcon icon={faPlus} />
                               </a>
                             </div>
                           </div>
@@ -2304,976 +2274,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {/* Women-Clothing /- */}
-        {/* Toys-Hobbies-&-Robots */}
-        <section className="section-maker">
-          <div className="container">
-            <div className="sec-maker-header text-center">
-              <h3 className="sec-maker-h3">Toys Hobbies &amp; Robots</h3>
-              <ul className="nav tab-nav-style-1-a justify-content-center">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    data-toggle="tab"
-                    href="#toys-latest-products"
-                  >
-                    Latest Products
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-toggle="tab"
-                    href="#toys-best-selling-products"
-                  >
-                    Best Selling
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-toggle="tab"
-                    href="#toys-top-rating-products"
-                  >
-                    Top Rating
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-toggle="tab"
-                    href="#toys-featured-products"
-                  >
-                    Featured Products
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="wrapper-content">
-              <div className="outer-area-tab">
-                <div className="tab-content">
-                  <div
-                    className="tab-pane active show fade"
-                    id="toys-latest-products"
-                  >
-                    <div className="slider-fouc">
-                      <div
-                        className="products-slider owl-carousel"
-                        data-item={4}
-                      >
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Helicopte
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  RC Helicopter 6-Cell
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag new">
-                            <span>NEW</span>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  DJI Phantom with 1080p Camera
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  DJI Inspire with 1080p Camera
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  DJI Phantom with Battery Lights
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag new">
-                            <span>NEW</span>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">DJI Mavic Air </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag sale">
-                            <span>SALE</span>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  U45 Raven RC Quadcopter
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  DJI Inspire 1 with 1080p Camera
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  DJI Inspire 1 with 360° Camera
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag discount">
-                            <span>-15%</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="toys-best-selling-products"
-                  >
-                    {/* Product Not Found */}
-                    <div className="product-not-found">
-                      <div className="not-found">
-                        <h2>SORRY!</h2>
-                        <h6>There is not any product in specific catalogue.</h6>
-                      </div>
-                    </div>
-                    {/* Product Not Found /- */}
-                  </div>
-                  <div className="tab-pane fade" id="toys-top-rating-products">
-                    <div className="slider-fouc">
-                      <div
-                        className="products-slider owl-carousel"
-                        data-item={4}
-                      >
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">DJI Mavic Air </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag sale">
-                            <span>SALE</span>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  U45 Raven RC Quadcopter
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  DJI Inspire 1 with 1080p Camera
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li className="has-separator">
-                                  <a href="shop-v1-root-category.html">
-                                    Toys Drones
-                                  </a>
-                                </li>
-                                <li className="has-separator">
-                                  <a href="shop-v2-sub-category.html">
-                                    RC Toys &amp; Hobbies
-                                  </a>
-                                </li>
-                                <li>
-                                  <a href="shop-v3-sub-sub-category.html">
-                                    RC Drone
-                                  </a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  DJI Inspire 1 with 360° Camera
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="4.5 out of 5 - based on 23 Reviews"
-                                >
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag discount">
-                            <span>-15%</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="tab-pane fade" id="toys-featured-products">
-                    {/* Product Not Found */}
-                    <div className="product-not-found">
-                      <div className="not-found">
-                        <h2>SORRY!</h2>
-                        <h6>There is not any product in specific catalogue.</h6>
-                      </div>
-                    </div>
-                    {/* Product Not Found /- */}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="redirect-link-wrapper text-center u-s-p-t-25 u-s-p-b-80">
-              <a className="redirect-link" href="store-directory.html">
-                <span>View more on this category</span>
-              </a>
-            </div>
-          </div>
-        </section>
-        {/* Toys-Hobbies-&-Robots /- */}
-        {/* Mobiles-&-Tablets */}
         <section className="section-maker">
           <div className="container">
             <div className="sec-maker-header text-center">
@@ -3416,7 +2416,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://noithatgiakho.com/upload/sanpham/large/bo-ban-an-mat-da-ceramic-bong-ket-hop-ghe-spot-229-1.jpg'
                                         alt="Product"
                                       />
                                     </a>
@@ -3426,16 +2426,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -3489,7 +2489,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://cf.shopee.vn/file/261cad5954be11b9ba8d414d9e64528c'
                                         alt="Product"
                                       />
                                     </a>
@@ -3499,16 +2499,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -3559,7 +2559,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://cf.shopee.vn/file/b68f5acafc4a6e7a4675ac222a6adb88'
                                         alt="Product"
                                       />
                                     </a>
@@ -3569,16 +2569,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -3632,7 +2632,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://i2.wp.com/noli.vn/wp-content/uploads/2019/06/Hoc-cach-moc-mu-vanh-cup-no-lien-cua-tac-gia-nha-nha.jpg?fit=800%2C696&ssl=1'
                                         alt="Product"
                                       />
                                     </a>
@@ -3642,16 +2642,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -3727,7 +2727,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://vn-test-11.slatic.net/p/d8a1826b67bb5613fdf6fd41a2a4a821.jpg'
                                         alt="Product"
                                       />
                                     </a>
@@ -3737,16 +2737,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -3800,7 +2800,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://image.voso.vn/users/vosoimage/images/30ca1625c5f340b2b6730ffa5c17107a?t%5B0%5D=compress%3Alevel%3D100&accessToken=f8601762a34874664a8a88a0e62c93ec0a945e912d995b23a22664e477200af5'
                                         alt="Product"
                                       />
                                     </a>
@@ -3810,16 +2810,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -3870,7 +2870,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://24hstore.vn/upload_images/images/SEO/iphone-11-mau-xanh-phien-ban-mau-sac-ban-chay-nhat-2020-4.jpg'
                                         alt="Product"
                                       />
                                     </a>
@@ -3880,16 +2880,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -3943,7 +2943,7 @@ export default function Home() {
                                     >
                                       <img
                                         className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
+                                        src='https://cdn.tgdd.vn/Files/2019/09/11/1197017/yellow_980x551-800-resize.jpg'
                                         alt="Product"
                                       />
                                     </a>
@@ -3953,16 +2953,16 @@ export default function Home() {
                                         data-toggle="modal"
                                         href="#quick-view"
                                       >
-                                        Quick Look
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} />
                                       </a>
                                       <a className="item-mail" href="">
-                                        Mail
+                                        <FontAwesomeIcon icon={faEnvelope} />
                                       </a>
                                       <a className="item-addwishlist" href="">
-                                        Add to Wishlist
+                                        <FontAwesomeIcon icon={faHeart} />
                                       </a>
                                       <a className="item-addCart" href="">
-                                        Add to Cart
+                                        <FontAwesomeIcon icon={faPlus} />
                                       </a>
                                     </div>
                                   </div>
@@ -4090,1163 +3090,8 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {/* Mobiles-&-Tablets /- */}
-        {/* Consumer-Electronics */}
-        <section className="section-maker">
-          <div className="container">
-            <div className="sec-maker-header text-center">
-              <h3 className="sec-maker-h3">Consumer Electronics</h3>
-              <ul className="nav tab-nav-style-1-a justify-content-center">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    data-toggle="tab"
-                    href="#consumer-latest-products"
-                  >
-                    Latest Products
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-toggle="tab"
-                    href="#consumer-best-selling-products"
-                  >
-                    Best Selling
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-toggle="tab"
-                    href="#consumer-top-rating-products"
-                  >
-                    Top Rating
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-toggle="tab"
-                    href="#consumer-featured-products"
-                  >
-                    Featured Products
-                  </a>
-                </li>
-              </ul>
-              <span className="sec-maker-span-text u-s-m-b-8 d-block">
-                Select products in specific category
-              </span>
-            </div>
-            <div className="wrapper-content">
-              <div className="outer-area-tab">
-                <div className="tab-content">
-                  <div
-                    className="tab-pane active show fade"
-                    id="consumer-latest-products"
-                  >
-                    <div className="row align-items-center">
-                      <div className="col-lg-1 col-md-12">
-                        <ul className="nav tab-nav-style-2-a">
-                          <li className="nav-item">
-                            <a
-                              className="nav-link active"
-                              data-toggle="tab"
-                              href="#laptops"
-                              title="Laptops"
-                            >
-                              {/* <i className="ion ion-md-laptop" /> */}
-                              <i>
-                                <FontAwesomeIcon icon={faLaptop} />
-                              </i>
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link"
-                              data-toggle="tab"
-                              href="#pc-and-accessories"
-                              title="PC & Accessories"
-                            >
-                              <i className="ion ion-ios-settings" />
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link"
-                              data-toggle="tab"
-                              href="#tv"
-                              title="TV's"
-                            >
-                              <i className="ion ion-md-tv" />
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link"
-                              data-toggle="tab"
-                              href="#cam-corder"
-                              title="Camera & Camcorders"
-                            >
-                              <i className="ion ion-md-camera" />
-                            </a>
-                          </li>
-                          <li className="nav-item">
-                            <a
-                              className="nav-link"
-                              data-toggle="tab"
-                              href="#audio-amplifiers"
-                              title="Audio & Amplifiers"
-                            >
-                              <i className="ion ion-md-microphone" />
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="col-lg-11 col-md-12">
-                        <div className="tab-content">
-                          <div
-                            className="tab-pane fade show active"
-                            id="laptops"
-                          >
-                            <div className="slider-fouc">
-                              <div
-                                className="specific-category-slider owl-carousel"
-                                data-item={3}
-                              >
-                                <div className="item">
-                                  <div className="image-container">
-                                    <a
-                                      className="item-img-wrapper-link"
-                                      href="single-product.html"
-                                    >
-                                      <img
-                                        className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
-                                        alt="Product"
-                                      />
-                                    </a>
-                                    <div className="item-action-behaviors">
-                                      <a
-                                        className="item-quick-look"
-                                        data-toggle="modal"
-                                        href="#quick-view"
-                                      >
-                                        Quick Look
-                                      </a>
-                                      <a className="item-mail" href="">
-                                        Mail
-                                      </a>
-                                      <a className="item-addwishlist" href="">
-                                        Add to Wishlist
-                                      </a>
-                                      <a className="item-addCart" href="">
-                                        Add to Cart
-                                      </a>
-                                    </div>
-                                  </div>
-                                  <div className="item-content">
-                                    <div className="what-product-is">
-                                      <ul className="bread-crumb">
-                                        <li className="has-separator">
-                                          <a href="shop-v1-root-category.html">
-                                            Consumer Electronics
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a href="shop-v2-sub-category.html">
-                                            Laptops
-                                          </a>
-                                        </li>
-                                      </ul>
-                                      <h6 className="item-title">
-                                        <a href="single-product.html">
-                                          HP Pavilion 15 Notebook
-                                        </a>
-                                      </h6>
-                                      <div className="item-stars">
-                                        <div
-                                          className="star"
-                                          title="0 out of 5 - based on 0 Reviews"
-                                        >
-                                          <span style={{ width: 0 }} />
-                                        </div>
-                                        <span>(0)</span>
-                                      </div>
-                                    </div>
-                                    <div className="price-template">
-                                      <div className="item-new-price">
-                                        $55.00
-                                      </div>
-                                      <div className="item-old-price">
-                                        $60.00
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="tag new">
-                                    <span>NEW</span>
-                                  </div>
-                                </div>
-                                <div className="item">
-                                  <div className="image-container">
-                                    <a
-                                      className="item-img-wrapper-link"
-                                      href="single-product.html"
-                                    >
-                                      <img
-                                        className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
-                                        alt="Product"
-                                      />
-                                    </a>
-                                    <div className="item-action-behaviors">
-                                      <a
-                                        className="item-quick-look"
-                                        data-toggle="modal"
-                                        href="#quick-view"
-                                      >
-                                        Quick Look
-                                      </a>
-                                      <a className="item-mail" href="">
-                                        Mail
-                                      </a>
-                                      <a className="item-addwishlist" href="">
-                                        Add to Wishlist
-                                      </a>
-                                      <a className="item-addCart" href="">
-                                        Add to Cart
-                                      </a>
-                                    </div>
-                                  </div>
-                                  <div className="item-content">
-                                    <div className="what-product-is">
-                                      <ul className="bread-crumb">
-                                        <li className="has-separator">
-                                          <a href="shop-v1-root-category.html">
-                                            Consumer Electronics
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a href="shop-v2-sub-category.html">
-                                            Laptops
-                                          </a>
-                                        </li>
-                                      </ul>
-                                      <h6 className="item-title">
-                                        <a href="single-product.html">
-                                          Apple Macbook Pro 2017
-                                        </a>
-                                      </h6>
-                                      <div className="item-stars">
-                                        <div
-                                          className="star"
-                                          title="0 out of 5 - based on 0 Reviews"
-                                        >
-                                          <span style={{ width: 0 }} />
-                                        </div>
-                                        <span>(0)</span>
-                                      </div>
-                                    </div>
-                                    <div className="price-template">
-                                      <div className="item-new-price">
-                                        $55.00
-                                      </div>
-                                      <div className="item-old-price">
-                                        $60.00
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="item">
-                                  <div className="image-container">
-                                    <a
-                                      className="item-img-wrapper-link"
-                                      href="single-product.html"
-                                    >
-                                      <img
-                                        className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
-                                        alt="Product"
-                                      />
-                                    </a>
-                                    <div className="item-action-behaviors">
-                                      <a
-                                        className="item-quick-look"
-                                        data-toggle="modal"
-                                        href="#quick-view"
-                                      >
-                                        Quick Look
-                                      </a>
-                                      <a className="item-mail" href="">
-                                        Mail
-                                      </a>
-                                      <a className="item-addwishlist" href="">
-                                        Add to Wishlist
-                                      </a>
-                                      <a className="item-addCart" href="">
-                                        Add to Cart
-                                      </a>
-                                    </div>
-                                  </div>
-                                  <div className="item-content">
-                                    <div className="what-product-is">
-                                      <ul className="bread-crumb">
-                                        <li className="has-separator">
-                                          <a href="shop-v1-root-category.html">
-                                            Consumer Electronics
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a href="shop-v2-sub-category.html">
-                                            Laptops
-                                          </a>
-                                        </li>
-                                      </ul>
-                                      <h6 className="item-title">
-                                        <a href="single-product.html">
-                                          Dell Inspiron 15
-                                        </a>
-                                      </h6>
-                                      <div className="item-stars">
-                                        <div
-                                          className="star"
-                                          title="0 out of 5 - based on 0 Reviews"
-                                        >
-                                          <span style={{ width: 0 }} />
-                                        </div>
-                                        <span>(0)</span>
-                                      </div>
-                                    </div>
-                                    <div className="price-template">
-                                      <div className="item-new-price">
-                                        $55.00
-                                      </div>
-                                      <div className="item-old-price">
-                                        $60.00
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="tag sale">
-                                    <span>SALE</span>
-                                  </div>
-                                </div>
-                                <div className="item">
-                                  <div className="image-container">
-                                    <a
-                                      className="item-img-wrapper-link"
-                                      href="single-product.html"
-                                    >
-                                      <img
-                                        className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
-                                        alt="Product"
-                                      />
-                                    </a>
-                                    <div className="item-action-behaviors">
-                                      <a
-                                        className="item-quick-look"
-                                        data-toggle="modal"
-                                        href="#quick-view"
-                                      >
-                                        Quick Look
-                                      </a>
-                                      <a className="item-mail" href="">
-                                        Mail
-                                      </a>
-                                      <a className="item-addwishlist" href="">
-                                        Add to Wishlist
-                                      </a>
-                                      <a className="item-addCart" href="">
-                                        Add to Cart
-                                      </a>
-                                    </div>
-                                  </div>
-                                  <div className="item-content">
-                                    <div className="what-product-is">
-                                      <ul className="bread-crumb">
-                                        <li className="has-separator">
-                                          <a href="shop-v1-root-category.html">
-                                            Consumer Electronics
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a href="shop-v2-sub-category.html">
-                                            Laptops
-                                          </a>
-                                        </li>
-                                      </ul>
-                                      <h6 className="item-title">
-                                        <a href="single-product.html">
-                                          Dell Inspiron 1525
-                                        </a>
-                                      </h6>
-                                      <div className="item-stars">
-                                        <div
-                                          className="star"
-                                          title="0 out of 5 - based on 0 Reviews"
-                                        >
-                                          <span style={{ width: 0 }} />
-                                        </div>
-                                        <span>(0)</span>
-                                      </div>
-                                    </div>
-                                    <div className="price-template">
-                                      <div className="item-new-price">
-                                        $55.00
-                                      </div>
-                                      <div className="item-old-price">
-                                        $60.00
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="tag discount">
-                                    <span>-15%</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div
-                            className="tab-pane fade"
-                            id="pc-and-accessories"
-                          >
-                            {/* Product Not Found */}
-                            <div className="product-not-found">
-                              <div className="not-found">
-                                <h2>SORRY!</h2>
-                                <h6>
-                                  There is not any product in specific
-                                  catalogue.
-                                </h6>
-                              </div>
-                            </div>
-                            {/* Product Not Found /- */}
-                          </div>
-                          <div className="tab-pane fade" id="tv">
-                            <div className="slider-fouc">
-                              <div
-                                className="specific-category-slider owl-carousel"
-                                data-item={3}
-                              >
-                                <div className="item">
-                                  <div className="image-container">
-                                    <a
-                                      className="item-img-wrapper-link"
-                                      href="single-product.html"
-                                    >
-                                      <img
-                                        className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
-                                        alt="Product"
-                                      />
-                                    </a>
-                                    <div className="item-action-behaviors">
-                                      <a
-                                        className="item-quick-look"
-                                        data-toggle="modal"
-                                        href="#quick-view"
-                                      >
-                                        Quick Look
-                                      </a>
-                                      <a className="item-mail" href="">
-                                        Mail
-                                      </a>
-                                      <a className="item-addwishlist" href="">
-                                        Add to Wishlist
-                                      </a>
-                                      <a className="item-addCart" href="">
-                                        Add to Cart
-                                      </a>
-                                    </div>
-                                  </div>
-                                  <div className="item-content">
-                                    <div className="what-product-is">
-                                      <ul className="bread-crumb">
-                                        <li className="has-separator">
-                                          <a href="shop-v1-root-category.html">
-                                            Consumer Electronics
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a href="shop-v2-sub-category.html">
-                                            TV/LCD/LED
-                                          </a>
-                                        </li>
-                                      </ul>
-                                      <h6 className="item-title">
-                                        <a href="single-product.html">
-                                          Hisense 4k LED TV
-                                        </a>
-                                      </h6>
-                                      <div className="item-stars">
-                                        <div
-                                          className="star"
-                                          title="0 out of 5 - based on 0 Reviews"
-                                        >
-                                          <span style={{ width: 0 }} />
-                                        </div>
-                                        <span>(0)</span>
-                                      </div>
-                                    </div>
-                                    <div className="price-template">
-                                      <div className="item-new-price">
-                                        $55.00
-                                      </div>
-                                      <div className="item-old-price">
-                                        $60.00
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="tag new">
-                                    <span>NEW</span>
-                                  </div>
-                                </div>
-                                <div className="item">
-                                  <div className="image-container">
-                                    <a
-                                      className="item-img-wrapper-link"
-                                      href="single-product.html"
-                                    >
-                                      <img
-                                        className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
-                                        alt="Product"
-                                      />
-                                    </a>
-                                    <div className="item-action-behaviors">
-                                      <a
-                                        className="item-quick-look"
-                                        data-toggle="modal"
-                                        href="#quick-view"
-                                      >
-                                        Quick Look
-                                      </a>
-                                      <a className="item-mail" href="">
-                                        Mail
-                                      </a>
-                                      <a className="item-addwishlist" href="">
-                                        Add to Wishlist
-                                      </a>
-                                      <a className="item-addCart" href="">
-                                        Add to Cart
-                                      </a>
-                                    </div>
-                                  </div>
-                                  <div className="item-content">
-                                    <div className="what-product-is">
-                                      <ul className="bread-crumb">
-                                        <li className="has-separator">
-                                          <a href="shop-v1-root-category.html">
-                                            Consumer Electronics
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a href="shop-v2-sub-category.html">
-                                            TV/LCD/LED
-                                          </a>
-                                        </li>
-                                      </ul>
-                                      <h6 className="item-title">
-                                        <a href="single-product.html">
-                                          TCL 4k LED TV
-                                        </a>
-                                      </h6>
-                                      <div className="item-stars">
-                                        <div
-                                          className="star"
-                                          title="0 out of 5 - based on 0 Reviews"
-                                        >
-                                          <span style={{ width: 0 }} />
-                                        </div>
-                                        <span>(0)</span>
-                                      </div>
-                                    </div>
-                                    <div className="price-template">
-                                      <div className="item-new-price">
-                                        $55.00
-                                      </div>
-                                      <div className="item-old-price">
-                                        $60.00
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="item">
-                                  <div className="image-container">
-                                    <a
-                                      className="item-img-wrapper-link"
-                                      href="single-product.html"
-                                    >
-                                      <img
-                                        className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
-                                        alt="Product"
-                                      />
-                                    </a>
-                                    <div className="item-action-behaviors">
-                                      <a
-                                        className="item-quick-look"
-                                        data-toggle="modal"
-                                        href="#quick-view"
-                                      >
-                                        Quick Look
-                                      </a>
-                                      <a className="item-mail" href="">
-                                        Mail
-                                      </a>
-                                      <a className="item-addwishlist" href="">
-                                        Add to Wishlist
-                                      </a>
-                                      <a className="item-addCart" href="">
-                                        Add to Cart
-                                      </a>
-                                    </div>
-                                  </div>
-                                  <div className="item-content">
-                                    <div className="what-product-is">
-                                      <ul className="bread-crumb">
-                                        <li className="has-separator">
-                                          <a href="shop-v1-root-category.html">
-                                            Consumer Electronics
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a href="shop-v2-sub-category.html">
-                                            TV/LCD/LED
-                                          </a>
-                                        </li>
-                                      </ul>
-                                      <h6 className="item-title">
-                                        <a href="single-product.html">
-                                          Sony 4k LED TV
-                                        </a>
-                                      </h6>
-                                      <div className="item-stars">
-                                        <div
-                                          className="star"
-                                          title="0 out of 5 - based on 0 Reviews"
-                                        >
-                                          <span style={{ width: 0 }} />
-                                        </div>
-                                        <span>(0)</span>
-                                      </div>
-                                    </div>
-                                    <div className="price-template">
-                                      <div className="item-new-price">
-                                        $55.00
-                                      </div>
-                                      <div className="item-old-price">
-                                        $60.00
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="tag sale">
-                                    <span>SALE</span>
-                                  </div>
-                                </div>
-                                <div className="item">
-                                  <div className="image-container">
-                                    <a
-                                      className="item-img-wrapper-link"
-                                      href="single-product.html"
-                                    >
-                                      <img
-                                        className="img-fluid"
-                                        src="/static/images/product/product@3x.jpg"
-                                        alt="Product"
-                                      />
-                                    </a>
-                                    <div className="item-action-behaviors">
-                                      <a
-                                        className="item-quick-look"
-                                        data-toggle="modal"
-                                        href="#quick-view"
-                                      >
-                                        Quick Look
-                                      </a>
-                                      <a className="item-mail" href="">
-                                        Mail
-                                      </a>
-                                      <a className="item-addwishlist" href="">
-                                        Add to Wishlist
-                                      </a>
-                                      <a className="item-addCart" href="">
-                                        Add to Cart
-                                      </a>
-                                    </div>
-                                  </div>
-                                  <div className="item-content">
-                                    <div className="what-product-is">
-                                      <ul className="bread-crumb">
-                                        <li className="has-separator">
-                                          <a href="shop-v1-root-category.html">
-                                            Consumer Electronics
-                                          </a>
-                                        </li>
-                                        <li>
-                                          <a href="shop-v2-sub-category.html">
-                                            TV/LCD/LED
-                                          </a>
-                                        </li>
-                                      </ul>
-                                      <h6 className="item-title">
-                                        <a href="single-product.html">
-                                          China Petrei 4k LED TV
-                                        </a>
-                                      </h6>
-                                      <div className="item-stars">
-                                        <div
-                                          className="star"
-                                          title="0 out of 5 - based on 0 Reviews"
-                                        >
-                                          <span style={{ width: 0 }} />
-                                        </div>
-                                        <span>(0)</span>
-                                      </div>
-                                    </div>
-                                    <div className="price-template">
-                                      <div className="item-new-price">
-                                        $55.00
-                                      </div>
-                                      <div className="item-old-price">
-                                        $60.00
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="tag discount">
-                                    <span>-15%</span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="tab-pane fade" id="cam-corder">
-                            {/* Product Not Found */}
-                            <div className="product-not-found">
-                              <div className="not-found">
-                                <h2>SORRY!</h2>
-                                <h6>
-                                  There is not any product in specific
-                                  catalogue.
-                                </h6>
-                              </div>
-                            </div>
-                            {/* Product Not Found /- */}
-                          </div>
-                          <div className="tab-pane fade" id="audio-amplifiers">
-                            {/* Product Not Found */}
-                            <div className="product-not-found">
-                              <div className="not-found">
-                                <h2>SORRY!</h2>
-                                <h6>
-                                  There is not any product in specific
-                                  catalogue.
-                                </h6>
-                              </div>
-                            </div>
-                            {/* Product Not Found /- */}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="consumer-best-selling-products"
-                  >
-                    {/* Product Not Found */}
-                    <div className="product-not-found">
-                      <div className="not-found">
-                        <h2>SORRY!</h2>
-                        <h6>There is not any product in specific catalogue.</h6>
-                      </div>
-                    </div>
-                    {/* Product Not Found /- */}
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="consumer-top-rating-products"
-                  >
-                    {/* Product Not Found */}
-                    <div className="product-not-found">
-                      <div className="not-found">
-                        <h2>SORRY!</h2>
-                        <h6>There is not any product in specific catalogue.</h6>
-                      </div>
-                    </div>
-                    {/* Product Not Found /- */}
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="consumer-featured-products"
-                  >
-                    {/* Product Not Found */}
-                    <div className="product-not-found">
-                      <div className="not-found">
-                        <h2>SORRY!</h2>
-                        <h6>There is not any product in specific catalogue.</h6>
-                      </div>
-                    </div>
-                    {/* Product Not Found /- */}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="redirect-link-wrapper text-center u-s-p-t-25 u-s-p-b-80">
-              <a className="redirect-link" href="store-directory.html">
-                <span>View more on this category</span>
-              </a>
-            </div>
-          </div>
-        </section>
         {/* Consumer-Electronics /- */}
-        {/* Books-&-Audible */}
-        <section className="section-maker">
-          <div className="container">
-            <div className="sec-maker-header text-center">
-              <h3 className="sec-maker-h3">Books &amp; Audible</h3>
-              <ul className="nav tab-nav-style-1-a justify-content-center">
-                <li className="nav-item">
-                  <a
-                    className="nav-link active"
-                    data-toggle="tab"
-                    href="#books-latest-products"
-                  >
-                    Latest Products
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-toggle="tab"
-                    href="#books-best-selling-products"
-                  >
-                    Best Selling
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-toggle="tab"
-                    href="#books-top-rating-products"
-                  >
-                    Top Rating
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    data-toggle="tab"
-                    href="#books-featured-products"
-                  >
-                    Featured Products
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="wrapper-content">
-              <div className="outer-area-tab">
-                <div className="tab-content">
-                  <div
-                    className="tab-pane active show fade"
-                    id="books-latest-products"
-                  >
-                    <div className="slider-fouc">
-                      <div
-                        className="products-slider owl-carousel"
-                        data-item={4}
-                      >
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li>
-                                  <a href="shop-v1-root-category.html">Books</a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  JavaScript The Definitive Guide by David
-                                  Flanagan
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag new">
-                            <span>NEW</span>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li>
-                                  <a href="shop-v1-root-category.html">Books</a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Eloquent JavaScript by Marijn Haverbeke
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li>
-                                  <a href="shop-v1-root-category.html">Books</a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  Secret of the JavaScript Ninja by Bear
-                                  Bibeault &amp; John Resig
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="item">
-                          <div className="image-container">
-                            <a
-                              className="item-img-wrapper-link"
-                              href="single-product.html"
-                            >
-                              <img
-                                className="img-fluid"
-                                src="/static/images/product/product@3x.jpg"
-                                alt="Product"
-                              />
-                            </a>
-                            <div className="item-action-behaviors">
-                              <a
-                                className="item-quick-look"
-                                data-toggle="modal"
-                                href="#quick-view"
-                              >
-                                Quick Look
-                              </a>
-                              <a className="item-mail" href="">
-                                Mail
-                              </a>
-                              <a className="item-addwishlist" href="">
-                                Add to Wishlist
-                              </a>
-                              <a className="item-addCart" href="">
-                                Add to Cart
-                              </a>
-                            </div>
-                          </div>
-                          <div className="item-content">
-                            <div className="what-product-is">
-                              <ul className="bread-crumb">
-                                <li>
-                                  <a href="shop-v1-root-category.html">Books</a>
-                                </li>
-                              </ul>
-                              <h6 className="item-title">
-                                <a href="single-product.html">
-                                  JavaScript The Good Parts by Douglas Crockford
-                                </a>
-                              </h6>
-                              <div className="item-stars">
-                                <div
-                                  className="star"
-                                  title="0 out of 5 - based on 0 Reviews"
-                                >
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                            <div className="price-template">
-                              <div className="item-new-price">$55.00</div>
-                              <div className="item-old-price">$60.00</div>
-                            </div>
-                          </div>
-                          <div className="tag new">
-                            <span>NEW</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    className="tab-pane fade"
-                    id="books-best-selling-products"
-                  >
-                    {/* Product Not Found */}
-                    <div className="product-not-found">
-                      <div className="not-found">
-                        <h2>SORRY!</h2>
-                        <h6>There is not any product in specific catalogue.</h6>
-                      </div>
-                    </div>
-                    {/* Product Not Found /- */}
-                  </div>
-                  <div className="tab-pane fade" id="books-top-rating-products">
-                    {/* Product Not Found */}
-                    <div className="product-not-found">
-                      <div className="not-found">
-                        <h2>SORRY!</h2>
-                        <h6>There is not any product in specific catalogue.</h6>
-                      </div>
-                    </div>
-                    {/* Product Not Found /- */}
-                  </div>
-                  <div className="tab-pane fade" id="books-featured-products">
-                    {/* Product Not Found */}
-                    <div className="product-not-found">
-                      <div className="not-found">
-                        <h2>SORRY!</h2>
-                        <h6>There is not any product in specific catalogue.</h6>
-                      </div>
-                    </div>
-                    {/* Product Not Found /- */}
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="redirect-link-wrapper text-center u-s-p-t-25 u-s-p-b-80">
-              <a className="redirect-link" href="store-directory.html">
-                <span>View more on this category</span>
-              </a>
-            </div>
-          </div>
-        </section>
-        {/* Books-&-Audible /- */}
+
         {/* Continue-Link */}
         <div className="continue-link-wrapper u-s-p-b-80">
           <a
@@ -5268,7 +3113,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://24hstore.vn/upload_images/images/SEO/iphone-11-mau-xanh-phien-ban-mau-sac-ban-chay-nhat-2020-4.jpg'
                     alt="Brand Logo 1"
                   />
                 </a>
@@ -5276,7 +3121,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://cdn.tgdd.vn/Files/2021/01/31/1324283/iphone-12-mini-128gb-282320-042317_800x533.jpg'
                     alt="Brand Logo 2"
                   />
                 </a>
@@ -5284,7 +3129,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://cdn.tgdd.vn/Files/2019/09/11/1197017/yellow_980x551-800-resize.jpg'
                     alt="Brand Logo 3"
                   />
                 </a>
@@ -5292,7 +3137,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://ss-images.saostar.vn/pc/1596849920066/iphone-12.jpg'
                     alt="Brand Logo 5"
                   />
                 </a>
@@ -5300,7 +3145,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://24hstore.vn/upload_images/images/SEO/iphone-11-mau-xanh-phien-ban-mau-sac-ban-chay-nhat-2020-4.jpg'
                     alt="Brand Logo 6"
                   />
                 </a>
@@ -5308,7 +3153,7 @@ export default function Home() {
               <div className="brand-pic">
                 <a href="#">
                   <img
-                    src="/static/images/brand-logos/b1.png"
+                    src='https://cdn.tgdd.vn/Files/2021/01/31/1324283/iphone-12-mini-128gb-282320-042317_800x533.jpg'
                     alt="Brand Logo 7"
                   />
                 </a>
