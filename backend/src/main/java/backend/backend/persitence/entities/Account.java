@@ -207,8 +207,6 @@ public class Account implements Serializable {
         return this.verificationToken;
     }
 
-
-
     // --- toString specific method
     @Override
     public String toString() {
@@ -252,9 +250,7 @@ public class Account implements Serializable {
     public void setListOfRole(List<Role> listOfRole) {
         this.listOfRole = listOfRole;
     }
-
-
-
+    
     public void addToListOfRefreshToken(RefreshToken refreshToken) {
         this.listOfRefreshToken.add(refreshToken);
         setListOfRefreshToken(this.listOfRefreshToken);

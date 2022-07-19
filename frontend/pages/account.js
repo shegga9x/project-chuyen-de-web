@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { signIn } from 'next-auth/client';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "react-hook-form";
@@ -17,11 +17,13 @@ export default function Account(props) {
 
     const elementRef = useRef(null);
 
-    if (props?.error) {
-        if (elementRef.current) {
-            elementRef.current.style.display = 'block';
+    useEffect(() => {
+        if (props?.error) {
+            if (elementRef.current) {
+                elementRef.current.style.display = 'block';
+            }
         }
-    }
+    }, [])
 
     //login useState
     const [email, setEmail] = useState("");
@@ -48,22 +50,18 @@ export default function Account(props) {
 
 
     //register useState
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = async ({ userName, email, password }) => {
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmit = async ({ email, password }) => {
         const message = await axios.post('http://localhost:4000/api/accounts/register', {
-            title: 'Mrs',
-            firstName: userName,
-            lastName: 'Phung pink',
             email: email,
             password: password,
             confirmPassword: password
         }, { withCredentials: true }).
             catch(errors => {
-                console.log(errors.response)
-                alert(errors.response.data.message)
+                console.log({errors})
+                // alert(errors.response.data.message)
             })
         if (message !== undefined) {
-            // console.log(message);
             alert(message.data.message)
         }
     };
@@ -202,26 +200,12 @@ export default function Account(props) {
                                     <form onSubmit={handleSubmit(onSubmit, onError)}>
                                         <div className="u-s-m-b-30">
                                             <label htmlFor="user-name">
-                                                {trans.account.username}
+                                                {trans.account.email}
                                                 <span className="astk">*</span>
                                             </label>
                                             <input
                                                 type="text"
                                                 id="user-name"
-                                                className="text-field"
-                                                placeholder="Username"
-                                                {...register("userName", { required: 'userName is required', minLength: { value: 6, message: 'user name min length is 6' } })}
-                                            />
-                                            {errors?.userName && <p style={{ color: "red" }}>{errors?.userName.message}</p>}
-                                        </div>
-                                        <div className="u-s-m-b-30">
-                                            <label htmlFor="email">
-                                                Email
-                                                <span className="astk">*</span>
-                                            </label>
-                                            <input
-                                                type="text"
-                                                id="email"
                                                 className="text-field"
                                                 placeholder="Email"
                                                 {...register("email", {
@@ -232,22 +216,41 @@ export default function Account(props) {
                                                 })}
                                             />
                                             {errors?.email && <p style={{ color: "red" }}>{errors?.email.message}</p>}
-
                                         </div>
                                         <div className="u-s-m-b-30">
-                                            <label htmlFor="password">
+                                            <label htmlFor="email">
                                                 {trans.account.password}
                                                 <span className="astk">*</span>
                                             </label>
                                             <input
-                                                required
                                                 type="text"
-                                                id="password"
+                                                id="email"
                                                 className="text-field"
                                                 placeholder="Password"
                                                 {...register("password", { required: 'Password is required', minLength: { value: 6, message: 'Password min length is 6' } })}
                                             />
                                             {errors?.password && <p style={{ color: "red" }}>{errors?.password.message}</p>}
+
+                                        </div>
+                                        <div className="u-s-m-b-30">
+                                            <label htmlFor="password">
+                                                {trans.account.confirmPassword}
+                                                <span className="astk">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                id="password"
+                                                className="text-field"
+                                                placeholder="Confirm password"
+                                                {...register("confirmPassword", {
+                                                    required: 'confirm password is required', validate: (val) => {
+                                                        if (watch('password') != val) {
+                                                            return "Your passwords do no match";
+                                                        }
+                                                    },
+                                                })}
+                                            />
+                                            {errors?.confirmPassword && <p style={{ color: "red" }}>{errors?.confirmPassword.message}</p>}
                                         </div>
                                         <div className="u-s-m-b-30">
                                             <input type="checkbox" className="check-box" id="accept" />
@@ -276,7 +279,7 @@ export default function Account(props) {
     )
 }
 
-export function getServerSideProps({ req, res, query }) {
+export function getServerSideProps({ query }) {
     if (query.error != undefined) {
         if (query.error === 'Callback' || query.error === 'system error') {
             return {

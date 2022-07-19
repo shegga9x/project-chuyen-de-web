@@ -44,16 +44,28 @@ public class CustomerService {
 
     public CustomerResponse getCurrentCustomer() {
         int idCustomer = SubUtils.getCurrentUser().getId();
-        Customer customer = customerRepository.findByIdCustomer(idCustomer).get();
-        CustomerResponse customerResponse = (CustomerResponse) SubUtils.mapperObject(customer, new CustomerResponse());
-        customerResponse.setEmail(customer.getAccount().getEmail());
-        customerResponse.setBirthday(customer.getBirthday());
-        return customerResponse;
+        Optional<Customer> optional = customerRepository.findByIdCustomer(idCustomer);
+        if (optional.isPresent()) {
+            Customer customer = optional.get();
+            CustomerResponse customerResponse = (CustomerResponse) SubUtils.mapperObject(customer, new CustomerResponse());
+            customerResponse.setEmail(customer.getAccount().getEmail());
+            customerResponse.setBirthday(customer.getBirthday());
+            return customerResponse;
+        } else {
+            Account account = accountRepository.getById(idCustomer);
+            Customer customer = new Customer();
+            customer.setAccount(account);
+            customer.setImgUrl("url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)");
+            customer.setName(SubUtils.getCurrentUser().getEmail().split("@")[0]);
+            CustomerResponse customerResponse = (CustomerResponse) SubUtils.mapperObject(customer, new CustomerResponse());
+            customerResponse.setEmail(SubUtils.getCurrentUser().getEmail());
+            customerRepository.save(customer);
+            return customerResponse;
+        }
     }
 
     public String changeInformationCustomer(CustomerRequest customerRequest) throws ParseException {
-        Customer customer = new Customer();
-        customer.setIdCustomer(customerRequest.getIdCustomer());
+        Customer customer = customerRepository.findByIdCustomer(customerRequest.getIdCustomer()).get();
         customer.setAddress(customerRequest.getAddress());
         customer.setGender(customerRequest.getGender());
         customer.setImgUrl(customerRequest.getImgUrl());

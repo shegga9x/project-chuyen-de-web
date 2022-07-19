@@ -11,17 +11,17 @@ export default function OrderProgress({ open, closeModal, listOrder }) {
     useEffect(() => {
         if (open) {
             const popup = document.getElementById("popup");
-            popup.style.opacity = 1;
+            popup.style.display = "block";
         } else {
             setUserName(null);
             setSaveImg(false);
             const popup = document.getElementById("popup");
-            popup.style.opacity = 0;
+            popup.style.display = "none";
         }
     }, [open])
 
     const closeModal1 = () => {
-        closeModal();
+        closeModal('orderProgress');
     }
 
     const continueStep1 = () => {
@@ -71,8 +71,6 @@ export default function OrderProgress({ open, closeModal, listOrder }) {
                 <style dangerouslySetInnerHTML={{
                     __html: `
                 #popup {
-                    opacity: 0;
-                    transition: opacity 0.7s;
                     background-color:white;
                     z-index: 1001;
                     border-radius: 3px;

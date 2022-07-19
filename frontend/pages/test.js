@@ -1,26 +1,71 @@
 import axios from "axios";
-import { useEffect } from "react";
+// import { useEffect, useState } from "react";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+import faker from 'faker';
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+);
+
+export const options = {
+    responsive: true,
+    plugins: {
+        legend: {
+            position: 'top'
+        },
+        title: {
+            display: true,
+            text: 'Chart.js Bar Chart',
+        },
+    },
+};
+
+const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
+export const data = {
+    labels,
+    datasets: [
+        {
+            label: 'Dataset 1',
+            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+        },
+        {
+            label: 'Dataset 2',
+            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+            backgroundColor: 'rgba(53, 162, 235, 0.5)',
+        },
+    ],
+};
 
 export default function test() {
-    useEffect(() => {
-        const options = {
-            method: 'POST',
-            url: 'https://d7sms.p.rapidapi.com/secure/send',
-            headers: {
-              'content-type': 'application/json',
-              Authorization: 'Basic cXZrdzg3OTM6UDdsSEp4MjU=',
-              'X-RapidAPI-Key': '67e6658240mshf5ac4f57584ca2bp1be28cjsn1f4fe1a07f3b',
-              'X-RapidAPI-Host': 'd7sms.p.rapidapi.com'
-            },
-            data: '{"content":"Test Message","from":"D7-Rapid","to":84983464047}'
-          };
-          
-          axios.request(options).then(function (response) {
-              console.log(response.data);
-          }).catch(function (error) {
-              console.error(error);
-          });
-    })
-    return (<></>)
+    // const [prevData, setPrevDate] = useState([0, 2]);
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         setPrevDate([1, 2]);
+    //     }, 5000);
+    //     console.log("....");
+
+    //     return () => {
+    //         console.log('end mount');
+    //     }
+    // }, [])
+    // // return (<>{prevData}</>)
+    return (<Bar options={options} data={data} />)
 }
 

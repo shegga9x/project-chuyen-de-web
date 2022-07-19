@@ -101,7 +101,7 @@ public class SingleProductPageService {
     }
 
     public List<ProductResponse> getListProductBySingleProductPage(int idSingleProduct) {
-        List<Product> list = productRepository.findByIdSingleProductPage(1);
+        List<Product> list = productRepository.findByIdSingleProductPage(idSingleProduct);
         List<ProductResponse> result = new ArrayList<>();
         for (Product product : list) {
             ProductResponse p = (ProductResponse) SubUtils.mapperObject(product, new ProductResponse());

@@ -30,7 +30,6 @@ export default function AccountShopXu() {
     }
 
     const closeModal = () => {
-        console.log('?????');
         setOpen(false);
         setTimeout(() => {
             document.body.classList.toggle('modal-visibile');

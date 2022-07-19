@@ -31,15 +31,16 @@ export default {
         titleRegister:
             "Đăng ký trang web này cho phép bạn truy cập trạng thái và lịch sử đơn hàng của mình.",
         username: "Tài khoản",
+        email: "Email",
         password: "Mật khẩu",
-
+        confirmPassword: "Nhập lại mật khẩu",
         remember: "Remember me",
         lostPassword: "Lost your password?",
         accept: "I’ve read and accept the .",
         terms: "terms &amp; conditions",
         err: "Sai thông tin đăng nhập (email hoặc mật khẩu)",
-    }, 
-    
+    },
+
     detail: {
         description: "Mô tả sản phẩm",
         price: "Giá gốc",
@@ -53,6 +54,6 @@ export default {
         share: "chia sẻ",
         quantity: "Số lượng",
         addToCart: "Thêm vào giỏ hàng",
-        sold:"Đã bán",
+        sold: "Đã bán",
     },
 };

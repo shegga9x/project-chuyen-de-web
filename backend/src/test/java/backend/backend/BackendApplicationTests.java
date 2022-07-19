@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
-
+import backend.backend.services.mainService.AdminService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +53,8 @@ class BackendApplicationTests {
     CustomerRepository customerRepository;
     @Autowired
     ResetPhoneTokenRepository resetPhoneTokenRepository;
+    @Autowired
+    AdminService adminService;
 
     @Test
     @Transactional
@@ -123,8 +125,7 @@ class BackendApplicationTests {
 
     @Test
     @Transactional
-    void test7() {
-       Optional<ResetPhoneToken> optional = resetPhoneTokenRepository.findById(1);
-       System.out.println(optional.get());
+    void test7() throws Exception {
+
     }
 }

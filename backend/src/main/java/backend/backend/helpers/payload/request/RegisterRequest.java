@@ -6,12 +6,6 @@ import javax.validation.constraints.Size;
 
 public class RegisterRequest {
     @NotEmpty
-    public String title;
-    @NotEmpty
-    public String firstName;
-    @NotEmpty
-    public String lastName;
-    @NotEmpty
     @Email
     public String email;
     @NotEmpty
@@ -20,31 +14,6 @@ public class RegisterRequest {
     @NotEmpty
     public String confirmPassword;
 
-
-
-    public String getTitle() {
-        return this.title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
 
     public String getEmail() {
         return this.email;
@@ -75,9 +44,6 @@ public class RegisterRequest {
     @Override
     public String toString() {
         return "{" +
-            " title='" + getTitle() + "'" +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
             ", email='" + getEmail() + "'" +
             ", password='" + getPassword() + "'" +
             ", confirmPassword='" + getConfirmPassword() + "'" +

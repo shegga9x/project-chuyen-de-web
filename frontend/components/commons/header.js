@@ -321,7 +321,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                                 <span className="mini-item-name">
                                                                     {ele.product.name}
                                                                 </span>
-                                                                <span className="mini-item-price">${ele.product.price}</span>
+                                                                <span className="mini-item-price">{ele.product.price} vnđ</span>
                                                                 <span className="mini-item-quantity"> x {ele.quantity} </span>
                                                             </a>
                                                         </li>
@@ -331,7 +331,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                         </ul>
                                         <div className="mini-shop-total clearfix">
                                             <span className="mini-total-heading float-left">Total:</span>
-                                            <span className="mini-total-price float-right">${getTotalCart()}</span>
+                                            <span className="mini-total-price float-right">{getTotalCart()} vnđ</span>
                                         </div>
                                         <div className="mini-action-anchors">
                                             <a onClick={() => { changeRoute('/cart', router) }} className="cart-anchor">

@@ -30,8 +30,9 @@ export default {
         register: "Register",
         titleRegister: "Registering for this site allows you to access your order status and history.",
         username: "Username",
+        email: "Email",
         password: "Password",
-
+        confirmPassword: "Confirm Password",
         remember: "Remember me",
         lostPassword: "Lost your password?",
         accept: "I’ve read and accept the .",
@@ -52,6 +53,6 @@ export default {
         share: "Share",
         quantity: "Quantity",
         addToCart: "Add to cart",
-        sold:"Sold",
+        sold: "Sold",
     },
 };

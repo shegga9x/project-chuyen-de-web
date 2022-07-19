@@ -1,7 +1,9 @@
 package backend.backend.controllers.subControllers;
-import java.io.IOException;
+
+import java.security.NoSuchAlgorithmException;
 
 import backend.backend.helpers.payload.request.DigitalSignatureRequest;
+import backend.backend.helpers.payload.request.DigitalSignatureRequest2;
 import backend.backend.services.subService.DigitalSignatureService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +20,19 @@ public class DigitalSignatureController {
     @Autowired
     DigitalSignatureService digitalSignatureService;
 
+    @GetMapping("/generateKeyPair")
+    public ResponseEntity<?> generateKeyPair() throws NoSuchAlgorithmException {
+        return ResponseEntity.ok(digitalSignatureService.generateKeyPair());
+    }
+
     @PostMapping({"/signing"})
-    public ResponseEntity<?> signing(@NotNull  @RequestBody DigitalSignatureRequest digitalSignatureRequest) throws IOException {
+    public ResponseEntity<?> signing(@NotNull @RequestBody DigitalSignatureRequest digitalSignatureRequest) {
         return ResponseEntity.ok(digitalSignatureService.signing(digitalSignatureRequest));
+    }
+
+    @PostMapping({"/verifying2"})
+    public ResponseEntity<?> verifying2(@NotNull @RequestBody DigitalSignatureRequest2 digitalSignatureRequest2) {
+        return ResponseEntity.ok(digitalSignatureService.verifying2(digitalSignatureRequest2));
     }
 
     @GetMapping({"/verifying"})
