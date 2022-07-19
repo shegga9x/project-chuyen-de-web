@@ -20,6 +20,22 @@ create table Role
     [role_name] [int] NOT NULL,
     PRIMARY KEY ([id])
 )
+--dữ liệu bảng AddressCell
+create table Addrress_Cell
+(
+    id int IDENTITY(1,1) PRIMARY KEY,
+    name nvarchar(50) not null,
+)
+--dữ liệu bảng Address
+create table Addrress
+(
+    id int IDENTITY(1,1) PRIMARY KEY,
+    province_id int NOT NULL FOREIGN KEY REFERENCES Addrress_Cell ([id]),
+    district_id int NOT NULL FOREIGN KEY REFERENCES Addrress_Cell ([id]),
+    WardCode int NOT NULL FOREIGN KEY REFERENCES Addrress_Cell ([id]),
+    sub_locate nvarchar(50) not null,
+
+)
 --dữ liệu bảng Privilege
 create table Privilege
 (
@@ -99,7 +115,7 @@ CREATE TABLE Customer
     gender CHAR(1),
     birthday date,
     img_url VARCHAR(MAX),
-    address nvarchar(max),
+    address_id int NOT NULL FOREIGN KEY REFERENCES Addrress ([id]),
 	pubkey nvarchar(max),
     PRIMARY KEY (id_customer)
 )
@@ -109,7 +125,7 @@ CREATE TABLE Shop
     name nvarchar(max) ,
     phone_number varchar(15),
     img_url VARCHAR(MAX),
-    address nvarchar(max),
+    address_id int NOT NULL FOREIGN KEY REFERENCES Addrress ([id]),
     description nvarchar(max),
     PRIMARY KEY (id_shop)
 )
