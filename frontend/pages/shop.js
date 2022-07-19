@@ -169,7 +169,7 @@ export default function Shop(props) {
                     <div className="row product-container list-style">
                       {props.data.page.map(function (d) {
                         return (
-                          <div className="product-item col-lg-4 col-md-6 col-sm-6">
+                          <div key={d.idSingleProductPage} className="product-item col-lg-4 col-md-6 col-sm-6">
                             <div className="item">
                               <div className="image-container">
                                 <a className="item-img-wrapper-link" onClick={() => { changeRoute(`/single-product/${d.idSingleProductPage}`, router) }} >
@@ -241,7 +241,7 @@ export default function Shop(props) {
                       <ul>
                         {Array.apply(null, { length: props.data.totalPage }).map(Number.call, Number).map((item) => {
                           return (
-                            <li className={props.currentPage == item + 1 ? "active" : ""}>
+                            <li key={item} className={props.currentPage == item + 1 ? "active" : ""}>
                               <a href={"shop?page=" + (item + 1) + " &size=" + props.currentSize} > {item + 1} </a>
                             </li>
                           );

@@ -10,6 +10,7 @@ import {
 import Layout from "../components/layout";
 import { faFacebook, faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import useTrans from "../helpers/customHook/useTrans";
+import { getSession } from 'next-auth/client';
 
 export default function Account(props) {
 
@@ -58,7 +59,7 @@ export default function Account(props) {
             confirmPassword: password
         }, { withCredentials: true }).
             catch(errors => {
-                console.log({errors})
+                console.log({ errors })
                 // alert(errors.response.data.message)
             })
         if (message !== undefined) {
@@ -279,18 +280,27 @@ export default function Account(props) {
     )
 }
 
-export function getServerSideProps({ query }) {
-    if (query.error != undefined) {
-        if (query.error === 'Callback' || query.error === 'system error') {
-            return {
-                redirect: {
-                    permanent: false,
-                    destination: "/500"
+export async function getServerSideProps({ req, query }) {
+    const session = await getSession({ req });
+    if (!session) {
+        if (query.error != undefined) {
+            if (query.error === 'Callback' || query.error === 'system error') {
+                return {
+                    redirect: {
+                        permanent: false,
+                        destination: "/500"
+                    }
                 }
+            } else {
+                return { props: { error: query.error } }
             }
-        } else {
-            return { props: { error: query.error } }
+        }
+        return { props: {} }
+    }
+    return {
+        redirect: {
+            permanent: false,
+            destination: "/"
         }
     }
-    return { props: {} }
 }

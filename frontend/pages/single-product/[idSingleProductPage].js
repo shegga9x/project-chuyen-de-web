@@ -11,9 +11,10 @@ import { useRouter } from "next/router";
 import Layout from "../../components/layout";
 import instance from "../../helpers/axiosConfig";
 import useTrans from "../../helpers/customHook/useTrans";
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios from "axios";
 import { changeRoute } from "../../helpers/customFunction/changeRoute";
+import Review from "../../components/single-product/review";
 
 export default function SingleProduct({ data }) {
 
@@ -23,12 +24,38 @@ export default function SingleProduct({ data }) {
 
   //use State
   const [product, setProduct] = useState(null);
-
   const [updateCartHeader, setUpdateCartHeader] = useState(0);
+  const [listReview, setListReview] = useState([]);
+  const [listReviewReply, setListReviewReply] = useState([]);
 
   //use Ref
   const errDiv = useRef();
   const productQuantity = useRef();
+
+  useEffect(() => {
+    const getReviewData = async () => {
+      const res = await axios.get(`http://localhost:4000/api/product/getReviewByIdProduct`, { params: { idSingleProductPage: data.singleProductPage.idSingleProductPage } })
+      if (res) {
+        setListReview(res.data);
+      }
+    }
+
+    const getReviewReplyData = async () => {
+      const res = await axios.get(`http://localhost:4000/api/product/getListEvaluateReplyResponse`, { params: { idSingleProductPage: data.singleProductPage.idSingleProductPage } })
+      if (res) {
+        console.log(res.data)
+        setListReviewReply(res.data);
+      }
+    }
+
+    getReviewData().catch((err) => {
+      console.log({ err });
+    });
+
+    getReviewReplyData().catch((err) => {
+      console.log({ err });
+    })
+  }, []);
 
 
   const checkAddToCart = async () => {
@@ -37,8 +64,13 @@ export default function SingleProduct({ data }) {
       const req = await instance().post(`http://localhost:4000/api/cart/addToCart`, { product, quantity: productQuantity.current.value })
         .catch((err) => {
           document.getElementById("buttonAddToCart").disabled = false;
+          console.log({ err })
           if (err.message != "Network Error") {
-            alert(err.response.data.message);
+            if (err.response.data.message) {
+              alert(err.response.data.message);
+            } else {
+              alert('ban can dang nhap');
+            }
           }
         });
       if (req) {
@@ -51,10 +83,13 @@ export default function SingleProduct({ data }) {
     }
   }
 
+  const totalReview = () => {
+    return listReview.length;
+  }
+
   if (router.isFallback) {
     return <h1>Loading..</h1>;
   }
-  // return <h1>{JSON.stringify(data)}</h1>
 
   return (
     <>
@@ -117,9 +152,6 @@ export default function SingleProduct({ data }) {
                     alt="Zoom Image"
                   />
                   <div id="gallery" className="u-s-m-t-10">
-                    {/* {data.listProduct.map((element, index) => {
-                  console.log(element.imgURL)
-                  return ( */}
                     <a
                       className="active"
                       data-image="/static/images/product/product@4x.jpg"
@@ -203,18 +235,6 @@ export default function SingleProduct({ data }) {
                       <li className="is-marked">
                         <a href="shop-v3-sub-sub-category.html">Hoodies</a>
                       </li>
-                      {/* <div style={{ display: "flex", marginBottom: "5px" }}>
-                        <a style={{ color: "red" }} onClick={() => { changeRoute("/shop", router) }}>Shop</a>
-                        <span style={{ marginLeft: "3px", marginRight: "3px" }}>{">"}</span>
-                        {data.listCategory.map((ele, i) => {
-                          const url = `/shop?page=1&size=8&catagory=${ele.idCategory}`;
-                          return (<div key={i + "map1"}>
-                            <a style={{ color: "red" }} onClick={() => { changeRoute(url, router) }}>{ele.name}</a>
-                            <span style={{ marginLeft: "3px", marginRight: "3px" }}>{">"}</span>
-                          </div>)
-                        })}
-                        <span>{data.singleProductPage.name}</span>
-                      </div> */}
                     </ul>
                     <div className="product-rating">
                       <div
@@ -236,18 +256,6 @@ export default function SingleProduct({ data }) {
                     <div className="price">
                       <h4> {product == null ? data.singleProductPage.priceRange : product.price} VNĐ</h4>
                     </div>
-                    {/* <div className="original-price">
-                      <span>{trans.detail.price}:</span>
-                      <span>$60.00</span>
-                    </div>
-                    <div className="discount-price">
-                      <span>{trans.detail.discount}:</span>
-                      <span>8%</span>
-                    </div>
-                    <div className="total-save">
-                      <span>{trans.detail.save}:</span>
-                      <span>$5</span>
-                    </div> */}
                   </div>
                   <div className="section-4-sku-information u-s-p-y-14">
                     <h6 className="information-heading u-s-m-b-8">
@@ -267,9 +275,6 @@ export default function SingleProduct({ data }) {
                       {trans.detail.variants}:
                     </h6>
                     <div style={{ display: "flex", rowGap: "5px", "flexWrap": "wrap" }}>
-                      {/* <button>
-                        áo xanh
-                      </button> */}
                       {data.listProduct.map((element, index) => {
                         return (<button className="button button-outline-secondary u-s-m-l-6" style={product === element ? { backgroundColor: "gainsboro", borderRadius: "0px" } : { borderRadius: "0px" }} key={index}
                           onClick={() => {
@@ -283,102 +288,8 @@ export default function SingleProduct({ data }) {
                         </button>);
                       })}
                     </div>
-                    {/* <div className="color u-s-m-b-11">
-                      <span>{trans.detail.color}:</span>
-                      <div className="color-variant select-box-wrapper">
-                        <select className="select-box product-color">
-                          <option value={1}>Heather Grey</option>
-                          <option value={3}>Black</option>
-                          <option value={5}>White</option>
-                        </select>
-                        <i
-                          style={{
-                            fontSize: 8,
-                            position: "absolute",
-                            right: 8,
-                            top: "50%",
-                            transform: "translateY(-50%)",
-                          }}
-                        >
-                          <FontAwesomeIcon icon={faAngleDown} />
-                        </i>
-                      </div>
-                    </div>
-                    <div className="sizes u-s-m-b-11">
-                      <span>{trans.detail.size}:</span>
-                      <div className="size-variant select-box-wrapper">
-                        <select className="select-box product-size">
-                          <option value="">Male 2XL</option>
-                          <option value="">Male 3XL</option>
-                          <option value="">Kids 4</option>
-                          <option value="">Kids 6</option>
-                          <option value="">Kids 8</option>
-                          <option value="">Kids 10</option>
-                          <option value="">Kids 12</option>
-                          <option value="">Female Small</option>
-                          <option value="">Male Small</option>
-                          <option value="">Female Medium</option>
-                          <option value="">Male Medium</option>
-                          <option value="">Female Large</option>
-                          <option value="">Male Large</option>
-                          <option value="">Female XL</option>
-                          <option value="">Male XL</option>
-                        </select>
-                        <i
-                          style={{
-                            fontSize: 8,
-                            position: "absolute",
-                            right: 8,
-                            top: "50%",
-                            transform: "translateY(-50%)",
-                          }}
-                        >
-                          <FontAwesomeIcon icon={faAngleDown} />
-                        </i>
-                      </div>
-                    </div> */}
                   </div>
                   <div className="section-6-social-media-quantity-actions u-s-p-y-14">
-                    {/* <div className="quick-social-media-wrapper u-s-m-b-22">
-                      <span>{trans.detail.share}:</span>
-                      <ul className="social-media-list">
-                        <li>
-                          <a href="#">
-                            <i>
-                              <FontAwesomeIcon icon={faFacebookF} />
-                            </i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i>
-                              <FontAwesomeIcon icon={faTwitter} />
-                            </i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i>
-                              <FontAwesomeIcon icon={faGooglePlusG} />
-                            </i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i>
-                              <FontAwesomeIcon icon={faRss} />
-                            </i>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="#">
-                            <i>
-                              <FontAwesomeIcon icon={faPinterest} />
-                            </i>
-                          </a>
-                        </li>
-                      </ul>
-                    </div> */}
                     <div className="quantity-wrapper u-s-m-b-22">
                       <span>{trans.detail.quantity}:</span>
                       <div className="quantity">
@@ -452,7 +363,7 @@ export default function SingleProduct({ data }) {
                           data-toggle="tab"
                           href="#review"
                         >
-                          Reviews (15)
+                          Reviews ({totalReview()})
                         </a>
                       </li>
                     </ul>
@@ -489,29 +400,6 @@ export default function SingleProduct({ data }) {
                     {/* Specifications-Tab */}
                     <div className="tab-pane fade" id="specification">
                       <div className="specification-whole-container">
-                        {/* <div className="spec-ul u-s-m-b-50">
-                          <h4 className="spec-heading">Key Features</h4>
-                          <ul>
-                            <li>Heather Grey</li>
-                            <li>Black</li>
-                            <li>White</li>
-                          </ul>
-                        </div>
-                        <div className="u-s-m-b-50">
-                          <h4 className="spec-heading">What's in the Box?</h4>
-                          <h3 className="spec-answer">1 x hoodie</h3>
-                        </div>
-                        <div className="spec-table u-s-m-b-50">
-                          <h4 className="spec-heading">General Information</h4>
-                          <table>
-                            <tbody>
-                              <tr>
-                                <td>Sku</td>
-                                <td>AY536FA08JT86NAFAMZ</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div> */}
                         <div className="spec-table u-s-m-b-50">
                           <h4 className="spec-heading">Product Information</h4>
                           <table>
@@ -569,297 +457,7 @@ export default function SingleProduct({ data }) {
                     </div>
                     {/* Specifications-Tab /- */}
                     {/* Reviews-Tab */}
-                    <div className="tab-pane fade" id="review">
-                      <div className="review-whole-container">
-                        <div className="row r-1 u-s-m-b-26 u-s-p-b-22">
-                          <div className="col-lg-6 col-md-6">
-                            <div className="total-score-wrapper">
-                              <h6 className="review-h6">Average Rating</h6>
-                              <div className="circle-wrapper">
-                                <h1>4.5</h1>
-                              </div>
-                              <h6 className="review-h6">Based on 23 Reviews</h6>
-                            </div>
-                          </div>
-                          <div className="col-lg-6 col-md-6">
-                            <div className="total-star-meter">
-                              <div className="star-wrapper">
-                                <span>5 Stars</span>
-                                <div className="star">
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                              <div className="star-wrapper">
-                                <span>4 Stars</span>
-                                <div className="star">
-                                  <span style={{ width: 67 }} />
-                                </div>
-                                <span>(23)</span>
-                              </div>
-                              <div className="star-wrapper">
-                                <span>3 Stars</span>
-                                <div className="star">
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                              <div className="star-wrapper">
-                                <span>2 Stars</span>
-                                <div className="star">
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                              <div className="star-wrapper">
-                                <span>1 Star</span>
-                                <div className="star">
-                                  <span style={{ width: 0 }} />
-                                </div>
-                                <span>(0)</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="row r-2 u-s-m-b-26 u-s-p-b-22">
-                          <div className="col-lg-12">
-                            <div className="your-rating-wrapper">
-                              <h6 className="review-h6">
-                                Your Review is matter.
-                              </h6>
-                              <h6 className="review-h6">
-                                Have you used this product before?
-                              </h6>
-                              <div className="star-wrapper u-s-m-b-8">
-                                <div className="star">
-                                  <span id="your-stars" style={{ width: 0 }} />
-                                </div>
-                                <label htmlFor="your-rating-value" />
-                                <input
-                                  id="your-rating-value"
-                                  type="text"
-                                  className="text-field"
-                                  placeholder={0.0}
-                                />
-                                <span id="star-comment" />
-                              </div>
-                              <form>
-                                <label htmlFor="your-name">
-                                  Name
-                                  <span className="astk"> *</span>
-                                </label>
-                                <input
-                                  id="your-name"
-                                  type="text"
-                                  className="text-field"
-                                  placeholder="Your Name"
-                                />
-                                <label htmlFor="your-email">
-                                  Email
-                                  <span className="astk"> *</span>
-                                </label>
-                                <input
-                                  id="your-email"
-                                  type="text"
-                                  className="text-field"
-                                  placeholder="Your Email"
-                                />
-                                <label htmlFor="review-title">
-                                  Review Title
-                                  <span className="astk"> *</span>
-                                </label>
-                                <input
-                                  id="review-title"
-                                  type="text"
-                                  className="text-field"
-                                  placeholder="Review Title"
-                                />
-                                <label htmlFor="review-text-area">
-                                  Review
-                                  <span className="astk"> *</span>
-                                </label>
-                                <textarea
-                                  className="text-area u-s-m-b-8"
-                                  id="review-text-area"
-                                  placeholder="Review"
-                                  defaultValue={""}
-                                />
-                                <button className="button button-outline-secondary">
-                                  Submit Review
-                                </button>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                        {/* Get-Reviews */}
-                        <div className="get-reviews u-s-p-b-22">
-                          {/* Review-Options */}
-                          <div className="review-options u-s-m-b-16">
-                            <div className="review-option-heading">
-                              <h6>
-                                Reviews
-                                <span> (15) </span>
-                              </h6>
-                            </div>
-                            <div className="review-option-box">
-                              <div className="select-box-wrapper">
-                                <label
-                                  className="sr-only"
-                                  htmlFor="review-sort"
-                                >
-                                  Review Sorter
-                                </label>
-                                <select className="select-box" id="review-sort">
-                                  <option value="">Sort by: Best Rating</option>
-                                  <option value="">
-                                    Sort by: Worst Rating
-                                  </option>
-                                </select>
-                              </div>
-                            </div>
-                          </div>
-                          {/* Review-Options /- */}
-                          {/* All-Reviews */}
-                          <div className="reviewers">
-                            <div className="review-data">
-                              <div className="reviewer-name-and-date">
-                                <h6 className="reviewer-name">John</h6>
-                                <h6 className="review-posted-date">
-                                  10 May 2018
-                                </h6>
-                              </div>
-                              <div className="reviewer-stars-title-body">
-                                <div className="reviewer-stars">
-                                  <div className="star">
-                                    <span style={{ width: 67 }} />
-                                  </div>
-                                  <span className="review-title">Good!</span>
-                                </div>
-                                <p className="review-body">Good Quality...!</p>
-                              </div>
-                            </div>
-                            <div className="review-data">
-                              <div className="reviewer-name-and-date">
-                                <h6 className="reviewer-name">Doe</h6>
-                                <h6 className="review-posted-date">
-                                  10 June 2018
-                                </h6>
-                              </div>
-                              <div className="reviewer-stars-title-body">
-                                <div className="reviewer-stars">
-                                  <div className="star">
-                                    <span style={{ width: 67 }} />
-                                  </div>
-                                  <span className="review-title">
-                                    Well done!
-                                  </span>
-                                </div>
-                                <p className="review-body">Cotton is good.</p>
-                              </div>
-                            </div>
-                            <div className="review-data">
-                              <div className="reviewer-name-and-date">
-                                <h6 className="reviewer-name">Tim</h6>
-                                <h6 className="review-posted-date">
-                                  10 July 2018
-                                </h6>
-                              </div>
-                              <div className="reviewer-stars-title-body">
-                                <div className="reviewer-stars">
-                                  <div className="star">
-                                    <span style={{ width: 67 }} />
-                                  </div>
-                                  <span className="review-title">
-                                    Well done!
-                                  </span>
-                                </div>
-                                <p className="review-body">
-                                  Excellent condition
-                                </p>
-                              </div>
-                            </div>
-                            <div className="review-data">
-                              <div className="reviewer-name-and-date">
-                                <h6 className="reviewer-name">Johnny</h6>
-                                <h6 className="review-posted-date">
-                                  10 March 2018
-                                </h6>
-                              </div>
-                              <div className="reviewer-stars-title-body">
-                                <div className="reviewer-stars">
-                                  <div className="star">
-                                    <span style={{ width: 67 }} />
-                                  </div>
-                                  <span className="review-title">Bright!</span>
-                                </div>
-                                <p className="review-body">Cotton</p>
-                              </div>
-                            </div>
-                            <div className="review-data">
-                              <div className="reviewer-name-and-date">
-                                <h6 className="reviewer-name">
-                                  Alexia C. Marshall
-                                </h6>
-                                <h6 className="review-posted-date">
-                                  12 May 2018
-                                </h6>
-                              </div>
-                              <div className="reviewer-stars-title-body">
-                                <div className="reviewer-stars">
-                                  <div className="star">
-                                    <span style={{ width: 67 }} />
-                                  </div>
-                                  <span className="review-title">
-                                    Well done!
-                                  </span>
-                                </div>
-                                <p className="review-body">
-                                  Good polyester Cotton
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                          {/* All-Reviews /- */}
-                          {/* Pagination-Review */}
-                          <div className="pagination-review-area">
-                            <div className="pagination-review-number">
-                              <ul>
-                                <li style={{ display: "none" }}>
-                                  <a
-                                    href="single-product.html"
-                                    title="Previous"
-                                  >
-                                    <i className="fas fa-angle-left" />
-                                  </a>
-                                </li>
-                                <li className="active">
-                                  <a href="single-product.html">1</a>
-                                </li>
-                                <li>
-                                  <a href="single-product.html">2</a>
-                                </li>
-                                <li>
-                                  <a href="single-product.html">3</a>
-                                </li>
-                                <li>
-                                  <a href="single-product.html">...</a>
-                                </li>
-                                <li>
-                                  <a href="single-product.html">10</a>
-                                </li>
-                                <li>
-                                  <a href="single-product.html" title="Next">
-                                    <i className="fas fa-angle-right" />
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          {/* Pagination-Review /- */}
-                        </div>
-                        {/* Get-Reviews /- */}
-                      </div>
-                    </div>
+                    <Review listReview={listReview} listReviewReply={listReviewReply} setListReview={setListReview} idSingleProductPage={data.singleProductPage.idSingleProductPage}></Review>
                     {/* Reviews-Tab /- */}
                   </div>
                 </div>
@@ -1258,7 +856,7 @@ export default function SingleProduct({ data }) {
   );
 }
 
-export async function getStaticPaths({ locales }) {
+export async function getStaticPaths() {
   const paths = [];
   const res = await instance().get(
     `http://localhost:4000/api/product/loadAllSingleProductPage`

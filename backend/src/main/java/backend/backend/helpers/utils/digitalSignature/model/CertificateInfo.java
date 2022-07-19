@@ -18,4 +18,18 @@ public class CertificateInfo {
     public Map<String, String> issuerOIDs = new HashMap<>();
 
     public Map<String, String> subjectOIDs = new HashMap<>();
+
+    @Override
+    public String toString() {
+        return "CertificateInfo{" +
+                "issuerDN='" + issuerDN + '\'' +
+                ", subjectDN='" + subjectDN + '\'' +
+                ", notValidBefore=" + notValidBefore +
+                ", notValidAfter=" + notValidAfter +
+                ", signAlgorithm='" + signAlgorithm + '\'' +
+                ", serial='" + serial + '\'' +
+                ", issuerOIDs=" + issuerOIDs +
+                ", subjectOIDs=" + subjectOIDs +
+                '}';
+    }
 }

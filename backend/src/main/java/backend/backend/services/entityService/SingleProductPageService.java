@@ -1,42 +1,29 @@
 package backend.backend.services.entityService;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import backend.backend.helpers.payload.request.EvaluateRequest;
+import backend.backend.helpers.payload.response.*;
+import backend.backend.persitence.entities.*;
+import backend.backend.persitence.model.UserDetailCustom;
+import backend.backend.persitence.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.dto.OrderItemDTO;
 import backend.backend.helpers.payload.dto.OrderMapValue;
 import backend.backend.helpers.payload.dto.SingleProductPageDTO;
-import backend.backend.helpers.payload.response.CategoryResponse;
-import backend.backend.helpers.payload.response.CustomSinglePage;
-import backend.backend.helpers.payload.response.PageSingleProductResponse;
-import backend.backend.helpers.payload.response.ProductResponse;
-import backend.backend.helpers.payload.response.SalerOrderItemResponse;
 import backend.backend.helpers.utils.SubUtils;
-import backend.backend.persitence.entities.Category;
-import backend.backend.persitence.entities.OrderItem;
-import backend.backend.persitence.entities.Product;
-import backend.backend.persitence.entities.SingleProductPage;
-import backend.backend.persitence.repository.AccountRepository;
-import backend.backend.persitence.repository.CategoryRepository;
-import backend.backend.persitence.repository.OrderItemRepository;
-import backend.backend.persitence.repository.ProductRepository;
-import backend.backend.persitence.repository.SingleProductPageRepository;
 
 @Service
 public class SingleProductPageService {
@@ -50,6 +37,10 @@ public class SingleProductPageService {
     OrderItemRepository orderRepository;
     @Autowired
     AccountRepository accountRepository;
+    @Autowired
+    EvaluateRepository evaluateRepository;
+    @Autowired
+    EvaluateReplyRepository evaluateReplyRepository;
 
     public PageSingleProductResponse loadAll(int page, int size, Integer[] catagory, Integer sorter) {
         PageSingleProductResponse responses = new PageSingleProductResponse();
@@ -129,7 +120,7 @@ public class SingleProductPageService {
 
     // saler
     public PageSingleProductResponse productSalerList(Integer idShop, Integer page, Integer size, Integer sorter,
-            Integer status) {
+                                                      Integer status) {
         PageSingleProductResponse responses = new PageSingleProductResponse();
         List<SingleProductPageDTO> pageS = new ArrayList<>();
         Page<SingleProductPage> allProductsOnThisPage = getProductSortFromSorterOfSaler(idShop, sorter, status,
@@ -142,6 +133,7 @@ public class SingleProductPageService {
         responses.setTotalPage(allProductsOnThisPage.getTotalPages());
         return responses;
     }
+
     @Transactional
     public boolean productSalerUpdate(SingleProductPageDTO singleProductPageDTO) {
         SingleProductPage singleProductPage = (SingleProductPage) SubUtils.mapperObject(singleProductPageDTO,
@@ -153,7 +145,7 @@ public class SingleProductPageService {
     }
 
     public SalerOrderItemResponse orderSalerList(Integer idShop, Integer page, Integer size, Integer sorter,
-            Integer status) {
+                                                 Integer status) {
         SalerOrderItemResponse responses = new SalerOrderItemResponse();
         Map<String, OrderMapValue> map = getOrderSortFromSorterOfSaler1(idShop, sorter, status);
         int lowerBound = page * size;
@@ -179,7 +171,7 @@ public class SingleProductPageService {
 
     // Ultil
     private Page<SingleProductPage> getSortFromSorter(Integer sorter, PageRequest pageRequest,
-            Integer[] catagory) {
+                                                      Integer[] catagory) {
         List<SingleProductPage> list = new ArrayList<>();
         if (catagory != null) {
             list = singleProductPageRepository.findByIdCategoryInAndStatus(catagory, (byte) 1);
@@ -228,7 +220,7 @@ public class SingleProductPageService {
     }
 
     private Page<SingleProductPage> getProductSortFromSorterOfSaler(Integer idShop, Integer sorter, Integer status,
-            PageRequest pageRequest) {
+                                                                    PageRequest pageRequest) {
         List<SingleProductPage> list = new ArrayList<>();
         if (status != null) {
             list = singleProductPageRepository.findByIdShopAndStatus(idShop, (byte) status.byteValue());
@@ -301,6 +293,47 @@ public class SingleProductPageService {
 
         return map;
 
+    }
+
+
+    //review
+    public List<EvaluateResponse> getReviewByIdProduct(int idSingleProductPage) {
+        List<Evaluate> evaluateList = evaluateRepository.findByIdSingleProductPage(idSingleProductPage);
+        List<EvaluateResponse> result = new ArrayList<>();
+        for (Evaluate evaluate : evaluateList) {
+            EvaluateResponse evaluateResponse = (EvaluateResponse) SubUtils.mapperObject(evaluate, new EvaluateResponse());
+            evaluateResponse.setNameCustomer(accountRepository.getById(evaluateResponse.getIdCustomer()).getEmail());
+            evaluateResponse.setDateCreate(new SimpleDateFormat("dd/MM/yyyy").format(evaluate.getDateCreate()));
+            evaluateResponse.setDateUpdate(new SimpleDateFormat("dd/MM/yyyy").format(evaluate.getDateUpdate()));
+            result.add(evaluateResponse);
+        }
+        return result;
+    }
+
+    public List<EvaluateReplyResponse> getListEvaluateReplyResponse(int idSingleProductPage) {
+        List<Evaluate> evaluateList = evaluateRepository.findByIdSingleProductPage(idSingleProductPage);
+        List<EvaluateReplyResponse> result = new ArrayList<>();
+        for (Evaluate evaluate : evaluateList) {
+            EvaluateReply evaluateReply = evaluateReplyRepository.getByIdEvaluate(evaluate.getIdEvaluate());
+            if (evaluateReply != null) {
+                result.add((EvaluateReplyResponse) SubUtils.mapperObject(evaluateReply, new EvaluateReplyResponse()));
+            }
+        }
+        return result;
+    }
+
+    public List<EvaluateResponse> onSubmitReview(EvaluateRequest evaluateRequest) {
+        Evaluate evaluate = new Evaluate();
+        int idUser = SubUtils.getCurrentUser().getId();
+        evaluate.setIdCustomer(idUser);
+        evaluate.setIdSingleProductPage(evaluateRequest.getIdSingleProductPage());
+        evaluate.setContent(evaluateRequest.getContent());
+        evaluate.setLikeCount(evaluateRequest.getLikeCount());
+        evaluate.setRateStar((byte) evaluateRequest.getRateStar());
+        evaluate.setDateCreate(new Date());
+        evaluate.setDateUpdate(new Date());
+        evaluateRepository.save(evaluate);
+        return getReviewByIdProduct(evaluateRequest.getIdSingleProductPage());
     }
 
 }

@@ -79,7 +79,7 @@ public class AuthController {
         String token = controlerUtils.getSingleFormCookie("refreshToken");
         if (SubUtils.isNullOrBlank(token))
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageResponse("Token is required"));
-        UserDetailCustom currentAccount = SubUtils.getCurrentUser();
+        UserDetailCustom currentAccount = (UserDetailCustom) SubUtils.getCurrentUser();
         List<String> roles = currentAccount.getAuthorities().stream().map(item -> item.getAuthority())
                 .collect(Collectors.toList()).stream().filter(x -> x.equals("Admin")).collect(Collectors.toList());
         if (!currentAccount.OwnsToken(token) && roles.size() > 0)
