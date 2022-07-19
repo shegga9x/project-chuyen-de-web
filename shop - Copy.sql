@@ -521,7 +521,7 @@ VALUES(2, N'nón Beanie Loại C', 100, 1, 62.900, 'https://salt.tikicdn.com/cac
 INSERT INTO Product
 VALUES(2, N'nón Beanie Loại B', 100, 1, 72.900, 'https://salt.tikicdn.com/cache/525x525/ts/product/f2/14/70/d8dc2060343127892cbc7c330058f381.jpg');
 INSERT INTO Product
-VALUES(2, N'Mũ nón Beanie Loại A', 100, 1, 82.900, 'https://cf.shopee.vn/file/6c3c90bc8f504a6e12345d16ae17c28c');
+VALUES(2, N'nón Beanie Loại A', 100, 1, 82.900, 'https://cf.shopee.vn/file/6c3c90bc8f504a6e12345d16ae17c28c');
 
 --Single_Product_Page=3
 INSERT INTO Product
