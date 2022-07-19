@@ -270,7 +270,7 @@ export async function getServerSideProps(context) {
     const res = await InstanceAxios(context).get(`http://localhost:4000/api/product/loadAll?page=${page - 1}&size=${size}${catagory}${sorter}`)
     const res2 = await InstanceAxios(context).get(`http://localhost:4000/api/product/loadCagetory`)
     const data = await res.data; 
-    const data3 = JSON.parse(JSON.stringify(data2).replaceAll(',"children":[]', ""));
+    const data3 = JSON.parse(JSON.stringify(res2.data).replaceAll(',"children":[]', ""));
     if (data.page != null) {
       return {
         props: {
