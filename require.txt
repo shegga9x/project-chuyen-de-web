@@ -25,7 +25,18 @@ Admin
 -- Duyet San Pham 
 
 Comment 
-Voucher, Sale 
+Trang chu
 Chat (WebSocket) 
+
+
+
+
+Voucher, Sale 
 Pay Online 
 Ship
+
+
+http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=10000000&vnp_BankCode=NCB&vnp_Command=pay&vnp_CreateDate=20220716114032&vnp_CurrCode=VND&vnp_IpAddr=172.16.68.68&vnp_Locale=vn&vnp_Merchant=DEMO&vnp_OrderInfo=Nap+tien+cho+thue+bao+0123456789.+So+tien+100%2c000&vnp_OrderType=topup&vnp_ReturnUrl=http%3a%2f%2fsandbox.vnpayment.vn%2ftryitnow%2fHome%2fVnPayReturn&vnp_TmnCode=L9JAE54R&vnp_TxnRef=23554&vnp_Version=2&vnp_SecureHashType=SHA256&vnp_SecureHash=234e23a69b03006f40ea02aa1382857013c336f411c434329d85f75b2f7ff131
+http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=10000000&vnp_BankCode=NCB&vnp_Command=pay&vnp_CreateDate=20220716114032&vnp_CurrCode=VND&vnp_IpAddr=172.16.68.68&vnp_Locale=vn&vnp_OrderInfo=NapTien&vnp_OrderType=topup&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A8080%2Fvnpay_jsp%2Fvnpay_return.jsp&vnp_TmnCode=L9JAE54R&vnp_TxnRef=74897194&vnp_Version=2.1.0&vnp_SecureHash=bf457a82262bb2bb04f5a530d434486ffc6a759e7cce21beb43b5e28f6a8844252ed1064be4473e50156e2f979e85118168e2309ffd63f53ed933d3527a214f4
+http://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=10000000&vnp_BankCode=NCB&vnp_Command=pay&vnp_CreateDate=20220716114032&vnp_CurrCode=VND&vnp_IpAddr=0%3A0%3A0%3A0%3A0%3A0%3A0%3A1&vnp_Locale=VietNam&vnp_OrderInfo=NapTien&vnp_OrderType=topup&vnp_ReturnUrl=http%3A%2F%2Flocalhost%3A8080%2Fvnpay_jsp%2Fvnpay_return.jsp&vnp_TmnCode=L9JAE54R&vnp_TxnRef=74897194&vnp_Version=2.1.0&vnp_SecureHash=bf457a82262bb2bb04f5a530d434486ffc6a759e7cce21beb43b5e28f6a8844252ed1064be4473e50156e2f979e85118168e2309ffd63f53ed933d3527a214f4
+https://sandbox.vnpayment.vn/paymentv2/vpcpay.html?vnp_Amount=10000000&vnp_Command=pay&vnp_CreateDate=20210801153333&vnp_CurrCode=VND&vnp_IpAddr=127.0.0.1&vnp_Locale=vn&vnp_OrderInfo=Thanh+toan+don+hang+%3A5&vnp_OrderType=other&vnp_ReturnUrl=https%3A%2F%2Fdomainmerchant.vn%2FReturnUrl&vnp_TmnCode=L9JAE54R&vnp_TxnRef=5&vnp_Version=2.1.0&vnp_SecureHashType=SHA256&vnp_SecureHash=234e23a69b03006f40ea02aa1382857013c336f411c434329d85f75b2f7ff131

@@ -86,6 +86,15 @@ public class SingleProductPage implements Serializable {
     }
 
     // util method
+
+    public int countAllEvaluate() {
+        return idCategory;
+    }
+
+    public int averageStartEvaluate() {
+        return idCategory;
+    }
+
     public List<ProductDTO> getProductDTOs() {
         List<ProductDTO> dtos = new ArrayList<>();
         for (Product product : this.listOfProduct) {
