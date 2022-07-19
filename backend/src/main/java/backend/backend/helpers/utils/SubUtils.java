@@ -5,6 +5,10 @@ import java.util.Arrays;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 import backend.backend.helpers.advice.CustomException;
 import backend.backend.persitence.model.UserDetailCustom;
 
@@ -33,9 +37,19 @@ public class SubUtils {
 
     public static UserDetailCustom getCurrentUser() {
         return (UserDetailCustom) SecurityContextHolder.getContext()
-        .getAuthentication()
-        .getPrincipal();
+                .getAuthentication()
+                .getPrincipal();
     }
 
+    public static String toJson(Object object) {
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        try {
+            String json = ow.writeValueAsString(object);
+            return json;
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return null;
 
+    }
 }
