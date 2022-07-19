@@ -152,7 +152,7 @@ CREATE TABLE Product
 CREATE TABLE Evaluate
 (
     id_evaluate int IDENTITY(1,1) ,
-    id_product int FOREIGN KEY REFERENCES Product (id_product),
+    id_single_product_page int FOREIGN KEY REFERENCES Single_Product_Page (id_single_product_page),
     id_customer int FOREIGN KEY REFERENCES Customer (id_customer),
     date_create datetime,
     date_update datetime,
@@ -630,6 +630,21 @@ SELECT * FROM Single_Product_Page where id_single_product_page > 5
 --select * from Verification_Token
 select * from ACCOUNT
 select * from Customer
+select * from Evaluate
+select * from Evaluate_Reply
+select * from Shop
+--CREATE TABLE Evaluate_Reply
+--(
+--    id_evaluate_reply int IDENTITY(1,1) ,
+--    id_evaluate int FOREIGN KEY REFERENCES Evaluate (id_evaluate),
+--    id_shop int FOREIGN KEY REFERENCES Shop (id_shop),
+--    date_create datetime,
+--    date_update datetime,
+--    content nvarchar(max),
+--    PRIMARY KEY (id_evaluate_reply)
+--)
+--insert into Evaluate_Reply values(1,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
+--insert into Evaluate_Reply values(2,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
 --delete from Customer
 --delete from Cart_Item
 --delete from Order_Item

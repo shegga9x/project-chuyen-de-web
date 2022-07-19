@@ -20,42 +20,52 @@ public class ProductController {
     @Autowired
     SingleProductPageService singleProductPageService;
 
-    @GetMapping({ "/loadAll" })
+    @GetMapping({"/loadAll"})
     public ResponseEntity<?> loadAll(@RequestParam("page") int page, @RequestParam("size") int size,
-            @RequestParam(name = "catagory", required = false) Integer[] catagory,
-            @RequestParam(name = "sorter", required = false) Integer sorter) {
+                                     @RequestParam(name = "catagory", required = false) Integer[] catagory,
+                                     @RequestParam(name = "sorter", required = false) Integer sorter) {
 
         return ResponseEntity.ok(singleProductPageService.loadAll(page, size, catagory, sorter));
     }
 
-    @GetMapping({ "/loadCagetory" })
+    @GetMapping({"/loadCagetory"})
     public ResponseEntity<?> loadCagetory() {
         return ResponseEntity.ok(singleProductPageService.loadCagetory());
     }
 
-    @GetMapping({ "/loadAllSingleProductPage" })
+    @GetMapping({"/loadAllSingleProductPage"})
     public ResponseEntity<?> loadAllSingleProductPage() {
         return ResponseEntity.ok(singleProductPageService.loadAllSingleProductPage());
     }
 
-    @GetMapping({ "/getSingleProductPagePerPage/{idSingleProduct}" })
+    @GetMapping({"/getSingleProductPagePerPage/{idSingleProduct}"})
     public ResponseEntity<?> getSingleProductPagePerPage(
             @PathVariable(value = "idSingleProduct") String idSingleProduct) {
         return ResponseEntity
                 .ok(singleProductPageService.getSingleProductPagePerPage(Integer.parseInt(idSingleProduct)));
     }
 
-    @GetMapping({ "/getListProductBySingleProductPage" })
+    @GetMapping({"/getListProductBySingleProductPage"})
     public ResponseEntity<?> getListProductBySingleProductPage(
             @NotNull @RequestParam("idSingleProduct") String idSingleProduct) {
         return ResponseEntity
                 .ok(singleProductPageService.getListProductBySingleProductPage(Integer.parseInt(idSingleProduct)));
     }
 
-    @GetMapping({ "/getListCategoryBySingleProductPage" })
+    @GetMapping({"/getListCategoryBySingleProductPage"})
     public ResponseEntity<?> getListCategoryBySingleProductPage(
             @NotNull @RequestParam("idCategory") String idCategory) {
         return ResponseEntity
                 .ok(singleProductPageService.getListCategoryBySingleProductPage(Integer.parseInt(idCategory)));
+    }
+
+    @GetMapping({"/getReviewByIdProduct"})
+    public ResponseEntity<?> getReviewByIdProduct(@RequestParam String idSingleProductPage) {
+        return ResponseEntity.ok(singleProductPageService.getReviewByIdProduct(Integer.valueOf(idSingleProductPage)));
+    }
+
+    @GetMapping("/getListEvaluateReplyResponse")
+    public ResponseEntity<?> getListEvaluateReplyResponse(@RequestParam String idSingleProductPage) {
+        return ResponseEntity.ok(singleProductPageService.getListEvaluateReplyResponse(Integer.valueOf(idSingleProductPage)));
     }
 }

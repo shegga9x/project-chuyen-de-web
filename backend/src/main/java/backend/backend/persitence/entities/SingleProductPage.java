@@ -28,7 +28,6 @@ import backend.backend.helpers.utils.SubUtils;
  * JPA entity class for "SingleProductPage"
  *
  * @author Telosys
- *
  */
 @Entity
 @Table(name = "Single_Product_Page", schema = "dbo", catalog = "shop")
@@ -62,6 +61,9 @@ public class SingleProductPage implements Serializable {
     private Byte status;
 
     // --- ENTITY LINKS ( RELATIONSHIP )
+    @OneToMany(mappedBy = "singleProductPage")
+    private List<Evaluate> listOfEvaluate;
+
     @ManyToOne
     @JoinColumn(name = "id_category", referencedColumnName = "id_category", insertable = false, updatable = false)
     private Category category;
@@ -203,6 +205,11 @@ public class SingleProductPage implements Serializable {
     }
 
     // --- GETTERS FOR LINKS
+
+    public List<Evaluate> getListOfEvaluate() {
+        return this.listOfEvaluate;
+    }
+
     public Category getCategory() {
         return this.category;
     }

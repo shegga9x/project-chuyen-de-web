@@ -51,9 +51,6 @@ public class Product implements Serializable {
     private List<Promote> listOfPromote;
 
     @OneToMany(mappedBy = "product")
-    private List<Evaluate> listOfEvaluate;
-
-    @OneToMany(mappedBy = "product")
     private List<CartItem> listOfCartItem;
 
     @ManyToOne
@@ -136,10 +133,6 @@ public class Product implements Serializable {
     // --- GETTERS FOR LINKS
     public List<Promote> getListOfPromote() {
         return this.listOfPromote;
-    }
-
-    public List<Evaluate> getListOfEvaluate() {
-        return this.listOfEvaluate;
     }
 
     public List<CartItem> getListOfCartItem() {
