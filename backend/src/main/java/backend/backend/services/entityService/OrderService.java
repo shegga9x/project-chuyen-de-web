@@ -32,7 +32,7 @@ public class OrderService {
             ProductResponse productResponse = (ProductResponse) SubUtils.mapperObject(orderItem.getProduct(),
                     new ProductResponse());
             OrderItemResponse orderItemResponse = new OrderItemResponse(orderItem.getIdCustomer(), productResponse,
-                    orderItem.getStatus());
+                    orderItem.getStatus(), orderItem.getQuantity());
             result.add(orderItemResponse);
         }
         return result;
@@ -53,6 +53,7 @@ public class OrderService {
             orderItem.setIdCustomer(idUser);
             orderItem.setIdProduct(cartItem.getProduct().getIdProduct());
             orderItem.setStatus((byte) 1);
+            orderItem.setQuantity(cartItem.getQuantity());
             listOrderItem.add(orderItem);
         }
         cartItemRepository.deleteAll(listCartItem);

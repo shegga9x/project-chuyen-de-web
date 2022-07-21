@@ -4,11 +4,13 @@ public class OrderItemResponse {
     private int idOrderItem;
     private ProductResponse product;
     private Byte status;
+    private int quantity;
 
-    public OrderItemResponse(int idOrderItem, ProductResponse product, Byte status) {
+    public OrderItemResponse(int idOrderItem, ProductResponse product, Byte status, int quantity) {
         this.idOrderItem = idOrderItem;
         this.product = product;
         this.status = status;
+        this.quantity = quantity;
     }
 
     public int getIdOrderItem() {
@@ -33,5 +35,13 @@ public class OrderItemResponse {
 
     public void setStatus(Byte status) {
         this.status = status;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

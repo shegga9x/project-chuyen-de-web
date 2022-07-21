@@ -604,21 +604,23 @@ INSERT INTO Product
 VALUES(21, N'Apple iPhone 11 màu hồng', 100, 1, 1240000, 'https://ss-images.saostar.vn/pc/1596849920066/iphone-12.jpg');
 
 
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
 
-INSERT INTO Order_Item VALUES(1, 1, 2,1);
-INSERT INTO Order_Item VALUES(1, 1, 3,1);
-INSERT INTO Order_Item VALUES(1, 1, 4,1);
-INSERT INTO Order_Item VALUES(1, 1, 5,1);
-INSERT INTO Order_Item VALUES(1, 1, 6,1);
+delete from Order_Item
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+
+--INSERT INTO Order_Item VALUES(1, 1, 2,1);
+--INSERT INTO Order_Item VALUES(1, 1, 3,1);
+--INSERT INTO Order_Item VALUES(1, 1, 4,1);
+--INSERT INTO Order_Item VALUES(1, 1, 5,1);
+--INSERT INTO Order_Item VALUES(1, 1, 6,1);
 
 -- FUNCTION
 
@@ -643,8 +645,8 @@ select * from Shop
 --    content nvarchar(max),
 --    PRIMARY KEY (id_evaluate_reply)
 --)
---insert into Evaluate_Reply values(1,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
---insert into Evaluate_Reply values(2,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
+--insert into Evaluate_Reply values(3,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
+--insert into Evaluate_Reply values(4,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
 --delete from Customer
 --delete from Cart_Item
 --delete from Order_Item
