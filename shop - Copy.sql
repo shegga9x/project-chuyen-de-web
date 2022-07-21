@@ -629,7 +629,8 @@ VALUES(21, N'Apple iPhone 11 màu hồng', 100, 1, 1240000, 'https://ss-images.s
 
 
 
-delete from Order_Item
+select * from Order_Item
+select * from Product
 --INSERT INTO Order_Item VALUES(1, 1, 1,1);
 --INSERT INTO Order_Item VALUES(1, 1, 1,1);
 --INSERT INTO Order_Item VALUES(1, 1, 1,1);

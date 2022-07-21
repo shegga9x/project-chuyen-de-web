@@ -11,7 +11,7 @@ import DownToolProgress from '../components/order/downToolProgress';
 import VerificationProgress from '../components/order/verificationProgress';
 import VNPayProgress from '../components/order/vnPayProgress';
 import { getSession } from 'next-auth/client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import instance from "../helpers/axiosConfig";
 
 export default function Order(props) {
@@ -25,6 +25,12 @@ export default function Order(props) {
     const [value, setValue] = useState('1');
 
 
+    useEffect(() => {
+        let list = order.filter(ele => ele.status == 1);
+        setListOrder(list);
+    }, [])
+
+
     const resetAll = () => {
         document.getElementsByClassName('el-input_name')[0].value = "";
         ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
@@ -36,6 +42,11 @@ export default function Order(props) {
         document.getElementsByClassName('content_step3_inside')[0].style.display = "none"
         document.getElementsByClassName('errorStep1')[0].style.visibility = 'hidden';
         document.getElementsByClassName('errorStep2')[0].style.visibility = 'hidden';
+        //vnPayProgress
+        let list = document.getElementsByClassName('mobile-banking-logo');
+        for (let i = 0; i < list.length; i++) {
+            list[i].getElementsByTagName('img')[0].style.border = "none";
+        }
     }
 
     const closeModal = (modal) => {
@@ -73,16 +84,6 @@ export default function Order(props) {
         console.log(newValue);
         setValue(newValue);
     };
-
-    const addItemToListOrder = (event, ele) => {
-        const target = event.target;
-        if (target.checked) {
-            listOrder.push(ele);
-        } else {
-            const result = listOrder.filter(element => element != ele);
-            setListOrder(result);
-        }
-    }
 
     const getTotalCart = (status) => {
         let result = 0;
@@ -131,7 +132,6 @@ export default function Order(props) {
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th></th>
                                                 <th>Product</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
@@ -143,13 +143,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -205,13 +202,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -227,7 +221,7 @@ export default function Order(props) {
                                                                         <input
                                                                             type="text"
                                                                             className="quantity-text-field"
-                                                                            defaultValue="1"
+                                                                            defaultValue={element.quantity}
                                                                             disabled
                                                                         />
                                                                     </div>
@@ -266,13 +260,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -288,7 +279,7 @@ export default function Order(props) {
                                                                         <input
                                                                             type="text"
                                                                             className="quantity-text-field"
-                                                                            defaultValue="1"
+                                                                            defaultValue={element.quantity}
                                                                             disabled
                                                                         />
                                                                     </div>
@@ -327,13 +318,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -349,7 +337,7 @@ export default function Order(props) {
                                                                         <input
                                                                             type="text"
                                                                             className="quantity-text-field"
-                                                                            defaultValue="1"
+                                                                            defaultValue={element.quantity}
                                                                             disabled
                                                                         />
                                                                     </div>
@@ -388,13 +376,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -410,7 +395,7 @@ export default function Order(props) {
                                                                         <input
                                                                             type="text"
                                                                             className="quantity-text-field"
-                                                                            defaultValue="1"
+                                                                            defaultValue={element.quantity}
                                                                             disabled
                                                                         />
                                                                     </div>

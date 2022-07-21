@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { useEffect, useState } from 'react';
+import axios from "axios";
 
 export default function VNPayProgress({ open, closeModal, listOrder }) {
 
@@ -10,6 +11,7 @@ export default function VNPayProgress({ open, closeModal, listOrder }) {
             const popup = document.getElementById("popupVnPayProgress");
             popup.style.display = "block";
         } else {
+            setBankCode(null);
             const popup = document.getElementById("popupVnPayProgress");
             popup.style.display = "none";
         }
@@ -32,12 +34,22 @@ export default function VNPayProgress({ open, closeModal, listOrder }) {
     }
 
     const total = () => {
-
+        const result = 0;
+        listOrder.forEach(element => {
+            result = result + (element.quantity * element.product.price);
+        });
+        return result.toFixed(2);
     }
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         if (bankCode != null) {
-            console.log(listOrder);
+            const total1 = total();
+            const res = await axios.get(`http://localhost:4000/api/vnPay/createLink`, { params: { amount: total1, bankCode: bankCode } })
+            if (res) {
+                let a = document.createElement('a');
+                a.href = res.data;
+                a.click();
+            }
         } else {
             alert("Vui lòng chọn ngân hàng thanh toán");
         }

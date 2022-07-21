@@ -156,7 +156,8 @@ export default function Cart(props) {
                                 <div className="cart-anchor-image">
                                   <a href="single-product.html">
                                     <img
-                                      src="/static/images/product/product@1x.jpg"
+                                      src={element.product.imgUrl}
+                                      // src="/static/images/product/product@1x.jpg"
                                       alt="Product"
                                     />
                                     <h6>{element.product.name}</h6>

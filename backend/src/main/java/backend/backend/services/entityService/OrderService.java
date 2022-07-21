@@ -3,6 +3,7 @@ package backend.backend.services.entityService;
 import java.util.ArrayList;
 import java.util.List;
 
+import backend.backend.persitence.entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -57,6 +58,23 @@ public class OrderService {
             listOrderItem.add(orderItem);
         }
         cartItemRepository.deleteAll(listCartItem);
+        orderItemRepository.saveAll(listOrderItem);
+        return "ok";
+    }
+
+    public String onCompleteOrderPayment() {
+        int idUser = SubUtils.getCurrentUser().getId();
+        // change status to 2
+        List<OrderItem> listOrderItem = orderItemRepository.findByIdCustomerAndStatus(idUser, (byte) 1);
+        for (OrderItem orderItem : listOrderItem) {
+            orderItem.setStatus((byte) 2);
+        }
+        // change quantity product
+        for (OrderItem orderItem : listOrderItem) {
+            Product product = orderItem.getProduct();
+            product.setQuantity(product.getQuantity() - orderItem.getQuantity());
+        }
+        //save all
         orderItemRepository.saveAll(listOrderItem);
         return "ok";
     }

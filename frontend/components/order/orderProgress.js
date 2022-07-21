@@ -49,7 +49,7 @@ export default function OrderProgress({ open, closeModal, listOrder, openVnPayPr
                 let url = window.URL.createObjectURL(res.data);
                 let a = document.createElement('a');
                 a.href = url;
-                a.download = "test.pdf";
+                a.download = "xacNhanOrder.pdf";
                 a.click();
                 document.getElementsByClassName('content_step3_inside')[0].style.display = "block";
             }

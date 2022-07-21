@@ -30,7 +30,7 @@ export default function DownToolProgress({ open, closeModal }) {
                 document.getElementById('button_div_progress').style.display = 'block';
 
                 //
-                a.href = 'https://drive.google.com/file/d/13j7CTiyK-_w6f9N-YDuEcZmrcZ3ETJNa/view?usp=sharing';
+                a.href = 'https://drive.google.com/file/d/15aVOk7Cmrkwfi_ZuSNHOYqwmYLNj3YLk/view?usp=sharing';
                 a.target = "_blank";
                 a.click();
             }

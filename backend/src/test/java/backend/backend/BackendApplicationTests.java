@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 
 import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfo;
 import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfoParser;
+import backend.backend.persitence.entities.OrderItem;
 import backend.backend.services.mainService.AdminService;
 import org.apache.pdfbox.io.IOUtils;
 import org.junit.jupiter.api.Test;
@@ -130,13 +131,9 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        try {
-            byte[] bytes = IOUtils.toByteArray(new FileInputStream("test.pdf"));
-            List<PDFSignatureInfo> info = PDFSignatureInfoParser.getPDFSignatureInfo(bytes);
-            for (PDFSignatureInfo pdfSignatureInfo : info) {
-                System.out.println(pdfSignatureInfo);
-            }
-        } catch (Exception e) {
+        List<OrderItem> list = orderItemRepository.findByIdCustomerAndStatus(1,(byte) 1);
+        for (OrderItem orderItem:list) {
+            System.out.println(orderItem);
         }
     }
 }

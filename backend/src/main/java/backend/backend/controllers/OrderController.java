@@ -25,4 +25,9 @@ public class OrderController {
     public ResponseEntity<?> addCartItemToOrder() {
         return ResponseEntity.ok(orderService.addCartItemToOrder());
     }
+
+    @GetMapping("/onCompleteOrderPayment")
+    public ResponseEntity<?> onCompleteOrderPayment() {
+        return ResponseEntity.ok(orderService.onCompleteOrderPayment());
+    }
 }
