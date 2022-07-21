@@ -66,7 +66,7 @@ public class CustomerService {
 
     public String changeInformationCustomer(CustomerRequest customerRequest) throws ParseException {
         Customer customer = customerRepository.findByIdCustomer(customerRequest.getIdCustomer()).get();
-        customer.setAddress(customerRequest.getAddress());
+        // customer.setAddress(customerRequest.getAddress());
         customer.setGender(customerRequest.getGender());
         customer.setImgUrl(customerRequest.getImgUrl());
         customer.setPhoneNumber(customerRequest.getPhoneNumber());

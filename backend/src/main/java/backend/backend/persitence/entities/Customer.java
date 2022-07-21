@@ -42,11 +42,11 @@ public class Customer implements Serializable {
     @Column(name = "img_url", length = 2147483647)
     private String imgUrl;
 
-    @Column(name = "address", length = 2147483647)
-    private String address;
-
     @Column(name = "pubkey", length = 2147483647)
     private String pubkey;
+
+    @Column(name = "address_id", nullable = false)
+    private Integer addressId;
 
     // --- ENTITY LINKS ( RELATIONSHIP )
     @OneToMany(mappedBy = "customer")
@@ -65,6 +65,10 @@ public class Customer implements Serializable {
 
     @OneToMany(mappedBy = "customer")
     private List<CartItem> listOfCartItem;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id", insertable = false, updatable = false)
+    private Addrress addrress;
 
     /**
      * Constructor
@@ -122,14 +126,6 @@ public class Customer implements Serializable {
         return this.imgUrl;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getAddress() {
-        return this.address;
-    }
-
     public void setPubkey(String pubkey) {
         this.pubkey = pubkey;
     }
@@ -159,6 +155,13 @@ public class Customer implements Serializable {
         return this.listOfCartItem;
     }
 
+    public void setAddressId(Integer addressId) {
+        this.addressId = addressId;
+    }
+
+    public Integer getAddressId() {
+        return this.addressId;
+    }
     // --- SETTERS FOR LINKS
 
     public void setAccount(Account account) {
@@ -180,8 +183,7 @@ public class Customer implements Serializable {
         sb.append(birthday);
         sb.append("|");
         sb.append(imgUrl);
-        sb.append("|");
-        sb.append(address);
+
         sb.append("|");
         sb.append(pubkey);
         return sb.toString();

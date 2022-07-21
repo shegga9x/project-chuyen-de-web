@@ -104,7 +104,7 @@ public class VNPayTest {
         String paymentUrl = VNPayUtils.vnp_PayUrl + "?" + queryUrl;
         System.out.println(paymentUrl);
 
-        com.google.gson.JsonObject job = new JsonObject();
+        JsonObject job = new JsonObject();
         job.addProperty("code", "00");
         job.addProperty("message", "success");
         job.addProperty("data", paymentUrl);

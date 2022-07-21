@@ -20,6 +20,22 @@ create table Role
     [role_name] [int] NOT NULL,
     PRIMARY KEY ([id])
 )
+--dữ liệu bảng AddressCell
+create table Addrress_Cell
+(
+    id int  PRIMARY KEY,
+    name nvarchar(50) not null,
+)
+--dữ liệu bảng Address
+create table Addrress
+(
+    id int IDENTITY(1,1) PRIMARY KEY,
+    province_id int NOT NULL FOREIGN KEY REFERENCES Addrress_Cell ([id]),
+    district_id int NOT NULL FOREIGN KEY REFERENCES Addrress_Cell ([id]),
+    ward_code int NOT NULL FOREIGN KEY REFERENCES Addrress_Cell ([id]),
+    sub_locate nvarchar(50) not null,
+
+)
 --dữ liệu bảng Privilege
 create table Privilege
 (
@@ -99,7 +115,7 @@ CREATE TABLE Customer
     gender CHAR(1),
     birthday date,
     img_url VARCHAR(MAX),
-    address nvarchar(max),
+    address_id int NOT NULL FOREIGN KEY REFERENCES Addrress ([id]),
 	pubkey nvarchar(max),
     PRIMARY KEY (id_customer)
 )
@@ -109,7 +125,7 @@ CREATE TABLE Shop
     name nvarchar(max) ,
     phone_number varchar(15),
     img_url VARCHAR(MAX),
-    address nvarchar(max),
+    address_id int NOT NULL FOREIGN KEY REFERENCES Addrress ([id]),
     description nvarchar(max),
     PRIMARY KEY (id_shop)
 )
@@ -281,13 +297,21 @@ INSERT INTO Verification_Token
 VALUES
     (1, null, getdate())
 
+INSERT INTO Addrress_Cell VALUES(202, N'TP Hồ Chí Minh');
+
+INSERT INTO Addrress_Cell VALUES(1461, N'Quận Gò Vấp');
+
+INSERT INTO Addrress_Cell VALUES(21305, N'Phường 7');
+
+INSERT INTO Addrress VALUES( 202,1461,21305,N'Nguyễn Văn Nghi');
+
 -- Customer
 INSERT INTO Customer
-VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '', N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp',null);
+VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '',1,null);
 
 -- Shop
 INSERT INTO Shop
-VALUES(1, N'shop của Phùng', '0378876395', N'', N'334/35/12 Nguyễn Văn Nghi F7 Gò Vấp', N'Shop ác nhất hành tinh');
+VALUES(1, N'shop của Phùng', '0378876395', N'', 1, N'Shop ác nhất hành tinh');
 
 -- Shop_Category
 INSERT INTO Shop_Category
@@ -521,7 +545,7 @@ VALUES(2, N'nón Beanie Loại C', 100, 1, 62.900, 'https://salt.tikicdn.com/cac
 INSERT INTO Product
 VALUES(2, N'nón Beanie Loại B', 100, 1, 72.900, 'https://salt.tikicdn.com/cache/525x525/ts/product/f2/14/70/d8dc2060343127892cbc7c330058f381.jpg');
 INSERT INTO Product
-VALUES(2, N'Mũ nón Beanie Loại A', 100, 1, 82.900, 'https://cf.shopee.vn/file/6c3c90bc8f504a6e12345d16ae17c28c');
+VALUES(2, N'nón Beanie Loại A', 100, 1, 82.900, 'https://cf.shopee.vn/file/6c3c90bc8f504a6e12345d16ae17c28c');
 
 --Single_Product_Page=3
 INSERT INTO Product

@@ -17,11 +17,11 @@ public class SMSTest {
 
     @Test
     public void send() {
-        service.send(new SMS("+84582301667", "okok"));
+        service.send(new SMS("+84983464047", "Hien Siu VIp"));
     }
 
     @Test
     public void addAnOutgoingCallerId() {
-        service.addAnOutgoingCallerId("+84963732213", "okok");
+        service.addAnOutgoingCallerId("+84983464047", "okok");
     }
 }

@@ -9,8 +9,8 @@ import org.springframework.web.client.RestTemplate;
 
 public class GHNUltils {
 
-    public static ResponseEntity<String> getResponse(String token, String idShop, String url, Object object) {
-        RestTemplate restTemplate = new RestTemplate();
+    public static ResponseEntity<String> getResponse(RestTemplate restTemplate, String token, String idShop, String url,
+            Object object) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set("Token", token);
