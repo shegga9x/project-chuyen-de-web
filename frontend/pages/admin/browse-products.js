@@ -75,7 +75,7 @@ export default function BrowseProducts({ singleProductPages }) {
 
 export async function getServerSideProps({ req }) {
     const session = await getSession({ req });
-    if (session) {
+    if (session && session.user.role.includes('Admin')) {
         const response = await instance({ req }).get("http://localhost:4000/api/admin/getAllSingleProductPage")
         return {
             props: {

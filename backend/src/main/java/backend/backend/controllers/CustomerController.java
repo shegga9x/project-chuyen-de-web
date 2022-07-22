@@ -4,6 +4,7 @@ import backend.backend.helpers.payload.request.CustomerRequest;
 import backend.backend.services.entityService.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -12,6 +13,7 @@ import java.text.ParseException;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@PreAuthorize("hasAnyRole('ROLE_Admin','ROLE_User')")
 @RequestMapping("/api/customer")
 public class CustomerController {
 

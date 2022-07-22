@@ -291,12 +291,20 @@ INSERT INTO ACCOUNT
 Values(N'sa@gmail.com', N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS', 'local', null, null, null, null, 1);
 INSERT INTO ACCOUNT_has_role
 VALUES
-    (1, 2)
+    (1, 1)
+;
+INSERT INTO ACCOUNT
+Values(N'user@gmail.com', N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS', 'local', null, null, null, null, 1);
+INSERT INTO ACCOUNT_has_role
+VALUES
+    (2, 2)
 ;
 INSERT INTO Verification_Token
 VALUES
     (1, null, getdate())
-
+	INSERT INTO Verification_Token
+VALUES
+    (2, null, getdate())
 INSERT INTO Addrress_Cell VALUES(202, N'TP Hồ Chí Minh');
 
 INSERT INTO Addrress_Cell VALUES(1461, N'Quận Gò Vấp');
@@ -309,9 +317,14 @@ INSERT INTO Addrress VALUES( 202,1461,21305,N'Nguyễn Văn Nghi');
 INSERT INTO Customer
 VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '',1,null);
 
+INSERT INTO Customer
+VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',1,null);
 -- Shop
 INSERT INTO Shop
 VALUES(1, N'shop của Phùng', '0378876395', N'', 1, N'Shop ác nhất hành tinh');
+
+INSERT INTO Shop
+VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', N'', 1, N'Shop ác nhất vũ trụ');
 
 -- Shop_Category
 INSERT INTO Shop_Category
@@ -660,6 +673,7 @@ select * from Customer
 select * from Evaluate
 select * from Evaluate_Reply
 select * from Shop
+select * from Role
 --CREATE TABLE Evaluate_Reply
 --(
 --    id_evaluate_reply int IDENTITY(1,1) ,

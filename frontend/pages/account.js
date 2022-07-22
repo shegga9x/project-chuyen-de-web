@@ -32,21 +32,20 @@ export default function Account(props) {
     const [password, setPassword] = useState("");
 
     const loginWithGoogle = () => {
-        signIn('google', { callbackUrl: '/' });
+        signIn('google', { callbackUrl: '/middleware' });
     }
 
     const loginWithGithub = () => {
-        signIn('github', { callbackUrl: '/' });
+        signIn('github', { callbackUrl: '/middleware' });
     }
 
     const loginWithFacebook = () => {
-        signIn('facebook', { callbackUrl: '/' });
+        signIn('facebook', { callbackUrl: '/middleware' });
     }
 
     const submit = (e) => {
         e.preventDefault();
-        signIn('credentials', { email: email, password: password, callbackUrl: '/' });
-        // signIn('google');
+        signIn('credentials', { email: email, password: password, callbackUrl: '/middleware'});
     }
 
 
@@ -60,7 +59,6 @@ export default function Account(props) {
         }, { withCredentials: true }).
             catch(errors => {
                 console.log({ errors })
-                // alert(errors.response.data.message)
             })
         if (message !== undefined) {
             alert(message.data.message)
