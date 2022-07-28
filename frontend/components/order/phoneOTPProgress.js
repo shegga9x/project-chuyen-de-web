@@ -1,19 +1,20 @@
-import Head from "next/head"
-import { useEffect, useState } from "react"
-import instance from '../../../helpers/axiosConfig';
+import Head from "next/head";
+import { useEffect, useState } from 'react';
+import instance from "../../helpers/axiosConfig";
+import { changeRoute } from "../../helpers/customFunction/changeRoute";
+import { useRouter } from 'next/router'
 
-export default function ModalProfilePhone({ open, closeModal, customer, setCustomer, setFirstRender }) {
+export default function VNPayProgress({ open, closeModal }) {
 
-    const [phoneNumber, setPhoneNumber] = useState(null);
+    const router = useRouter()
 
     useEffect(() => {
         if (open) {
-            const popup = document.getElementById("popupPhone");
-            setTimeout(() => { popup.style.transform = 'translate(-50%, -50%) scale(1.0)' }, 100);
+            const popup = document.getElementById("popupPhoneOTPProgress");
+            popup.style.display = "block";
         } else {
-            const popup = document.getElementById("popupPhone");
-            popup.style.display = 'block';
-            popup.style.transform = 'translate(-50%, -50%) scale(0.0)';
+            const popup = document.getElementById("popupPhoneOTPProgress");
+            popup.style.display = "none";
         }
     }, [open])
 
@@ -25,58 +26,49 @@ export default function ModalProfilePhone({ open, closeModal, customer, setCusto
             const sms = res.data;
             const res2 = await instance().get('http://localhost:4000/api/sms/sendPhoneSMS', { params: { phoneNumber: phoneNumber, sms: sms } });
             if (res2) {
-                setPhoneNumber(phoneNumber);
+                alert('đã send thành công');
             }
         }
     }
 
     const checkSMS = async () => {
         const sms = document.getElementsByClassName('smsNumber')[0].value;
-        const res = await instance().get('http://localhost:4000/api/customer/checkPhoneSMS', { params: { sms: sms, phoneNumber: phoneNumber } })
+        const res = await instance().get('http://localhost:4000/api/customer/onCompleteOrderPayment', { params: { sms: sms } })
             .catch(err => {
                 alert(err.response.data.message);
             })
         if (res) {
-            const newCustomer = {
-                idCustomer: customer.idCustomer,
-                name: customer.name,
-                email: customer.email,
-                phoneNumber: phoneNumber,
-                gender: customer.gender,
-                birthday: customer.birthday,
-                imgUrl: customer.imgUrl,
-                address: customer.address
-            }
-            setFirstRender(1);
-            setCustomer(newCustomer);
-            closeModal('phone');
+            changeRoute('/order', router);
         }
     }
+
 
     return (
         <>
             <Head>
+                <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
                 <style dangerouslySetInnerHTML={{
                     __html: `
-                #popupPhone {
-                    transition: transform 0.2s linear;
-                    background-color:white;
-                    z-index: 1001;
-                    border-radius: 3px;
-                    position: fixed;
-                    top: 50%;
-                    left: 50%;
-                    -webkit-transform: translate(-50%, -50%);
-                    transform: translate(-50%, -50%);
-                    padding: 16px;
-                }
-                `}} />
+                    #popupPhoneOTPProgress {
+                        background-color:white;
+                        z-index: 1001;
+                        border-radius: 3px;
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        -webkit-transform: translate(-50%, -50%);
+                        transform: translate(-50%, -50%);
+                        /* border: 1px solid red; */
+                        padding: 16px;
+                        // box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+                    }
+                ` }} />
             </Head>
-            <div id="popupPhone">
+            <div id="popupPhoneOTPProgress">
                 <div>
                     <div style={{ padding: '1.875rem' }}>
                         <div style={{ fontSize: '1.25rem', fontWeight: 400, color: 'rgba(0, 0, 0, 0.8)', textTransform: 'capitalize' }}>
-                            Thêm Số Điện Thoại
+                            Xác Minh Số Điện Thoại
                         </div>
                     </div>
                     <div style={{ padding: '0 1.875rem' }}>
@@ -92,9 +84,8 @@ export default function ModalProfilePhone({ open, closeModal, customer, setCusto
                             </div>
                         </div>
                         <div style={{ margin: '1.375rem 0', justifyContent: 'flex-end', display: 'flex' }}>
-                            <button onClick={() => { closeModal('phone') }} style={{ minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', background: 'none', borderRadius: '0.125rem', height: '2.5rem' }}>Trở
-                                Lại</button>
-                            <button onClick={() => { checkSMS() }} style={{ marginLeft: '0.625rem', minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', backgroundColor: 'red', borderRadius: '0.125rem', height: '2.5rem' }}>OK</button>
+                            <button onClick={() => { closeModal('phoneOTPProgress') }} style={{ minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', background: 'none', borderRadius: '0.125rem', height: '2.5rem' }}>Thoát</button>
+                            <button onClick={() => { checkSMS() }} style={{ marginLeft: '0.625rem', minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', backgroundColor: 'red', borderRadius: '0.125rem', height: '2.5rem' }}>Xác minh</button>
                         </div>
                     </div>
                 </div>

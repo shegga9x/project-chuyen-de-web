@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/client';
-import instance from "../helpers/axiosConfig";
+import instance from "../../helpers/axiosConfig";
 export default function orderProcessSuccess() {
     return (
         <>

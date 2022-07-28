@@ -4,14 +4,8 @@ import backend.backend.helpers.advice.CustomException;
 import backend.backend.helpers.payload.request.CustomerRequest;
 import backend.backend.helpers.payload.response.CustomerResponse;
 import backend.backend.helpers.utils.SubUtils;
-import backend.backend.persitence.entities.Account;
-import backend.backend.persitence.entities.Customer;
-import backend.backend.persitence.entities.ResetEmailToken;
-import backend.backend.persitence.entities.ResetPhoneToken;
-import backend.backend.persitence.repository.AccountRepository;
-import backend.backend.persitence.repository.CustomerRepository;
-import backend.backend.persitence.repository.ResetEmailTokenRepository;
-import backend.backend.persitence.repository.ResetPhoneTokenRepository;
+import backend.backend.persitence.entities.*;
+import backend.backend.persitence.repository.*;
 import backend.backend.services.subService.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +14,15 @@ import javax.mail.MessagingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
 @Service
 public class CustomerService {
+
+    @Autowired
+    private OrderItemRepository orderItemRepository;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -116,6 +114,37 @@ public class CustomerService {
         return "ok";
     }
 
+    //    onCompleteOrderPayment
+    public String onCompleteOrderPayment(String sms){
+        int idCustomer = SubUtils.getCurrentUser().getId();
+        Optional<ResetPhoneToken> optinal = resetPhoneTokenRepository.findByResetTokenContent(sms);
+        if (optinal.isPresent()) {
+            ResetPhoneToken resetPhoneToken = optinal.get();
+            if (resetPhoneToken.getResetTokenExpires().before(new Date())) {
+                throw new CustomException("SMS đã hết hạn");
+            }
+            ///
+            Account account = resetPhoneToken.getAccount();
+            account.setResetPhoneToken(new ResetPhoneToken(idCustomer, new Date(), null, null));
+            // change status to 2
+            List<OrderItem> listOrderItem = orderItemRepository.findByIdCustomerAndStatus(idCustomer, (byte) 1);
+            for (OrderItem orderItem : listOrderItem) {
+                orderItem.setStatus((byte) 2);
+            }
+            // change quantity product
+            for (OrderItem orderItem : listOrderItem) {
+                Product product = orderItem.getProduct();
+                product.setQuantity(product.getQuantity() - orderItem.getQuantity());
+            }
+            ///
+            orderItemRepository.saveAll(listOrderItem);
+            accountRepository.save(account);
+        } else {
+            throw new CustomException("SMS không đúng hoặc không hợp lệ");
+        }
+        return "ok";
+    }
+
     public String sendEmailSMS(String email) throws MessagingException {
         int idCustomer = SubUtils.getCurrentUser().getId();
         Account account = accountRepository.getById(idCustomer);
@@ -160,4 +189,5 @@ public class CustomerService {
         int number = rnd.nextInt(999999);
         return String.format("%06d", number);
     }
+
 }

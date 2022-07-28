@@ -30,10 +30,11 @@ public class DigitalUltil {
         String[][] result = { { "ProductId", "CustomerId", "Email", "ToTalPrice" } };
         // insert mấy trường dài quá như product name là bị lỗi, éo bít sửa sao
         for (OrderItemResponse orderItem : orderItems) {
+            String totalPrice = String.valueOf(orderItem.getProduct().getPrice() * orderItem.getQuantity());
             String[][] data = { { orderItem.getProduct().getIdProduct().toString(),
                     account.getIdAccount().toString(),
                     account.getEmail(),
-                    orderItem.getProduct().getPrice().toString() } };
+                    totalPrice} };
             result = append(result, data);
         }
         return result;

@@ -28,8 +28,4 @@ public class OrderController {
         return ResponseEntity.ok(orderService.addCartItemToOrder());
     }
 
-    @GetMapping("/onCompleteOrderPayment")
-    public ResponseEntity<?> onCompleteOrderPayment() {
-        return ResponseEntity.ok(orderService.onCompleteOrderPayment());
-    }
 }

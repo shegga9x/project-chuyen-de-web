@@ -319,6 +319,7 @@ VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '',1,null);
 
 INSERT INTO Customer
 VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',1,null);
+update Customer set phone_number = '0339579758' where id_customer = 2;
 -- Shop
 INSERT INTO Shop
 VALUES(1, N'shop của Phùng', '0378876395', N'', 1, N'Shop ác nhất hành tinh');
@@ -700,6 +701,9 @@ select * from Role
 UPDATE Customer
 SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
 WHERE id_customer = 1;
+UPDATE Customer
+SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
+WHERE id_customer = 2;
 SELECT * FROM Order_Item o JOIN Product p on  o.id_product = p.id_product 
 						   JOIN Single_Product_Page spg on spg.id_single_product_page = p.id_single_product_page
 		WHERE spg.id_shop =  1 AND o.status = 1

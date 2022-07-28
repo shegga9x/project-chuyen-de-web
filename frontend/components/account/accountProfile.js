@@ -100,11 +100,14 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
                     <div style={{ display: 'flex', marginBottom: '30px' }}>
                         <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }}>Số Điện Thoại</div>
                         <div style={{ paddingLeft: '20px', fontSize: '.875rem', fontWeight: 500 }}>
-                            {customer.phoneNumber}
-                            {/* <a href="#" style={{ color: "blue" }}>
-                                Thêm
-                            </a> */}
-                            <a onClick={() => { openModal('phone') }} style={{ color: "blue", marginLeft: "5px", fontSize: '11px' }}>Thay Đổi</a>
+                            {customer.phoneNumber != null ? <>
+                                {customer.phoneNumber}<a onClick={() => { openModal('phone') }} style={{ color: "blue", marginLeft: "5px", fontSize: '11px' }}>Thay Đổi</a>
+                            </> : <>
+                                <a onClick={() => { openModal('phone') }} style={{ color: "blue", marginLeft: "5px", fontSize: '11px' }}>
+                                    Thêm
+                                </a>
+                            </>}
+                            {/* <a onClick={() => { openModal('phone') }} style={{ color: "blue", marginLeft: "5px", fontSize: '11px' }}>Thay Đổi</a> */}
                         </div>
                     </div>
                     <div style={{ display: 'flex', marginBottom: '30px' }}>

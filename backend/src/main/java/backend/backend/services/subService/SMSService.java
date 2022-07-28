@@ -19,13 +19,14 @@ public class SMSService {
 
     private String FROM_NUMBER = "+12512765229";
 
-    public void send(SMS sms) {
+    public String send(SMS sms) {
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
 
         Message message = Message.creator(new PhoneNumber(sms.getTo()), new PhoneNumber(FROM_NUMBER), sms.getMessage())
                 .create();
         System.out.println("here is my id:" + message.getSid());// Unique resource ID created to manage this transaction
 
+        return "ok";
     }
 
     public void receive(MultiValueMap<String, String> smscallback) {

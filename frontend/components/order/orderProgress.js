@@ -3,7 +3,7 @@ import Script from 'next/script';
 import instance from "../../helpers/axiosConfig";
 import { useEffect, useState } from 'react';
 
-export default function OrderProgress({ open, closeModal, listOrder, openVnPayProgress }) {
+export default function OrderProgress({ open, closeModal, listOrder, openPhoneOTPProgress }) {
 
     const [userName, setUserName] = useState(null);
     const [saveImg, setSaveImg] = useState(false);
@@ -60,7 +60,7 @@ export default function OrderProgress({ open, closeModal, listOrder, openVnPayPr
 
     const thanhToan = () => {
         closeModal('orderProgress');
-        openVnPayProgress('vnPayProgress');
+        openPhoneOTPProgress('phoneOTPProgress');
     }
 
     const isSaveImg = () => {

@@ -9,7 +9,7 @@ import Layout from "../components/layout";
 import OrderProgress from '../components/order/orderProgress';
 import DownToolProgress from '../components/order/downToolProgress';
 import VerificationProgress from '../components/order/verificationProgress';
-import VNPayProgress from '../components/order/vnPayProgress';
+import PhoneOTPProgress from '../components/order/phoneOTPProgress';
 import { getSession } from 'next-auth/client';
 import { useState, useEffect } from 'react';
 import instance from "../helpers/axiosConfig";
@@ -20,7 +20,7 @@ export default function Order(props) {
     const [openOrderProgress, setOpenOrderProgress] = useState(false);
     const [openDownToolProgress, setOpenDownToolProgress] = useState(false);
     const [openVerificationProgress, setOpenVerificationProgress] = useState(false);
-    const [openVnPayProgress, setOpenVnPayProgress] = useState(false);
+    const [openPhoneOTPProgress, setOpenPhoneOTPProgress] = useState(false);
     const [order, setOrder] = useState(props.order);
     const [value, setValue] = useState('1');
 
@@ -42,11 +42,10 @@ export default function Order(props) {
         document.getElementsByClassName('content_step3_inside')[0].style.display = "none"
         document.getElementsByClassName('errorStep1')[0].style.visibility = 'hidden';
         document.getElementsByClassName('errorStep2')[0].style.visibility = 'hidden';
-        //vnPayProgress
-        let list = document.getElementsByClassName('mobile-banking-logo');
-        for (let i = 0; i < list.length; i++) {
-            list[i].getElementsByTagName('img')[0].style.border = "none";
-        }
+        //Phone OTP Progress
+        document.getElementsByClassName('PhoneNumber')[0].value = "";
+        document.getElementsByClassName('smsNumber')[0].value = "";
+       
     }
 
     const closeModal = (modal) => {
@@ -57,7 +56,7 @@ export default function Order(props) {
         } else if (modal == 'verificationProgress') {
             setOpenVerificationProgress(false);
         } else {
-            setOpenVnPayProgress(false);
+            setOpenPhoneOTPProgress(false);
         }
         document.body.classList.toggle('modal-visibile');
         const model = document.getElementsByClassName('modal-load')[0];
@@ -76,7 +75,7 @@ export default function Order(props) {
         } else if (modal == 'verificationProgress') {
             setOpenVerificationProgress(true);
         } else {
-            setOpenVnPayProgress(true)
+            setOpenPhoneOTPProgress(true)
         }
     }
 
@@ -432,10 +431,10 @@ export default function Order(props) {
                         </div>
                     </div>
                     <div className="modal-load">
-                        <OrderProgress open={openOrderProgress} closeModal={closeModal} listOrder={listOrder} openVnPayProgress={openModal}></OrderProgress>
+                        <OrderProgress open={openOrderProgress} closeModal={closeModal} listOrder={listOrder} openPhoneOTPProgress={openModal}></OrderProgress>
                         <DownToolProgress open={openDownToolProgress} closeModal={closeModal}></DownToolProgress>
                         <VerificationProgress open={openVerificationProgress} closeModal={closeModal}></VerificationProgress>
-                        <VNPayProgress open={openVnPayProgress} closeModal={closeModal} listOrder={listOrder}></VNPayProgress>
+                        <PhoneOTPProgress open={openPhoneOTPProgress} closeModal={closeModal}></PhoneOTPProgress>
                     </div>
                 </div>
             </Layout>
@@ -445,6 +444,7 @@ export default function Order(props) {
 }
 
 export async function getServerSideProps(context) {
+    console.log(context.locale);
     const session = await getSession(context);
     if (session) {
         const response = await instance(context).get("http://localhost:4000/api/order/getOrderItemByIdCustomer")
