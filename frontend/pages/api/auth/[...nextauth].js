@@ -24,7 +24,7 @@ const nextAuthOptions = (req, res) => {
           if (response) {
             const name = response.data.firstName && response.data.lastName
               ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
-            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, };
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, role: response.data.role };
           }
         },
       }),
@@ -39,7 +39,7 @@ const nextAuthOptions = (req, res) => {
           cookiesSetter.set(cookies)
           if (response) {
             const name = response.data.firstName && response.data.lastName ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
-            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email };
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, role: response.data.role };
           }
         },
       }),
@@ -53,7 +53,7 @@ const nextAuthOptions = (req, res) => {
           if (response) {
             const name = response.data.firstName && response.data.lastName
               ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
-            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, };
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, role: response.data.role };
           }
         },
       }),
@@ -67,7 +67,7 @@ const nextAuthOptions = (req, res) => {
           if (response) {
             const name = response.data.firstName && response.data.lastName
               ? `${response.data.firstName} ${response.data.lastName}` : `${response.data.email}`;
-            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, };
+            return { jwt: response.data.jwtToken, id: response.data.idAccount, name: name, email: response.data.email, role: response.data.role };
           }
         },
       }),
@@ -87,6 +87,9 @@ const nextAuthOptions = (req, res) => {
         session.user = token
         return session;
       },
+      redirect: async (url, baseUrl) => {
+        return Promise.resolve(url)
+      }
     },
     pages: {
       signIn: '/account',
@@ -102,7 +105,7 @@ async function refreshAccessToken(token, cookiesSetter) {
     });
     const cookies = response.headers['set-cookie']
     cookiesSetter.set(cookies)
-    return {  
+    return {
       ...token,
       id: response.data.idAccount,
       jwtExpires: Date.now() + parseInt(process.env.jwtExpirationMs),

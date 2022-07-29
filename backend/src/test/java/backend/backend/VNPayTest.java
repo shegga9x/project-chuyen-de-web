@@ -32,12 +32,12 @@ public class VNPayTest {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String vnp_OrderInfo = "Nap Tien";
-        String orderType = "topup";
+        String orderType = "billpayment";
         String vnp_TxnRef = VNPayUtils.getRandomNumber(8);
         String vnp_IpAddr = "";
         String vnp_TmnCode = VNPayUtils.vnp_TmnCode;
 
-        int amount = Integer.parseInt("100000") * 100;
+        int amount = (int)(Integer.parseInt("100000") * 100.5);
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
         vnp_Params.put("vnp_Command", vnp_Command);

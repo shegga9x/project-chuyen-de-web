@@ -80,7 +80,7 @@ public class AuthService {
         account.setProvider(AuthProvider.local);
         account.setLastExpires(new Date());
         boolean isFirstAccount = accountRepository.findAll().size() == 0;
-        RoleEnum roleEnum = (isFirstAccount ? RoleEnum.Admin : RoleEnum.Student);
+        RoleEnum roleEnum = (isFirstAccount ? RoleEnum.Admin : RoleEnum.User);
         List<Role> roles = new ArrayList<>(List.of(new Role(roleEnum)));
         VerificationToken verificationToken = new VerificationToken(tokenUtils.generateVerificationToken());
         account.setListOfRole(roles);

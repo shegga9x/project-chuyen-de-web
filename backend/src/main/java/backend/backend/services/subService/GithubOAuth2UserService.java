@@ -72,7 +72,7 @@ public class GithubOAuth2UserService {
         user.setAcceptTerms(true);
         user.setLastExpires(new Date());
         boolean isFirstAccount = accountRepository.findAll().size() == 0;
-        RoleEnum roleEnum = (isFirstAccount ? RoleEnum.Admin : RoleEnum.Student);
+        RoleEnum roleEnum = (isFirstAccount ? RoleEnum.Admin : RoleEnum.User);
         List<Role> roles = new ArrayList<>(List.of(new Role(roleEnum)));
         user.setListOfRole(roles);
         user.setVerificationToken(new VerificationToken());

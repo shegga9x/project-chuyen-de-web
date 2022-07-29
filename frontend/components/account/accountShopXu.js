@@ -19,7 +19,11 @@ export default function AccountShopXu() {
 
     const resetAll = () => {
         document.getElementsByClassName('XuNumber')[0].value = '';
-        document.getElementsByClassName('CodeNumber')[0].value = '';
+        //vnPayProgress
+        let list = document.getElementsByClassName('mobile-banking-logo');
+        for (let i = 0; i < list.length; i++) {
+            list[i].getElementsByTagName('img')[0].style.border = "none";
+        }
     }
 
     const openModal = () => {
@@ -67,7 +71,7 @@ export default function AccountShopXu() {
                 </div>
             </div>
             <div className="modal-load">
-                <ModalShopXu open={open} closeModal={closeModal} setXuVip={setXuVip}></ModalShopXu>
+                <ModalShopXu open={open} closeModal={closeModal}></ModalShopXu>
             </div>
         </>
     )

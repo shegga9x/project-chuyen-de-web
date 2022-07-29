@@ -17,7 +17,7 @@ public class SMSTest {
 
     @Test
     public void send() {
-        service.send(new SMS("+84983464047", "Hien Siu VIp"));
+        service.send(new SMS("+84339579758", "Hien Siu VIp"));
     }
 
     @Test

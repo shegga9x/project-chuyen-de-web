@@ -3,7 +3,7 @@ import Script from 'next/script';
 import instance from "../../helpers/axiosConfig";
 import { useEffect, useState } from 'react';
 
-export default function OrderProgress({ open, closeModal, listOrder }) {
+export default function OrderProgress({ open, closeModal, listOrder, openPhoneOTPProgress }) {
 
     const [userName, setUserName] = useState(null);
     const [saveImg, setSaveImg] = useState(false);
@@ -43,19 +43,24 @@ export default function OrderProgress({ open, closeModal, listOrder }) {
             document.getElementsByClassName('content_step2')[0].style.display = "none"
             document.getElementsByClassName('content_step3')[0].style.display = "block"
             const res = await instance().post(`http://localhost:4000/api/digitalSignature/signing`,
-             { listOrderItem: listOrder, imageBase64: img.src, userName: userName }, 
-             { headers: { 'Content-Type': 'application/json' }, responseType: 'blob' }).catch((err) => { console.log({ err }) });
+                { listOrderItem: listOrder, imageBase64: img.src, userName: userName },
+                { headers: { 'Content-Type': 'application/json' }, responseType: 'blob' }).catch((err) => { console.log({ err }) });
             if (res) {
                 let url = window.URL.createObjectURL(res.data);
                 let a = document.createElement('a');
                 a.href = url;
-                a.download = "test.pdf";
+                a.download = "xacNhanOrder.pdf";
                 a.click();
                 document.getElementsByClassName('content_step3_inside')[0].style.display = "block";
             }
         } else {
             document.getElementsByClassName('errorStep2')[0].style.visibility = 'visible';
         }
+    }
+
+    const thanhToan = () => {
+        closeModal('orderProgress');
+        openPhoneOTPProgress('phoneOTPProgress');
     }
 
     const isSaveImg = () => {
@@ -217,13 +222,11 @@ export default function OrderProgress({ open, closeModal, listOrder }) {
                 <div className="content_step3" style={{ display: 'none' }}>
                     <span style={{ fontFamily: 'Muli,Sarabun', fontWeight: 700, fontSize: '14px' }}>Cảm ơn bạn đã hoàn tất thủ tục, Xin hãy đợi ...</span>
                     <div className="content_step3_inside" style={{ display: "none" }}>
-                        {/* <div className="el-form" style={{ textAlign: 'center' }}>
-                            <button className="button_submit" style={{ marginTop: '10px', width: '180px' }}>
-                                Download file PDF
-                            </button>
-                        </div> */}
                         <div className="el-form">
-                            <button onClick={closeModal1} className="button_submit" style={{ float: 'right', marginTop: '10px' }}>
+                            <button onClick={thanhToan} className="button_submit" style={{ float: 'right', marginTop: '10px', width: '100px' }}>
+                                Thanh toán
+                            </button>
+                            <button onClick={closeModal1} className="button_submit" style={{ float: 'right', marginTop: '10px', marginRight: '5px', }}>
                                 Thoát
                             </button>
                         </div>

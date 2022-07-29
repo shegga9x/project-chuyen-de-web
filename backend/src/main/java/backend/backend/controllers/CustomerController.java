@@ -4,6 +4,7 @@ import backend.backend.helpers.payload.request.CustomerRequest;
 import backend.backend.services.entityService.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
@@ -12,6 +13,7 @@ import java.text.ParseException;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
+@PreAuthorize("hasAnyRole('ROLE_Admin','ROLE_User')")
 @RequestMapping("/api/customer")
 public class CustomerController {
 
@@ -34,17 +36,22 @@ public class CustomerController {
     }
 
     @GetMapping("/checkPhoneSMS")
-    public ResponseEntity<?> checkPhoneSMS(@NotNull @RequestParam String sms, @NotNull @RequestParam String phoneNumber) {
+    public ResponseEntity<?> checkPhoneSMS(@RequestParam String sms, @RequestParam String phoneNumber) {
         return ResponseEntity.ok(customerService.checkPhoneSMS(sms, phoneNumber));
     }
 
     @GetMapping("/sendGmailSMS")
-    public ResponseEntity<?> sendGmailSMS(@NotNull @RequestParam String email) throws MessagingException {
+    public ResponseEntity<?> sendGmailSMS(@RequestParam String email) throws MessagingException {
         return ResponseEntity.ok(customerService.sendEmailSMS(email));
     }
 
     @GetMapping("/checkGmailSMS")
-    public ResponseEntity<?> checkGmailSMS(@NotNull @RequestParam String sms, @NotNull @RequestParam String email) {
+    public ResponseEntity<?> checkGmailSMS(@RequestParam String sms, @RequestParam String email) {
         return ResponseEntity.ok(customerService.checkEmailSMS(sms, email));
+    }
+
+    @GetMapping("/onCompleteOrderPayment")
+    public ResponseEntity<?> onCompleteOrderPayment(@RequestParam String sms) {
+        return ResponseEntity.ok(customerService.onCompleteOrderPayment(sms));
     }
 }

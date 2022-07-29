@@ -326,12 +326,20 @@ INSERT INTO ACCOUNT
 Values(N'sa@gmail.com', N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS', 'local', null, null, null, null, 1);
 INSERT INTO ACCOUNT_has_role
 VALUES
-    (1, 2)
+    (1, 1)
+;
+INSERT INTO ACCOUNT
+Values(N'user@gmail.com', N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS', 'local', null, null, null, null, 1);
+INSERT INTO ACCOUNT_has_role
+VALUES
+    (2, 2)
 ;
 INSERT INTO Verification_Token
 VALUES
     (1, null, getdate())
-
+	INSERT INTO Verification_Token
+VALUES
+    (2, null, getdate())
 INSERT INTO Addrress_Cell VALUES(202, N'TP Hồ Chí Minh');
 
 INSERT INTO Addrress_Cell VALUES(1461, N'Quận Gò Vấp');
@@ -345,9 +353,15 @@ INSERT INTO Addrress VALUES(N'customer1', 202,1461,21305,N'Nguyễn Văn Nghi');
 INSERT INTO Customer
 VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '',N'customer1',null);
 
+INSERT INTO Customer
+VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',1,null);
+update Customer set phone_number = '0339579758' where id_customer = 2;
 -- Shop
 INSERT INTO Shop
 VALUES(1, N'shop của Phùng', '0378876395', N'', N'shop1', N'Shop ác nhất hành tinh');
+
+INSERT INTO Shop
+VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', N'', 1, N'Shop ác nhất vũ trụ');
 
 -- Shop_Category
 INSERT INTO Shop_Category
@@ -664,21 +678,24 @@ INSERT INTO Product
 VALUES(21, N'Apple iPhone 11 màu hồng', 100, 1, 1240000, 'https://ss-images.saostar.vn/pc/1596849920066/iphone-12.jpg');
 
 
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
-INSERT INTO Order_Item VALUES(1, 1, 1,1);
 
-INSERT INTO Order_Item VALUES(1, 1, 2,1);
-INSERT INTO Order_Item VALUES(1, 1, 3,1);
-INSERT INTO Order_Item VALUES(1, 1, 4,1);
-INSERT INTO Order_Item VALUES(1, 1, 5,1);
-INSERT INTO Order_Item VALUES(1, 1, 6,1);
+select * from Order_Item
+select * from Product
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+--INSERT INTO Order_Item VALUES(1, 1, 1,1);
+
+--INSERT INTO Order_Item VALUES(1, 1, 2,1);
+--INSERT INTO Order_Item VALUES(1, 1, 3,1);
+--INSERT INTO Order_Item VALUES(1, 1, 4,1);
+--INSERT INTO Order_Item VALUES(1, 1, 5,1);
+--INSERT INTO Order_Item VALUES(1, 1, 6,1);
 
 -- FUNCTION
 
@@ -693,6 +710,7 @@ select * from Customer
 select * from Evaluate
 select * from Evaluate_Reply
 select * from Shop
+select * from Role
 --CREATE TABLE Evaluate_Reply
 --(
 --    id_evaluate_reply int IDENTITY(1,1) ,
@@ -703,8 +721,8 @@ select * from Shop
 --    content nvarchar(max),
 --    PRIMARY KEY (id_evaluate_reply)
 --)
---insert into Evaluate_Reply values(1,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
---insert into Evaluate_Reply values(2,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
+--insert into Evaluate_Reply values(3,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
+--insert into Evaluate_Reply values(4,1,GETDATE(),GETDATE(),N'em xin cảm ơn ạ');
 --delete from Customer
 --delete from Cart_Item
 --delete from Order_Item
@@ -730,3 +748,9 @@ select * from Addrress_Cell
 
 --delete from shop where id_shop = 2
 --delete from Addrress where id = 'shop2'
+UPDATE Customer
+SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
+WHERE id_customer = 2;
+SELECT * FROM Order_Item o JOIN Product p on  o.id_product = p.id_product 
+						   JOIN Single_Product_Page spg on spg.id_single_product_page = p.id_single_product_page
+		WHERE spg.id_shop =  1 AND o.status = 1

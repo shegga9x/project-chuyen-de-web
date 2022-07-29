@@ -22,7 +22,7 @@ import backend.backend.services.mainService.SalerService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
-@PreAuthorize("hasAnyRole('ROLE_Student','ROLE_Professor','ROLE_Admin')")
+@PreAuthorize("hasAnyRole('ROLE_Admin','ROLE_User')")
 @RequestMapping("/api/saler")
 public class SalerController {
     @Autowired

@@ -1,7 +1,6 @@
 import Head from "next/head";
 import instance from "../../helpers/axiosConfig";
 import { useEffect, useState } from 'react';
-import { async } from "rxjs";
 
 export default function VerificationProgress({ open, closeModal }) {
 

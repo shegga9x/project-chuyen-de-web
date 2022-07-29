@@ -1,6 +1,5 @@
 package backend.backend;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +7,6 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.apache.pdfbox.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +17,8 @@ import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.utils.SubUtils;
-import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfo;
-import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfoParser;
 import backend.backend.persitence.entities.Category;
+import backend.backend.persitence.entities.OrderItem;
 import backend.backend.persitence.entities.Product;
 import backend.backend.persitence.entities.SingleProductPage;
 import backend.backend.persitence.repository.CartItemRepository;
@@ -130,13 +127,9 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        try {
-            byte[] bytes = IOUtils.toByteArray(new FileInputStream("test.pdf"));
-            List<PDFSignatureInfo> info = PDFSignatureInfoParser.getPDFSignatureInfo(bytes);
-            for (PDFSignatureInfo pdfSignatureInfo : info) {
-                System.out.println(pdfSignatureInfo);
-            }
-        } catch (Exception e) {
+        List<OrderItem> list = orderItemRepository.findByIdCustomerAndStatus(1,(byte) 1);
+        for (OrderItem orderItem:list) {
+            System.out.println(orderItem);
         }
     }
 

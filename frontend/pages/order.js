@@ -9,8 +9,9 @@ import Layout from "../components/layout";
 import OrderProgress from '../components/order/orderProgress';
 import DownToolProgress from '../components/order/downToolProgress';
 import VerificationProgress from '../components/order/verificationProgress';
+import PhoneOTPProgress from '../components/order/phoneOTPProgress';
 import { getSession } from 'next-auth/client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import instance from "../helpers/axiosConfig";
 
 export default function Order(props) {
@@ -19,8 +20,15 @@ export default function Order(props) {
     const [openOrderProgress, setOpenOrderProgress] = useState(false);
     const [openDownToolProgress, setOpenDownToolProgress] = useState(false);
     const [openVerificationProgress, setOpenVerificationProgress] = useState(false);
+    const [openPhoneOTPProgress, setOpenPhoneOTPProgress] = useState(false);
     const [order, setOrder] = useState(props.order);
     const [value, setValue] = useState('1');
+
+
+    useEffect(() => {
+        let list = order.filter(ele => ele.status == 1);
+        setListOrder(list);
+    }, [])
 
 
     const resetAll = () => {
@@ -34,6 +42,10 @@ export default function Order(props) {
         document.getElementsByClassName('content_step3_inside')[0].style.display = "none"
         document.getElementsByClassName('errorStep1')[0].style.visibility = 'hidden';
         document.getElementsByClassName('errorStep2')[0].style.visibility = 'hidden';
+        //Phone OTP Progress
+        document.getElementsByClassName('PhoneNumber')[0].value = "";
+        document.getElementsByClassName('smsNumber')[0].value = "";
+       
     }
 
     const closeModal = (modal) => {
@@ -41,8 +53,10 @@ export default function Order(props) {
             setOpenOrderProgress(false);
         } else if (modal == 'downToolProgress') {
             setOpenDownToolProgress(false);
-        } else {
+        } else if (modal == 'verificationProgress') {
             setOpenVerificationProgress(false);
+        } else {
+            setOpenPhoneOTPProgress(false);
         }
         document.body.classList.toggle('modal-visibile');
         const model = document.getElementsByClassName('modal-load')[0];
@@ -58,8 +72,10 @@ export default function Order(props) {
             setOpenOrderProgress(true);
         } else if (modal == 'downToolProgress') {
             setOpenDownToolProgress(true);
-        } else {
+        } else if (modal == 'verificationProgress') {
             setOpenVerificationProgress(true);
+        } else {
+            setOpenPhoneOTPProgress(true)
         }
     }
 
@@ -67,16 +83,6 @@ export default function Order(props) {
         console.log(newValue);
         setValue(newValue);
     };
-
-    const addItemToListOrder = (event, ele) => {
-        const target = event.target;
-        if (target.checked) {
-            listOrder.push(ele);
-        } else {
-            const result = listOrder.filter(element => element != ele);
-            setListOrder(result);
-        }
-    }
 
     const getTotalCart = (status) => {
         let result = 0;
@@ -95,6 +101,12 @@ export default function Order(props) {
                     Groover - Online Shopping for Electronics, Apparel, Computers, Books,
                     DVDs & more
                 </title>
+                <style dangerouslySetInnerHTML={{
+                    __html: `
+                a {
+                    color:black;
+                }
+                ` }} />
             </Head>
             <Layout >
                 <div className='container'>
@@ -119,7 +131,6 @@ export default function Order(props) {
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th></th>
                                                 <th>Product</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
@@ -131,13 +142,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -153,7 +161,7 @@ export default function Order(props) {
                                                                         <input
                                                                             type="text"
                                                                             className="quantity-text-field"
-                                                                            defaultValue="1"
+                                                                            defaultValue={element.quantity}
                                                                             disabled
                                                                         />
                                                                     </div>
@@ -193,13 +201,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -215,7 +220,7 @@ export default function Order(props) {
                                                                         <input
                                                                             type="text"
                                                                             className="quantity-text-field"
-                                                                            defaultValue="1"
+                                                                            defaultValue={element.quantity}
                                                                             disabled
                                                                         />
                                                                     </div>
@@ -254,13 +259,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -276,7 +278,7 @@ export default function Order(props) {
                                                                         <input
                                                                             type="text"
                                                                             className="quantity-text-field"
-                                                                            defaultValue="1"
+                                                                            defaultValue={element.quantity}
                                                                             disabled
                                                                         />
                                                                     </div>
@@ -315,13 +317,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -337,7 +336,7 @@ export default function Order(props) {
                                                                         <input
                                                                             type="text"
                                                                             className="quantity-text-field"
-                                                                            defaultValue="1"
+                                                                            defaultValue={element.quantity}
                                                                             disabled
                                                                         />
                                                                     </div>
@@ -376,13 +375,10 @@ export default function Order(props) {
                                                     return (
                                                         <tr key={i}>
                                                             <td>
-                                                                <input type="checkbox" onChange={(event) => { addItemToListOrder(event, element) }}></input>
-                                                            </td>
-                                                            <td>
                                                                 <div className="cart-anchor-image">
                                                                     <a href="single-product.html">
                                                                         <img
-                                                                            src="/static/images/product/product@1x.jpg"
+                                                                            src={element.product.imgUrl}
                                                                             alt="Product"
                                                                         />
                                                                         <h6>{element.product.name}</h6>
@@ -398,7 +394,7 @@ export default function Order(props) {
                                                                         <input
                                                                             type="text"
                                                                             className="quantity-text-field"
-                                                                            defaultValue="1"
+                                                                            defaultValue={element.quantity}
                                                                             disabled
                                                                         />
                                                                     </div>
@@ -435,9 +431,10 @@ export default function Order(props) {
                         </div>
                     </div>
                     <div className="modal-load">
-                        <OrderProgress open={openOrderProgress} closeModal={closeModal} listOrder={listOrder}></OrderProgress>
+                        <OrderProgress open={openOrderProgress} closeModal={closeModal} listOrder={listOrder} openPhoneOTPProgress={openModal}></OrderProgress>
                         <DownToolProgress open={openDownToolProgress} closeModal={closeModal}></DownToolProgress>
                         <VerificationProgress open={openVerificationProgress} closeModal={closeModal}></VerificationProgress>
+                        <PhoneOTPProgress open={openPhoneOTPProgress} closeModal={closeModal}></PhoneOTPProgress>
                     </div>
                 </div>
             </Layout>
@@ -447,6 +444,7 @@ export default function Order(props) {
 }
 
 export async function getServerSideProps(context) {
+    console.log(context.locale);
     const session = await getSession(context);
     if (session) {
         const response = await instance(context).get("http://localhost:4000/api/order/getOrderItemByIdCustomer")

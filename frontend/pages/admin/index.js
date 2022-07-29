@@ -1,10 +1,12 @@
 import Head from "next/head";
 import LayoutAdmin from "../../components/layoutAdmin";
 import { useEffect } from "react";
+import instance from "../../helpers/axiosConfig";
+import { getSession } from 'next-auth/client';
 export default function Admin() {
 
   useEffect(() => {
-    setTimeout(() => { $('#dataTable').DataTable() }, 200);
+    // setTimeout(() => { $('#dataTable').DataTable() }, 200);
   }, [])
 
   return (
@@ -507,5 +509,23 @@ export default function Admin() {
       </LayoutAdmin>
     </>
   );
+}
+
+export async function getServerSideProps({ req }) {
+  const session = await getSession({ req });
+  if (session && session.user.role.includes('Admin')) {
+    const response = await instance({ req }).get("http://localhost:4000/api/admin/getAllSingleProductPage")
+    return {
+      props: {
+        singleProductPages: response.data
+      }
+    }
+  }
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/account"
+    }
+  }
 }
 
