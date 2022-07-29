@@ -16,7 +16,7 @@ export default function Profile({ keyword, customer }) {
 
     useEffect(() => {
         const changeInformationCustomer = async () => {
-            await instance().post("http://localhost:4000/api/customer/changeInformationCustomer", customerState);
+            await instance().post("http://localhost:4000/api/customer/changeInformationCustomer", customerState).catch;
             console.log('done');
         }
         if (firstRender != 0) {
@@ -116,8 +116,7 @@ export default function Profile({ keyword, customer }) {
                                                 <li onClick={() => { changeRoute('/account/profile?keyword=payment') }} className={keyword == 'payment' ? 'active' : ''}>Ngân Hàng</li>
                                                 <li onClick={() => { changeRoute('/account/profile?keyword=address') }} className={keyword == 'address' ? 'active' : ''}>Địa Chỉ</li>
                                                 <li>Đổi Mật Khẩu</li>
-                                            </ul>
-                                        </div>
+                                            </ul></div>
                                     </li>
                                     <li>
                                         <div onClick={() => { childListOpen(1) }}>
@@ -162,13 +161,14 @@ export default function Profile({ keyword, customer }) {
 }
 
 export async function getServerSideProps({ req, query }) {
+    
     // session.user.email
-    const session = await getSession({ req });
-    if (session) {
-        const res = await instance({ req }).get("http://localhost:4000/api/customer/getCurrentCustomer")
-        const customer = res.data;
+        const session = await getSession({ req });
+        if (session) {
+            const res = await instance({ req }).get("http://localhost:4000/api/customer/getCurrentCustomer")
+            const customer = res.data;
         if (query.keyword != undefined) {
-            return {
+            return {    
                 props: {
                     keyword: query.keyword,
                     customer: customer

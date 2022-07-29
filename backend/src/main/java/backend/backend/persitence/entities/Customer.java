@@ -7,7 +7,22 @@ package backend.backend.persitence.entities;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import backend.backend.helpers.payload.dto.AddressDTO;
+import backend.backend.helpers.payload.dto.AddrressCellDTO;
+import backend.backend.helpers.utils.SubUtils;
 
 /**
  * JPA entity class for "Customer"
@@ -45,7 +60,7 @@ public class Customer implements Serializable {
     @Column(name = "pubkey", length = 2147483647)
     private String pubkey;
 
-    @Column(name = "address_id", nullable = false)
+    @Column(name = "address_id", nullable = true)
     private String addressId;
 
     // --- ENTITY LINKS ( RELATIONSHIP )
@@ -66,7 +81,7 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer")
     private List<CartItem> listOfCartItem;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Addrress addrress;
 
@@ -155,6 +170,10 @@ public class Customer implements Serializable {
         return this.listOfCartItem;
     }
 
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     public void setAddressId(String addressId) {
         this.addressId = addressId;
     }
@@ -162,10 +181,27 @@ public class Customer implements Serializable {
     public String getAddressId() {
         return this.addressId;
     }
+
+    public Addrress getAddress() {
+        return this.addrress;
+    }
     // --- SETTERS FOR LINKS
 
-    public void setAccount(Account account) {
-        this.account = account;
+    public void setAddressDTO(AddressDTO addressDTO) {
+        this.addrress = (Addrress) SubUtils.mapperObject(addressDTO, new Addrress());
+    }
+
+    public AddressDTO getAddressDTO() {
+        try {
+            return new AddressDTO(
+                    (AddrressCellDTO) SubUtils.mapperObject(this.addrress.getAddrressCell3(), new AddrressCellDTO()),
+                    (AddrressCellDTO) SubUtils.mapperObject(this.addrress.getAddrressCell2(), new AddrressCellDTO()),
+                    (AddrressCellDTO) SubUtils.mapperObject(this.addrress.getAddrressCell(), new AddrressCellDTO()),
+                    this.addrress.getSubLocate());
+        } catch (Exception e) {
+
+        }
+        return null;
     }
 
     // --- toString specific method

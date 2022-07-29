@@ -1,22 +1,33 @@
 package backend.backend.services.entityService;
 
-import backend.backend.helpers.advice.CustomException;
-import backend.backend.helpers.payload.request.CustomerRequest;
-import backend.backend.helpers.payload.response.CustomerResponse;
-import backend.backend.helpers.utils.SubUtils;
-import backend.backend.persitence.entities.*;
-import backend.backend.persitence.repository.*;
-import backend.backend.services.subService.EmailService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import javax.mail.MessagingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Random;
+
+import javax.mail.MessagingException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import backend.backend.helpers.advice.CustomException;
+import backend.backend.helpers.payload.dto.CustomerDTO;
+import backend.backend.helpers.payload.request.CustomerRequest;
+import backend.backend.helpers.utils.SubUtils;
+import backend.backend.persitence.entities.Account;
+import backend.backend.persitence.entities.Customer;
+import backend.backend.persitence.entities.OrderItem;
+import backend.backend.persitence.entities.Product;
+import backend.backend.persitence.entities.ResetEmailToken;
+import backend.backend.persitence.entities.ResetPhoneToken;
+import backend.backend.persitence.repository.AccountRepository;
+import backend.backend.persitence.repository.CustomerRepository;
+import backend.backend.persitence.repository.OrderItemRepository;
+import backend.backend.persitence.repository.ResetEmailTokenRepository;
+import backend.backend.persitence.repository.ResetPhoneTokenRepository;
+import backend.backend.services.subService.EmailService;
 
 @Service
 public class CustomerService {
@@ -39,13 +50,12 @@ public class CustomerService {
     @Autowired
     EmailService emailService;
 
-
-    public CustomerResponse getCurrentCustomer() {
+    public CustomerDTO getCurrentCustomer() {
         int idCustomer = SubUtils.getCurrentUser().getId();
         Optional<Customer> optional = customerRepository.findByIdCustomer(idCustomer);
         if (optional.isPresent()) {
             Customer customer = optional.get();
-            CustomerResponse customerResponse = (CustomerResponse) SubUtils.mapperObject(customer, new CustomerResponse());
+            CustomerDTO customerResponse = (CustomerDTO) SubUtils.mapperObject(customer, new CustomerDTO());
             customerResponse.setEmail(customer.getAccount().getEmail());
             customerResponse.setBirthday(customer.getBirthday());
             return customerResponse;
@@ -55,7 +65,7 @@ public class CustomerService {
             customer.setAccount(account);
             customer.setImgUrl("url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)");
             customer.setName(SubUtils.getCurrentUser().getEmail().split("@")[0]);
-            CustomerResponse customerResponse = (CustomerResponse) SubUtils.mapperObject(customer, new CustomerResponse());
+            CustomerDTO customerResponse = (CustomerDTO) SubUtils.mapperObject(customer, new CustomerDTO());
             customerResponse.setEmail(SubUtils.getCurrentUser().getEmail());
             customerRepository.save(customer);
             return customerResponse;
@@ -63,14 +73,10 @@ public class CustomerService {
     }
 
     public String changeInformationCustomer(CustomerRequest customerRequest) throws ParseException {
-        Customer customer = customerRepository.findByIdCustomer(customerRequest.getIdCustomer()).get();
-        // customer.setAddress(customerRequest.getAddress());
-        customer.setGender(customerRequest.getGender());
-        customer.setImgUrl(customerRequest.getImgUrl());
-        customer.setPhoneNumber(customerRequest.getPhoneNumber());
-        customer.setName(customerRequest.getName());
-        //birthday
-        customer.setBirthday(new SimpleDateFormat("yyyy-MM-dd").parse(customerRequest.getBirthday()));
+        Customer customer = (Customer) SubUtils.mapperObject(customerRequest, new Customer());
+        customer.getAddress().setId("customer" + customer.getIdCustomer());
+        customer.setAddressId("customer" + customer.getIdCustomer());
+        // birthday
         customerRepository.save(customer);
         return null;
     }
@@ -114,8 +120,8 @@ public class CustomerService {
         return "ok";
     }
 
-    //    onCompleteOrderPayment
-    public String onCompleteOrderPayment(String sms){
+    // onCompleteOrderPayment
+    public String onCompleteOrderPayment(String sms) {
         int idCustomer = SubUtils.getCurrentUser().getId();
         Optional<ResetPhoneToken> optinal = resetPhoneTokenRepository.findByResetTokenContent(sms);
         if (optinal.isPresent()) {

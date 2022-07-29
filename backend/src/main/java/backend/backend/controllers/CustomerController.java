@@ -21,7 +21,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/getCurrentCustomer")
-    public ResponseEntity<?> addCartItemToOrder() {
+    public ResponseEntity<?> getCurrentCustomer() {
         return ResponseEntity.ok(customerService.getCurrentCustomer());
     }
 

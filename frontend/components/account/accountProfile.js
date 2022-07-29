@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import InstanceAxios from "../../helpers/axiosConfig";
 import ModalProfileEmail from "./modal/modalProfileEmail";
 import ModalProfilePhone from "./modal/modalProfilePhone";
 
@@ -6,6 +7,14 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
 
     const [openPhone, setOpenPhone] = useState(false);
     const [openEmail, setOpenEmail] = useState(false);
+
+    const [province, setProvince] = useState([]);
+    const [district, setDistrict] = useState([]);
+    const [ward, setWard] = useState([]);
+
+    const [provinceSelected, setProvinceSelected] = useState({ id: 0, name: "" });
+    const [districtSelected, setDistrictSelected] = useState({ id: 0, name: "" });
+    const [wardSelected, setWardSelected] = useState({ id: 0, name: "" });
 
     const openFileImage = () => {
         document.getElementById('file').click();
@@ -31,9 +40,18 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
         const birthday = document.getElementById('birthday').value
         // value imgUrl
         const imgUrl = document.getElementById('imgUrl').style.backgroundImage
+
+        const addressDTO = {
+            provinceId: provinceSelected,
+            districtId: districtSelected,
+            wardCode: wardSelected,
+            subLocate: "Nguyen Van Nghi F7"
+        }
+        console.log(addressDTO);
+
         // value tên shop tạm thời không nên thay đổi vì chưa hiểu trường
 
-        //change customer
+        // change customer
         const newCustomer = {
             idCustomer: customer.idCustomer,
             name: customer.name,
@@ -41,7 +59,7 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
             phoneNumber: customer.phoneNumber,
             gender: gender, birthday: birthday,
             imgUrl: imgUrl,
-            address: customer.address
+            addressDTO: addressDTO
         }
         setFirstRender(1);
         setCustomer(newCustomer);
@@ -77,7 +95,63 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
             resetAll();
         }, 200)
     }
+    useEffect(() => {
+        async function fetchMyAPI() {
+            console.log(customer);
+            let provinceArr = await InstanceAxios().get(`http://localhost:4000/api/ghn/province`).then((data) => {
+                let reformattedArray = data.data.data.map(obj => { return { provinceID: obj.ProvinceID, provinceName: obj.ProvinceName } })
+                setProvince(reformattedArray)
+                return reformattedArray;
+            })
+            const address = customer.addressDTO;
+            if (address) {
+                getAddressCell("district", address.provinceId.id + "-" + address.provinceId.name, true)
+                getAddressCell("ward", address.districtId.id + "-" + address.districtId.name, true)
+                getAddressCell("", address.ward.id + "-" + address.ward.name, true)
+            } else {
+                getAddressCell("district", provinceArr[0].provinceID + "-" + provinceArr[0].provinceName, false)
+            }
+        }
+        fetchMyAPI()
+    }, [])
+    async function getAddressCell(type, value, begin) {
+        const id = value.split("-")[0]
+        const name = value.split("-")[1]
+        let result = null;
+        if (type != "") {
+            let param = "";
+            (type == "district" ? param = `?province_id=` + id : param = `?district_id=` + id)
+            result = await InstanceAxios().get(`http://localhost:4000/api/ghn/${type}` + param).then((data) => {
+                let reformattedArray = data.data.data.map(obj => {
+                    switch (type) {
+                        case "district":
+                            return { districtID: obj.DistrictID, districtName: obj.DistrictName }
+                        case "ward":
+                            return { wardCode: obj.WardCode, wardName: obj.WardName }
+                    }
+                })
+                if (type == "district") {
+                    setDistrict(reformattedArray)
+                    if (!begin) getAddressCell("ward", reformattedArray[0].districtID + "-" + reformattedArray[0].districtName, false)
+                } else {
+                    setWard(reformattedArray)
+                    if (!begin) getAddressCell("", reformattedArray[0].wardCode + "-" + reformattedArray[0].wardName, false)
+                }
+                return reformattedArray;
+            })
+        }
 
+        switch (type) {
+            case "district":
+                setProvinceSelected({ id: id, name: name }); break;
+            case "ward":
+                setDistrictSelected({ id: id, name: name }); break;
+            default:
+                setWardSelected({ id: id, name: name }); break;
+        }
+        return result
+
+    };
     return (
         <>
             <div className="right_container_header" style={{ padding: '18px 0px 18px 0px', borderBottom: '0.0625rem solid #efefef' }}>
@@ -111,9 +185,36 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
                         </div>
                     </div>
                     <div style={{ display: 'flex', marginBottom: '30px' }}>
-                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }}>Tên Shop</div>
+                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }}>Họ Tên</div>
                         <div style={{ paddingLeft: '20px', fontSize: '.875rem', fontWeight: 500 }}>
                             <input id="shopName" type="text" defaultValue={customer.name} />
+                        </div>
+                    </div>
+                    <div style={{ display: 'flex', marginBottom: '30px' }} className="row mt-3">
+                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }} className="col-md-8"><label className="labels">Tỉnh/Thành Phố</label>
+                            <select style={{ marginLeft: "10px" }} name="" id="" value={provinceSelected.id + "-" + provinceSelected.name} onChange={(e) => { getAddressCell("district", e.target.value, false) }}>
+                                {province.map(o =>
+                                (
+                                    <option key={o.provinceID} value={o.provinceID + "-" + o.provinceName} >{o.provinceName}</option>
+                                )
+                                )}
+
+                            </select>
+                        </div>
+                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }} className="col-md-8"><label className="labels">Quận/Huyện</label>
+                            <select style={{ marginLeft: "10px" }} name="" id="" value={districtSelected.id + "-" + districtSelected.name}  onChange={(e) => { getAddressCell("ward", e.target.value, false) }}>
+                                {district.map(o => (
+                                    <option key={o.districtID} value={o.districtID + "-" + o.districtName}  >{o.districtName}</option>
+                                ))}
+
+                            </select>
+                        </div>
+                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }} className="col-md-8"><label className="labels">Phường</label>
+                            <select style={{ marginLeft: "10px" }} name="" id="" value={wardSelected.id + "-" + wardSelected.name} onChange={(e) => { getAddressCell("", e.target.value, false) }}>
+                                {ward.map(o => (
+                                    <option key={o.wardCode} value={o.wardCode + "-" + o.wardName} >{o.wardName}</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
                     <div style={{ display: 'flex', marginBottom: '30px' }}>

@@ -107,6 +107,8 @@ CREATE TABLE Reset_Email_Token
     [email_reset] [datetime2](7) NULL,
     PRIMARY KEY (ID_ACCOUNT)
 )
+
+
 CREATE TABLE Customer
 (
     id_customer int FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,
@@ -115,10 +117,16 @@ CREATE TABLE Customer
     gender CHAR(1),
     birthday date,
     img_url VARCHAR(MAX),
-    address_id nvarchar(50) NOT NULL FOREIGN KEY REFERENCES Addrress ([id]) unique,
+    address_id    nvarchar(50)  FOREIGN KEY REFERENCES Addrress ([id]) NULL ,
 	pubkey nvarchar(max),
     PRIMARY KEY (id_customer)
 )
+CREATE UNIQUE INDEX indunique
+  ON Customer(address_id)
+  WHERE address_id IS NOT NULL
+
+
+
 CREATE TABLE Shop
 (
     id_shop int FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,    
@@ -334,10 +342,10 @@ INSERT INTO ACCOUNT_has_role
 VALUES
     (2, 2)
 ;
-INSERT INTO Verification_Token
+INSERT INTO Verification_Token	
 VALUES
     (1, null, getdate())
-	INSERT INTO Verification_Token
+	INSERT INTO Verification_Token	
 VALUES
     (2, null, getdate())
 INSERT INTO Addrress_Cell VALUES(202, N'TP Hồ Chí Minh');
@@ -349,19 +357,19 @@ INSERT INTO Addrress_Cell VALUES(21305, N'Phường 7');
 INSERT INTO Addrress VALUES(N'shop1', 202,1461,21305,N'Nguyễn Văn Nghi');
 INSERT INTO Addrress VALUES(N'customer1', 202,1461,21305,N'Nguyễn Văn Nghi');
 
--- Customer
+ --Customer
 INSERT INTO Customer
 VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '',N'customer1',null);
 
-INSERT INTO Customer
-VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',1,null);
-update Customer set phone_number = '0339579758' where id_customer = 2;
+--INSERT INTO Customer
+--VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',1,null);
+--update Customer set phone_number = '0339579758' where id_customer = 2;
 -- Shop
 INSERT INTO Shop
 VALUES(1, N'shop của Phùng', '0378876395', N'', N'shop1', N'Shop ác nhất hành tinh');
 
-INSERT INTO Shop
-VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', N'', 1, N'Shop ác nhất vũ trụ');
+--INSERT INTO Shop
+--VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', N'', 1, N'Shop ác nhất vũ trụ');
 
 -- Shop_Category
 INSERT INTO Shop_Category
@@ -750,7 +758,14 @@ select * from Addrress_Cell
 --delete from Addrress where id = 'shop2'
 UPDATE Customer
 SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
-WHERE id_customer = 2;
+WHERE id_customer = 2;	
 SELECT * FROM Order_Item o JOIN Product p on  o.id_product = p.id_product 
 						   JOIN Single_Product_Page spg on spg.id_single_product_page = p.id_single_product_page
 		WHERE spg.id_shop =  1 AND o.status = 1
+
+
+
+
+
+
+

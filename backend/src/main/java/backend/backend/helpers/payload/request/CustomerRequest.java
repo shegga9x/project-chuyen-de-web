@@ -1,7 +1,10 @@
 package backend.backend.helpers.payload.request;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import backend.backend.helpers.payload.dto.AddressDTO;
 
 public class CustomerRequest {
 
@@ -17,6 +20,10 @@ public class CustomerRequest {
 
     private String birthday;
 
+    private String imgUrl;
+
+    private AddressDTO addressDTO;
+
     public String getEmail() {
         return email;
     }
@@ -24,10 +31,6 @@ public class CustomerRequest {
     public void setEmail(String email) {
         this.email = email;
     }
-
-    private String imgUrl;
-
-    private String address;
 
     public Integer getIdCustomer() {
         return idCustomer;
@@ -61,8 +64,13 @@ public class CustomerRequest {
         this.gender = gender;
     }
 
-    public String getBirthday() {
-        return birthday;
+    public Date getBirthday() {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(birthday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void setBirthday(Date birthday) {
@@ -77,11 +85,12 @@ public class CustomerRequest {
         this.imgUrl = imgUrl;
     }
 
-    public String getAddress() {
-        return address;
+    public AddressDTO getAddressDTO() {
+        return this.addressDTO;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddressDTO(AddressDTO addressDTO) {
+        this.addressDTO = addressDTO;
     }
+
 }

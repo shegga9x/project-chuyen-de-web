@@ -9,6 +9,8 @@ public class CustomerDTO {
 
     private String name;
 
+    private String email;
+
     private String phoneNumber;
 
     private String gender;
@@ -17,7 +19,9 @@ public class CustomerDTO {
 
     private String imgUrl;
 
-    private String address;
+    private String addressId;
+
+    private AddressDTO addressDTO;
 
     public Integer getIdCustomer() {
         return this.idCustomer;
@@ -67,12 +71,28 @@ public class CustomerDTO {
         this.imgUrl = imgUrl;
     }
 
-    public String getAddress() {
-        return this.address;
+    public String getAddressId() {
+        return this.addressId;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAddressId(String addressId) {
+        this.addressId = addressId;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public AddressDTO getAddressDTO() {
+        return this.addressDTO;
+    }
+
+    public void setAddressDTO(AddressDTO addressDTO) {
+        this.addressDTO = addressDTO;
     }
 
 }
