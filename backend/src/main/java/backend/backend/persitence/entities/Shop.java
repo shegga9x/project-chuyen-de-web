@@ -6,7 +6,21 @@ package backend.backend.persitence.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import backend.backend.helpers.payload.dto.AddressDTO;
+import backend.backend.helpers.payload.dto.AddrressCellDTO;
+import backend.backend.helpers.utils.SubUtils;
 
 /**
  * JPA entity class for "Shop"
@@ -38,27 +52,16 @@ public class Shop implements Serializable {
     @Column(name = "description", length = 2147483647)
     private String description;
     @Column(name = "address_id", nullable = false)
-    private Integer addressId;
+    private String addressId;
 
     // --- ENTITY LINKS ( RELATIONSHIP )
-    @OneToMany(mappedBy = "shop")
-    private List<SingleProductPage> listOfSingleProductPage;
 
-    @OneToOne(mappedBy = "shop")
-    private WalletShop walletShop;
-
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_shop", referencedColumnName = "ID_ACCOUNT", insertable = false, updatable = false)
     @MapsId
     private Account account;
 
-    @OneToMany(mappedBy = "shop")
-    private List<EvaluateReply> listOfEvaluateReply;
-
-    @OneToMany(mappedBy = "shop")
-    private List<ShopCategory> listOfShopCategory;
-
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Addrress addrress;
 
@@ -67,6 +70,16 @@ public class Shop implements Serializable {
      */
     public Shop() {
         super();
+    }
+
+    public Shop(Integer idShop, String name, String phoneNumber, String imgUrl, String description, String addressId) {
+        this.idShop = idShop;
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.imgUrl = imgUrl;
+        this.description = description;
+        this.addressId = addressId;
+
     }
 
     // --- GETTERS & SETTERS FOR FIELDS
@@ -102,7 +115,6 @@ public class Shop implements Serializable {
         return this.imgUrl;
     }
 
- 
     public void setDescription(String description) {
         this.description = description;
     }
@@ -112,32 +124,38 @@ public class Shop implements Serializable {
     }
 
     // --- GETTERS FOR LINKS
-    public List<SingleProductPage> getListOfSingleProductPage() {
-        return this.listOfSingleProductPage;
-    }
 
-    public WalletShop getWalletShop() {
-        return this.walletShop;
-    }
 
-    public Account getAccount() {
-        return this.account;
-    }
-
-    public List<EvaluateReply> getListOfEvaluateReply() {
-        return this.listOfEvaluateReply;
-    }
-
-    public List<ShopCategory> getListOfShopCategory() {
-        return this.listOfShopCategory;
-    }
-
-    public void setAddressId(Integer addressId) {
+    public void setAddressId(String addressId) {
         this.addressId = addressId;
     }
 
-    public Integer getAddressId() {
+    public String getAddressId() {
         return this.addressId;
+    }
+
+    public void setAddrress(Addrress addrress) {
+        this.addrress = addrress;
+    }
+
+    public Addrress getAddress() {
+        return this.addrress;
+    }
+
+    public void setAddressDTO(AddressDTO addressDTO) {
+        this.addrress = (Addrress) SubUtils.mapperObject(addressDTO, new Addrress());
+    }
+
+    public AddressDTO getAddressDTO() {
+        return new AddressDTO(
+                (AddrressCellDTO) SubUtils.mapperObject(this.addrress.getAddrressCell3(), new AddrressCellDTO()),
+                (AddrressCellDTO) SubUtils.mapperObject(this.addrress.getAddrressCell2(), new AddrressCellDTO()),
+                (AddrressCellDTO) SubUtils.mapperObject(this.addrress.getAddrressCell(), new AddrressCellDTO()),
+                this.addrress.getSubLocate());
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     // --- toString specific method
@@ -152,7 +170,7 @@ public class Shop implements Serializable {
         sb.append("|");
         sb.append(imgUrl);
         sb.append("|");
-      
+
         sb.append(description);
         return sb.toString();
     }

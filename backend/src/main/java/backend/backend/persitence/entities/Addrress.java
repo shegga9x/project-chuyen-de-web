@@ -5,8 +5,20 @@
 package backend.backend.persitence.entities;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.SQLInsert;
+
+import backend.backend.helpers.payload.dto.AddrressCellDTO;
+import backend.backend.helpers.utils.SubUtils;
 
 /**
  * JPA entity class for "Addrress"
@@ -16,15 +28,15 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "Addrress", schema = "dbo", catalog = "shop")
+@SQLInsert( sql="EXECUTE updateAddrress    @district_id = ?, @province_id = ?,@sub_locate = ?, @ward_code = ?, @id = ?")
 public class Addrress implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     // --- ENTITY PRIMARY KEY
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
-    private Integer id;
+    private String id;
 
     // --- ENTITY DATA FIELDS
     @Column(name = "province_id", nullable = false)
@@ -40,23 +52,23 @@ public class Addrress implements Serializable {
     private String subLocate;
 
     // --- ENTITY LINKS ( RELATIONSHIP )
-    @OneToMany(mappedBy = "addrress")
-    private List<Customer> listOfCustomer;
+    @OneToOne(mappedBy = "addrress")
+    private Customer listOfCustomer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "province_id", referencedColumnName = "id", insertable = false, updatable = false)
     private AddrressCell addrressCell3;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "district_id", referencedColumnName = "id", insertable = false, updatable = false)
     private AddrressCell addrressCell2;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ward_Code", referencedColumnName = "id", insertable = false, updatable = false)
     private AddrressCell addrressCell;
 
-    @OneToMany(mappedBy = "addrress")
-    private List<Shop> listOfShop;
+    @OneToOne(mappedBy = "addrress")
+    private Shop shop;
 
     /**
      * Constructor
@@ -65,37 +77,21 @@ public class Addrress implements Serializable {
         super();
     }
 
+    public Addrress(Integer provinceId, Integer districtId, Integer wardCode, String subLocate) {
+        this.provinceId = provinceId;
+        this.districtId = districtId;
+        this.wardCode = wardCode;
+        this.subLocate = subLocate;
+
+    }
+
     // --- GETTERS & SETTERS FOR FIELDS
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public Integer getId() {
+    public String getId() {
         return this.id;
-    }
-
-    public void setProvinceId(Integer provinceId) {
-        this.provinceId = provinceId;
-    }
-
-    public Integer getProvinceId() {
-        return this.provinceId;
-    }
-
-    public void setDistrictId(Integer districtId) {
-        this.districtId = districtId;
-    }
-
-    public Integer getDistrictId() {
-        return this.districtId;
-    }
-
-    public void setWardcode(Integer wardCode) {
-        this.wardCode = wardCode;
-    }
-
-    public Integer getWardcode() {
-        return this.wardCode;
     }
 
     public void setSubLocate(String subLocate) {
@@ -107,7 +103,7 @@ public class Addrress implements Serializable {
     }
 
     // --- GETTERS FOR LINKS
-    public List<Customer> getListOfCustomer() {
+    public Customer getListOfCustomer() {
         return this.listOfCustomer;
     }
 
@@ -123,8 +119,48 @@ public class Addrress implements Serializable {
         return this.addrressCell;
     }
 
-    public List<Shop> getListOfShop() {
-        return this.listOfShop;
+    public Shop getShop() {
+        return this.shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
+
+    public void setProvinceId(AddrressCellDTO provinceId) {
+        this.provinceId = provinceId.getId();
+    }
+
+    public void setDistrictId(AddrressCellDTO districtId) {
+        this.districtId = districtId.getId();
+    }
+
+    public void setWardCode(AddrressCellDTO wardCode) {
+        this.wardCode = wardCode.getId();
+    }
+
+    public Integer getProvinceId1() {
+        return this.provinceId;
+    }
+
+    public Integer getDistrictId1() {
+        return this.districtId;
+    }
+
+    public Integer getWardCode1() {
+        return this.wardCode;
+    }
+
+    public void setProvince(AddrressCellDTO province) {
+        this.addrressCell3 = (AddrressCell) SubUtils.mapperObject(province, new AddrressCell());
+    }
+
+    public void setDistrict(AddrressCellDTO district) {
+        this.addrressCell2 = (AddrressCell) SubUtils.mapperObject(district, new AddrressCell());
+    }
+
+    public void setWard(AddrressCellDTO ward) {
+        this.addrressCell = (AddrressCell) SubUtils.mapperObject(ward, new AddrressCell());
     }
 
     // --- toString specific method

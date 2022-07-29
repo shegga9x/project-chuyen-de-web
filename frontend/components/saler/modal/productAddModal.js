@@ -23,9 +23,9 @@ const customStyles = {
 }
 
 const validationSchema = Yup.object().shape({
-    name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-    description: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
-    name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Required'),
+    name: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Bắt Buộc'),
+    description: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Bắt Buộc'),
+    idCategory: Yup.number().required('Bắt Buộc'),
 });
 export default function ProductAddModal({ open, closeModal }) {
     const [checked1, setChecked] = useState([]);
@@ -46,7 +46,7 @@ export default function ProductAddModal({ open, closeModal }) {
     };
     const formik = useFormik({
         initialValues: {
-            name: '',
+            name: "",
             description: '',
             productDTOs: [{
                 name: '',
@@ -60,7 +60,13 @@ export default function ProductAddModal({ open, closeModal }) {
         },
         validationSchema,
         onSubmit: values => {
-            InstanceAxios().post(`http://localhost:4000/api/saler/productSalerUpdate`, values)
+            InstanceAxios().post(`http://localhost:4000/api/saler/productSalerUpdate`, values).then((response) => {
+                alert("Cập Nhật Thành Công"); formik.resetForm(); setImages([]); closeModal();
+            }).catch((error) => {
+                if (error.response) {
+                    alert("Cập Nhật Thất Bại");
+                }
+            });
         },
     });
     const handleClick = () => {
@@ -89,8 +95,15 @@ export default function ProductAddModal({ open, closeModal }) {
                     const cagetory = find(nodes, parseInt(arr[0]))
                     setChecked(arr);
                     setSelectedCagetory(cagetory)
-                    formik.setFieldValue(`cagetory`, cagetory.label);
-                    formik.setFieldValue(`idCategory`, cagetory.value);
+                    if (cagetory) {
+                        formik.setFieldValue(`cagetory`, cagetory.label);
+                        formik.setFieldValue(`idCategory`, cagetory.value);
+                    } else {
+                        formik.setFieldValue(`cagetory`, null);
+                        formik.setFieldValue(`idCategory`, null);
+                    }
+
+
                 }
             }}
             onExpand={(expanded) => { setExpanded(expanded); }} />
@@ -163,15 +176,8 @@ export default function ProductAddModal({ open, closeModal }) {
                 <div className="panel-body" >
                     <form onSubmit={formik.handleSubmit} className="form-horizontal" role="form">
                         <div className="form-group">
-                            <label htmlFor="name" className="col-sm-3 control-label">Тип заказа</label>
-                            <div className="col-sm-9">
-                                <label className="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio1" defaultValue="option1" /> Tên Sản Phẩm
-                                </label>
-                                <label className="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" defaultValue="option2" /> Внутренный заказ
-                                </label>
-                            </div>
+
+
                         </div> {/* form-group // */}
                         <div className="form-group">
                             <label htmlFor="name" className="col-sm-3 control-label" >Tên Sản Phẩm</label>
@@ -207,6 +213,8 @@ export default function ProductAddModal({ open, closeModal }) {
                             <div className="col-sm-3">
                                 <input type="text" name="cagetory" className="form-control" onChange={formik.handleChange} disabled
                                     value={formik.values.cagetory} />
+                                {(formik.errors.idCategory) && <div>{formik.errors.idCategory}</div>}
+
                             </div>
                         </div> {/* form-group // */}
                         <div className="form-group">
@@ -225,7 +233,6 @@ export default function ProductAddModal({ open, closeModal }) {
                             <div className="col-sm-offset-3 col-sm-9">
                                 <button type="submit" onClick={() => formik.validateForm().then((e) => {
                                     (Object.keys(e).length !== 0 ? alert("Hay Hoan Thanh Form") : "")
-                                    console.log(e);
                                 })} className="btn btn-primary">Lưu</button>
                             </div>
                         </div> {/* form-group // */}

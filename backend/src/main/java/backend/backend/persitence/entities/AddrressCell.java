@@ -6,7 +6,14 @@ package backend.backend.persitence.entities;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.SQLInsert;
 
 /**
  * JPA entity class for "AddrressCell"
@@ -15,75 +22,76 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Addrress_Cell", schema="dbo", catalog="shop" )
+@Table(name = "Addrress_Cell", schema = "dbo", catalog = "shop")
+@SQLInsert( sql="EXECUTE updateAddrress_Cell   @name = ?,@id = ?")
 public class AddrressCell implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    //--- ENTITY PRIMARY KEY 
+    // --- ENTITY PRIMARY KEY
     @Id
-    @Column(name="id", nullable=false)
-    private Integer    id ;
+    @Column(name = "id", nullable = false)
+    private Integer id;
 
-    //--- ENTITY DATA FIELDS 
-    @Column(name="name", nullable=false, length=50)
-    private String     name ;
+    // --- ENTITY DATA FIELDS
+    @Column(name = "name", nullable = false, length = 50)
+    private String name;
 
+    // --- ENTITY LINKS ( RELATIONSHIP )
+    @OneToMany(mappedBy = "addrressCell2")
+    private List<Addrress> listOfAddrress2;
 
-    //--- ENTITY LINKS ( RELATIONSHIP )
-    @OneToMany(mappedBy="addrressCell2")
-    private List<Addrress> listOfAddrress2 ; 
+    @OneToMany(mappedBy = "addrressCell")
+    private List<Addrress> listOfAddrress;
 
-    @OneToMany(mappedBy="addrressCell")
-    private List<Addrress> listOfAddrress ; 
-
-    @OneToMany(mappedBy="addrressCell3")
-    private List<Addrress> listOfAddrress3 ; 
-
+    @OneToMany(mappedBy = "addrressCell3")
+    private List<Addrress> listOfAddrress3;
 
     /**
      * Constructor
      */
     public AddrressCell() {
-		super();
+        super();
     }
-    
-    //--- GETTERS & SETTERS FOR FIELDS
-    public void setId( Integer id ) {
-        this.id = id ;
+
+    // --- GETTERS & SETTERS FOR FIELDS
+    public void setId(Integer id) {
+        this.id = id;
     }
+
     public Integer getId() {
         return this.id;
     }
 
-    public void setName( String name ) {
-        this.name = name ;
+    public void setName(String name) {
+        this.name = name;
     }
+
     public String getName() {
         return this.name;
     }
 
-    //--- GETTERS FOR LINKS
+    // --- GETTERS FOR LINKS
     public List<Addrress> getListOfAddrress2() {
         return this.listOfAddrress2;
-    } 
+    }
 
     public List<Addrress> getListOfAddrress() {
         return this.listOfAddrress;
-    } 
+    }
 
     public List<Addrress> getListOfAddrress3() {
         return this.listOfAddrress3;
-    } 
+    }
 
-    //--- toString specific method
-	@Override
-    public String toString() { 
-        StringBuilder sb = new StringBuilder(); 
+    // --- toString specific method
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
         sb.append(id);
         sb.append("|");
         sb.append(name);
-        return sb.toString(); 
-    } 
+        return sb.toString();
+    }
 
 }

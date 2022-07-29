@@ -1,18 +1,20 @@
 package backend.backend.helpers.utils.digitalSignature;
 
-import backend.backend.helpers.payload.request.DigitalSignatureRequest2;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.springframework.util.Base64Utils;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.math.BigInteger;
+import java.security.DigestInputStream;
+import java.security.Key;
+import java.security.MessageDigest;
+import java.security.Security;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.math.BigInteger;
-import java.security.*;
-import java.util.Base64;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.springframework.util.Base64Utils;
+
+import backend.backend.helpers.payload.request.DigitalSignatureRequest2;
 
 public class DigitalSignature {
     static int ivSize = 16;

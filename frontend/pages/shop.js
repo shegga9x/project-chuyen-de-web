@@ -286,4 +286,4 @@ export async function getServerSideProps(context) {
     redirect:
       { permanent: false, destination: "/500", },
   };
-}
+} 

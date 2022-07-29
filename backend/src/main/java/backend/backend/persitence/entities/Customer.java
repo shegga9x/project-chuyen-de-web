@@ -46,7 +46,7 @@ public class Customer implements Serializable {
     private String pubkey;
 
     @Column(name = "address_id", nullable = false)
-    private Integer addressId;
+    private String addressId;
 
     // --- ENTITY LINKS ( RELATIONSHIP )
     @OneToMany(mappedBy = "customer")
@@ -66,7 +66,7 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer")
     private List<CartItem> listOfCartItem;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "id", insertable = false, updatable = false)
     private Addrress addrress;
 
@@ -155,11 +155,11 @@ public class Customer implements Serializable {
         return this.listOfCartItem;
     }
 
-    public void setAddressId(Integer addressId) {
+    public void setAddressId(String addressId) {
         this.addressId = addressId;
     }
 
-    public Integer getAddressId() {
+    public String getAddressId() {
         return this.addressId;
     }
     // --- SETTERS FOR LINKS

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import backend.backend.helpers.advice.CustomException;
 import backend.backend.helpers.payload.dto.OrderItemDTO;
+import backend.backend.helpers.payload.dto.ShopDTO;
 import backend.backend.helpers.payload.dto.SingleProductPageDTO;
 import backend.backend.helpers.payload.response.MessageResponse;
 import backend.backend.helpers.utils.SubUtils;
@@ -41,8 +42,7 @@ public class SalerController {
     }
 
     @PostMapping({ "/productSalerUpdate" })
-    public ResponseEntity<?> productSalerUpdate(@RequestBody SingleProductPageDTO singleProductPageDTO ) {
-        System.out.println(singleProductPageDTO);
+    public ResponseEntity<?> productSalerUpdate(@RequestBody SingleProductPageDTO singleProductPageDTO) {
         if (!salerService.productSalerUpdate(singleProductPageDTO))
             throw new CustomException("Add Product Fail");
         return ResponseEntity.ok(new MessageResponse("Add Order Success"));
@@ -63,6 +63,16 @@ public class SalerController {
         if (!salerService.orderSalerUpdateStatus(orderItemDTO))
             throw new CustomException("Add Order Fail");
         return ResponseEntity.ok(new MessageResponse("Add Order Success"));
+    }
+
+    @GetMapping({ "/getShopProfile" })
+    public ResponseEntity<?> getShopProfile() {
+        return ResponseEntity.ok(salerService.getShopProfile());
+    }
+
+    @PostMapping({ "/updateShop" })
+    public ResponseEntity<?> updateShop(@RequestBody ShopDTO request) {
+        return ResponseEntity.ok(new MessageResponse(salerService.updateShop(request) + ""));
     }
 
 }

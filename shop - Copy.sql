@@ -29,7 +29,7 @@ create table Addrress_Cell
 --dữ liệu bảng Address
 create table Addrress
 (
-    id int IDENTITY(1,1) PRIMARY KEY,
+    id nvarchar(50) PRIMARY KEY,
     province_id int NOT NULL FOREIGN KEY REFERENCES Addrress_Cell ([id]),
     district_id int NOT NULL FOREIGN KEY REFERENCES Addrress_Cell ([id]),
     ward_code int NOT NULL FOREIGN KEY REFERENCES Addrress_Cell ([id]),
@@ -115,17 +115,17 @@ CREATE TABLE Customer
     gender CHAR(1),
     birthday date,
     img_url VARCHAR(MAX),
-    address_id int NOT NULL FOREIGN KEY REFERENCES Addrress ([id]),
+    address_id nvarchar(50) NOT NULL FOREIGN KEY REFERENCES Addrress ([id]) unique,
 	pubkey nvarchar(max),
     PRIMARY KEY (id_customer)
 )
 CREATE TABLE Shop
 (
-    id_shop int FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,
+    id_shop int FOREIGN KEY REFERENCES ACCOUNT (ID_ACCOUNT) ,    
     name nvarchar(max) ,
     phone_number varchar(15),
     img_url VARCHAR(MAX),
-    address_id int NOT NULL FOREIGN KEY REFERENCES Addrress ([id]),
+    address_id nvarchar(50)  NOT NULL FOREIGN KEY REFERENCES Addrress ([id]) unique,
     description nvarchar(max),
     PRIMARY KEY (id_shop)
 )
@@ -279,6 +279,41 @@ ALTER TABLE Chat_Line
 -- TRIGGER
 
 -- FUNCTION
+-- PROCEDURE
+go
+create PROCEDURE updateAddrress_Cell
+    @name nvarchar(50),
+	@id int
+As
+Begin
+IF EXISTS (SELECT * FROM Addrress_Cell WHERE id=@id)
+    UPDATE Addrress_Cell SET name =@name WHERE id=@id
+ELSE
+    INSERT INTO Addrress_Cell VALUES (@id,@name)
+End
+go
+create PROCEDURE updateAddrress
+    @id nvarchar(50),
+	@province_id int,
+	@district_id int,
+	@ward_code int,
+	@sub_locate nvarchar(50)
+
+As
+Begin
+IF EXISTS (SELECT * FROM Addrress WHERE id=@id)
+    UPDATE Addrress SET province_id = @province_id,district_id = @district_id,ward_code = @ward_code,sub_locate=@sub_locate  WHERE id=@id
+ELSE
+    INSERT INTO Addrress VALUES (@id,@province_id,@district_id,@ward_code,@sub_locate)
+End
+
+go
+INSERT Addrress_Cell(id, name)
+SELECT id, name  FROM Addrress_Cell AS t
+WHERE NOT EXISTS (SELECT 1 FROM Addrress_Cell AS d WHERE id = t.id );
+go
+---
+
 INSERT INTO Role
 VALUES
     (0)
@@ -303,15 +338,16 @@ INSERT INTO Addrress_Cell VALUES(1461, N'Quận Gò Vấp');
 
 INSERT INTO Addrress_Cell VALUES(21305, N'Phường 7');
 
-INSERT INTO Addrress VALUES( 202,1461,21305,N'Nguyễn Văn Nghi');
+INSERT INTO Addrress VALUES(N'shop1', 202,1461,21305,N'Nguyễn Văn Nghi');
+INSERT INTO Addrress VALUES(N'customer1', 202,1461,21305,N'Nguyễn Văn Nghi');
 
 -- Customer
 INSERT INTO Customer
-VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '',1,null);
+VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '',N'customer1',null);
 
 -- Shop
 INSERT INTO Shop
-VALUES(1, N'shop của Phùng', '0378876395', N'', 1, N'Shop ác nhất hành tinh');
+VALUES(1, N'shop của Phùng', '0378876395', N'', N'shop1', N'Shop ác nhất hành tinh');
 
 -- Shop_Category
 INSERT INTO Shop_Category
@@ -683,6 +719,14 @@ select * from Shop
 UPDATE Customer
 SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
 WHERE id_customer = 1;
-SELECT * FROM Order_Item o JOIN Product p on  o.id_product = p.id_product 
-						   JOIN Single_Product_Page spg on spg.id_single_product_page = p.id_single_product_page
-		WHERE spg.id_shop =  1 AND o.status = 1
+
+use shop
+select * from ACCOUNT
+select * from shop
+	
+select * from Addrress
+select * from Addrress_Cell
+
+
+--delete from shop where id_shop = 2
+--delete from Addrress where id = 'shop2'

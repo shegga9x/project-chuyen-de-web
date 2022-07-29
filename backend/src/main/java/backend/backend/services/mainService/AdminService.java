@@ -1,16 +1,15 @@
 package backend.backend.services.mainService;
 
-import backend.backend.helpers.advice.CustomException;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import backend.backend.helpers.payload.dto.SingleProductPageDTO;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.entities.SingleProductPage;
 import backend.backend.persitence.repository.SingleProductPageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class AdminService {

@@ -1,29 +1,51 @@
 package backend.backend.services.entityService;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
-import backend.backend.helpers.payload.request.EvaluateRequest;
-import backend.backend.helpers.payload.response.*;
-import backend.backend.persitence.entities.*;
-import backend.backend.persitence.model.UserDetailCustom;
-import backend.backend.persitence.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import backend.backend.helpers.payload.dto.CategoryDto;
 import backend.backend.helpers.payload.dto.OrderItemDTO;
 import backend.backend.helpers.payload.dto.OrderMapValue;
 import backend.backend.helpers.payload.dto.SingleProductPageDTO;
+import backend.backend.helpers.payload.request.EvaluateRequest;
+import backend.backend.helpers.payload.response.CategoryResponse;
+import backend.backend.helpers.payload.response.CustomSinglePage;
+import backend.backend.helpers.payload.response.EvaluateReplyResponse;
+import backend.backend.helpers.payload.response.EvaluateResponse;
+import backend.backend.helpers.payload.response.PageSingleProductResponse;
+import backend.backend.helpers.payload.response.ProductResponse;
+import backend.backend.helpers.payload.response.SalerOrderItemResponse;
 import backend.backend.helpers.utils.SubUtils;
+import backend.backend.persitence.entities.Category;
+import backend.backend.persitence.entities.Evaluate;
+import backend.backend.persitence.entities.EvaluateReply;
+import backend.backend.persitence.entities.OrderItem;
+import backend.backend.persitence.entities.Product;
+import backend.backend.persitence.entities.SingleProductPage;
+import backend.backend.persitence.repository.AccountRepository;
+import backend.backend.persitence.repository.CategoryRepository;
+import backend.backend.persitence.repository.EvaluateReplyRepository;
+import backend.backend.persitence.repository.EvaluateRepository;
+import backend.backend.persitence.repository.OrderItemRepository;
+import backend.backend.persitence.repository.ProductRepository;
+import backend.backend.persitence.repository.SingleProductPageRepository;
 
 @Service
 public class SingleProductPageService {
@@ -87,7 +109,6 @@ public class SingleProductPageService {
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
                 singleProductPage.get().getTotalQuantity());
-        // System.out.println(result);
         return result;
     }
 

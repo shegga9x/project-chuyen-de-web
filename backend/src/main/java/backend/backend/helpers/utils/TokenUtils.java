@@ -85,14 +85,19 @@ public class TokenUtils {
     public void removeOldRefreshTokens(int idAccount) {
         List<Integer> ids = new ArrayList<>();
         Account account = accountRepository.findById(idAccount).get();
-        for (RefreshToken refreshToken : account.getListOfRefreshToken()) {
-            if (refreshToken.getRevoked() != null
-                    && refreshToken.getExpires().before(new Date())
-                    && new Date(refreshToken.getCreated().getTime() + jwtRefreshExpirationMs).before(new Date())) {
-                ids.add(refreshToken.getId());
+        try {
+
+            for (RefreshToken refreshToken : account.getListOfRefreshToken()) {
+                if (refreshToken.getRevoked() != null
+                        && refreshToken.getExpires().before(new Date())
+                        && new Date(refreshToken.getCreated().getTime() + jwtRefreshExpirationMs).before(new Date())) {
+                    ids.add(refreshToken.getId());
+                }
             }
+            refreshTokenRepository.deleteAllById(ids);
+        } catch (Exception e) {
+            // TODO: handle exception
         }
-        refreshTokenRepository.deleteAllById(ids);
     }
 
     public Account getAccountByResetToken(String token) {

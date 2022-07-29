@@ -1,7 +1,5 @@
 package backend.backend.helpers.payload.response;
 
-import java.util.Date;
-
 public class EvaluateResponse {
     private int idEvaluate;
     private int idSingleProductPage;
