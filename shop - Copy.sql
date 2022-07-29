@@ -117,11 +117,11 @@ CREATE TABLE Customer
     gender CHAR(1),
     birthday date,
     img_url VARCHAR(MAX),
-    address_id    nvarchar(50)  FOREIGN KEY REFERENCES Addrress ([id]) NULL ,
+    address_id nvarchar(50)  FOREIGN KEY REFERENCES Addrress ([id]) NULL ,
 	pubkey nvarchar(max),
     PRIMARY KEY (id_customer)
 )
-CREATE UNIQUE INDEX indunique
+CREATE UNIQUE INDEX customer_unique
   ON Customer(address_id)
   WHERE address_id IS NOT NULL
 
@@ -133,10 +133,14 @@ CREATE TABLE Shop
     name nvarchar(max) ,
     phone_number varchar(15),
     img_url VARCHAR(MAX),
-    address_id nvarchar(50)  NOT NULL FOREIGN KEY REFERENCES Addrress ([id]) unique,
+    address_id nvarchar(50)  FOREIGN KEY REFERENCES Addrress ([id]) NULL ,
     description nvarchar(max),
     PRIMARY KEY (id_shop)
 )
+CREATE UNIQUE INDEX shop_unique
+  ON Shop(address_id)
+  WHERE address_id IS NOT NULL
+
 CREATE TABLE Shop_Category
 (
     id_shop_category int IDENTITY(1,1) ,
@@ -764,7 +768,7 @@ SELECT * FROM Order_Item o JOIN Product p on  o.id_product = p.id_product
 		WHERE spg.id_shop =  1 AND o.status = 1
 
 
-
+		select * from shop
 
 
 

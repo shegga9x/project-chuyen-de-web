@@ -73,9 +73,14 @@ public class CustomerService {
     }
 
     public String changeInformationCustomer(CustomerRequest customerRequest) throws ParseException {
+        System.out.println("okok");
+        Account account = accountRepository.getById(SubUtils.getCurrentUser().getId());
         Customer customer = (Customer) SubUtils.mapperObject(customerRequest, new Customer());
-        customer.getAddress().setId("customer" + customer.getIdCustomer());
+        customer.setIdCustomer(SubUtils.getCurrentUser().getId());
         customer.setAddressId("customer" + customer.getIdCustomer());
+        
+        customer.getAddress().setId("customer" + customer.getIdCustomer());
+        customer.setAccount(account);
         // birthday
         customerRepository.save(customer);
         return null;
