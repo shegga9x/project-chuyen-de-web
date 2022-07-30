@@ -117,11 +117,11 @@ CREATE TABLE Customer
     gender CHAR(1),
     birthday date,
     img_url VARCHAR(MAX),
-    address_id    nvarchar(50)  FOREIGN KEY REFERENCES Addrress ([id]) NULL ,
+    address_id nvarchar(50)  FOREIGN KEY REFERENCES Addrress ([id]) NULL ,
 	pubkey nvarchar(max),
     PRIMARY KEY (id_customer)
 )
-CREATE UNIQUE INDEX indunique
+CREATE UNIQUE INDEX customer_unique
   ON Customer(address_id)
   WHERE address_id IS NOT NULL
 
@@ -133,10 +133,14 @@ CREATE TABLE Shop
     name nvarchar(max) ,
     phone_number varchar(15),
     img_url VARCHAR(MAX),
-    address_id nvarchar(50)  NOT NULL FOREIGN KEY REFERENCES Addrress ([id]) unique,
+    address_id nvarchar(50)  FOREIGN KEY REFERENCES Addrress ([id]) NULL ,
     description nvarchar(max),
     PRIMARY KEY (id_shop)
 )
+CREATE UNIQUE INDEX shop_unique
+  ON Shop(address_id)
+  WHERE address_id IS NOT NULL
+
 CREATE TABLE Shop_Category
 (
     id_shop_category int IDENTITY(1,1) ,
@@ -354,7 +358,7 @@ INSERT INTO Addrress_Cell VALUES(1461, N'Quận Gò Vấp');
 
 INSERT INTO Addrress_Cell VALUES(21305, N'Phường 7');
 
-INSERT INTO Addrress VALUES(N'shop1', 202,1461,21305,N'Nguyễn Văn Nghi');
+INSERT INTO Addrress VALUES(N'3107502', 202,1461,21305,N'334/35/12 Nguyễn Văn Nghi');
 INSERT INTO Addrress VALUES(N'customer1', 202,1461,21305,N'Nguyễn Văn Nghi');
 INSERT INTO Addrress VALUES(N'shop2', 202,1461,21305,N'Nguyễn Văn Nghi');
 INSERT INTO Addrress VALUES(N'customer2', 202,1461,21305,N'Nguyễn Văn Nghi');
@@ -368,7 +372,11 @@ VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',N'cu
 --update Customer set phone_number = '0339579758' where id_customer = 2;
 -- Shop
 INSERT INTO Shop
+<<<<<<< HEAD
 VALUES(1, N'shop của Phùng', '0378876395', 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)', N'shop1', N'Shop ác nhất hành tinh');
+=======
+VALUES(1, N'shop của Phùng', '0378876395', N'', N'3107502', N'Shop ác nhất hành tinh');
+>>>>>>> 575cc01e1fb1c5678212acafcec13632a6ab146d
 
 INSERT INTO Shop
 VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)', N'shop2', N'Shop ác nhất vũ trụ');
@@ -767,8 +775,8 @@ SELECT * FROM Order_Item o JOIN Product p on  o.id_product = p.id_product
 		WHERE spg.id_shop =  1 AND o.status = 1
 
 
+		select * from shop
 
-
-
-
+delete from Customer where id_customer = 2
+select * from Customer
 

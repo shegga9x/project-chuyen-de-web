@@ -5,9 +5,10 @@ import Layout from "../components/layout";
 import { getSession } from 'next-auth/client';
 import instance from '../helpers/axiosConfig';
 import axios from "axios";
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { changeRoute } from "../helpers/customFunction/changeRoute";
 import { useRouter } from "next/router";
+import InstanceAxios from "../helpers/axiosConfig";
 
 export default function Cart(props) {
 
@@ -100,8 +101,15 @@ export default function Cart(props) {
     let ele1 = document.getElementById(productId);
     ele1.style.removeProperty('pointer-events');
   }
-
-  // return <h1>{JSON.stringify(cart)}</h1>
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const data = Object.assign([], cart);
+      data.forEach(function (cartItem) { delete cartItem.product.imgUrl });
+      console.log(data);
+      const responseShipService = await instance().post("http://localhost:4000/api/ghn/calculateFee", data)
+    }
+    fetchMyAPI()
+  }, [])
   return (
     <>
       <Head>
@@ -392,15 +400,16 @@ export default function Cart(props) {
   );
 }
 
-export async function getServerSideProps({ req }) {
-  const session = await getSession({ req });
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
   if (session) {
     // console.log(session.user.id)
-    const response = await axios.get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id }, headers: { Authorization: `Bearer ${session.user.jwt}` } })
-    // console.log(response)
+    const responseCart = await axios.get("http://localhost:4000/api/cart/getCartByIdCustomer",
+      { params: { idCustomer: session.user.id }, headers: { Authorization: `Bearer ${session.user.jwt}` } })
+
     return {
       props: {
-        cart: response.data,
+        cart: responseCart.data,
         user: session.user
       }
     }

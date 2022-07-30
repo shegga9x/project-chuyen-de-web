@@ -52,7 +52,7 @@ export default function BrowseProducts({ singleProductPages }) {
                             </TabPanel>
                             <TabPanel value="two">
                                 {
-                                    !loading ? (<BrowseProductsTable singleProductPages={productsPages} setProductPages={setProductPages} isLoading={isLoading} status={2}></BrowseProductsTable>) : <ScaleLoader cssOverride={customCss} color="blue"></ScaleLoader>
+                                    !loading ? (<BrowseProductsTable singleProductPages={productsPages} setProductPages={setProductPages} isLoading={isLoading} status={3}></BrowseProductsTable>) : <ScaleLoader cssOverride={customCss} color="blue"></ScaleLoader>
                                 }
                             </TabPanel>
                             <TabPanel value="three">
@@ -62,7 +62,7 @@ export default function BrowseProducts({ singleProductPages }) {
                             </TabPanel>
                             <TabPanel value="four">
                                 {
-                                    !loading ? (<BrowseProductsTable singleProductPages={productsPages} setProductPages={setProductPages} isLoading={isLoading} status={3}></BrowseProductsTable>) : <ScaleLoader cssOverride={customCss} color="blue"></ScaleLoader>
+                                    !loading ? (<BrowseProductsTable singleProductPages={productsPages} setProductPages={setProductPages} isLoading={isLoading} status={4}></BrowseProductsTable>) : <ScaleLoader cssOverride={customCss} color="blue"></ScaleLoader>
                                 }
                             </TabPanel>
                         </TabContext>

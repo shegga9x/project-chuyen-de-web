@@ -1,6 +1,6 @@
 package backend.backend.persitence.model.ghn;
 
-public class GHNItem {
+public class GHNServiceModel {
     Integer service_id;
     String short_name;
     Integer service_type_id;
