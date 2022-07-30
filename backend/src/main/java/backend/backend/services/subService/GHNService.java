@@ -177,7 +177,8 @@ public class GHNService {
                     "", customer.getName(), "0938843188", customer.getAddress().getSubLocate(),
                     customer.getAddress().getWardCode1() + "", 200000, "Theo New York Times", new ArrayList<>(),
                     new ArrayList<>());
-            System.out.println(createOrder(ghnOrderCreateRequest, shop.getAddressId() + ""));
+            // System.out.println(createOrder(ghnOrderCreateRequest, shop.getAddressId() +
+            // ""));
         });
 
         return null;
