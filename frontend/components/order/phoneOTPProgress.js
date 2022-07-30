@@ -46,7 +46,6 @@ export default function VNPayProgress({ open, closeModal }) {
     return (
         <>
             <Head>
-                <link rel="stylesheet" href="/static/css/bootstrap.min.css" />
                 <style dangerouslySetInnerHTML={{
                     __html: `
                     #popupPhoneOTPProgress {

@@ -2,6 +2,7 @@ package backend.backend.controllers;
 
 import javax.validation.constraints.NotNull;
 
+import backend.backend.services.mainService.SalerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,6 +20,9 @@ import backend.backend.services.entityService.SingleProductPageService;
 public class ProductController {
     @Autowired
     SingleProductPageService singleProductPageService;
+
+    @Autowired
+    SalerService salerService;
 
     @GetMapping({"/loadAll"})
     public ResponseEntity<?> loadAll(@RequestParam("page") int page, @RequestParam("size") int size,
@@ -67,5 +71,10 @@ public class ProductController {
     @GetMapping("/getListEvaluateReplyResponse")
     public ResponseEntity<?> getListEvaluateReplyResponse(@RequestParam String idSingleProductPage) {
         return ResponseEntity.ok(singleProductPageService.getListEvaluateReplyResponse(Integer.valueOf(idSingleProductPage)));
+    }
+
+    @GetMapping({"/getShopProfile"})
+    public ResponseEntity<?> getShopProfile(@RequestParam String idShop) {
+        return ResponseEntity.ok(salerService.getShopProfile(Integer.parseInt(idShop)));
     }
 }

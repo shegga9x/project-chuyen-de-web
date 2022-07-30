@@ -84,7 +84,7 @@ public class EmailService {
                     resetUrl);
         } else {
             message = MessageFormat.format(
-                    "<p>Please use the below token to reset your password with the <code>/account/reset-password?token={0}</code> </p>",
+                    "<p>Please use the below token to reset your password with the <code>http://localhost:3000/account/reset-password?token={0}</code> </p>",
                     account.getResetToken().getResetTokenContent());
         }
         try {

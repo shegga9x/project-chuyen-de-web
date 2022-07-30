@@ -55,6 +55,10 @@ public class SalerService {
         return (ShopDTO) SubUtils.mapperObject(shopService.getShop(), new ShopDTO());
     }
 
+    public ShopDTO getShopProfile(int idShop) {
+        return (ShopDTO) SubUtils.mapperObject(shopService.getShop(idShop), new ShopDTO());
+    }
+
     // evaluate
     public Integer updateShop(ShopDTO request) {
         return shopService.updateShop(request);

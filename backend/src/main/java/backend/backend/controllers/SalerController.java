@@ -31,7 +31,7 @@ public class SalerController {
     @Autowired
     AccountRepository accountRepository;
 
-    @GetMapping({ "/productSalerList" })
+    @GetMapping({"/productSalerList"})
     public ResponseEntity<?> productSalerList(
             @RequestParam("page") Integer page,
             @RequestParam("size") Integer size,
@@ -41,14 +41,14 @@ public class SalerController {
         return ResponseEntity.ok(salerService.productSalerList(idShop, page, size, sorter, status));
     }
 
-    @PostMapping({ "/productSalerUpdate" })
+    @PostMapping({"/productSalerUpdate"})
     public ResponseEntity<?> productSalerUpdate(@RequestBody SingleProductPageDTO singleProductPageDTO) {
         if (!salerService.productSalerUpdate(singleProductPageDTO))
             throw new CustomException("Add Product Fail");
         return ResponseEntity.ok(new MessageResponse("Add Order Success"));
     }
 
-    @GetMapping({ "/orderSalerList" })
+    @GetMapping({"/orderSalerList"})
     public ResponseEntity<?> orderSalerList(
             @RequestParam("page") Integer page,
             @RequestParam("size") Integer size,
@@ -58,19 +58,19 @@ public class SalerController {
         return ResponseEntity.ok(salerService.orderSalerList(idShop, page, size, sorter, status));
     }
 
-    @PostMapping({ "/orderSalerUpdateStatus" })
+    @PostMapping({"/orderSalerUpdateStatus"})
     public ResponseEntity<?> orderSalerUpdate(@RequestBody OrderItemDTO orderItemDTO) {
         if (!salerService.orderSalerUpdateStatus(orderItemDTO))
             throw new CustomException("Add Order Fail");
         return ResponseEntity.ok(new MessageResponse("Add Order Success"));
     }
 
-    @GetMapping({ "/getShopProfile" })
+    @GetMapping({"/getShopProfile"})
     public ResponseEntity<?> getShopProfile() {
         return ResponseEntity.ok(salerService.getShopProfile());
     }
 
-    @PostMapping({ "/updateShop" })
+    @PostMapping({"/updateShop"})
     public ResponseEntity<?> updateShop(@RequestBody ShopDTO request) {
         return ResponseEntity.ok(new MessageResponse(salerService.updateShop(request) + ""));
     }
