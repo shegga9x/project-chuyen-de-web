@@ -16,6 +16,8 @@ public class ProductResponse {
 
     private String imgUrl;
 
+    private Integer idShop;
+
     public Integer getIdProduct() {
         return idProduct;
     }
@@ -70,6 +72,15 @@ public class ProductResponse {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+
+    public Integer getIdShop() {
+        return this.idShop;
+    }
+
+    public void setIdShop(Integer idShop) {
+        this.idShop = idShop;
     }
 
     @Override

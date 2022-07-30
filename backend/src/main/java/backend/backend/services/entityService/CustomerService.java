@@ -82,6 +82,7 @@ public class CustomerService {
         customer.getAddress().setId("customer" + customer.getIdCustomer());
         customer.setAccount(account);
         // birthday
+        
         customerRepository.save(customer);
         return null;
     }

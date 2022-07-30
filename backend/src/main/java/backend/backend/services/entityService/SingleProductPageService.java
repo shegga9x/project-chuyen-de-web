@@ -159,7 +159,7 @@ public class SingleProductPageService {
     public boolean productSalerUpdate(SingleProductPageDTO singleProductPageDTO) {
         SingleProductPage singleProductPage = (SingleProductPage) SubUtils.mapperObject(singleProductPageDTO,
                 new SingleProductPage());
-        singleProductPage.setStatus((byte) 1);
+        singleProductPage.setStatus((byte) 3);
         singleProductPage.setIdShop(accountRepository.getById(SubUtils.getCurrentUser().getId()).getShop().getIdShop());
 
         return (singleProductPageRepository.save(singleProductPage) != null);

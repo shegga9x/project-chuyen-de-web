@@ -57,7 +57,7 @@ export default function BrowseProductsTable({ singleProductPages, setProductPage
                                                 <td>{ele.status}</td>
                                                 <td>
                                                     {
-                                                        status == 2 && (<button onClick={() => { duyetSanPham(ele.idSingleProductPage) }} className="btn-outline-secondary" style={{ border: "none" }}>
+                                                        status == 3 && (<button onClick={() => { duyetSanPham(ele.idSingleProductPage) }} className="btn-outline-secondary" style={{ border: "none" }}>
                                                             <i className="F-icon" > <FontAwesomeIcon icon={faSync} /> </i>
                                                         </button>)
                                                     }

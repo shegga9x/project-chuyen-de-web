@@ -74,6 +74,7 @@ public class Product implements Serializable {
     public void setSingleProductPage(SingleProductPage singleProductPage) {
         this.singleProductPage = singleProductPage;
     }
+
     public void setIdProduct(Integer idProduct) {
         this.idProduct = idProduct;
     }
@@ -150,6 +151,11 @@ public class Product implements Serializable {
     public List<ChatLine> getListOfChatLine() {
         return this.listOfChatLine;
     }
+
+public Integer getIdShop() {
+        return this.singleProductPage.getIdShop();
+    }
+
 
     // --- toString specific method
     @Override

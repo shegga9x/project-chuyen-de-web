@@ -3,6 +3,9 @@ package backend.backend;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.IOUtils;
@@ -11,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +23,11 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
 
+import backend.backend.helpers.payload.request.ghn.GHNServiceResponse;
 import backend.backend.helpers.payload.request.ghn.GHNStoreRegistRequest;
+import backend.backend.persitence.model.ghn.GHNServiceModel;
+import backend.backend.persitence.repository.CustomerRepository;
+import backend.backend.persitence.repository.ShopRepository;
 import backend.backend.services.subService.GHNService;
 
 @RunWith(SpringRunner.class)
@@ -27,6 +35,10 @@ import backend.backend.services.subService.GHNService;
 public class GHNTest {
     @Autowired
     GHNService ghnService;
+    @Autowired
+    ShopRepository shopRepository;
+    @Autowired
+    CustomerRepository customerRepository;
 
     @Test
     public void getProvince() {
@@ -77,4 +89,15 @@ public class GHNTest {
         }
 
     }
+
+    @Test
+    @Transactional
+    public void getServiceType() throws IOException, DocumentException {
+        Map<Integer, List<Integer>> mapProductByIdShop = new HashMap<>();
+        List<Integer> list = mapProductByIdShop.get(0);
+        
+        System.out.println(list.size());
+
+    }
+
 }

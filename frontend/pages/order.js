@@ -24,7 +24,7 @@ export default function Order(props) {
     const [order, setOrder] = useState(props.order);
     const [value, setValue] = useState('1');
 
-
+    
     useEffect(() => {
         let list = order.filter(ele => ele.status == 1);
         setListOrder(list);

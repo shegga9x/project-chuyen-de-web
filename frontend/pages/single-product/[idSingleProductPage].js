@@ -909,6 +909,7 @@ export async function getStaticProps({ params }) {
         res1 = data1;
         res2 = data2;
       }))
+    console.log(res.data);
     if (res2 != null && res1 != null) {
       return {
         props: {

@@ -9,12 +9,12 @@ public class GHNOrderCreateRequest {
     int payment_type_id,
             weight, length, width, height,
             pick_station_id, to_district_id,
-            insurance_value, service_id, service_type_id, coupon;
+            insurance_value, service_id, service_type_id,cod_amount;
     String note, required_note, return_phone,
             return_address, return_district_id,
             return_ward_code, client_order_code,
             to_name, to_phone, to_address,
-            to_ward_code, cod_amount,
+            to_ward_code, coupon,
             content;
     List<Integer> pick_shift = new ArrayList<>();
     List<GHNItem> items = new ArrayList<>();
@@ -99,11 +99,11 @@ public class GHNOrderCreateRequest {
         this.service_type_id = service_type_id;
     }
 
-    public int getCoupon() {
+    public String getCoupon() {
         return this.coupon;
     }
 
-    public void setCoupon(int coupon) {
+    public void setCoupon(String coupon) {
         this.coupon = coupon;
     }
 
@@ -195,11 +195,11 @@ public class GHNOrderCreateRequest {
         this.to_ward_code = to_ward_code;
     }
 
-    public String getCod_amount() {
+    public int getCod_amount() {
         return this.cod_amount;
     }
 
-    public void setCod_amount(String cod_amount) {
+    public void setCod_amount(int cod_amount) {
         this.cod_amount = cod_amount;
     }
 
@@ -229,9 +229,9 @@ public class GHNOrderCreateRequest {
 
     public GHNOrderCreateRequest(int payment_type_id, int weight, int length, int width, int height,
             int pick_station_id, int to_district_id, int insurance_value, int service_id, int service_type_id,
-            int coupon, String note, String required_note, String return_phone, String return_address,
+            String coupon, String note, String required_note, String return_phone, String return_address,
             String return_district_id, String return_ward_code, String client_order_code, String to_name,
-            String to_phone, String to_address, String to_ward_code, String cod_amount, String content,
+            String to_phone, String to_address, String to_ward_code, int cod_amount, String content,
             List<Integer> pick_shift, List<GHNItem> items) {
         this.payment_type_id = payment_type_id;
         this.weight = weight;
@@ -260,5 +260,6 @@ public class GHNOrderCreateRequest {
         this.pick_shift = pick_shift;
         this.items = items;
     }
+
 
 }
