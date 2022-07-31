@@ -1,10 +1,7 @@
 package backend.backend.helpers.payload.request.ghn;
 
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import backend.backend.persitence.model.ghn.GHNServiceModel;
 import backend.backend.persitence.model.ghn.GHNCalFeeResponseModel;
 
 public class GHNCalFeeResponse {

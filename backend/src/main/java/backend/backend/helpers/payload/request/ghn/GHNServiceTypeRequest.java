@@ -1,9 +1,5 @@
 package backend.backend.helpers.payload.request.ghn;
 
-import java.util.List;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import backend.backend.helpers.payload.dto.ShopDTO;
 import backend.backend.persitence.model.ghn.GHNServiceModel;
 

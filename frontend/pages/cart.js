@@ -110,6 +110,7 @@ export default function Cart(props) {
     }
   }
 
+
   const addCartItemToOrder = async () => {
     const req = [];
     for (const [key, value] of shippingPriceList) {
