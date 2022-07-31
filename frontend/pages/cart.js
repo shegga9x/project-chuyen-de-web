@@ -44,7 +44,7 @@ export default function Cart(props) {
     if (shippingPriceList != null) {
       let result = 0;
       cart.forEach(ele => {
-        result = result + (ele.product.price * ele.quantity) + shippingPriceList.get(ele.product.idProduct + "");
+        result = result + (ele.product.price * ele.quantity) + parseInt(shippingPriceList.get(ele.product.idProduct + "").split("-")[0]);
       })
       return result.toFixed(2);
     }
@@ -278,13 +278,13 @@ export default function Cart(props) {
                               <td>
                                 <div className="cart-price">
                                   {
-                                    shippingPriceList && shippingPriceList.get(element.product.idProduct + "")
+                                    shippingPriceList && shippingPriceList.get(element.product.idProduct + "").split("-")[0]
                                   }
                                 </div>
                               </td>
                               <td>
                                 {shippingPriceList &&
-                                  <div className="cart-price">{((element.product.price * element.quantity) + shippingPriceList.get(element.product.idProduct + ""))}</div>
+                                  <div className="cart-price">{((element.product.price * element.quantity) + parseInt(shippingPriceList.get(element.product.idProduct + "").split("-")[0]))}</div>
                                 }
                               </td>
                               <td>

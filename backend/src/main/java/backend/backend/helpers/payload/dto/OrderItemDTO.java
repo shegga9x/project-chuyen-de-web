@@ -18,6 +18,8 @@ public class OrderItemDTO {
     private SingleProductPageDTO singleProductPageDTO;
 
     private CustomerDTO customerDTO;
+    private Integer serviceId;
+    private Integer serviceTypeId;
 
     public Integer getIdOrderItem() {
         return this.idOrderItem;
@@ -89,6 +91,22 @@ public class OrderItemDTO {
 
     public void setShippingPrice(Integer shippingPrice) {
         this.shippingPrice = shippingPrice;
+    }
+
+    public Integer getServiceId() {
+        return this.serviceId;
+    }
+
+    public void setServiceId(Integer serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public Integer getServiceTypeId() {
+        return this.serviceTypeId;
+    }
+
+    public void setServiceTypeId(Integer serviceTypeId) {
+        this.serviceTypeId = serviceTypeId;
     }
 
     @Override

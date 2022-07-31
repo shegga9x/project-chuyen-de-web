@@ -143,6 +143,11 @@ public class GHNService {
         return GHNUltils.getResponse(restTemplate, token, shopId, url, ghnOrderCreateRequest).getBody();
     }
 
+    public String cancelOrder(String order_code,String shopId ) {
+        String url = "https://online-gateway.ghn.vn/shiip/public-api/v2/switch-status/cancel";
+        return GHNUltils.getResponse(restTemplate, token, shopId, url, Map.of("order_codes", new String[]{order_code})).getBody();
+    }
+
     public Map<Integer, List<ProductResponse>> convertToMapProduct(List<CartItemResponse> cartItemDTOsItemResponses) {
         Map<Integer, List<ProductResponse>> mapProductByIdShop = new HashMap<>();
         for (CartItemResponse cartItemResponse : cartItemDTOsItemResponses) {
@@ -162,11 +167,11 @@ public class GHNService {
 
     }
 
-    public Map<Integer, Integer> calculateFee(CalFeeRequest calFeeRequest) {
+    public Map<Integer, String> calculateFee(CalFeeRequest calFeeRequest) {
         List<CartItemResponse> cartItemDTOsItemResponses = calFeeRequest.getCartItemDTOsItemResponses();
         List<GHNServiceTypeRequest> ghnServiceTypeRequests = calFeeRequest.getGhnServiceTypeRequests();
         Map<Integer, List<ProductResponse>> mapProductByIdShop = convertToMapProduct(cartItemDTOsItemResponses);
-        Map<Integer, Integer> result = new HashMap<>();
+        Map<Integer, String> result = new HashMap<>();
 
         mapProductByIdShop.forEach((key, value) -> {
             Shop shop = shopRepository.findById(key).get();
@@ -187,22 +192,9 @@ public class GHNService {
                         10000,
                         customer.getAddress().getWardCode1() + "", null);
                 result.put(productResponse.getIdProduct(),
-                        calculateFee(ghnCalFeeRequest, shop.getAddressId() + "").getData().getTotal());
-
-                GHNOrderCreateRequest ghnOrderCreateRequest = new GHNOrderCreateRequest(2,
-                        200, 20,
-                        20, 50 + (productResponse.getQuantity() * 5), 1444, customer.getAddress().getDistrictId1(),
-                        10000,
-                        mapServiceByIdShop.get(shop.getIdShop()).getService_id(),
-                        mapServiceByIdShop.get(shop.getIdShop()).getService_type_id(),
-                        null, "Tintest 123", "KHONGCHOXEMHANG", shop.getPhoneNumber(), shop.getAddress().getSubLocate(),
-                        shop.getAddress().getDistrictId1() + "",
-                        shop.getAddress().getWardCode1() + "",
-                        "", customer.getName(), "0938843188", customer.getAddress().getSubLocate(),
-                        customer.getAddress().getWardCode1() + "", 200000, "Theo New York Times", new ArrayList<>(),
-                        new ArrayList<>());
-                // System.out.println(createOrder(ghnOrderCreateRequest, shop.getAddressId() +
-                // ""));
+                        calculateFee(ghnCalFeeRequest, shop.getAddressId() + "").getData().getTotal() + "-"
+                                + mapServiceByIdShop.get(shop.getIdShop()).getService_id() + "-"
+                                + mapServiceByIdShop.get(shop.getIdShop()).getService_type_id());
             }
 
         });

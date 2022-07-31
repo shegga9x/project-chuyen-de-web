@@ -56,6 +56,12 @@ public class OrderItem implements Serializable {
 
     @Column(name = "shipping_price")
     private Integer shippingPrice;
+    @Column(name = "service_id")
+    private Integer serviceId;
+    @Column(name = "service_type_id")
+    private Integer serviceTypeId;
+    @Column(name = "order_ship_id")
+    private String orderShipId;
     // --- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
     @JoinColumn(name = "id_product", referencedColumnName = "id_product", insertable = false, updatable = false)
@@ -132,6 +138,30 @@ public class OrderItem implements Serializable {
 
     public void setShippingPrice(Integer shippingPrice) {
         this.shippingPrice = shippingPrice;
+    }
+
+    public Integer getServiceId() {
+        return this.serviceId;
+    }
+
+    public void setServiceId(Integer serviceId) {
+        this.serviceId = serviceId;
+    }
+
+    public Integer getServiceTypeId() {
+        return this.serviceTypeId;
+    }
+
+    public void setServiceTypeId(Integer serviceTypeId) {
+        this.serviceTypeId = serviceTypeId;
+    }
+
+    public String getOrderShipId() {
+        return this.orderShipId;
+    }
+
+    public void setOrderShipId(String orderShipId) {
+        this.orderShipId = orderShipId;
     }
 
     public Customer getCustomer() {

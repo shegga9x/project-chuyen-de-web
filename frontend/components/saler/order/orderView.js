@@ -38,6 +38,10 @@ export default function OrderView({ value, index, data, tabChange, dataChange })
                 break;
         }
     }
+    function cancelOrder(status) {
+        // await InstanceAxios().post(`http://localhost:4000/api/saler/orderSalerUpdateStatus`, order)
+
+    }
     return (
         <div >
             {value === index && data && (
@@ -59,6 +63,7 @@ export default function OrderView({ value, index, data, tabChange, dataChange })
                                                 {Array.from(data.entries()).map((entry) => {
                                                     const [key, value] = entry;
                                                     const singleProductPage = value.singleProductPageDTO;
+                                                    console.log(entry);
                                                     return (
                                                         <tr>
                                                             <td>

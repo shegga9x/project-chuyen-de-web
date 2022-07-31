@@ -214,6 +214,9 @@ CREATE TABLE Order_Item
     status tinyint,
 	quantity int,
 	shipping_price int,
+    service_id int,
+    service_type_id int,
+	order_ship_id varchar(50),
     PRIMARY KEY (id_order_item)
 )
 
@@ -367,7 +370,7 @@ INSERT INTO Addrress VALUES(N'customer2', 202,1461,21305,N'Nguyễn Văn Nghi');
 
  --Customer
 INSERT INTO Customer
-VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '',N'customer1',null);
+VALUES(1, N'Lê Đình Phùng', '84582301667', 'm', '25/08/2000', '',N'customer1',null);
 
 INSERT INTO Customer
 VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',N'customer2',null);

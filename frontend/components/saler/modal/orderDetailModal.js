@@ -1,4 +1,4 @@
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import Modal from 'react-modal';
@@ -8,7 +8,7 @@ import customStyles from '../customCSS/customCss1.css.js'
 import CustomerDetailModal from "./customerDetailModal.js";
 
 Modal.setAppElement('body');
-export default function OrderDetailModal({ open, closeModal, listOrder ,dataChange}) {
+export default function OrderDetailModal({ open, closeModal, listOrder, dataChange }) {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [customer, setCustomer] = useState(null);
     const [isLoading, setIsLoading] = useState(-1);
@@ -58,6 +58,11 @@ export default function OrderDetailModal({ open, closeModal, listOrder ,dataChan
                                         {isLoading != order.idOrderItem && order.status == 2 && (
                                             <button className=" btn-outline-secondary " onClick={() => handleData(order, 1)}>
                                                 Hủy xác nhận <i className="F-icon"  > <FontAwesomeIcon icon={faCheck} /> </i>
+                                            </button>
+                                        )}
+                                        {isLoading != order.idOrderItem && order.status != 5 && (
+                                            <button className=" btn-outline-secondary " onClick={() => handleData(order, 5)}>
+                                                Hủy Đơn Hàng <i className="F-icon"  > <FontAwesomeIcon icon={faTrash} /> </i>
                                             </button>
                                         )}
                                     </td>

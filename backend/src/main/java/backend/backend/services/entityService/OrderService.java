@@ -34,16 +34,16 @@ public class OrderService {
             ProductResponse productResponse = (ProductResponse) SubUtils.mapperObject(orderItem.getProduct(),
                     new ProductResponse());
             OrderItemResponse orderItemResponse = new OrderItemResponse(orderItem.getIdCustomer(), productResponse,
-                    orderItem.getStatus(), orderItem.getQuantity(),orderItem.getShippingPrice());
+                    orderItem.getStatus(), orderItem.getQuantity(), orderItem.getShippingPrice());
             result.add(orderItemResponse);
         }
         return result;
     }
 
     public String addCartItemToOrder(List<String> listShipingPrice) {
-        Map<Integer, Integer> map = new HashMap<>();
+        Map<Integer, String> map = new HashMap<>();
         for (String string : listShipingPrice) {
-            map.put(Integer.parseInt(string.split("-")[0]), Integer.parseInt(string.split("-")[1]));
+            map.put(Integer.parseInt(string.split("-")[0]), string);
         }
         int idUser = SubUtils.getCurrentUser().getId();
         List<OrderItem> listOrderItem = new ArrayList<>();
@@ -56,12 +56,19 @@ public class OrderService {
         walletCustomerService.removeMoneyFormCustomerWallet(totalCart);
 
         for (CartItem cartItem : listCartItem) {
+            String[] arr = map.get(cartItem.getProduct().getIdProduct()).split("-");
+            Integer productId = Integer.parseInt(arr[0]);
+            Integer shipPrice = Integer.parseInt(arr[1]);
+            Integer serviceID = Integer.parseInt(arr[2]);
+            Integer serviceTypeID = Integer.parseInt(arr[3]);
             OrderItem orderItem = new OrderItem();
             orderItem.setIdCustomer(idUser);
             orderItem.setIdProduct(cartItem.getProduct().getIdProduct());
             orderItem.setStatus((byte) 1);
             orderItem.setQuantity(cartItem.getQuantity());
-            orderItem.setShippingPrice(map.get(cartItem.getProduct().getIdProduct()));
+            orderItem.setShippingPrice(shipPrice);
+            orderItem.setServiceId(serviceID);
+            orderItem.setServiceTypeId(serviceTypeID);
             listOrderItem.add(orderItem);
         }
         cartItemRepository.deleteAll(listCartItem);

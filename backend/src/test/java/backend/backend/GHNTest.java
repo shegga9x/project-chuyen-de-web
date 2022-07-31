@@ -92,9 +92,14 @@ public class GHNTest {
     public void getServiceType() throws IOException, DocumentException {
         Map<Integer, List<Integer>> mapProductByIdShop = new HashMap<>();
         List<Integer> list = mapProductByIdShop.get(0);
-        
+
         System.out.println(list.size());
 
+    }
+
+    @Test
+    public void cancelOrder() throws IOException, DocumentException {
+        System.out.println(ghnService.cancelOrder("GA4WNH6V", "3107502  "));
     }
 
 }

@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -25,6 +26,7 @@ import backend.backend.helpers.payload.dto.OrderItemDTO;
 import backend.backend.helpers.payload.dto.OrderMapValue;
 import backend.backend.helpers.payload.dto.SingleProductPageDTO;
 import backend.backend.helpers.payload.request.EvaluateRequest;
+import backend.backend.helpers.payload.request.ghn.GHNOrderCreateRequest;
 import backend.backend.helpers.payload.response.CategoryResponse;
 import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.EvaluateReplyResponse;
@@ -34,18 +36,23 @@ import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.payload.response.SalerOrderItemResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.entities.Category;
+import backend.backend.persitence.entities.Customer;
 import backend.backend.persitence.entities.Evaluate;
 import backend.backend.persitence.entities.EvaluateReply;
 import backend.backend.persitence.entities.OrderItem;
 import backend.backend.persitence.entities.Product;
+import backend.backend.persitence.entities.Shop;
 import backend.backend.persitence.entities.SingleProductPage;
 import backend.backend.persitence.repository.AccountRepository;
 import backend.backend.persitence.repository.CategoryRepository;
+import backend.backend.persitence.repository.CustomerRepository;
 import backend.backend.persitence.repository.EvaluateReplyRepository;
 import backend.backend.persitence.repository.EvaluateRepository;
 import backend.backend.persitence.repository.OrderItemRepository;
 import backend.backend.persitence.repository.ProductRepository;
+import backend.backend.persitence.repository.ShopRepository;
 import backend.backend.persitence.repository.SingleProductPageRepository;
+import backend.backend.services.subService.GHNService;
 
 @Service
 public class SingleProductPageService {
@@ -63,6 +70,12 @@ public class SingleProductPageService {
     EvaluateRepository evaluateRepository;
     @Autowired
     EvaluateReplyRepository evaluateReplyRepository;
+    @Autowired
+    ShopRepository shopRepository;
+    @Autowired
+    CustomerRepository customerRepository;
+    @Autowired
+    GHNService ghnService;
 
     public PageSingleProductResponse loadAll(int page, int size, Integer[] catagory, Integer sorter) {
         PageSingleProductResponse responses = new PageSingleProductResponse();
@@ -104,7 +117,8 @@ public class SingleProductPageService {
     public CustomSinglePage getSingleProductPagePerPage(int idSingleProduct) {
         Optional<SingleProductPage> singleProductPage = singleProductPageRepository
                 .findByIdSingleProductPage(idSingleProduct);
-        CustomSinglePage result = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(), singleProductPage.get().getIdShop(),
+        CustomSinglePage result = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+                singleProductPage.get().getIdShop(),
                 singleProductPage.get().getIdCategory(),
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
@@ -141,7 +155,7 @@ public class SingleProductPageService {
 
     // saler
     public PageSingleProductResponse productSalerList(Integer idShop, Integer page, Integer size, Integer sorter,
-                                                      Integer status) {
+            Integer status) {
         PageSingleProductResponse responses = new PageSingleProductResponse();
         List<SingleProductPageDTO> pageS = new ArrayList<>();
         Page<SingleProductPage> allProductsOnThisPage = getProductSortFromSorterOfSaler(idShop, sorter, status,
@@ -166,7 +180,7 @@ public class SingleProductPageService {
     }
 
     public SalerOrderItemResponse orderSalerList(Integer idShop, Integer page, Integer size, Integer sorter,
-                                                 Integer status) {
+            Integer status) {
         SalerOrderItemResponse responses = new SalerOrderItemResponse();
         Map<String, OrderMapValue> map = getOrderSortFromSorterOfSaler1(idShop, sorter, status);
         int lowerBound = page * size;
@@ -187,12 +201,46 @@ public class SingleProductPageService {
     public boolean orderSalerUpdateStatus(OrderItemDTO orderItemDTO) {
         OrderItem orderItem = orderRepository.getById(orderItemDTO.getIdOrderItem());
         orderItem.setStatus(orderItemDTO.getStatus());
+
+        Shop shop = shopRepository.findById(orderItem.getSingleProductPageDTO().getIdShop()).get();
+        Customer customer = customerRepository.findById(orderItem.getIdCustomer()).get();
+        switch (orderItemDTO.getStatus()) {
+            case 2:
+                GHNOrderCreateRequest ghnOrderCreateRequest = new GHNOrderCreateRequest(2,
+                        200, 20,
+                        20, 50 + (orderItemDTO.getQuantity() * 5), 1444, customer.getAddress().getDistrictId1(),
+                        10000,
+                        orderItem.getServiceId(),
+                        orderItem.getServiceTypeId(),
+                        null, "Tintest 123", "KHONGCHOXEMHANG", shop.getPhoneNumber(), shop.getAddress().getSubLocate(),
+                        shop.getAddress().getDistrictId1() + "",
+                        shop.getAddress().getWardCode1() + "",
+                        "", customer.getName(), "0938843188", customer.getAddress().getSubLocate(),
+                        customer.getAddress().getWardCode1() + "", 200000, "Theo New York Times", new ArrayList<>(),
+                        new ArrayList<>());
+                JSONObject jsonObj = new JSONObject(
+                        ghnService.createOrder(ghnOrderCreateRequest, shop.getAddressId() + ""));
+                String orderShipId = jsonObj.getJSONObject("data").getString("order_code");
+                orderItem.setOrderShipId(orderShipId);
+                System.out.println(orderShipId);
+
+                break;
+            case 1:
+                ghnService.cancelOrder(orderItem.getOrderShipId(), shop.getAddressId()+"");
+                break;
+            case 5:
+                ghnService.cancelOrder(orderItem.getOrderShipId(), shop.getAddressId()+"");
+                break;
+
+            default:
+                break;
+        }
         return (orderRepository.save(orderItem) != null);
     }
 
     // Ultil
     private Page<SingleProductPage> getSortFromSorter(Integer sorter, PageRequest pageRequest,
-                                                      Integer[] catagory) {
+            Integer[] catagory) {
         List<SingleProductPage> list = new ArrayList<>();
         if (catagory != null) {
             list = singleProductPageRepository.findByIdCategoryInAndStatus(catagory, (byte) 1);
@@ -241,7 +289,7 @@ public class SingleProductPageService {
     }
 
     private Page<SingleProductPage> getProductSortFromSorterOfSaler(Integer idShop, Integer sorter, Integer status,
-                                                                    PageRequest pageRequest) {
+            PageRequest pageRequest) {
         List<SingleProductPage> list = new ArrayList<>();
         if (status != null) {
             list = singleProductPageRepository.findByIdShopAndStatus(idShop, (byte) status.byteValue());
@@ -316,13 +364,13 @@ public class SingleProductPageService {
 
     }
 
-
-    //review
+    // review
     public List<EvaluateResponse> getReviewByIdProduct(int idSingleProductPage) {
         List<Evaluate> evaluateList = evaluateRepository.findByIdSingleProductPage(idSingleProductPage);
         List<EvaluateResponse> result = new ArrayList<>();
         for (Evaluate evaluate : evaluateList) {
-            EvaluateResponse evaluateResponse = (EvaluateResponse) SubUtils.mapperObject(evaluate, new EvaluateResponse());
+            EvaluateResponse evaluateResponse = (EvaluateResponse) SubUtils.mapperObject(evaluate,
+                    new EvaluateResponse());
             evaluateResponse.setNameCustomer(accountRepository.getById(evaluateResponse.getIdCustomer()).getEmail());
             evaluateResponse.setDateCreate(new SimpleDateFormat("dd/MM/yyyy").format(evaluate.getDateCreate()));
             evaluateResponse.setDateUpdate(new SimpleDateFormat("dd/MM/yyyy").format(evaluate.getDateUpdate()));
