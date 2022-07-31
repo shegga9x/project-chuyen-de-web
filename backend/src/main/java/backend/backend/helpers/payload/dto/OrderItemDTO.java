@@ -11,6 +11,7 @@ public class OrderItemDTO {
     private Byte status;
 
     private Integer quantity;
+    private Integer shippingPrice;
 
     private ProductDTO productDTO;
 
@@ -80,6 +81,14 @@ public class OrderItemDTO {
 
     public void setCustomerDTO(CustomerDTO customerDTO) {
         this.customerDTO = customerDTO;
+    }
+
+    public Integer getShippingPrice() {
+        return this.shippingPrice;
+    }
+
+    public void setShippingPrice(Integer shippingPrice) {
+        this.shippingPrice = shippingPrice;
     }
 
     @Override

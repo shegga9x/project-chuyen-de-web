@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -16,12 +17,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
+import backend.backend.helpers.payload.dto.ShopDTO;
+import backend.backend.helpers.payload.request.ghn.CalFeeRequest;
 import backend.backend.helpers.payload.request.ghn.GHNCalFeeRequest;
 import backend.backend.helpers.payload.request.ghn.GHNCalFeeResponse;
 import backend.backend.helpers.payload.request.ghn.GHNOrderCreateRequest;
 import backend.backend.helpers.payload.request.ghn.GHNServiceRequest;
 import backend.backend.helpers.payload.request.ghn.GHNServiceResponse;
+import backend.backend.helpers.payload.request.ghn.GHNServiceTypeRequest;
+import backend.backend.helpers.payload.request.ghn.GHNServiceTypeResponse;
 import backend.backend.helpers.payload.request.ghn.GHNStoreRegistRequest;
 import backend.backend.helpers.payload.response.CartItemResponse;
 import backend.backend.helpers.payload.response.ProductResponse;
@@ -109,6 +116,24 @@ public class GHNService {
                 new GHNServiceResponse());
     }
 
+    public List<GHNServiceTypeResponse> getServiceType(List<CartItemResponse> cartItemDTOsItemResponses) {
+        Map<Integer, List<ProductResponse>> mapProductByIdShop = convertToMapProduct(cartItemDTOsItemResponses);
+        List<GHNServiceTypeResponse> ghnServiceTypeResponses = new ArrayList<>();
+        mapProductByIdShop.forEach((key, value) -> {
+            Shop shop = shopRepository.findById(key).get();
+            Customer customer = customerRepository.findById(SubUtils.getCurrentUser().getId()).get();
+            List<GHNServiceModel> ghnServiceModels = new ArrayList<>();
+            for (GHNServiceModel cartItemResponse : getServiceType(shop.getAddress(), customer.getAddress())
+                    .getData()) {
+                ghnServiceModels.add(cartItemResponse);
+            }
+            ghnServiceTypeResponses.add(
+                    new GHNServiceTypeResponse((ShopDTO) SubUtils.mapperObject(shop, new ShopDTO()), ghnServiceModels));
+        });
+        return ghnServiceTypeResponses;
+
+    }
+
     public GHNCalFeeResponse calculateFee(GHNCalFeeRequest ghnCalFeeRequest, String shopId) {
         String url = "https://online-gateway.ghn.vn/shiip/public-api/v2/shipping-order/fee";
         return (GHNCalFeeResponse) SubUtils.jsonToObject(
@@ -140,48 +165,52 @@ public class GHNService {
 
     }
 
-    public GHNServiceResponse calculateFee(List<CartItemResponse> cartItemDTOsItemResponses) {
+    public Map<Integer, Integer> calculateFee(CalFeeRequest calFeeRequest) {
+        List<CartItemResponse> cartItemDTOsItemResponses = calFeeRequest.getCartItemDTOsItemResponses();
+        List<GHNServiceTypeRequest> ghnServiceTypeRequests = calFeeRequest.getGhnServiceTypeRequests();
         Map<Integer, List<ProductResponse>> mapProductByIdShop = convertToMapProduct(cartItemDTOsItemResponses);
+        Map<Integer, Integer> result = new HashMap<>();
+
         mapProductByIdShop.forEach((key, value) -> {
             Shop shop = shopRepository.findById(key).get();
             Customer customer = customerRepository.findById(SubUtils.getCurrentUser().getId()).get();
-            // khuc nay la dữ liệu phải lấy từ frontEnd
             Map<Integer, GHNServiceModel> mapServiceByIdShop = new HashMap<>();
-            List<GHNServiceModel> ghnServiceModels = new ArrayList<>();
-            for (GHNServiceModel cartItemResponse : getServiceType(shop.getAddress(), customer.getAddress())
-                    .getData()) {
-                ghnServiceModels.add(cartItemResponse);
+            for (GHNServiceTypeRequest ghnServiceTypeRequest : ghnServiceTypeRequests) {
+                if (shop.getIdShop().equals(ghnServiceTypeRequest.getShopDTO().getIdShop())) {
+                    mapServiceByIdShop.put(shop.getIdShop(),
+                            (GHNServiceModel) SubUtils.mapperObject(ghnServiceTypeRequest.getGhnServiceModels(),
+                                    new GHNServiceModel()));
+                }
             }
-            mapServiceByIdShop.put(shop.getIdShop(),
-                    (GHNServiceModel) SubUtils.mapperObject(ghnServiceModels.get(0), new GHNServiceModel()));
-            //
-            int totalHeight = 0;
             for (ProductResponse productResponse : value) {
-                totalHeight += productResponse.getQuantity();
-            }
-            GHNCalFeeRequest ghnCalFeeRequest = new GHNCalFeeRequest(shop.getAddress().getDistrictId1(),
-                    mapServiceByIdShop.get(shop.getIdShop()).getService_id(),
-                    mapServiceByIdShop.get(shop.getIdShop()).getService_type_id(),
-                    customer.getAddress().getDistrictId1(), 50 + (totalHeight * 5), 20, 200, 20, 10000,
-                    customer.getAddress().getWardCode1() + "", null);
-            System.out.println(calculateFee(ghnCalFeeRequest, shop.getAddressId() + ""));
+                GHNCalFeeRequest ghnCalFeeRequest = new GHNCalFeeRequest(shop.getAddress().getDistrictId1(),
+                        mapServiceByIdShop.get(shop.getIdShop()).getService_id(),
+                        mapServiceByIdShop.get(shop.getIdShop()).getService_type_id(),
+                        customer.getAddress().getDistrictId1(), 50 + (productResponse.getQuantity() * 5), 20, 200, 20,
+                        10000,
+                        customer.getAddress().getWardCode1() + "", null);
+                result.put(productResponse.getIdProduct(),
+                        calculateFee(ghnCalFeeRequest, shop.getAddressId() + "").getData().getTotal());
 
-            GHNOrderCreateRequest ghnOrderCreateRequest = new GHNOrderCreateRequest(2,
-                    200, 20,
-                    20, 50 + (totalHeight * 5), 1444, customer.getAddress().getDistrictId1(), 10000,
-                    mapServiceByIdShop.get(shop.getIdShop()).getService_id(),
-                    mapServiceByIdShop.get(shop.getIdShop()).getService_type_id(),
-                    null, "Tintest 123", "KHONGCHOXEMHANG", shop.getPhoneNumber(), shop.getAddress().getSubLocate(),
-                    shop.getAddress().getDistrictId1() + "",
-                    shop.getAddress().getWardCode1() + "",
-                    "", customer.getName(), "0938843188", customer.getAddress().getSubLocate(),
-                    customer.getAddress().getWardCode1() + "", 200000, "Theo New York Times", new ArrayList<>(),
-                    new ArrayList<>());
-            // System.out.println(createOrder(ghnOrderCreateRequest, shop.getAddressId() +
-            // ""));
+                GHNOrderCreateRequest ghnOrderCreateRequest = new GHNOrderCreateRequest(2,
+                        200, 20,
+                        20, 50 + (productResponse.getQuantity() * 5), 1444, customer.getAddress().getDistrictId1(),
+                        10000,
+                        mapServiceByIdShop.get(shop.getIdShop()).getService_id(),
+                        mapServiceByIdShop.get(shop.getIdShop()).getService_type_id(),
+                        null, "Tintest 123", "KHONGCHOXEMHANG", shop.getPhoneNumber(), shop.getAddress().getSubLocate(),
+                        shop.getAddress().getDistrictId1() + "",
+                        shop.getAddress().getWardCode1() + "",
+                        "", customer.getName(), "0938843188", customer.getAddress().getSubLocate(),
+                        customer.getAddress().getWardCode1() + "", 200000, "Theo New York Times", new ArrayList<>(),
+                        new ArrayList<>());
+                // System.out.println(createOrder(ghnOrderCreateRequest, shop.getAddressId() +
+                // ""));
+            }
+
         });
 
-        return null;
+        return result;
     }
 
 }

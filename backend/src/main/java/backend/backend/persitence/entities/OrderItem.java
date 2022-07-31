@@ -53,6 +53,9 @@ public class OrderItem implements Serializable {
 
     @Column(name = "quantity")
     private Integer quantity;
+
+    @Column(name = "shipping_price")
+    private Integer shippingPrice;
     // --- ENTITY LINKS ( RELATIONSHIP )
     @ManyToOne
     @JoinColumn(name = "id_product", referencedColumnName = "id_product", insertable = false, updatable = false)
@@ -121,6 +124,14 @@ public class OrderItem implements Serializable {
     // --- GETTERS FOR LINKS
     public Product getProduct() {
         return this.product;
+    }
+
+    public Integer getShippingPrice() {
+        return this.shippingPrice;
+    }
+
+    public void setShippingPrice(Integer shippingPrice) {
+        this.shippingPrice = shippingPrice;
     }
 
     public Customer getCustomer() {
