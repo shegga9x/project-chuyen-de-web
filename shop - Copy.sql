@@ -374,11 +374,8 @@ VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',N'cu
 --update Customer set phone_number = '0339579758' where id_customer = 2;
 -- Shop
 INSERT INTO Shop
-<<<<<<< HEAD
-VALUES(1, N'shop của Phùng', '0378876395', 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)', N'shop1', N'Shop ác nhất hành tinh');
-=======
-VALUES(1, N'shop của Phùng', '0378876395', N'', N'3107502', N'Shop ác nhất hành tinh');
->>>>>>> 575cc01e1fb1c5678212acafcec13632a6ab146d
+VALUES(1, N'shop của Phùng', '0378876395', 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)', N'3107502', N'Shop ác nhất hành tinh');
+
 
 INSERT INTO Shop
 VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)', N'shop2', N'Shop ác nhất vũ trụ');
@@ -760,6 +757,10 @@ WHERE id_customer = 1;
 
 use shop
 select * from ACCOUNT
+select * from Product
+	
+select * from Addrress
+select * from Addrress_Cell
 select * from shop
 
 
@@ -781,4 +782,6 @@ select * from Addrress
 select * from Addrress_Cell
 delete from Customer where id_customer = 2
 select * from Customer
+select * from Order_Item
+delete from Shop where id_shop=2;
 

@@ -77,13 +77,22 @@ public class CustomerService {
         Customer customer = (Customer) SubUtils.mapperObject(customerRequest, new Customer());
         customer.setIdCustomer(SubUtils.getCurrentUser().getId());
         customer.setAddressId("customer" + customer.getIdCustomer());
-        
+
         customer.getAddress().setId("customer" + customer.getIdCustomer());
         customer.setAccount(account);
         // birthday
-        
+
         customerRepository.save(customer);
         return null;
+    }
+
+    public String checkPhoneExistCustomer() {
+        int idCustomer = SubUtils.getCurrentUser().getId();
+        Customer customer = customerRepository.findByIdCustomer(idCustomer).get();
+        if (customer.getPhoneNumber() == null) {
+            throw new CustomException("Vui lòng thêm số điện thoại trước khi thanh toán");
+        }
+        return "ok";
     }
 
     public String sendPhoneSMS() {
@@ -139,9 +148,9 @@ public class CustomerService {
             account.setResetPhoneToken(new ResetPhoneToken(idCustomer, new Date(), null, null));
             // change status to 2
             List<OrderItem> listOrderItem = orderItemRepository.findByIdCustomerAndStatus(idCustomer, (byte) 1);
-            for (OrderItem orderItem : listOrderItem) {
-                orderItem.setStatus((byte) 2);
-            }
+//            for (OrderItem orderItem : listOrderItem) {
+//                orderItem.setStatus((byte) 2);
+//            }
             // change quantity product
             for (OrderItem orderItem : listOrderItem) {
                 Product product = orderItem.getProduct();

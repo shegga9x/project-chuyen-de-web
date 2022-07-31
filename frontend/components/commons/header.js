@@ -107,11 +107,34 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                         </i>My Profile
                                                     </a>
                                                 </li>
+                                                <li onClick={() => { changeRoute('/saler/profile', router) }}>
+                                                    <a>
+                                                        <i className=" u-s-m-r-9">
+                                                            <FontAwesomeIcon icon={faCog} />
+                                                        </i>My Saler Profile
+                                                    </a>
+                                                </li>
+                                                {
+                                                    session.user.role.includes('Admin') && <li onClick={() => { changeRoute('/admin', router) }}>
+                                                        <a>
+                                                            <i className=" u-s-m-r-9">
+                                                                <FontAwesomeIcon icon={faCog} />
+                                                            </i>Admin Page
+                                                        </a>
+                                                    </li>
+                                                }
                                                 <li onClick={() => { changeRoute('/order', router) }}>
                                                     <a>
                                                         <i className="u-s-m-r-9">
                                                             <FontAwesomeIcon icon={faCircleCheck} />
                                                         </i>Checkout
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a onClick={() => { changeRoute('/logout', router) }}>
+                                                        <i className=" u-s-m-r-9" >
+                                                            <FontAwesomeIcon icon={faRightFromBracket} />
+                                                        </i>Sign out
                                                     </a>
                                                 </li>
                                             </>) : (<></>)
@@ -121,13 +144,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                 <i className=" u-s-m-r-9">
                                                     <FontAwesomeIcon icon={faSignInAlt} />
                                                 </i>Login / Signup
-                                            </a>
-                                        </li>}
-                                        {session && <li>
-                                            <a onClick={() => { changeRoute('/logout', router) }}>
-                                                <i className=" u-s-m-r-9" >
-                                                    <FontAwesomeIcon icon={faRightFromBracket} />
-                                                </i>Sign out
                                             </a>
                                         </li>}
                                     </ul>

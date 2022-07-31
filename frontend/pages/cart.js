@@ -8,6 +8,7 @@ import axios from "axios";
 import { useState, useEffect } from 'react';
 import { changeRoute } from "../helpers/customFunction/changeRoute";
 import { useRouter } from "next/router";
+import PhoneOTPProgress from "../components/cart/phoneOTPProgress";
 
 export default function Cart(props) {
 
@@ -15,12 +16,39 @@ export default function Cart(props) {
   const [cart, setCart] = useState(props.cart);
   const [shippingTypeList, setShippingTypeList] = useState([]);
   const [shippingPriceList, setShippingPriceList] = useState(null);
+  const [openPhoneOTPProgress, setOpenPhoneOTPProgress] = useState(false);
+
+
+  const resetAll = () => {
+    //Phone OTP Progress
+    // document.getElementsByClassName('PhoneNumber')[0].value = "";
+    document.getElementsByClassName('smsNumber')[0].value = "";
+  }
+
+  const closeModal = () => {
+    setOpenPhoneOTPProgress(false);
+    document.body.classList.toggle('modal-visibile');
+    const model = document.getElementsByClassName('modal-load')[0];
+    model.classList.toggle('visible');
+    resetAll();
+  }
+
+  const openModal = () => {
+    document.body.classList.toggle('modal-visibile');
+    const model = document.getElementsByClassName('modal-load')[0];
+    model.classList.toggle('visible');
+    setOpenPhoneOTPProgress(true);
+  }
+
   const getTotalCart = () => {
-    let result = 0;
-    cart.forEach(ele => {
-      result += (ele.product.price * ele.quantity)
-    })
-    return result.toFixed(2);
+    if (shippingPriceList != null) {
+      let result = 0;
+      cart.forEach(ele => {
+        result = result + (ele.product.price * ele.quantity) + shippingPriceList.get(ele.product.idProduct + "");
+      })
+      return result.toFixed(2);
+    }
+    return 0;
   }
 
   const onlyNumberKey = (evt) => {
@@ -104,8 +132,6 @@ export default function Cart(props) {
       const response = await instance().get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
       if (response) {
         setCart(response.data);
-
-
       }
     }
   }
@@ -118,9 +144,13 @@ export default function Cart(props) {
       req.push(key + "-" + value);
     }
 
-    const res = await instance().post(`http://localhost:4000/api/order/addCartItemToOrder`, req).catch((err) => { alert(err.response.data.message) })
-    if (res) {
-      changeRoute("/order", router)
+    //check thang nay co sdt truoc roi moi remove
+    const res1 = await instance().get(`http://localhost:4000/api/customer/checkPhoneExistCustomer`)
+      .catch((err) => {
+        alert(err.response.data.message);
+      })
+    if (res1) {
+      openModal();
     }
   }
 
@@ -318,14 +348,14 @@ export default function Cart(props) {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        {/* <tr>
                           <td>
                             <h3 className="calc-h3 u-s-m-b-0">Subtotal</h3>
                           </td>
                           <td>
                             <span className="calc-text">${getTotalCart()}</span>
                           </td>
-                        </tr>
+                        </tr> */}
                         <tr>
                           <td>
                             <h3 className="calc-h3 u-s-m-b-8">Shipping Type</h3>
@@ -360,8 +390,6 @@ export default function Cart(props) {
                                   </div></>
                               )
                             })}
-
-
                           </td>
                           <td></td>
                         </tr>
@@ -394,6 +422,9 @@ export default function Cart(props) {
           </div>
         </div>
         {/* Cart-Page /- */}
+        <div className="modal-load">
+          <PhoneOTPProgress open={openPhoneOTPProgress} closeModal={closeModal} shippingPriceList={shippingPriceList}></PhoneOTPProgress>
+        </div>
       </Layout>
     </>
   );

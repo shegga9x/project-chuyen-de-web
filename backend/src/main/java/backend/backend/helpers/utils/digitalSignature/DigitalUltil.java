@@ -26,15 +26,25 @@ public class DigitalUltil {
         return result;
     }
 
+    public static double getTotalPrice(List<OrderItemResponse> orderItems) {
+        double result = 0;
+        for (OrderItemResponse orderItem : orderItems) {
+            result = result + (orderItem.getProduct().getPrice() * orderItem.getQuantity()) + orderItem.getShippingPrice();
+        }
+        return result;
+    }
+
     public static String[][] createContent(List<OrderItemResponse> orderItems, Account account) {
-        String[][] result = { { "ProductId", "CustomerId", "Email", "ToTalPrice" } };
+        String[][] result = {{"ProductId", "CustomerId", "Email", "Quantity", "Price", "ShippingPrice"}};
         // insert mấy trường dài quá như product name là bị lỗi, éo bít sửa sao
         for (OrderItemResponse orderItem : orderItems) {
-            String totalPrice = String.valueOf(orderItem.getProduct().getPrice() * orderItem.getQuantity());
-            String[][] data = { { orderItem.getProduct().getIdProduct().toString(),
+            String totalPrice = String.valueOf(orderItem.getProduct().getPrice());
+            String[][] data = {{orderItem.getProduct().getIdProduct().toString(),
                     account.getIdAccount().toString(),
                     account.getEmail(),
-                    totalPrice} };
+                    String.valueOf(orderItem.getQuantity()),
+                    totalPrice,
+                    String.valueOf(orderItem.getShippingPrice())}};
             result = append(result, data);
         }
         return result;
@@ -55,9 +65,15 @@ public class DigitalUltil {
 
                 // create Content
                 String[][] content = createContent(orderItems, account);
-                System.out.println(content[0][0]);
 
                 drawTable(myPage, cont, 690, 30, content);
+                cont.beginText();
+
+                cont.setFont(PDType1Font.TIMES_ROMAN, 12);
+                cont.setLeading(14.5f);
+                cont.newLineAtOffset(30, 640 - 22 * orderItems.size());
+                cont.showText("ToTal Price: " + getTotalPrice(orderItems));
+                cont.endText();
 
             }
             ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -70,9 +86,9 @@ public class DigitalUltil {
 
     public static void drawTable(PDPage page,
 
-            PDPageContentStream contentStream, float y, float margin,
+                                 PDPageContentStream contentStream, float y, float margin,
 
-            String[][] content) throws IOException {
+                                 String[][] content) throws IOException {
 
         final int rows = content.length;
 

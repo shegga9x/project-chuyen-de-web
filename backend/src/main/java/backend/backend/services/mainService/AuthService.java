@@ -251,6 +251,7 @@ public class AuthService {
         response.refreshToken = refreshToken.getToken();
         response.expireToken = refreshToken.getExpires();
         response = (AuthenticateResponse) SubUtils.mapperObject(account, response);
+        System.out.println(response);
         return response;
     }
 

@@ -67,7 +67,8 @@ export default function SingleProduct({ data }) {
           console.log({ err })
           if (err.message != "Network Error") {
             if (err.response.data.message) {
-              alert(err.response.data.message);
+              alert('Ban chua cap nhap thong tin');
+              changeRoute('/account/profile',router);
             } else {
               alert('ban can dang nhap');
             }
@@ -391,18 +392,6 @@ export default function SingleProduct({ data }) {
                           mascots across the chest, either as part of a uniform
                           or personal preference.
                         </p>
-                        {/* <img
-                          className="desc-img img-fluid u-s-m-b-26"
-                          src="/static/images/product/product@3x.jpg"
-                          alt="Product"
-                        />
-                        <iframe
-                          className="desc-iframe u-s-m-b-45"
-                          width={710}
-                          height={400}
-                          src="/static/images/product/iframe-youtube.jpg"
-                          allowFullScreen=""
-                        /> */}
                       </div>
                     </div>
                     {/* Description-Tab /- */}

@@ -34,7 +34,7 @@ public class OrderService {
             ProductResponse productResponse = (ProductResponse) SubUtils.mapperObject(orderItem.getProduct(),
                     new ProductResponse());
             OrderItemResponse orderItemResponse = new OrderItemResponse(orderItem.getIdCustomer(), productResponse,
-                    orderItem.getStatus(), orderItem.getQuantity());
+                    orderItem.getStatus(), orderItem.getQuantity(),orderItem.getShippingPrice());
             result.add(orderItemResponse);
         }
         return result;

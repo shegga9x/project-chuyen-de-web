@@ -4,7 +4,7 @@ import instance from "../../helpers/axiosConfig";
 import { changeRoute } from "../../helpers/customFunction/changeRoute";
 import { useRouter } from 'next/router'
 
-export default function VNPayProgress({ open, closeModal }) {
+export default function PhoneOTPProgress({ open, closeModal, shippingPriceList, user }) {
 
     const router = useRouter()
 
@@ -20,13 +20,17 @@ export default function VNPayProgress({ open, closeModal }) {
 
 
     const sendSMS = async () => {
-        const phoneNumber = document.getElementsByClassName('PhoneNumber')[0].value
-        const res = await instance().get('http://localhost:4000/api/customer/sendPhoneSMS')
-        if (res) {
-            const sms = res.data;
-            const res2 = await instance().get('http://localhost:4000/api/sms/sendPhoneSMS', { params: { phoneNumber: phoneNumber, sms: sms } });
-            if (res2) {
-                alert('đã send thành công');
+        // const phoneNumber = document.getElementsByClassName('PhoneNumber')[0].value
+        const res1 = await instance().get('http://localhost:4000/api/customer/getCurrentCustomer')
+        if (res1) {
+            const phoneNumber = res1.data.phoneNumber;
+            const res = await instance().get('http://localhost:4000/api/customer/sendPhoneSMS')
+            if (res) {
+                const sms = res.data;
+                const res2 = await instance().get('http://localhost:4000/api/sms/sendPhoneSMS', { params: { phoneNumber: phoneNumber, sms: sms } });
+                if (res2) {
+                    alert('đã send thành công');
+                }
             }
         }
     }
@@ -38,7 +42,21 @@ export default function VNPayProgress({ open, closeModal }) {
                 alert(err.response.data.message);
             })
         if (res) {
-            changeRoute('/order', router);
+            const req = [];
+            for (const [key, value] of shippingPriceList) {
+                console.log(key, value);
+                req.push(key + "-" + value);
+            }
+            const res1 = await instance().post(`http://localhost:4000/api/order/addCartItemToOrder`, req)
+                .catch((err) => {
+                    alert(err.response.data.message)
+                    if (err.response.data.message == "Khách hàng không đủ tiền mua hàng, vui lòng nạp thêm") {
+                        changeRoute('/account/profile?keyword=shopXu', router)
+                    }
+                })
+            if (res1) {
+                changeRoute("/order", router)
+            }
         }
     }
 
@@ -73,17 +91,17 @@ export default function VNPayProgress({ open, closeModal }) {
                     <div style={{ padding: '0 1.875rem' }}>
                         <div>
                             <div style={{ display: 'flex' }}>
-                                <input className="PhoneNumber" type="text" placeholder="Số Điện Thoại" style={{ flex: 1, padding: '0.625rem', outline: 'none', border: '1px solid rgba(0, 0, 0, 0.14)', height: '2.5rem' }} />
+                                <input className="smsNumber" type="text" placeholder="Mã xác minh" style={{ flex: 1, padding: '0.625rem', outline: 'none', border: '1px solid rgba(0, 0, 0, 0.14)', height: '2.5rem' }} />
                                 <button onClick={() => { sendSMS() }} style={{ border: '1px solid rgba(0, 0, 0, 0.5)', backgroundColor: '#fbfbfb', padding: '0 0.625rem' }}>Gửi
                                     Mã xác
                                     minh</button>
                             </div>
-                            <div style={{ display: 'flex', marginTop: '30px' }}>
+                            {/* <div style={{ display: 'flex', marginTop: '30px' }}>
                                 <input className="smsNumber" type="text" placeholder="Mã xác minh" style={{ flex: 1, padding: '0.625rem', outline: 'none', border: '1px solid rgba(0, 0, 0, 0.14)', height: '2.5rem' }} />
-                            </div>
+                            </div> */}
                         </div>
                         <div style={{ margin: '1.375rem 0', justifyContent: 'flex-end', display: 'flex' }}>
-                            <button onClick={() => { closeModal('phoneOTPProgress') }} style={{ minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', background: 'none', borderRadius: '0.125rem', height: '2.5rem' }}>Thoát</button>
+                            <button onClick={() => { closeModal() }} style={{ minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', background: 'none', borderRadius: '0.125rem', height: '2.5rem' }}>Thoát</button>
                             <button onClick={() => { checkSMS() }} style={{ marginLeft: '0.625rem', minWidth: '8.75rem', outline: 'none', padding: '0 0.625rem', border: 'none', backgroundColor: 'red', borderRadius: '0.125rem', height: '2.5rem' }}>Xác minh</button>
                         </div>
                     </div>
