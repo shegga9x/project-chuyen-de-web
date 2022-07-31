@@ -362,20 +362,26 @@ INSERT INTO Addrress_Cell VALUES(21305, N'Phường 7');
 
 INSERT INTO Addrress VALUES(N'3107502', 202,1461,21305,N'334/35/12 Nguyễn Văn Nghi');
 INSERT INTO Addrress VALUES(N'customer1', 202,1461,21305,N'Nguyễn Văn Nghi');
+INSERT INTO Addrress VALUES(N'shop2', 202,1461,21305,N'Nguyễn Văn Nghi');
+INSERT INTO Addrress VALUES(N'customer2', 202,1461,21305,N'Nguyễn Văn Nghi');
 
  --Customer
 INSERT INTO Customer
 VALUES(1, N'Lê Đình Phùng', '0378876395', 'm', '25/08/2000', '',N'customer1',null);
 
---INSERT INTO Customer
---VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',1,null);
+INSERT INTO Customer
+VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'm', '28/09/2000', '',N'customer2',null);
 --update Customer set phone_number = '0339579758' where id_customer = 2;
 -- Shop
 INSERT INTO Shop
+<<<<<<< HEAD
+VALUES(1, N'shop của Phùng', '0378876395', 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)', N'shop1', N'Shop ác nhất hành tinh');
+=======
 VALUES(1, N'shop của Phùng', '0378876395', N'', N'3107502', N'Shop ác nhất hành tinh');
+>>>>>>> 575cc01e1fb1c5678212acafcec13632a6ab146d
 
---INSERT INTO Shop
---VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', N'', 1, N'Shop ác nhất vũ trụ');
+INSERT INTO Shop
+VALUES(2, N'Nguyễn Ngô Minh Hiển', '0339579758', 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)', N'shop2', N'Shop ác nhất vũ trụ');
 
 -- Shop_Category
 INSERT INTO Shop_Category
@@ -760,6 +766,7 @@ select * from shop
 
 --delete from shop where id_shop = 2
 --delete from Addrress where id = 'shop2'
+select * from Shop
 UPDATE Customer
 SET img_url = 'url(https://upload.wikimedia.org/wikipedia/commons/7/72/Default-welcomer.png)'
 WHERE id_customer = 2;	

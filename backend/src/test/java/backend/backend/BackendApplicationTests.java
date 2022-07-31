@@ -104,7 +104,7 @@ class BackendApplicationTests {
     @Transactional
     void test5() {
         Optional<SingleProductPage> singleProductPage = singleProductPageRepository.findByIdSingleProductPage(1);
-        CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+        CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(), singleProductPage.get().getIdShop(),
                 singleProductPage.get().getIdCategory(),
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
@@ -127,12 +127,11 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        List<OrderItem> list = orderItemRepository.findByIdCustomerAndStatus(1,(byte) 1);
-        for (OrderItem orderItem:list) {
+        List<OrderItem> list = orderItemRepository.findByIdCustomerAndStatus(1, (byte) 1);
+        for (OrderItem orderItem : list) {
             System.out.println(orderItem);
         }
     }
 
- 
 
 }

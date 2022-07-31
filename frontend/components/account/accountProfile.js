@@ -114,6 +114,7 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
         }
         fetchMyAPI()
     }, [])
+
     async function getAddressCell(type, value, begin) {
         const id = value.split("-")[0]
         const name = value.split("-")[1]
@@ -190,9 +191,10 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
                             <input id="shopName" type="text" defaultValue={customer.name} />
                         </div>
                     </div>
-                    <div style={{ display: 'flex', marginBottom: '30px' }} className="row mt-3">
-                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }} className="col-md-8"><label className="labels">Tỉnh/Thành Phố</label>
-                            <select style={{ marginLeft: "10px" }} name="" id="" value={provinceSelected.id + "-" + provinceSelected.name} onChange={(e) => { getAddressCell("district", e.target.value, false) }}>
+                    <div style={{ display: 'flex', marginBottom: '30px' }}>
+                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }}>Tỉnh/Thành Phố</div>
+                        <div style={{ paddingLeft: '20px', fontSize: '.875rem', fontWeight: 500 }}>
+                            <select name="" id="" value={provinceSelected.id + "-" + provinceSelected.name} onChange={(e) => { getAddressCell("district", e.target.value, false) }}>
                                 {province.map(o =>
                                 (
                                     <option key={o.provinceID} value={o.provinceID + "-" + o.provinceName} >{o.provinceName}</option>
@@ -201,16 +203,22 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
 
                             </select>
                         </div>
-                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }} className="col-md-8"><label className="labels">Quận/Huyện</label>
-                            <select style={{ marginLeft: "10px" }} name="" id="" value={districtSelected.id + "-" + districtSelected.name}  onChange={(e) => { getAddressCell("ward", e.target.value, false) }}>
+                    </div>
+                    <div style={{ display: 'flex', marginBottom: '30px' }}>
+                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }}>Quận/Huyện</div>
+                        <div style={{ paddingLeft: '20px', fontSize: '.875rem', fontWeight: 500 }}>
+                            <select name="" id="" value={districtSelected.id + "-" + districtSelected.name} onChange={(e) => { getAddressCell("ward", e.target.value, false) }}>
                                 {district.map(o => (
                                     <option key={o.districtID} value={o.districtID + "-" + o.districtName}  >{o.districtName}</option>
                                 ))}
 
                             </select>
                         </div>
-                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }} className="col-md-8"><label className="labels">Phường</label>
-                            <select style={{ marginLeft: "10px" }} name="" id="" value={wardSelected.id + "-" + wardSelected.name} onChange={(e) => { getAddressCell("", e.target.value, false) }}>
+                    </div>
+                    <div style={{ display: 'flex', marginBottom: '30px' }}>
+                        <div style={{ width: '115px', textAlign: 'right', fontSize: '.875rem' }}>Phường</div>
+                        <div style={{ paddingLeft: '20px', fontSize: '.875rem', fontWeight: 500 }}>
+                            <select name="" id="" value={wardSelected.id + "-" + wardSelected.name} onChange={(e) => { getAddressCell("", e.target.value, false) }}>
                                 {ward.map(o => (
                                     <option key={o.wardCode} value={o.wardCode + "-" + o.wardName} >{o.wardName}</option>
                                 ))}

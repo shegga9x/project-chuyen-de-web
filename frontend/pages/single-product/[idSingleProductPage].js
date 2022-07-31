@@ -98,6 +98,28 @@ export default function SingleProduct({ data }) {
           Groover - Online Shopping for Electronics, Apparel, Computers, Books,
           DVDs & more
         </title>
+        <style dangerouslySetInnerHTML={{
+          __html: `
+                    .btn {
+                      overflow: hidden;
+                      display: -webkit-box;
+                      text-overflow: ellipsis;
+                      -webkit-line-clamp: 1;
+                      flex-direction: column;
+                      font-size: 14px;
+                      -moz-box-sizing: border-box;
+                      box-sizing: border-box;
+                      box-shadow: 0 1px 1px 0 rgb(0 0 0 / 9%);
+                      border-radius: 2px;
+                      border: 0;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      text-transform: capitalize;
+                      outline: 0;
+                      cursor: pointer;
+                  }
+                ` }} />
       </Head>
       <Layout shop updateCartHeader={updateCartHeader}>
         {/* Page Introduction Wrapper */}
@@ -165,63 +187,6 @@ export default function SingleProduct({ data }) {
                         </a>
                       );
                     })}
-
-                    {/* <a
-                    <a
-                      className="active"
-                      data-image="/static/images/product/product@4x.jpg"
-                      data-zoom-image="/static/images/product/product@4x.jpg"
-                    >
-                      <img
-                        src="/static/images/product/product@2x.jpg"
-                        alt="Product"
-                      />
-                    </a>
-                    <a
-                      data-image="/static/images/product/product@4x.jpg"
-                      data-zoom-image="/static/images/product/product@4x.jpg"
-                    >
-                      <img
-                        src="/static/images/product/product@2x.jpg"
-                        alt="Product"
-                      />
-                    </a>
-                    <a
-                      data-image="/static/images/product/product@4x.jpg"
-                      data-zoom-image="/static/images/product/product@4x.jpg"
-                    >
-                      <img
-                        src="/static/images/product/product@2x.jpg"
-                        alt="Product"
-                      />
-                    </a>
-                    <a
-                      data-image="/static/images/product/product@4x.jpg"
-                      data-zoom-image="/static/images/product/product@4x.jpg"
-                    >
-                      <img
-                        src="/static/images/product/product@2x.jpg"
-                        alt="Product"
-                      />
-                    </a>
-                    <a
-                      data-image="/static/images/product/product@4x.jpg"
-                      data-zoom-image="/static/images/product/product@4x.jpg"
-                    >
-                      <img
-                        src="/static/images/product/product@2x.jpg"
-                        alt="Product"
-                      />
-                    </a>
-                    <a
-                      data-image="/static/images/product/product@4x.jpg"
-                      data-zoom-image="/static/images/product/product@4x.jpg"
-                    >
-                      <img
-                        src="/static/images/product/product@2x.jpg"
-                        alt="Product"
-                      />
-                    </a> */}
                   </div>
                 </div>
                 {/* Product-zoom-area /- */}
@@ -347,7 +312,36 @@ export default function SingleProduct({ data }) {
             {/* Product-Detail /- */}
             {/* Detail-Tabs */}
             <div>
-              <h1>Phải làm thằng này (Người bán)</h1>
+              <div style={{ backgroundColor: "#f5f5f5" }}>
+                <div style={{ padding: "25px", display: "flex" }}>
+                  <div>
+                    <div style={{ backgroundImage: `${data.shop.imgUrl}`, borderRadius: "50%", backgroundPosition: "50%", backgroundSize: "cover", backgroundRepeat: "no-repeat", width: "78px", height: "78px" }}>
+                    </div>
+                  </div>
+                  <div style={{ marginLeft: "10px" }}>
+                    <div style={{ color: "black" }}>{data.shop.name}</div>
+                    <div>{data.shop.description}</div>
+                    <div style={{ display: "flex" }}>
+                      <button className="btn" style={{ marginRight: "0.625rem", outline: "none", border: "none", paddingLeft: "15px", paddingRight: "15px", textTransform: "uppercase", flexDirection: "row" }}>
+                        <svg style={{ width: "1em", height: "1em", marginRight: "5px", fill: "red" }} viewBox="0 0 16 16" className="shopee-svg-icon Co0ddi"><g fillRule="evenodd"><path d="M15 4a1 1 0 01.993.883L16 5v9.932a.5.5 0 01-.82.385l-2.061-1.718-8.199.001a1 1 0 01-.98-.8l-.016-.117-.108-1.284 
+                        8.058.001a2 2 0 001.976-1.692l.018-.155L14.293 4H15zm-2.48-4a1 1 0 011 1l-.003.077-.646 8.4a1 1 
+                        0 01-.997.923l-8.994-.001-2.06 1.718a.5.5 0 01-.233.108l-.087.007a.5.5 0 01-.492-.41L0 11.732V1a1 1 0 011-1h11.52zM3.646 4.246a.5.5 0 000 .708c.305.304.694.526 1.146.682A4.936 4.936 0 006.4 5.9c.464 0 1.02-.062 1.608-.264.452-.156.841-.378 1.146-.682a.5.5 0 10-.708-.708c-.185.186-.445.335-.764.444a4.004 4.004 0 01-2.564 0c-.319-.11-.579-.258-.764-.444a.5.5 0 00-.708 0z"></path></g>
+                        </svg>
+                        Chat Ngay
+                      </button>
+                      <button className="btn" style={{ outline: "none", border: "none", paddingLeft: "15px", paddingRight: "15px", textTransform: "uppercase", flexDirection: "row" }}>
+                        <svg style={{ width: "1em", height: "1em", marginRight: "5px", fill: "black" }} enableBackground="new 0 0 15 15" viewBox="0 0 15 15" x="0" y="0" strokeWidth="0" className="shopee-svg-icon cy9i0H"><path d="m13 1.9c-.2-.5-.8-1-1.4-1h-8.4c-.6.1-1.2.5-1.4 1l-1.4 4.3c0 .8.3 1.6.9 2.1v4.8c0 .6.5 1 1.1 
+                        1h10.2c.6 0 1.1-.5 1.1-1v-4.6c.6-.4.9-1.2.9-2.3zm-11.4 3.4 1-3c .1-.2.4-.4.6-.4h8.3c.3 0 .5.2.6.4l1 3zm 
+                        .6 3.5h.4c.7 0 1.4-.3 1.8-.8.4.5.9.8 1.5.8.7 0 1.3-.5 1.5-.8.2.3.8.8 1.5.8.6 0 1.1-.3 1.5-.8.4.5 1.1.8 1.7.8h.4v3.9c0 .1 0 .2-.1.3s-.2.1-.3.1h-9.5c-.1 0-.2 0-.3-.1s-.1-.2-.1-.3zm8.8-1.7h-1v .1s0 .3-.2.6c-.2.1-.5.2-.9.2-.3 0-.6-.1-.8-.3-.2-.3-.2-.6-.2-.6v-.1h-1v .1s0 .3-.2.5c-.2.3-.5.4-.8.4-1 0-1-.8-1-.8h-1c0 .8-.7.8-1.3.8s-1.1-1-1.2-1.7h12.1c0 .2-.1.9-.5 1.4-.2.2-.5.3-.8.3-1.2 0-1.2-.8-1.2-.9z"></path>
+                        </svg>
+                        Xem Shop
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
             </div>
             <div className="row">
               <div className="col-lg-12 col-md-12 col-sm-12">
@@ -897,17 +891,21 @@ export async function getStaticProps({ params }) {
   if (res != undefined) {
     let res1 = null;
     let res2 = null;
+    let res3 = null;
     await axios.all([
       instance().get(
         `http://localhost:4000/api/product/getListProductBySingleProductPage`,
         { params: { idSingleProduct: res.data.idSingleProductPage } }),
       instance().get(`http://localhost:4000/api/product/getListCategoryBySingleProductPage`,
-        { params: { idCategory: res.data.idCategory } })
+        { params: { idCategory: res.data.idCategory } }),
+      instance().get(`http://localhost:4000/api/product/getShopProfile`, { params: { idShop: res.data.idShop } })
+
     ])
-      .then(axios.spread((data1, data2) => {
+      .then(axios.spread((data1, data2, data3) => {
         // output of req.
         res1 = data1;
         res2 = data2;
+        res3 = data3;
       }))
     console.log(res.data);
     if (res2 != null && res1 != null) {
@@ -916,7 +914,8 @@ export async function getStaticProps({ params }) {
           data: {
             singleProductPage: res.data,
             listProduct: res1.data,
-            listCategory: res2.data
+            listCategory: res2.data,
+            shop: res3.data
           },
         },
       };

@@ -36,6 +36,15 @@ public class ShopService {
         }
     }
 
+    public Shop getShop(int idShop) {
+        try {
+            return shopRepository.findById(idShop).get();
+        } catch (Exception e) {
+            throw new CustomException("Chua co Shop");
+        }
+    }
+
+    @Transactional
     public Integer updateShop(ShopDTO request) {
         Shop shop = (Shop) SubUtils.mapperObject(request, new Shop());
         Integer shopID = shop.getIdShop();

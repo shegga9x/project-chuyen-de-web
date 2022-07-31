@@ -187,7 +187,7 @@ public class AuthService {
         try {
             account = accountRepository.findByEmail(model.getEmail()).get();
         } catch (Exception e) {
-            throw new CustomException("Can't find Email !!!");
+            throw new CustomException("Can't find User with that Email !!!");
         }
         ResetToken resetToken = account.getResetToken();
         // create reset token that expires after 1 day

@@ -16,11 +16,16 @@ export default function Profile({ keyword, customer }) {
 
     useEffect(() => {
         const changeInformationCustomer = async () => {
-            await instance().post("http://localhost:4000/api/customer/changeInformationCustomer", customerState).catch;
-            console.log('done');
+            const res = await instance().post("http://localhost:4000/api/customer/changeInformationCustomer", customerState)
+                .catch(err => {
+                    alert('Xảy ra sự cố khi thay đổi thông tin');
+                });
+            if (res) {
+                alert('Thay đổi thông tin thành công');
+            }
         }
         if (firstRender != 0) {
-            changeInformationCustomer().catch(err => { console.log({ err }) });
+            changeInformationCustomer();
         }
     }, [customerState])
 
@@ -161,14 +166,14 @@ export default function Profile({ keyword, customer }) {
 }
 
 export async function getServerSideProps({ req, query }) {
-    
+
     // session.user.email
-        const session = await getSession({ req });
-        if (session) {
-            const res = await instance({ req }).get("http://localhost:4000/api/customer/getCurrentCustomer")
-            const customer = res.data;
+    const session = await getSession({ req });
+    if (session) {
+        const res = await instance({ req }).get("http://localhost:4000/api/customer/getCurrentCustomer")
+        const customer = res.data;
         if (query.keyword != undefined) {
-            return {    
+            return {
                 props: {
                     keyword: query.keyword,
                     customer: customer

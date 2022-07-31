@@ -10,11 +10,15 @@ import {
 import Layout from "../components/layout";
 import { faFacebook, faGithub, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import useTrans from "../helpers/customHook/useTrans";
+import { useRouter } from 'next/router';
+import { changeRoute } from "../helpers/customFunction/changeRoute";
 import { getSession } from 'next-auth/client';
 
 export default function Account(props) {
 
     const trans = useTrans();
+
+    const router = useRouter();
 
     const elementRef = useRef(null);
 
@@ -45,7 +49,7 @@ export default function Account(props) {
 
     const submit = (e) => {
         e.preventDefault();
-        signIn('credentials', { email: email, password: password, callbackUrl: '/middleware'});
+        signIn('credentials', { email: email, password: password, callbackUrl: '/middleware' });
     }
 
 
@@ -159,7 +163,7 @@ export default function Account(props) {
                                             </div>
                                             <div className="group-2 text-right">
                                                 <div className="page-anchor">
-                                                    <a href="lost-password.html">
+                                                    <a onClick={() => { changeRoute('/account/reset', router) }}>
                                                         <i className="fas fa-circle-o-notch u-s-m-r-9" />
                                                         {trans.account.lostPassword}
                                                     </a>

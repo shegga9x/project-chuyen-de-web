@@ -104,7 +104,7 @@ public class SingleProductPageService {
     public CustomSinglePage getSingleProductPagePerPage(int idSingleProduct) {
         Optional<SingleProductPage> singleProductPage = singleProductPageRepository
                 .findByIdSingleProductPage(idSingleProduct);
-        CustomSinglePage result = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+        CustomSinglePage result = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(), singleProductPage.get().getIdShop(),
                 singleProductPage.get().getIdCategory(),
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
