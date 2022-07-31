@@ -172,6 +172,7 @@ export async function getServerSideProps({ req, query }) {
     if (session) {
         const res = await instance({ req }).get("http://localhost:4000/api/customer/getCurrentCustomer")
         const customer = res.data;
+        console.log(customer);
         if (query.keyword != undefined) {
             return {
                 props: {

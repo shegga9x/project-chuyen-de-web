@@ -67,7 +67,8 @@ export default function SingleProduct({ data }) {
           console.log({ err })
           if (err.message != "Network Error") {
             if (err.response.data.message) {
-              alert(err.response.data.message);
+              alert('Ban chua cap nhap thong tin');
+              changeRoute('/account/profile',router);
             } else {
               alert('ban can dang nhap');
             }

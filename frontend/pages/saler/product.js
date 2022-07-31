@@ -12,6 +12,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { useSession } from "next-auth/client";
 import customStyles from '../../components/saler/customCSS/customCss1.css'
 import ProductAddModal from "../../components/saler/modal/productAddModal";
+import { changeRoute } from "../../helpers/customFunction/changeRoute";
 
 
 export default function Product() {
@@ -55,6 +56,10 @@ export default function Product() {
             const sorter = router.query.sorter == null ? "" : `&sorter=${router.query.sorter}`;
             InstanceAxios().get(`http://localhost:4000/api/saler/productSalerList?page=${page - 1}&size=${size}${status}${sorter}`)
                 .then((data) => { setData(data.data.page); })
+                .catch((err) => {
+                    alert('Chưa cập nhập profile');
+                    changeRoute('/saler/profile', router);
+                })
         }
     }, [loading, router.asPath, router.isReady, update])
     function openModal() {
@@ -65,7 +70,7 @@ export default function Product() {
     }
     return (
         <>
-         
+
             <Head> <title> Saler Order </title> </Head>
             <Layout shop>
                 {

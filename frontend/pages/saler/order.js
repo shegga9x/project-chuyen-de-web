@@ -11,6 +11,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import { useSession } from "next-auth/client";
 import customStyles from '../../components/saler/customCSS/customCss1.css'
 import Layout from "../../components/saler/layout";
+import { changeRoute } from "../../helpers/customFunction/changeRoute";
 
 
 export default function Order() {
@@ -54,6 +55,10 @@ export default function Order() {
                 .then((data) => {
                     const map = new Map(Object.entries(data.data.map));
                     setData(map);
+                })
+                .catch((err) => {
+                    alert('Chưa cập nhập profile');
+                    changeRoute('/saler/profile', router);
                 })
         }
     }, [loading, router.asPath, router.isReady, update])

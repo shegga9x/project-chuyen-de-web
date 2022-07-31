@@ -213,8 +213,10 @@ CREATE TABLE Order_Item
     id_product int FOREIGN KEY REFERENCES Product (id_product),
     status tinyint,
 	quantity int,
+	shipping_price int,
     PRIMARY KEY (id_order_item)
 )
+
 CREATE TABLE Wallet_Shop
 (
     id_shop int FOREIGN KEY REFERENCES Shop (id_shop),
@@ -759,6 +761,8 @@ select * from Product
 	
 select * from Addrress
 select * from Addrress_Cell
+select * from shop
+
 
 
 --delete from shop where id_shop = 2
@@ -772,8 +776,12 @@ SELECT * FROM Order_Item o JOIN Product p on  o.id_product = p.id_product
 		WHERE spg.id_shop =  1 AND o.status = 1
 
 
-		select * from shop
-
+select * from shop
+	
+select * from Addrress
+select * from Addrress_Cell
 delete from Customer where id_customer = 2
 select * from Customer
+select * from Order_Item
+delete from Shop where id_shop=2;
 

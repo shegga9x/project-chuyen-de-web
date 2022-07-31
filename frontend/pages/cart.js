@@ -5,22 +5,50 @@ import Layout from "../components/layout";
 import { getSession } from 'next-auth/client';
 import instance from '../helpers/axiosConfig';
 import axios from "axios";
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { changeRoute } from "../helpers/customFunction/changeRoute";
 import { useRouter } from "next/router";
-import InstanceAxios from "../helpers/axiosConfig";
+import PhoneOTPProgress from "../components/cart/phoneOTPProgress";
 
 export default function Cart(props) {
 
   const router = useRouter();
   const [cart, setCart] = useState(props.cart);
+  const [shippingTypeList, setShippingTypeList] = useState([]);
+  const [shippingPriceList, setShippingPriceList] = useState(null);
+  const [openPhoneOTPProgress, setOpenPhoneOTPProgress] = useState(false);
+
+
+  const resetAll = () => {
+    //Phone OTP Progress
+    // document.getElementsByClassName('PhoneNumber')[0].value = "";
+    document.getElementsByClassName('smsNumber')[0].value = "";
+  }
+
+  const closeModal = () => {
+    setOpenPhoneOTPProgress(false);
+    document.body.classList.toggle('modal-visibile');
+    const model = document.getElementsByClassName('modal-load')[0];
+    model.classList.toggle('visible');
+    resetAll();
+  }
+
+  const openModal = () => {
+    document.body.classList.toggle('modal-visibile');
+    const model = document.getElementsByClassName('modal-load')[0];
+    model.classList.toggle('visible');
+    setOpenPhoneOTPProgress(true);
+  }
 
   const getTotalCart = () => {
-    let result = 0;
-    cart.forEach(ele => {
-      result += (ele.product.price * ele.quantity)
-    })
-    return result.toFixed(2);
+    if (shippingPriceList != null) {
+      let result = 0;
+      cart.forEach(ele => {
+        result = result + (ele.product.price * ele.quantity) + shippingPriceList.get(ele.product.idProduct + "");
+      })
+      return result.toFixed(2);
+    }
+    return 0;
   }
 
   const onlyNumberKey = (evt) => {
@@ -36,6 +64,7 @@ export default function Cart(props) {
       target.value = currentQuantity;
     } else {
       disableClick(product.idProduct);
+
       const res = await instance().post(`http://localhost:4000/api/cart/updateProduct`, { product, quantity: target.value })
         .catch((err) => {
           console.log(err);
@@ -50,6 +79,17 @@ export default function Cart(props) {
         if (response) {
           removeDisableClick(product.idProduct);
           setCart(response.data);
+
+          const ghnServiceTypeRequests = [];
+          shippingTypeList.forEach(element => {
+            ghnServiceTypeRequests.push({ shopDTO: element.shopDTO, ghnServiceModels: element.ghnServiceModels[0] })
+          });
+          const data = JSON.parse(JSON.stringify(response.data))
+          data.forEach(function (cartItem) { delete cartItem.product.imgUrl });
+          const calFeeRequest = { cartItemDTOsItemResponses: data, ghnServiceTypeRequests: ghnServiceTypeRequests };
+          const responseShipServiceFee = await instance().post("http://localhost:4000/api/ghn/calculateFee", calFeeRequest)
+          const map = new Map(Object.entries(responseShipServiceFee.data));
+          setShippingPriceList(map)
         }
       }
     }
@@ -71,6 +111,17 @@ export default function Cart(props) {
       if (response) {
         removeDisableClick(product.idProduct);
         setCart(response.data);
+
+        const ghnServiceTypeRequests = [];
+        shippingTypeList.forEach(element => {
+          ghnServiceTypeRequests.push({ shopDTO: element.shopDTO, ghnServiceModels: element.ghnServiceModels[0] })
+        });
+        const data = JSON.parse(JSON.stringify(response.data))
+        data.forEach(function (cartItem) { delete cartItem.product.imgUrl });
+        const calFeeRequest = { cartItemDTOsItemResponses: data, ghnServiceTypeRequests: ghnServiceTypeRequests };
+        const responseShipServiceFee = await instance().post("http://localhost:4000/api/ghn/calculateFee", calFeeRequest)
+        const map = new Map(Object.entries(responseShipServiceFee.data));
+        setShippingPriceList(map)
       }
     }
   }
@@ -86,9 +137,19 @@ export default function Cart(props) {
   }
 
   const addCartItemToOrder = async () => {
-    const res = await instance().get(`http://localhost:4000/api/order/addCartItemToOrder`).catch((err) => { alert(err.response.data.message) })
-    if (res) {
-      changeRoute("/order", router)
+    const req = [];
+    for (const [key, value] of shippingPriceList) {
+      console.log(key, value);
+      req.push(key + "-" + value);
+    }
+
+    //check thang nay co sdt truoc roi moi remove
+    const res1 = await instance().get(`http://localhost:4000/api/customer/checkPhoneExistCustomer`)
+      .catch((err) => {
+        alert(err.response.data.message);
+      })
+    if (res1) {
+      openModal();
     }
   }
 
@@ -103,10 +164,25 @@ export default function Cart(props) {
   }
   useEffect(() => {
     async function fetchMyAPI() {
-      const data = Object.assign([], cart);
+
+      const data = JSON.parse(JSON.stringify(cart))
       data.forEach(function (cartItem) { delete cartItem.product.imgUrl });
-      console.log(data);
-      const responseShipService = await instance().post("http://localhost:4000/api/ghn/calculateFee", data)
+      const responseShipServiceType = await instance().post("http://localhost:4000/api/ghn/getServiceType", data)
+      const listShipServiceType = [];
+      const ghnServiceTypeRequests = [];
+
+      responseShipServiceType.data.forEach(element => {
+        listShipServiceType.push(element);
+      });
+      listShipServiceType.forEach(element => {
+        ghnServiceTypeRequests.push({ shopDTO: element.shopDTO, ghnServiceModels: element.ghnServiceModels[0] })
+      });
+      setShippingTypeList(listShipServiceType)
+
+      const calFeeRequest = { cartItemDTOsItemResponses: data, ghnServiceTypeRequests: ghnServiceTypeRequests };
+      const responseShipServiceFee = await instance().post("http://localhost:4000/api/ghn/calculateFee", calFeeRequest)
+      const map = new Map(Object.entries(responseShipServiceFee.data));
+      setShippingPriceList(map)
     }
     fetchMyAPI()
   }, [])
@@ -151,9 +227,11 @@ export default function Cart(props) {
                       <thead>
                         <tr>
                           <th>Product</th>
-                          <th>Price</th>
                           <th>Quantity</th>
-                          <th>Subtotal</th>
+                          <th>Price</th>
+                          <th>Ship</th>
+                          <th>Total</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody >
@@ -171,9 +249,6 @@ export default function Cart(props) {
                                     <h6>{element.product.name}</h6>
                                   </a>
                                 </div>
-                              </td>
-                              <td>
-                                <div className="cart-price">{element.product.price}</div>
                               </td>
                               <td>
                                 <div className="cart-quantity">
@@ -194,6 +269,22 @@ export default function Cart(props) {
                                     </a>
                                   </div>
                                 </div>
+                              </td>
+
+                              <td>
+                                <div className="cart-price">{element.product.price}</div>
+                              </td>
+                              <td>
+                                <div className="cart-price">
+                                  {
+                                    shippingPriceList && shippingPriceList.get(element.product.idProduct + "")
+                                  }
+                                </div>
+                              </td>
+                              <td>
+                                {shippingPriceList &&
+                                  <div className="cart-price">{((element.product.price * element.quantity) + shippingPriceList.get(element.product.idProduct + ""))}</div>
+                                }
                               </td>
                               <td>
                                 <div className="action-wrapper">
@@ -256,113 +347,48 @@ export default function Cart(props) {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                        {/* <tr>
                           <td>
                             <h3 className="calc-h3 u-s-m-b-0">Subtotal</h3>
                           </td>
                           <td>
                             <span className="calc-text">${getTotalCart()}</span>
                           </td>
-                        </tr>
+                        </tr> */}
                         <tr>
                           <td>
-                            <h3 className="calc-h3 u-s-m-b-8">Shipping</h3>
-                            <div className="calc-choice-text u-s-m-b-4">
-                              Flat Rate: Not Available
-                            </div>
-                            <div className="calc-choice-text u-s-m-b-4">
-                              Free Shipping: Not Available
-                            </div>
-                            <a
-                              data-toggle="collapse"
-                              href="#shipping-calculation"
-                              className="calc-anchor u-s-m-b-4"
-                            >
-                              Calculate Shipping
-                            </a>
-                            <div className="collapse" id="shipping-calculation">
-                              <>
-                                <div className="select-country-wrapper u-s-m-b-8">
-                                  <div className="select-box-wrapper">
-                                    <label
-                                      className="sr-only"
-                                      htmlFor="select-country"
-                                    >
-                                      Choose your country
-                                    </label>
-                                    <select
-                                      className="select-box"
-                                      id="select-country"
-                                      defaultValue={'default'}
-                                    >
-                                      <option value="default">
-                                        Choose your country...
-                                      </option>
-                                      <option value="">
-                                        United Kingdom (UK)
-                                      </option>
-                                      <option value="">
-                                        United States (US)
-                                      </option>
-                                      <option value="">
-                                        United Arab Emirates (UAE)
-                                      </option>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div className="select-state-wrapper u-s-m-b-8">
-                                  <div className="select-box-wrapper">
-                                    <label
-                                      className="sr-only"
-                                      htmlFor="select-state"
-                                    >
-                                      Choose your state
-                                    </label>
-                                    <select
-                                      className="select-box"
-                                      id="select-state"
-                                      defaultValue={'default'}
-                                    >
-                                      <option value="default">
-                                        Choose your state...
-                                      </option>
-                                      <option value="">Alabama</option>
-                                      <option value="">Alaska</option>
-                                      <option value="">Arizona</option>
-                                    </select>
-                                  </div>
-                                </div>
-                                <div className="town-city-div u-s-m-b-8">
-                                  <label
-                                    className="sr-only"
-                                    htmlFor="town-city"
-                                  />
-                                  <input
-                                    type="text"
-                                    id="town-city"
-                                    className="text-field"
-                                    placeholder="Town / City"
-                                  />
-                                </div>
-                                <div className="postal-code-div u-s-m-b-8">
-                                  <label
-                                    className="sr-only"
-                                    htmlFor="postal-code"
-                                  />
-                                  <input
-                                    type="text"
-                                    id="postal-code"
-                                    className="text-field"
-                                    placeholder="Postcode / Zip"
-                                  />
-                                </div>
-                                <div className="update-totals-div u-s-m-b-8">
-                                  <button className="button button-outline-platinum">
-                                    Update Totals
-                                  </button>
-                                </div>
-                              </>
-                            </div>
+                            <h3 className="calc-h3 u-s-m-b-8">Shipping Type</h3>
+                            {shippingTypeList.map(function (element) {
+                              return (
+                                <>
+                                  <a data-toggle="collapse" href={"#shop" + element.shopDTO.idShop} className="calc-anchor u-s-m-b-4" >
+                                    {element.shopDTO.name}
+                                  </a>
+                                  <div></div>
+                                  <div className="collapse" id={"shop" + element.shopDTO.idShop}>
+                                    <div className="select-country-wrapper u-s-m-b-8">
+                                      <div className="select-box-wrapper">
+                                        <label
+                                          className="sr-only"
+                                          htmlFor="select-country"
+                                        >
+                                          Chọn kiểu giao hàng
+                                        </label>
+                                        <select className="select-box" id="select-country" defaultValue={'default'} >
+
+                                          {element.ghnServiceModels.map(function (element) {
+                                            return (<>
+                                              < option value="">
+                                                {element.short_name}
+                                              </option>
+                                            </>)
+                                          })}
+                                        </select>
+                                      </div>
+                                    </div>
+                                  </div></>
+                              )
+                            })}
                           </td>
                           <td></td>
                         </tr>
@@ -395,6 +421,9 @@ export default function Cart(props) {
           </div>
         </div>
         {/* Cart-Page /- */}
+        <div className="modal-load">
+          <PhoneOTPProgress open={openPhoneOTPProgress} closeModal={closeModal} shippingPriceList={shippingPriceList}></PhoneOTPProgress>
+        </div>
       </Layout>
     </>
   );

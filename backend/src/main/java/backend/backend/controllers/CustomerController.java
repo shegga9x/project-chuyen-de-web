@@ -25,6 +25,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerService.getCurrentCustomer());
     }
 
+    @GetMapping("/checkPhoneExistCustomer")
+    public ResponseEntity<?> checkPhoneExistCustomer(){
+        return ResponseEntity.ok(customerService.checkPhoneExistCustomer());
+    }
+
     @PostMapping("/changeInformationCustomer")
     public ResponseEntity<?> changeInformationCustomer(@RequestBody CustomerRequest customerRequest) throws ParseException {
         return ResponseEntity.ok(customerService.changeInformationCustomer(customerRequest));

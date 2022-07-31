@@ -1,8 +1,12 @@
 import Head from "next/head";
 import Script from "next/script";
+import { useRouter } from 'next/router'
+import { changeRoute } from "../../helpers/customFunction/changeRoute";
 
 export default function Layout({ children }) {
-  
+
+    const router = useRouter()
+
     return (
         <>
             <Head>
@@ -34,7 +38,7 @@ export default function Layout({ children }) {
                                         <li><a href="#">Upgrade</a></li>
                                         <li><a href="#">Help</a></li>
                                         <li role="separator" className="divider" />
-                                        <li><a href="#">Logout</a></li>
+                                        <li><a onClick={() => { changeRoute('/logout', router) }}>Logout</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#"><i className="fa fa-bell-o" /></a></li>
@@ -63,7 +67,7 @@ export default function Layout({ children }) {
                         {/* Main Menu */}
                         <div className="side-menu-container">
                             <ul className="nav navbar-nav">
-                                <li className="panel panel-default" id="dropdown">
+                                {/* <li className="panel panel-default" id="dropdown">
                                     <a data-toggle="collapse" style={{ fontWeight: '600' }} href="#dropdown-lvl1a" >
                                         <i className="fa fa-diamond" /> Quản Lý Đơn Hàng <span className="caret" />
                                     </a>
@@ -117,13 +121,13 @@ export default function Layout({ children }) {
                                         <i className="fa fa-diamond" /> Quản Lý Shop
                                         <span className="caret" />
                                     </a>
-                                    {/* Dropdown level 1 */}
+                                    
                                     <div id="dropdown-lvl1c" className="panel-collapse collapse">
                                         <div className="panel-body">
                                             <ul className="nav navbar-nav">
                                                 <li><a href="#">Mail</a></li>
 
-                                                {/* Dropdown level 2 */}
+                                              
                                                 <li className="panel panel-default" id="dropdown">
                                                     <a data-toggle="collapse" style={{ fontWeight: '600' }} href="#dropdown-lvl2c">
                                                         <i className="glyphicon glyphicon-off" /> Sub Level <span className="caret" />
@@ -139,10 +143,11 @@ export default function Layout({ children }) {
                                             </ul>
                                         </div>
                                     </div>
-                                </li>
-                                <li><a href="#" style={{ fontWeight: '600' }}><i className="fa fa-heart" /> Quản Lý Shop</a></li>
-                                <li><a href="#" style={{ fontWeight: '600' }}><i className="fa fa-heart" /> Dữ Liệu</a></li>
-                                <li><a href="#" style={{ fontWeight: '600' }}><i className="fa fa-heart" /> Tài Chính</a></li>
+                                </li> */}
+                                <li style={{ cursor: "pointer" }}><a onClick={() => { changeRoute('/saler/profile', router) }} style={{ fontWeight: '600' }}><i className="fa fa-cog" />Saler Profile</a></li>
+                                <li style={{ cursor: "pointer" }}><a onClick={() => { changeRoute('/saler/product', router) }} style={{ fontWeight: '600' }}><i className="fa fa-cog" />Saler Product</a></li>
+                                <li style={{ cursor: "pointer" }}><a onClick={() => { changeRoute('/saler/order', router) }} style={{ fontWeight: '600' }}><i className="fa fa-cog" />Saler Order</a></li>
+                                <li style={{ cursor: "pointer" }}><a onClick={() => { changeRoute('/', router) }} style={{ fontWeight: '600' }}><i className="fa fa-home" />Home</a></li>
                             </ul>
                         </div>{/* /.navbar-collapse */}
                     </nav>

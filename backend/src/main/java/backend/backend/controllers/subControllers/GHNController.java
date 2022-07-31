@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import backend.backend.helpers.payload.request.ghn.CalFeeRequest;
 import backend.backend.helpers.payload.response.CartItemResponse;
 import backend.backend.services.subService.GHNService;
 
@@ -39,11 +40,15 @@ public class GHNController {
     public ResponseEntity<?> printOrder(@RequestParam(value = "order_id") String[] order_id) {
         return ResponseEntity.ok(ghnService.printOrder(order_id));
     }
+
     @PostMapping("/calculateFee")
-    public ResponseEntity<?> calculateFee(@RequestBody List<CartItemResponse> cartItemDTOsItemResponses) {
-        return ResponseEntity.ok(ghnService.calculateFee(  cartItemDTOsItemResponses));
+    public ResponseEntity<?> calculateFee(@RequestBody CalFeeRequest calFeeRequest) {
+        return ResponseEntity.ok(ghnService.calculateFee(calFeeRequest));
     }
 
- 
+    @PostMapping("/getServiceType")
+    public ResponseEntity<?> getServiceType(@RequestBody List<CartItemResponse> cartItemDTOsItemResponses) {
+        return ResponseEntity.ok(ghnService.getServiceType(cartItemDTOsItemResponses));
+    }
 
 }

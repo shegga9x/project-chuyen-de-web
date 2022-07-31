@@ -9,7 +9,7 @@ import Layout from "../components/layout";
 import OrderProgress from '../components/order/orderProgress';
 import DownToolProgress from '../components/order/downToolProgress';
 import VerificationProgress from '../components/order/verificationProgress';
-import PhoneOTPProgress from '../components/order/phoneOTPProgress';
+// import PhoneOTPProgress from '../components/order/phoneOTPProgress';
 import { getSession } from 'next-auth/client';
 import { useState, useEffect } from 'react';
 import instance from "../helpers/axiosConfig";
@@ -20,11 +20,11 @@ export default function Order(props) {
     const [openOrderProgress, setOpenOrderProgress] = useState(false);
     const [openDownToolProgress, setOpenDownToolProgress] = useState(false);
     const [openVerificationProgress, setOpenVerificationProgress] = useState(false);
-    const [openPhoneOTPProgress, setOpenPhoneOTPProgress] = useState(false);
+    // const [openPhoneOTPProgress, setOpenPhoneOTPProgress] = useState(false);
     const [order, setOrder] = useState(props.order);
     const [value, setValue] = useState('1');
 
-    
+
     useEffect(() => {
         let list = order.filter(ele => ele.status == 1);
         setListOrder(list);
@@ -43,9 +43,9 @@ export default function Order(props) {
         document.getElementsByClassName('errorStep1')[0].style.visibility = 'hidden';
         document.getElementsByClassName('errorStep2')[0].style.visibility = 'hidden';
         //Phone OTP Progress
-        document.getElementsByClassName('PhoneNumber')[0].value = "";
-        document.getElementsByClassName('smsNumber')[0].value = "";
-       
+        // document.getElementsByClassName('PhoneNumber')[0].value = "";
+        // document.getElementsByClassName('smsNumber')[0].value = "";
+
     }
 
     const closeModal = (modal) => {
@@ -55,9 +55,7 @@ export default function Order(props) {
             setOpenDownToolProgress(false);
         } else if (modal == 'verificationProgress') {
             setOpenVerificationProgress(false);
-        } else {
-            setOpenPhoneOTPProgress(false);
-        }
+        } 
         document.body.classList.toggle('modal-visibile');
         const model = document.getElementsByClassName('modal-load')[0];
         model.classList.toggle('visible');
@@ -74,8 +72,6 @@ export default function Order(props) {
             setOpenDownToolProgress(true);
         } else if (modal == 'verificationProgress') {
             setOpenVerificationProgress(true);
-        } else {
-            setOpenPhoneOTPProgress(true)
         }
     }
 
@@ -88,7 +84,7 @@ export default function Order(props) {
         let result = 0;
         order.forEach(ele => {
             if (ele.status == status) {
-                result += (ele.product.price)
+                result = result + (ele.product.price * ele.quantity) + ele.shippingPrice
             }
         })
         return result.toFixed(2);
@@ -133,6 +129,7 @@ export default function Order(props) {
                                             <tr>
                                                 <th>Product</th>
                                                 <th>Price</th>
+                                                <th>Ship</th>
                                                 <th>Quantity</th>
                                             </tr>
                                         </thead>
@@ -154,6 +151,9 @@ export default function Order(props) {
                                                             </td>
                                                             <td>
                                                                 <div className="cart-price">{element.product.price}</div>
+                                                            </td>
+                                                            <td>
+                                                                <div className="cart-price">{element.shippingPrice}</div>
                                                             </td>
                                                             <td>
                                                                 <div className="cart-quantity">
@@ -192,6 +192,7 @@ export default function Order(props) {
                                             <tr>
                                                 <th>Product</th>
                                                 <th>Price</th>
+                                                <th>Ship</th>
                                                 <th>Quantity</th>
                                             </tr>
                                         </thead>
@@ -215,6 +216,9 @@ export default function Order(props) {
                                                                 <div className="cart-price">{element.product.price}</div>
                                                             </td>
                                                             <td>
+                                                                <div className="cart-price">{element.shippingPrice}</div>
+                                                            </td>
+                                                            <td>
                                                                 <div className="cart-quantity">
                                                                     <div className="quantity" >
                                                                         <input
@@ -234,6 +238,7 @@ export default function Order(props) {
                                         <tfoot>
                                             <tr>
                                                 <th></th>
+                                                <th></th>
                                                 <th>Tổng tiền: {getTotalCart(2)}</th>
                                                 <th></th>
                                             </tr>
@@ -250,6 +255,7 @@ export default function Order(props) {
                                             <tr>
                                                 <th>Product</th>
                                                 <th>Price</th>
+                                                <th>Ship</th>
                                                 <th>Quantity</th>
                                             </tr>
                                         </thead>
@@ -273,6 +279,9 @@ export default function Order(props) {
                                                                 <div className="cart-price">{element.product.price}</div>
                                                             </td>
                                                             <td>
+                                                                <div className="cart-price">{element.shippingPrice}</div>
+                                                            </td>
+                                                            <td>
                                                                 <div className="cart-quantity">
                                                                     <div className="quantity" >
                                                                         <input
@@ -292,6 +301,7 @@ export default function Order(props) {
                                         <tfoot>
                                             <tr>
                                                 <th></th>
+                                                <th></th>
                                                 <th>Tổng tiền: {getTotalCart(3)}</th>
                                                 <th></th>
                                             </tr>
@@ -308,6 +318,7 @@ export default function Order(props) {
                                             <tr>
                                                 <th>Product</th>
                                                 <th>Price</th>
+                                                <th>Ship</th>
                                                 <th>Quantity</th>
                                             </tr>
                                         </thead>
@@ -331,6 +342,9 @@ export default function Order(props) {
                                                                 <div className="cart-price">{element.product.price}</div>
                                                             </td>
                                                             <td>
+                                                                <div className="cart-price">{element.shippingPrice}</div>
+                                                            </td>
+                                                            <td>
                                                                 <div className="cart-quantity">
                                                                     <div className="quantity" >
                                                                         <input
@@ -350,6 +364,7 @@ export default function Order(props) {
                                         <tfoot>
                                             <tr>
                                                 <th></th>
+                                                <th></th>
                                                 <th>Tổng tiền: {getTotalCart(4)}</th>
                                                 <th></th>
                                             </tr>
@@ -366,6 +381,7 @@ export default function Order(props) {
                                             <tr>
                                                 <th>Product</th>
                                                 <th>Price</th>
+                                                <th>Ship</th>
                                                 <th>Quantity</th>
                                             </tr>
                                         </thead>
@@ -389,6 +405,9 @@ export default function Order(props) {
                                                                 <div className="cart-price">{element.product.price}</div>
                                                             </td>
                                                             <td>
+                                                                <div className="cart-price">{element.shippingPrice}</div>
+                                                            </td>
+                                                            <td>
                                                                 <div className="cart-quantity">
                                                                     <div className="quantity" >
                                                                         <input
@@ -407,6 +426,7 @@ export default function Order(props) {
                                         </tbody>
                                         <tfoot>
                                             <tr>
+                                                <th></th>
                                                 <th></th>
                                                 <th>Tổng tiền: {getTotalCart(5)}</th>
                                                 <th></th>
@@ -431,10 +451,10 @@ export default function Order(props) {
                         </div>
                     </div>
                     <div className="modal-load">
-                        <OrderProgress open={openOrderProgress} closeModal={closeModal} listOrder={listOrder} openPhoneOTPProgress={openModal}></OrderProgress>
+                        <OrderProgress open={openOrderProgress} closeModal={closeModal} listOrder={listOrder}></OrderProgress>
                         <DownToolProgress open={openDownToolProgress} closeModal={closeModal}></DownToolProgress>
                         <VerificationProgress open={openVerificationProgress} closeModal={closeModal}></VerificationProgress>
-                        <PhoneOTPProgress open={openPhoneOTPProgress} closeModal={closeModal}></PhoneOTPProgress>
+                        {/* <PhoneOTPProgress open={openPhoneOTPProgress} closeModal={closeModal}></PhoneOTPProgress> */}
                     </div>
                 </div>
             </Layout>
@@ -448,6 +468,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context);
     if (session) {
         const response = await instance(context).get("http://localhost:4000/api/order/getOrderItemByIdCustomer")
+        console.log(response.data);
         return {
             props: {
                 order: response.data,

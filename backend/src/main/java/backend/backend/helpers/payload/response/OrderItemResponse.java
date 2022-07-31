@@ -5,12 +5,14 @@ public class OrderItemResponse {
     private ProductResponse product;
     private Byte status;
     private int quantity;
+    private int shippingPrice;
 
-    public OrderItemResponse(int idOrderItem, ProductResponse product, Byte status, int quantity) {
+    public OrderItemResponse(int idOrderItem, ProductResponse product, Byte status, int quantity, int shippingPrice) {
         this.idOrderItem = idOrderItem;
         this.product = product;
         this.status = status;
         this.quantity = quantity;
+        this.shippingPrice = shippingPrice;
     }
 
     public int getIdOrderItem() {
@@ -43,5 +45,13 @@ public class OrderItemResponse {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getShippingPrice() {
+        return shippingPrice;
+    }
+
+    public void setShippingPrice(int shippingPrice) {
+        this.shippingPrice = shippingPrice;
     }
 }

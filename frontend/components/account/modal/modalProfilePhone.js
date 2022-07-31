@@ -45,7 +45,7 @@ export default function ModalProfilePhone({ open, closeModal, customer, setCusto
                 gender: customer.gender,
                 birthday: customer.birthday,
                 imgUrl: customer.imgUrl,
-                address: customer.address
+                addressDTO: customer.addressDTO
             }
             setFirstRender(1);
             setCustomer(newCustomer);

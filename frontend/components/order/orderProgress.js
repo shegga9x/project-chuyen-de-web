@@ -3,7 +3,7 @@ import Script from 'next/script';
 import instance from "../../helpers/axiosConfig";
 import { useEffect, useState } from 'react';
 
-export default function OrderProgress({ open, closeModal, listOrder, openPhoneOTPProgress }) {
+export default function OrderProgress({ open, closeModal, listOrder}) {
 
     const [userName, setUserName] = useState(null);
     const [saveImg, setSaveImg] = useState(false);
@@ -58,10 +58,10 @@ export default function OrderProgress({ open, closeModal, listOrder, openPhoneOT
         }
     }
 
-    const thanhToan = () => {
-        closeModal('orderProgress');
-        openPhoneOTPProgress('phoneOTPProgress');
-    }
+    // const thanhToan = () => {
+    //     closeModal('orderProgress');
+    //     openPhoneOTPProgress('phoneOTPProgress');
+    // }
 
     const isSaveImg = () => {
         if (isCanvasBlank() == false) {
@@ -223,9 +223,9 @@ export default function OrderProgress({ open, closeModal, listOrder, openPhoneOT
                     <span style={{ fontFamily: 'Muli,Sarabun', fontWeight: 700, fontSize: '14px' }}>Cảm ơn bạn đã hoàn tất thủ tục, Xin hãy đợi ...</span>
                     <div className="content_step3_inside" style={{ display: "none" }}>
                         <div className="el-form">
-                            <button onClick={thanhToan} className="button_submit" style={{ float: 'right', marginTop: '10px', width: '100px' }}>
+                            {/* <button onClick={thanhToan} className="button_submit" style={{ float: 'right', marginTop: '10px', width: '100px' }}>
                                 Thanh toán
-                            </button>
+                            </button> */}
                             <button onClick={closeModal1} className="button_submit" style={{ float: 'right', marginTop: '10px', marginRight: '5px', }}>
                                 Thoát
                             </button>

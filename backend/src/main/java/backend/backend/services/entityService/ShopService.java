@@ -44,7 +44,6 @@ public class ShopService {
         }
     }
 
-    @Transactional
     public Integer updateShop(ShopDTO request) {
         Shop shop = (Shop) SubUtils.mapperObject(request, new Shop());
         Integer shopID = shop.getIdShop();
