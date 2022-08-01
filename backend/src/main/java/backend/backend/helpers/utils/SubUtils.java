@@ -54,7 +54,6 @@ public class SubUtils {
             e.printStackTrace();
         }
         return null;
-
     }
 
     public static Object jsonToObject(String json, Object result) {

@@ -4,7 +4,7 @@ import instance from "../../helpers/axiosConfig";
 import { changeRoute } from "../../helpers/customFunction/changeRoute";
 import { useRouter } from 'next/router'
 
-export default function PhoneOTPProgress({ open, closeModal, shippingPriceList, user }) {
+export default function PhoneOTPProgress({ open, closeModal, shippingPriceList }) {
 
     const router = useRouter()
 
@@ -42,20 +42,22 @@ export default function PhoneOTPProgress({ open, closeModal, shippingPriceList, 
                 alert(err.response.data.message);
             })
         if (res) {
-            const req = [];
-            for (const [key, value] of shippingPriceList) {
-                console.log(key, value);
-                req.push(key + "-" + value);
-            }
-            const res1 = await instance().post(`http://localhost:4000/api/order/addCartItemToOrder`, req)
-                .catch((err) => {
-                    alert(err.response.data.message)
-                    if (err.response.data.message == "Khách hàng không đủ tiền mua hàng, vui lòng nạp thêm") {
-                        changeRoute('/account/profile?keyword=shopXu', router)
-                    }
-                })
-            if (res1) {
-                changeRoute("/order", router)
+            if (shippingPriceList != null) {
+                const req = [];
+                for (const [key, value] of shippingPriceList) {
+                    console.log(key, value);
+                    req.push(key + "-" + value);
+                }
+                const res1 = await instance().post(`http://localhost:4000/api/order/addCartItemToOrder`, req)
+                    .catch((err) => {
+                        alert(err.response.data.message)
+                        if (err.response.data.message == "Khách hàng không đủ tiền mua hàng, vui lòng nạp thêm") {
+                            changeRoute('/account/profile?keyword=shopXu', router)
+                        }
+                    })
+                if (res1) {
+                    changeRoute("/order", router)
+                }
             }
         }
     }

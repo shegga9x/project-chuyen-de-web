@@ -68,7 +68,7 @@ export default function SingleProduct({ data }) {
           if (err.message != "Network Error") {
             if (err.response.data.message) {
               alert('Ban chua cap nhap thong tin');
-              changeRoute('/account/profile',router);
+              changeRoute('/account/profile', router);
             } else {
               alert('ban can dang nhap');
             }
@@ -168,27 +168,10 @@ export default function SingleProduct({ data }) {
                     // src="/static/images/product/product@4x.jpg"
                     // src={data.listProduct[0].imgUrl}
                     src={product == null ? data.listProduct[0].imgUrl : product.imgUrl}
-                    data-zoom-image={product == null ? data.listProduct[0].imgUrl : product.imgUrl}
+                    // data-zoom-image={() => { onDataZoomChange() }}
                     alt="Zoom Image"
                     style={{ height: '500px', width: '500px' }}
                   />
-                  <div id="gallery" className="u-s-m-t-10">
-                    {data.listProduct.map((element, index) => {
-                      return (
-                        <a
-                          className="active"
-                          data-image={element.imgUrl}
-                          data-zoom-image={element.imgUrl}
-                          key={index}
-                        >
-                          <img
-                            src={element.imgUrl}
-                            alt="Product"
-                          />
-                        </a>
-                      );
-                    })}
-                  </div>
                 </div>
                 {/* Product-zoom-area /- */}
               </div>
