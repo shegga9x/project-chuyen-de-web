@@ -111,6 +111,7 @@ export default function ProductAddModal({ open, closeModal }) {
     // (<input onChange={handleOnChange} key={c} className={index} type="text" ></input>
     const step2a = (c, index) => {
         return (
+            formik.values.productDTOs[index] &&
             <div className="container" style={{ maxWidth: "100%" }}>
                 <section className="panel panel-default">
                     <div className="panel-heading">

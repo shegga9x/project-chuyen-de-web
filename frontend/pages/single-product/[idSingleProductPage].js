@@ -68,7 +68,7 @@ export default function SingleProduct({ data }) {
           if (err.message != "Network Error") {
             if (err.response.data.message) {
               alert('Ban chua cap nhap thong tin');
-              changeRoute('/account/profile',router);
+              changeRoute('/account/profile', router);
             } else {
               alert('ban can dang nhap');
             }
@@ -174,9 +174,10 @@ export default function SingleProduct({ data }) {
                   />
                   <div id="gallery" className="u-s-m-t-10">
                     {data.listProduct.map((element, index) => {
+
                       return (
                         <a
-                          className="active"
+                          className={product == null || product.idProduct != element.idProduct ? "" : "active"}
                           data-image={element.imgUrl}
                           data-zoom-image={element.imgUrl}
                           key={index}
