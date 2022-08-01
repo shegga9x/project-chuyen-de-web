@@ -8,6 +8,7 @@ export default {
         home: "Home",
         account: "Account",
         detail: "Detail",
+        cart:"Cart"
 
     },
 
@@ -55,4 +56,19 @@ export default {
         addToCart: "Add to cart",
         sold: "Sold",
     },
+
+    cart: {
+        product: "Product",
+        quantity: "Quantity",
+        price: "Price",
+        ship: "Ship",
+        total: "Total",
+        shippingType: "Shipping Type",
+        tax: "Tax",
+        cartTotal: "Cart Totals",
+        title: '(estimated for your country)',
+        continue: 'Continue Shopping',
+        checkout: "Proceed to Checkout",
+    },
+
 };

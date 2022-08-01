@@ -449,7 +449,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                     <a onClick={() => { changeRoute('/shop', router) }}>Shop</a>
                                                 </li>
                                                 <li>
-                                                    <a href="cart.html">Cart</a>
+                                                    <a onClick={() => { changeRoute('/cart', router) }}>Cart</a>
                                                 </li>
                                                 <li>
                                                     <a href="checkout.html">Checkout</a>
