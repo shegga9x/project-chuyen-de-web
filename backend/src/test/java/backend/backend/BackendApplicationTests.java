@@ -127,10 +127,10 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-        List<OrderItem> list = orderItemRepository.findByIdCustomerAndStatus(1, (byte) 1);
-        for (OrderItem orderItem : list) {
-            System.out.println(orderItem);
-        }
+//        List<OrderItem> list = orderItemRepository.findByIdCustomerAndStatus(1, (byte) 1);
+//        for (OrderItem orderItem : list) {
+//            System.out.println(orderItem);
+//        }
     }
 
 

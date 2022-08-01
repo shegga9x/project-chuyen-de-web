@@ -168,7 +168,7 @@ export default function SingleProduct({ data }) {
                     // src="/static/images/product/product@4x.jpg"
                     // src={data.listProduct[0].imgUrl}
                     src={product == null ? data.listProduct[0].imgUrl : product.imgUrl}
-                    data-zoom-image={product == null ? data.listProduct[0].imgUrl : product.imgUrl}
+                    // data-zoom-image={() => { onDataZoomChange() }}
                     alt="Zoom Image"
                     style={{ height: '500px', width: '500px' }}
                   />

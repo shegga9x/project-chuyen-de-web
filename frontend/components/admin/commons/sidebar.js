@@ -42,6 +42,12 @@ export default function Sidebar() {
                         <span>Duyệt Sản Phẩm</span>
                     </a>
                 </li>
+                <li className="nav-item">
+                    <a onClick={() => { changeRoute('/', router) }} className="nav-link" aria-expanded="true">
+                        <i className="fas fa-fw fa-home" />
+                        <span>Home</span>
+                    </a>
+                </li>
                 {/* Divider */}
                 <hr className="sidebar-divider" />
                 {/* Sidebar Toggler (Sidebar) */}

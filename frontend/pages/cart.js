@@ -9,9 +9,11 @@ import { useState, useEffect } from 'react';
 import { changeRoute } from "../helpers/customFunction/changeRoute";
 import { useRouter } from "next/router";
 import PhoneOTPProgress from "../components/cart/phoneOTPProgress";
+import useTrans from "../helpers/customHook/useTrans";
 
 export default function Cart(props) {
 
+  const trans = useTrans();
   const router = useRouter();
   const [cart, setCart] = useState(props.cart);
   const [shippingTypeList, setShippingTypeList] = useState([]);
@@ -200,16 +202,16 @@ export default function Cart(props) {
         <div className="page-style-a">
           <div className="container">
             <div className="page-intro">
-              <h2>Cart</h2>
+              <h2>{trans.header.cart}</h2>
               <ul className="bread-crumb">
                 <li className="has-separator">
                   <i>
                     <FontAwesomeIcon icon={faHome} />
                   </i>
-                  <a href="home.html">Home</a>
+                  <a href="home.html">{trans.header.home}</a>
                 </li>
                 <li className="is-marked">
-                  <a href="cart.html">Cart</a>
+                  <a href="cart.html">{trans.header.cart}</a>
                 </li>
               </ul>
             </div>
@@ -227,11 +229,11 @@ export default function Cart(props) {
                     <table>
                       <thead>
                         <tr>
-                          <th>Product</th>
-                          <th>Quantity</th>
-                          <th>Price</th>
-                          <th>Ship</th>
-                          <th>Total</th>
+                          <th>{trans.cart.product}</th>
+                          <th>{trans.cart.quantity}</th>
+                          <th>{trans.cart.price}</th>
+                          <th>{trans.cart.ship}</th>
+                          <th>{trans.cart.total}</th>
                           <th>Action</th>
                         </tr>
                       </thead>
@@ -329,10 +331,10 @@ export default function Cart(props) {
                     </div>
                     <div className="button-area">
                       <a href="shop-v1-root-category.html" className="continue">
-                        Continue Shopping
+                        {trans.cart.continue}
                       </a>
                       <a onClick={() => { addCartItemToOrder() }} className="checkout">
-                        Proceed to Checkout
+                        {trans.cart.checkout}
                       </a>
                     </div>
                   </div>
@@ -344,7 +346,7 @@ export default function Cart(props) {
                     <table>
                       <thead>
                         <tr>
-                          <th colSpan={2}>Cart Totals</th>
+                          <th colSpan={2}>{trans.cart.cartTotal}</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -358,7 +360,7 @@ export default function Cart(props) {
                         </tr> */}
                         <tr>
                           <td>
-                            <h3 className="calc-h3 u-s-m-b-8">Shipping Type</h3>
+                            <h3 className="calc-h3 u-s-m-b-8">{trans.cart.shippingType}</h3>
                             {shippingTypeList.map(function (element) {
                               return (
                                 <>
@@ -396,9 +398,9 @@ export default function Cart(props) {
                         <tr>
                           <td>
                             <h3 className="calc-h3 u-s-m-b-0" id="tax-heading">
-                              Tax
+                              {trans.cart.tax}
                             </h3>
-                            <span> (estimated for your country)</span>
+                            <span> {trans.cart.title}</span>
                           </td>
                           <td>
                             <span className="calc-text">$0.00</span>
@@ -406,7 +408,7 @@ export default function Cart(props) {
                         </tr>
                         <tr>
                           <td>
-                            <h3 className="calc-h3 u-s-m-b-0">Total</h3>
+                            <h3 className="calc-h3 u-s-m-b-0">{trans.cart.total}</h3>
                           </td>
                           <td>
                             <span className="calc-text">${getTotalCart()}</span>

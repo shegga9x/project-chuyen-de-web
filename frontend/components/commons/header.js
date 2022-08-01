@@ -405,7 +405,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                                     Home &amp; Static Pages
                                                 </li>
                                                 <li>
-                                                    <a href="home.html" className="u-c-brand">
+                                                    <a href="home.html">
                                                         Home
                                                     </a>
                                                 </li>
@@ -446,10 +446,10 @@ export default function Header({ updateCartHeader, isPageCart }) {
                                             <ul>
                                                 <li className="menu-title">Ecommerce Pages</li>
                                                 <li>
-                                                    <a href="shop-v2-sub-category.html">Shop</a>
+                                                    <a onClick={() => { changeRoute('/shop', router) }}>Shop</a>
                                                 </li>
                                                 <li>
-                                                    <a href="cart.html">Cart</a>
+                                                    <a onClick={() => { changeRoute('/cart', router) }}>Cart</a>
                                                 </li>
                                                 <li>
                                                     <a href="checkout.html">Checkout</a>

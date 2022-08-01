@@ -8,6 +8,7 @@ export default {
         home: "Trang chủ",
         account: "Tài khoản",
         detail: "Chi tiết sản phẩm",
+        cart:"Giỏ hàng",
     },
 
     footer: {
@@ -56,4 +57,19 @@ export default {
         addToCart: "Thêm vào giỏ hàng",
         sold: "Đã bán",
     },
+
+    cart: {
+        product: "Tên sản phẩm",
+        quantity: "Số lượng",
+        price: "Giá sản phẩm",
+        ship: "Phí vận chuyển",
+        total:"Tổng tiền",
+        shippingType: "Loại vẩn chuyển",
+        tax: "Thuế",
+        cartTotal:"Hóa đơn",
+        title:'(ước tính dựa trên địa chỉ của bạn)',
+        continue: 'Tiếp tục mua hàng',
+        checkout: "Tiến hành kiểm tra",
+    },
+
 };
