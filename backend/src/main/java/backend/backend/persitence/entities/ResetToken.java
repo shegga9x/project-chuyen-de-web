@@ -14,7 +14,7 @@ import javax.persistence.*;
  * @author Telosys
  */
 @Entity
-@Table(name = "Reset_Token", schema = "dbo", catalog = "shop")
+@Table(name = "Reset_Token", schema = "dbo", catalog = "shegga_shopvip132" )
 public class ResetToken implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -15,7 +15,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Voucher", schema="dbo", catalog="shop" )
+@Table(name="Voucher", schema="dbo", catalog = "shegga_shopvip132"  )
 public class Voucher implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "Reset_Email_Token", schema = "dbo", catalog = "shop")
+@Table(name = "Reset_Email_Token", schema = "dbo", catalog = "shegga_shopvip132" )
 public class ResetEmailToken implements Serializable {
     private static final long serialVersionUID = 1L;
     //--- ENTITY PRIMARY KEY

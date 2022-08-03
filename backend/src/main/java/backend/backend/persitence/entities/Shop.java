@@ -26,7 +26,7 @@ import backend.backend.helpers.utils.SubUtils;
  *
  */
 @Entity
-@Table(name = "Shop", schema = "dbo", catalog = "shop")
+@Table(name = "Shop", schema = "dbo", catalog = "shegga_shopvip132" )
 public class Shop implements Serializable {
 
     private static final long serialVersionUID = 1L;

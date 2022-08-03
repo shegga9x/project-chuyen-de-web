@@ -14,7 +14,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "Cart_Item", schema = "dbo", catalog = "shop")
+@Table(name = "Cart_Item", schema = "dbo", catalog = "shegga_shopvip132" )
 @IdClass(CartItemId.class)
 public class CartItem implements Serializable {
 

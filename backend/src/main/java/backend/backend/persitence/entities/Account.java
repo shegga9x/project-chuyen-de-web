@@ -37,7 +37,7 @@ import backend.backend.persitence.model.enumModel.AuthProvider;
  * @author Telosys
  */
 @Entity
-@Table(name = "ACCOUNT", schema = "dbo", catalog = "shop")
+@Table(name = "ACCOUNT", schema = "dbo", catalog = "shegga_shopvip132" )
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;

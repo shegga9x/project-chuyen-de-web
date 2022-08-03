@@ -30,7 +30,7 @@ import backend.backend.helpers.utils.SubUtils;
  * @author Telosys
  */
 @Entity
-@Table(name = "Customer", schema = "dbo", catalog = "shop")
+@Table(name = "Customer", schema = "dbo", catalog = "shegga_shopvip132" )
 public class Customer implements Serializable {
 
     private static final long serialVersionUID = 1L;

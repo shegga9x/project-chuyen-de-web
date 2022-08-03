@@ -15,7 +15,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "Chat_Line", schema = "dbo", catalog = "shop")
+@Table(name = "Chat_Line", schema = "dbo", catalog = "shegga_shopvip132" )
 public class ChatLine implements Serializable {
 
     private static final long serialVersionUID = 1L;

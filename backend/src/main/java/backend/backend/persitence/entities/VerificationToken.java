@@ -15,7 +15,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "Verification_Token", schema = "dbo", catalog = "shop")
+@Table(name = "Verification_Token", schema = "dbo", catalog = "shegga_shopvip132" )
 public class VerificationToken implements Serializable {
 
     private static final long serialVersionUID = 1L;

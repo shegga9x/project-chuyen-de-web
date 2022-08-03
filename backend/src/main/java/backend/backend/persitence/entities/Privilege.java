@@ -14,7 +14,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Privilege", schema="dbo", catalog="shop" )
+@Table(name="Privilege", schema="dbo", catalog = "shegga_shopvip132"  )
 public class Privilege implements Serializable {
 
     private static final long serialVersionUID = 1L;

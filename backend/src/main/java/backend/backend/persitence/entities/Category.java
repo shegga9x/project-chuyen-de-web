@@ -27,7 +27,7 @@ import backend.backend.helpers.payload.dto.CategoryDto;
  *
  */
 @Entity
-@Table(name = "Category", schema = "dbo", catalog = "shop")
+@Table(name = "Category", schema = "dbo", catalog = "shegga_shopvip132" )
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
