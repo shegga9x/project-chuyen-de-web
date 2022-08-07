@@ -6,4 +6,4 @@ backend:
 git : https://git.heroku.com/sqlshop123.git
 url : https://sqlshop123.herokuapp.com/
 frontend : 
-url : project-chuyen-de-53gdgh6sd-shegga9x.vercel.app
+url : project-chuyen-de-web.vercel.app
