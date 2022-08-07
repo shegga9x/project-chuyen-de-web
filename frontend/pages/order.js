@@ -467,7 +467,7 @@ export async function getServerSideProps(context) {
     console.log(context.locale);
     const session = await getSession(context);
     if (session) {
-        const response = await instance(context).get("http://localhost:4000/api/order/getOrderItemByIdCustomer")
+        const response = await instance(context).get("https://sqlshop123.herokuapp.com/api/order/getOrderItemByIdCustomer")
         console.log(response.data);
         return {
             props: {

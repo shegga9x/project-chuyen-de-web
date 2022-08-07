@@ -20,10 +20,10 @@ export default function ModalProfilePhone({ open, closeModal, customer, setCusto
 
     const sendSMS = async () => {
         const phoneNumber = document.getElementsByClassName('PhoneNumber')[0].value
-        const res = await instance().get('http://localhost:4000/api/customer/sendPhoneSMS')
+        const res = await instance().get('https://sqlshop123.herokuapp.com/api/customer/sendPhoneSMS')
         if (res) {
             const sms = res.data;
-            const res2 = await instance().get('http://localhost:4000/api/sms/sendPhoneSMS', { params: { phoneNumber: phoneNumber, sms: sms } });
+            const res2 = await instance().get('https://sqlshop123.herokuapp.com/api/sms/sendPhoneSMS', { params: { phoneNumber: phoneNumber, sms: sms } });
             if (res2) {
                 setPhoneNumber(phoneNumber);
             }
@@ -32,7 +32,7 @@ export default function ModalProfilePhone({ open, closeModal, customer, setCusto
 
     const checkSMS = async () => {
         const sms = document.getElementsByClassName('smsNumber')[0].value;
-        const res = await instance().get('http://localhost:4000/api/customer/checkPhoneSMS', { params: { sms: sms, phoneNumber: phoneNumber } })
+        const res = await instance().get('https://sqlshop123.herokuapp.com/api/customer/checkPhoneSMS', { params: { sms: sms, phoneNumber: phoneNumber } })
             .catch(err => {
                 alert(err.response.data.message);
             })

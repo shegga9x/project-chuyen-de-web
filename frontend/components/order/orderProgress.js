@@ -42,7 +42,7 @@ export default function OrderProgress({ open, closeModal, listOrder}) {
             document.getElementsByClassName('step3')[0].classList.add('active');
             document.getElementsByClassName('content_step2')[0].style.display = "none"
             document.getElementsByClassName('content_step3')[0].style.display = "block"
-            const res = await instance().post(`http://localhost:4000/api/digitalSignature/signing`,
+            const res = await instance().post(`https://sqlshop123.herokuapp.com/api/digitalSignature/signing`,
                 { listOrderItem: listOrder, imageBase64: img.src, userName: userName },
                 { headers: { 'Content-Type': 'application/json' }, responseType: 'blob' }).catch((err) => { console.log({ err }) });
             if (res) {

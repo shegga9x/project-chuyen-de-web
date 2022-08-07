@@ -84,8 +84,8 @@ public class EmailService {
                     resetUrl);
         } else {
             message = MessageFormat.format(
-                    "<p>Please use the below token to reset your password with the <code>http://localhost:3000/account/reset-password?token={0}</code> </p>",
-                    account.getResetToken().getResetTokenContent());
+                    "<p>Please use the below token to reset your password with the <code>{0}/account/reset-password?token={1}</code> </p>",
+                    new Object[] { origin, account.getResetToken().getResetTokenContent() });
         }
         try {
             sendMail(account.getEmail(), "Sign-up Verification API - Reset Password",

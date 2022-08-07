@@ -56,7 +56,7 @@ export default function Account(props) {
     //register useState
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async ({ email, password }) => {
-        const message = await axios.post('http://localhost:4000/api/accounts/register', {
+        const message = await axios.post('https://sqlshop123.herokuapp.com/api/accounts/register', {
             email: email,
             password: password,
             confirmPassword: password

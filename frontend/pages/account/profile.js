@@ -16,7 +16,7 @@ export default function Profile({ keyword, customer }) {
 
     useEffect(() => {
         const changeInformationCustomer = async () => {
-            const res = await instance().post("http://localhost:4000/api/customer/changeInformationCustomer", customerState)
+            const res = await instance().post("https://sqlshop123.herokuapp.com/api/customer/changeInformationCustomer", customerState)
                 .catch(err => {
                     alert('Xảy ra sự cố khi thay đổi thông tin');
                 });
@@ -170,7 +170,7 @@ export async function getServerSideProps({ req, query }) {
     // session.user.email
     const session = await getSession({ req });
     if (session) {
-        const res = await instance({ req }).get("http://localhost:4000/api/customer/getCurrentCustomer")
+        const res = await instance({ req }).get("https://sqlshop123.herokuapp.com/api/customer/getCurrentCustomer")
         const customer = res.data;
         console.log(customer);
         if (query.keyword != undefined) {

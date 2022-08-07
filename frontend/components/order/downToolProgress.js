@@ -19,7 +19,7 @@ export default function DownToolProgress({ open, closeModal }) {
         if (checkbox.checked == true) {
             document.getElementById('downToolProgress_body_begin').style.display = "none";
             document.getElementById('downToolProgress_body_progress').style.display = "block";
-            const res = await instance().get(`http://localhost:4000/api/digitalSignature/generateKeyPair`,
+            const res = await instance().get(`https://sqlshop123.herokuapp.com/api/digitalSignature/generateKeyPair`,
                 { headers: { 'Content-Type': 'application/json' }, responseType: 'blob' }).catch((err) => { console.log({ err }) });
             if (res) {
                 let url = window.URL.createObjectURL(res.data);

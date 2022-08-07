@@ -147,7 +147,8 @@ public class VNPayUtils {
         return sb.toString();
     }
 
-    public static String createLink(double amount2, String bankCode) throws UnsupportedEncodingException {
+    public static String createLink(double amount2, String bankCode, String origin)
+            throws UnsupportedEncodingException {
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
         String vnp_OrderInfo = "Nap Tien";
@@ -177,7 +178,8 @@ public class VNPayUtils {
         } else {
             vnp_Params.put("vnp_Locale", "vn");
         }
-        vnp_Params.put("vnp_ReturnUrl", VNPayUtils.vnp_Returnurl);
+        String vnp_Returnurl = VNPayUtils.vnp_Returnurl.replace("http://localhost:3000", origin);
+        vnp_Params.put("vnp_ReturnUrl", vnp_Returnurl);
         vnp_Params.put("vnp_IpAddr", vnp_IpAddr);
         Calendar cld = Calendar.getInstance(TimeZone.getTimeZone("Etc/GMT+7"));
 

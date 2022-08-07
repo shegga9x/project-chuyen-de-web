@@ -21,13 +21,13 @@ export default function PhoneOTPProgress({ open, closeModal, shippingPriceList }
 
     const sendSMS = async () => {
         // const phoneNumber = document.getElementsByClassName('PhoneNumber')[0].value
-        const res1 = await instance().get('http://localhost:4000/api/customer/getCurrentCustomer')
+        const res1 = await instance().get('https://sqlshop123.herokuapp.com/api/customer/getCurrentCustomer')
         if (res1) {
             const phoneNumber = res1.data.phoneNumber;
-            const res = await instance().get('http://localhost:4000/api/customer/sendPhoneSMS')
+            const res = await instance().get('https://sqlshop123.herokuapp.com/api/customer/sendPhoneSMS')
             if (res) {
                 const sms = res.data;
-                const res2 = await instance().get('http://localhost:4000/api/sms/sendPhoneSMS', { params: { phoneNumber: phoneNumber, sms: sms } });
+                const res2 = await instance().get('https://sqlshop123.herokuapp.com/api/sms/sendPhoneSMS', { params: { phoneNumber: phoneNumber, sms: sms } });
                 if (res2) {
                     alert('đã send thành công');
                 }
@@ -37,7 +37,7 @@ export default function PhoneOTPProgress({ open, closeModal, shippingPriceList }
 
     const checkSMS = async () => {
         const sms = document.getElementsByClassName('smsNumber')[0].value;
-        const res = await instance().get('http://localhost:4000/api/customer/onCompleteOrderPayment', { params: { sms: sms } })
+        const res = await instance().get('https://sqlshop123.herokuapp.com/api/customer/onCompleteOrderPayment', { params: { sms: sms } })
             .catch(err => {
                 alert(err.response.data.message);
             })
@@ -48,7 +48,7 @@ export default function PhoneOTPProgress({ open, closeModal, shippingPriceList }
                     console.log(key, value);
                     req.push(key + "-" + value);
                 }
-                const res1 = await instance().post(`http://localhost:4000/api/order/addCartItemToOrder`, req)
+                const res1 = await instance().post(`https://sqlshop123.herokuapp.com/api/order/addCartItemToOrder`, req)
                     .catch((err) => {
                         alert(err.response.data.message)
                         if (err.response.data.message == "Khách hàng không đủ tiền mua hàng, vui lòng nạp thêm") {

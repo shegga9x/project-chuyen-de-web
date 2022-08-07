@@ -30,7 +30,7 @@ export default function Profile() {
         },
         validationSchema,
         onSubmit: values => {
-            InstanceAxios().post(`http://localhost:4000/api/saler/updateShop`, values).then((response) => {
+            InstanceAxios().post(`https://sqlshop123.herokuapp.com/api/saler/updateShop`, values).then((response) => {
                 alert("Cập Nhật Thành Công");
                 formik.setFieldValue('idShop', data.message)
             }).catch((error) => {
@@ -44,14 +44,14 @@ export default function Profile() {
     useEffect(() => {
         async function fetchMyAPI() {
             if (session) {
-                let provinceArr = await InstanceAxios().get(`http://localhost:4000/api/ghn/province`).then((data) => {
+                let provinceArr = await InstanceAxios().get(`https://sqlshop123.herokuapp.com/api/ghn/province`).then((data) => {
                     let reformattedArray = data.data.data.map(obj => { return { provinceID: obj.ProvinceID, provinceName: obj.ProvinceName } })
                     setProvince(reformattedArray)
 
                     return reformattedArray;
 
                 })
-                await InstanceAxios().get(`http://localhost:4000/api/saler/getShopProfile`).then((data) => {
+                await InstanceAxios().get(`https://sqlshop123.herokuapp.com/api/saler/getShopProfile`).then((data) => {
                     const address = data.data.addressDTO;
                     formik.setFieldValue('addressDTO.provinceId', { id: address.provinceId.id, name: address.provinceId.name })
                     formik.setFieldValue('addressDTO.districtId', { id: address.districtId.id, name: address.districtId.name })
@@ -86,7 +86,7 @@ export default function Profile() {
         if (type != "") {
             let param = "";
             (type == "district" ? param = `?province_id=` + id : param = `?district_id=` + id)
-            result = await InstanceAxios().get(`http://localhost:4000/api/ghn/${type}` + param).then((data) => {
+            result = await InstanceAxios().get(`https://sqlshop123.herokuapp.com/api/ghn/${type}` + param).then((data) => {
                 let reformattedArray = data.data.data.map(obj => {
                     switch (type) {
                         case "district":

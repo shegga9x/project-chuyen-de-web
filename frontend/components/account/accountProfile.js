@@ -98,7 +98,7 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
     useEffect(() => {
         async function fetchMyAPI() {
             console.log(customer);
-            let provinceArr = await InstanceAxios().get(`http://localhost:4000/api/ghn/province`).then((data) => {
+            let provinceArr = await InstanceAxios().get(`https://sqlshop123.herokuapp.com/api/ghn/province`).then((data) => {
                 let reformattedArray = data.data.data.map(obj => { return { provinceID: obj.ProvinceID, provinceName: obj.ProvinceName } })
                 setProvince(reformattedArray)
                 return reformattedArray;
@@ -122,7 +122,7 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
         if (type != "") {
             let param = "";
             (type == "district" ? param = `?province_id=` + id : param = `?district_id=` + id)
-            result = await InstanceAxios().get(`http://localhost:4000/api/ghn/${type}` + param).then((data) => {
+            result = await InstanceAxios().get(`https://sqlshop123.herokuapp.com/api/ghn/${type}` + param).then((data) => {
                 let reformattedArray = data.data.data.map(obj => {
                     switch (type) {
                         case "district":
