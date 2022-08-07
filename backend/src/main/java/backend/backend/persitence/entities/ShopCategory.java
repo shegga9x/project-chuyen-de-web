@@ -15,7 +15,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "Shop_Category", schema = "dbo", catalog = "shegga_shopvip132" )
+@Table(name = "Shop_Category", schema = "dbo", catalog = Account.CATALOG )
 public class ShopCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -15,7 +15,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Evaluate_Reply", schema="dbo", catalog = "shegga_shopvip132"  )
+@Table(name="Evaluate_Reply", schema="dbo", catalog = Account.CATALOG  )
 public class EvaluateReply implements Serializable {
 
     private static final long serialVersionUID = 1L;

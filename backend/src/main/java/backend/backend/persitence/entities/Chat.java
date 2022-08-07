@@ -16,7 +16,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name="Chat", schema="dbo", catalog = "shegga_shopvip132"  )
+@Table(name="Chat", schema="dbo", catalog = Account.CATALOG  )
 @IdClass(ChatId.class)
 public class Chat implements Serializable {
 

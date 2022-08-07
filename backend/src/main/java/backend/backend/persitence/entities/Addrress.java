@@ -27,7 +27,7 @@ import backend.backend.helpers.utils.SubUtils;
  *
  */
 @Entity
-@Table(name = "Addrress", schema = "dbo", catalog = "shegga_shopvip132" )
+@Table(name = "Addrress", schema = "dbo", catalog = Account.CATALOG )
 @SQLInsert( sql="EXECUTE updateAddrress    @district_id = ?, @province_id = ?,@sub_locate = ?, @ward_code = ?, @id = ?")
 public class Addrress implements Serializable {
 

@@ -30,7 +30,7 @@ import backend.backend.helpers.utils.SubUtils;
  *
  */
 @Entity
-@Table(name = "Order_Item", schema = "dbo", catalog = "shegga_shopvip132" )
+@Table(name = "Order_Item", schema = "dbo", catalog = Account.CATALOG )
 public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -15,7 +15,7 @@ import javax.persistence.*;
  * @author Telosys
  */
 @Entity
-@Table(name = "Evaluate", schema = "dbo", catalog = "shegga_shopvip132" )
+@Table(name = "Evaluate", schema = "dbo", catalog = Account.CATALOG )
 public class Evaluate implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -29,6 +29,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import backend.backend.persitence.model.enumModel.AuthProvider;
 
 /**
@@ -37,9 +39,11 @@ import backend.backend.persitence.model.enumModel.AuthProvider;
  * @author Telosys
  */
 @Entity
-@Table(name = "ACCOUNT", schema = "dbo", catalog = "shegga_shopvip132" )
+@Table(name = "ACCOUNT", schema = "dbo", catalog = Account.CATALOG)
 public class Account implements Serializable {
-
+    @Value("${bezkoder.app.databaseName}")
+    public static final String CATALOG = "";
+    
     private static final long serialVersionUID = 1L;
 
     // --- ENTITY PRIMARY KEY
@@ -94,7 +98,6 @@ public class Account implements Serializable {
     @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "account", cascade = CascadeType.MERGE)
     private ResetEmailToken resetEmailToken;
-
 
     @PrimaryKeyJoinColumn
     @OneToOne(mappedBy = "account", cascade = CascadeType.ALL)

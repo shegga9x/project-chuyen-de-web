@@ -22,7 +22,7 @@ import org.hibernate.annotations.SQLInsert;
  *
  */
 @Entity
-@Table(name = "Addrress_Cell", schema = "dbo", catalog = "shegga_shopvip132" )
+@Table(name = "Addrress_Cell", schema = "dbo", catalog = Account.CATALOG )
 @SQLInsert( sql="EXECUTE updateAddrress_Cell   @name = ?,@id = ?")
 public class AddrressCell implements Serializable {
 
