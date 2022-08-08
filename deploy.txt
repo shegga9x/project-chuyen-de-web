@@ -1,5 +1,5 @@
 sql:
-Server Name: sql.bsite.net\MSSQL2016SQL 
+Server Name: sql.bsite.net\MSSQL2016
 Username: shegga_shopvip132
 password : 0378876395pP
 backend: 
