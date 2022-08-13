@@ -171,7 +171,7 @@ public class RefreshToken implements Serializable {
         return this.revoked != null;
     }
 
-    public boolean IsActive() {
+    public boolean  IsActive() {
         return this.revoked == null && !IsExpired();
     }
 

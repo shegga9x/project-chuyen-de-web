@@ -10,9 +10,8 @@ export default function orderProcessSuccess() {
 export async function getServerSideProps(context) {
     const session = await getSession(context);
     if (session) {
-        const response = await instance(context).get("https://sqlshop123.herokuapp.com/api/order/onCompleteOrderPayment")
+        const response = await instance(context).get("https://localhost:4000/api/order/onCompleteOrderPayment")
         if (response) {
-           console.log('quá đã');
         }
     }
     return {

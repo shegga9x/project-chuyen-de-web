@@ -22,7 +22,7 @@ export default function OrderDetailModal({ open, closeModal, listOrder, dataChan
     const handleData = async (order, status) => {
         order.status = status;
         setIsLoading(order.idOrderItem)
-        await InstanceAxios().post(`https://sqlshop123.herokuapp.com/api/saler/orderSalerUpdateStatus`, order)
+        await InstanceAxios().post(`https://localhost:4000/api/saler/orderSalerUpdateStatus`, order)
         setIsLoading(-1)
         dataChange(1)
     }

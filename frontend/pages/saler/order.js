@@ -51,7 +51,7 @@ export default function Order() {
             const size = router.query.size == null ? 6 : router.query.size;
             const status = router.query.status == null || router.query.status == 0 ? "" : `&status=${router.query.status}`;
             const sorter = router.query.sorter == null ? "" : `&sorter=${router.query.sorter}`;
-            InstanceAxios().get(`https://sqlshop123.herokuapp.com/api/saler/orderSalerList?page=${page - 1}&size=${size}${status}${sorter}`)
+            InstanceAxios().get(`https://localhost:4000/api/saler/orderSalerList?page=${page - 1}&size=${size}${status}${sorter}`)
                 .then((data) => {
                     const map = new Map(Object.entries(data.data.map));
                     setData(map);

@@ -34,16 +34,15 @@ export default function SingleProduct({ data }) {
 
   useEffect(() => {
     const getReviewData = async () => {
-      const res = await axios.get(`https://sqlshop123.herokuapp.com/api/product/getReviewByIdProduct`, { params: { idSingleProductPage: data.singleProductPage.idSingleProductPage } })
+      const res = await axios.get(`https://localhost:4000/api/product/getReviewByIdProduct`, { params: { idSingleProductPage: data.singleProductPage.idSingleProductPage } })
       if (res) {
         setListReview(res.data);
       }
     }
 
     const getReviewReplyData = async () => {
-      const res = await axios.get(`https://sqlshop123.herokuapp.com/api/product/getListEvaluateReplyResponse`, { params: { idSingleProductPage: data.singleProductPage.idSingleProductPage } })
+      const res = await axios.get(`https://localhost:4000/api/product/getListEvaluateReplyResponse`, { params: { idSingleProductPage: data.singleProductPage.idSingleProductPage } })
       if (res) {
-        console.log(res.data)
         setListReviewReply(res.data);
       }
     }
@@ -61,7 +60,7 @@ export default function SingleProduct({ data }) {
   const checkAddToCart = async () => {
     if (product != null) {
       document.getElementById("buttonAddToCart").disabled = true;
-      const req = await instance().post(`https://sqlshop123.herokuapp.com/api/cart/addToCart`, { product, quantity: productQuantity.current.value })
+      const req = await instance().post(`https://localhost:4000/api/cart/addToCart`, { product, quantity: productQuantity.current.value })
         .catch((err) => {
           document.getElementById("buttonAddToCart").disabled = false;
           console.log({ err })
@@ -858,7 +857,7 @@ export default function SingleProduct({ data }) {
 export async function getStaticPaths() {
   const paths = [];
   const res = await instance().get(
-    `https://sqlshop123.herokuapp.com/api/product/loadAllSingleProductPage`
+    `https://localhost:4000/api/product/loadAllSingleProductPage`
   );
   if (res != undefined) {
     const listSingleProductPagesID = res.data;
@@ -876,7 +875,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const res = await instance().get(
-    `https://sqlshop123.herokuapp.com/api/product/getSingleProductPagePerPage/${params.idSingleProductPage}`
+    `https://localhost:4000/api/product/getSingleProductPagePerPage/${params.idSingleProductPage}`
   );
   if (res != undefined) {
     let res1 = null;
@@ -884,11 +883,11 @@ export async function getStaticProps({ params }) {
     let res3 = null;
     await axios.all([
       instance().get(
-        `https://sqlshop123.herokuapp.com/api/product/getListProductBySingleProductPage`,
+        `https://localhost:4000/api/product/getListProductBySingleProductPage`,
         { params: { idSingleProduct: res.data.idSingleProductPage } }),
-      instance().get(`https://sqlshop123.herokuapp.com/api/product/getListCategoryBySingleProductPage`,
+      instance().get(`https://localhost:4000/api/product/getListCategoryBySingleProductPage`,
         { params: { idCategory: res.data.idCategory } }),
-      instance().get(`https://sqlshop123.herokuapp.com/api/product/getShopProfile`, { params: { idShop: res.data.idShop } })
+      instance().get(`https://localhost:4000/api/product/getShopProfile`, { params: { idShop: res.data.idShop } })
 
     ])
       .then(axios.spread((data1, data2, data3) => {
@@ -897,7 +896,6 @@ export async function getStaticProps({ params }) {
         res2 = data2;
         res3 = data3;
       }))
-    console.log(res.data);
     if (res2 != null && res1 != null) {
       return {
         props: {

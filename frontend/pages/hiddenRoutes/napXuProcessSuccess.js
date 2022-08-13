@@ -8,14 +8,11 @@ export default function NapXuProcessSuccess() {
     )
 }
 export async function getServerSideProps(context) {
-    console.log(context)
-    console.log(context.locale)
     const session = await getSession(context);
     if (session) {
         const money = context.query.vnp_Amount / 100000;
-        const res = await instance(context).get('https://sqlshop123.herokuapp.com/api/walletCustomer/addMoneyToCustomerWallet', { params: { money: money } });
+        const res = await instance(context).get('https://localhost:4000/api/walletCustomer/addMoneyToCustomerWallet', { params: { money: money } });
         if (res) {
-           console.log('quá đã');
         }
     }
     return {

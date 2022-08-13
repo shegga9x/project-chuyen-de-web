@@ -36,7 +36,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
         if (session) {
             const getCartByIdUser = async () => {
                 // You can await here
-                const response = await instance().get("https://sqlshop123.herokuapp.com/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id } });
+                const response = await instance().get("https://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id } });
                 if (response) {
                     setUserCart(response.data);
                     setLoadingCart(false)
@@ -44,7 +44,6 @@ export default function Header({ updateCartHeader, isPageCart }) {
             }
 
             getCartByIdUser().catch(err => {
-                console.log({ err })
                 if (err.message == "Network Error") {
                     console.log("chua mo backend");
                 }

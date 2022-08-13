@@ -67,7 +67,7 @@ export default function Cart(props) {
     } else {
       disableClick(product.idProduct);
 
-      const res = await instance().post(`https://sqlshop123.herokuapp.com/api/cart/updateProduct`, { product, quantity: target.value })
+      const res = await instance().post(`https://localhost:4000/api/cart/updateProduct`, { product, quantity: target.value })
         .catch((err) => {
           console.log(err);
           removeDisableClick(product.idProduct);
@@ -77,7 +77,7 @@ export default function Cart(props) {
           }
         });
       if (res) {
-        const response = await instance().get("https://sqlshop123.herokuapp.com/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
+        const response = await instance().get("https://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
         if (response) {
           removeDisableClick(product.idProduct);
           setCart(response.data);
@@ -89,7 +89,7 @@ export default function Cart(props) {
           const data = JSON.parse(JSON.stringify(response.data))
           data.forEach(function (cartItem) { delete cartItem.product.imgUrl });
           const calFeeRequest = { cartItemDTOsItemResponses: data, ghnServiceTypeRequests: ghnServiceTypeRequests };
-          const responseShipServiceFee = await instance().post("https://sqlshop123.herokuapp.com/api/ghn/calculateFee", calFeeRequest)
+          const responseShipServiceFee = await instance().post("https://localhost:4000/api/ghn/calculateFee", calFeeRequest)
           const map = new Map(Object.entries(responseShipServiceFee.data));
           setShippingPriceList(map)
         }
@@ -100,7 +100,7 @@ export default function Cart(props) {
   const addToCart = async (quantity, currentQuantity, product) => {
     const target = document.getElementById(`product-id-${product.idProduct}`);
     disableClick(product.idProduct);
-    const res = await instance().post(`https://sqlshop123.herokuapp.com/api/cart/addToCart`, { product, quantity: quantity })
+    const res = await instance().post(`https://localhost:4000/api/cart/addToCart`, { product, quantity: quantity })
       .catch((err) => {
         removeDisableClick(product.idProduct);
         if (err.message != "Network Error") {
@@ -109,7 +109,7 @@ export default function Cart(props) {
         }
       });
     if (res) {
-      const response = await instance().get("https://sqlshop123.herokuapp.com/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
+      const response = await instance().get("https://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
       if (response) {
         removeDisableClick(product.idProduct);
         setCart(response.data);
@@ -121,7 +121,7 @@ export default function Cart(props) {
         const data = JSON.parse(JSON.stringify(response.data))
         data.forEach(function (cartItem) { delete cartItem.product.imgUrl });
         const calFeeRequest = { cartItemDTOsItemResponses: data, ghnServiceTypeRequests: ghnServiceTypeRequests };
-        const responseShipServiceFee = await instance().post("https://sqlshop123.herokuapp.com/api/ghn/calculateFee", calFeeRequest)
+        const responseShipServiceFee = await instance().post("https://localhost:4000/api/ghn/calculateFee", calFeeRequest)
         const map = new Map(Object.entries(responseShipServiceFee.data));
         setShippingPriceList(map)
       }
@@ -129,9 +129,9 @@ export default function Cart(props) {
   }
 
   const deletCart = async (quantity, product) => {
-    const res = await instance().post(`https://sqlshop123.herokuapp.com/api/cart/deleteCartItem`, product).catch(() => { alert("không thể delete product") });
+    const res = await instance().post(`https://localhost:4000/api/cart/deleteCartItem`, product).catch(() => { alert("không thể delete product") });
     if (res) {
-      const response = await instance().get("https://sqlshop123.herokuapp.com/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
+      const response = await instance().get("https://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: props.user.id } });
       if (response) {
         setCart(response.data);
       }
@@ -142,12 +142,11 @@ export default function Cart(props) {
   const addCartItemToOrder = async () => {
     const req = [];
     for (const [key, value] of shippingPriceList) {
-      console.log(key, value);
       req.push(key + "-" + value);
     }
 
     //check thang nay co sdt truoc roi moi remove
-    const res1 = await instance().get(`https://sqlshop123.herokuapp.com/api/customer/checkPhoneExistCustomer`)
+    const res1 = await instance().get(`https://localhost:4000/api/customer/checkPhoneExistCustomer`)
       .catch((err) => {
         alert(err.response.data.message);
       })
@@ -170,7 +169,7 @@ export default function Cart(props) {
 
       const data = JSON.parse(JSON.stringify(cart))
       data.forEach(function (cartItem) { delete cartItem.product.imgUrl });
-      const responseShipServiceType = await instance().post("https://sqlshop123.herokuapp.com/api/ghn/getServiceType", data)
+      const responseShipServiceType = await instance().post("https://localhost:4000/api/ghn/getServiceType", data)
       const listShipServiceType = [];
       const ghnServiceTypeRequests = [];
 
@@ -183,7 +182,7 @@ export default function Cart(props) {
       setShippingTypeList(listShipServiceType)
 
       const calFeeRequest = { cartItemDTOsItemResponses: data, ghnServiceTypeRequests: ghnServiceTypeRequests };
-      const responseShipServiceFee = await instance().post("https://sqlshop123.herokuapp.com/api/ghn/calculateFee", calFeeRequest)
+      const responseShipServiceFee = await instance().post("https://localhost:4000/api/ghn/calculateFee", calFeeRequest)
       const map = new Map(Object.entries(responseShipServiceFee.data));
       setShippingPriceList(map)
     }
@@ -436,7 +435,7 @@ export async function getServerSideProps(context) {
   const session = await getSession(context);
   if (session) {
     // console.log(session.user.id)
-    const responseCart = await axios.get("https://sqlshop123.herokuapp.com/api/cart/getCartByIdCustomer",
+    const responseCart = await axios.get("https://localhost:4000/api/cart/getCartByIdCustomer",
       { params: { idCustomer: session.user.id }, headers: { Authorization: `Bearer ${session.user.jwt}` } })
 
     return {

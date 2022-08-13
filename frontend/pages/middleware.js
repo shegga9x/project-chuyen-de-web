@@ -8,7 +8,6 @@ export default function Middleware() {
 }
 
 export async function getServerSideProps({ req }) {
-    console.log('????');
     const session = await getSession({ req });
     if (session) {
         if (session.user.role.includes('User')) {

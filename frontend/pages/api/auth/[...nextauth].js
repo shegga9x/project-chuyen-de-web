@@ -81,7 +81,7 @@ const nextAuthOptions = (req, res) => {
         if (Date.now() < token.jwtExpires) {
           return token
         }
-        return refreshAccessToken(token, cookiesSetter)
+        return await refreshAccessToken(token, cookiesSetter)
       },
       async session(session, token) {
         session.user = token
@@ -95,6 +95,18 @@ const nextAuthOptions = (req, res) => {
       signIn: '/account',
       error: '/account',
     },
+    debug: true,
+    logger: {
+      error(code, metadata) {
+        console.log(code, metadata);
+      },
+      warn(code) {
+        console.log(code);
+      },
+      debug(code, metadata) {
+        console.log(code, metadata);
+      }
+    }
   };
 };
 
@@ -104,7 +116,7 @@ async function refreshAccessToken(token, cookiesSetter) {
       headers: { Cookie: "refreshToken=" + cookiesSetter.get('refreshToken') + ";" }
     });
     const cookies = response.headers['set-cookie']
-    cookiesSetter.set(cookies)
+    await cookiesSetter.set(cookies)
     return {
       ...token,
       id: response.data.idAccount,

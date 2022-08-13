@@ -52,13 +52,12 @@ export default function VerificationProgress({ open, closeModal }) {
         const decry = document.getElementById('decry').value;
         const mode = document.getElementById('mode').value;
         const padding = document.getElementById('padding').value;
-        console.log(base64FileEncry);
         const digitalSignatureRequest2 = { hash: hash, decry: decry, mode: mode, padding: padding, base64FileData: base64FileData, base64FileEncry: base64FileEncry };
         document.getElementById('xm').style.visibility = 'visible';
         document.getElementById('xmtb').style.display = 'none';
         document.getElementById('xmtc').style.display = 'none';
         document.getElementById('dxm').style.display = 'block';
-        const req = await instance().post(`https://sqlshop123.herokuapp.com/api/digitalSignature/verifying2`, { ...digitalSignatureRequest2 })
+        const req = await instance().post(`https://localhost:4000/api/digitalSignature/verifying2`, { ...digitalSignatureRequest2 })
             .catch((err) => {
                 document.getElementById('dxm').style.display = 'none';
                 document.getElementById('xmtb').style.display = 'block';

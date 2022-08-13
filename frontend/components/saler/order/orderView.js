@@ -39,7 +39,7 @@ export default function OrderView({ value, index, data, tabChange, dataChange })
         }
     }
     function cancelOrder(status) {
-        // await InstanceAxios().post(`https://sqlshop123.herokuapp.com/api/saler/orderSalerUpdateStatus`, order)
+        // await InstanceAxios().post(`https://localhost:4000/api/saler/orderSalerUpdateStatus`, order)
 
     }
     return (
@@ -63,7 +63,6 @@ export default function OrderView({ value, index, data, tabChange, dataChange })
                                                 {Array.from(data.entries()).map((entry) => {
                                                     const [key, value] = entry;
                                                     const singleProductPage = value.singleProductPageDTO;
-                                                    console.log(entry);
                                                     return (
                                                         <tr>
                                                             <td>

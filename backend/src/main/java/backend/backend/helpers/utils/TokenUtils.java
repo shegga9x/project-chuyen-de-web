@@ -96,7 +96,6 @@ public class TokenUtils {
             }
             refreshTokenRepository.deleteAllById(ids);
         } catch (Exception e) {
-            // TODO: handle exception
         }
     }
 

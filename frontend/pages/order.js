@@ -76,7 +76,6 @@ export default function Order(props) {
     }
 
     const handleChange = (event, newValue) => {
-        console.log(newValue);
         setValue(newValue);
     };
 
@@ -464,11 +463,9 @@ export default function Order(props) {
 }
 
 export async function getServerSideProps(context) {
-    console.log(context.locale);
     const session = await getSession(context);
     if (session) {
-        const response = await instance(context).get("https://sqlshop123.herokuapp.com/api/order/getOrderItemByIdCustomer")
-        console.log(response.data);
+        const response = await instance(context).get("https://localhost:4000/api/order/getOrderItemByIdCustomer")
         return {
             props: {
                 order: response.data,

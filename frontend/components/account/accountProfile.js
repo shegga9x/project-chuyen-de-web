@@ -47,7 +47,6 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
             wardCode: wardSelected,
             subLocate: "Nguyen Van Nghi F7"
         }
-        console.log(addressDTO);
 
         // value tên shop tạm thời không nên thay đổi vì chưa hiểu trường
 
@@ -74,10 +73,8 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
         const model = document.getElementsByClassName('modal-load')[0];
         model.classList.toggle('visible');
         if (modalName === 'email') {
-            console.log('email');
             setOpenEmail(true);
         } else {
-            console.log('phone');
             setOpenPhone(true);
         }
     }
@@ -97,8 +94,7 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
     }
     useEffect(() => {
         async function fetchMyAPI() {
-            console.log(customer);
-            let provinceArr = await InstanceAxios().get(`https://sqlshop123.herokuapp.com/api/ghn/province`).then((data) => {
+            let provinceArr = await InstanceAxios().get(`https://localhost:4000/api/ghn/province`).then((data) => {
                 let reformattedArray = data.data.data.map(obj => { return { provinceID: obj.ProvinceID, provinceName: obj.ProvinceName } })
                 setProvince(reformattedArray)
                 return reformattedArray;
@@ -122,7 +118,7 @@ export default function AccountProfile({ customer, setCustomer, setFirstRender }
         if (type != "") {
             let param = "";
             (type == "district" ? param = `?province_id=` + id : param = `?district_id=` + id)
-            result = await InstanceAxios().get(`https://sqlshop123.herokuapp.com/api/ghn/${type}` + param).then((data) => {
+            result = await InstanceAxios().get(`https://localhost:4000/api/ghn/${type}` + param).then((data) => {
                 let reformattedArray = data.data.data.map(obj => {
                     switch (type) {
                         case "district":

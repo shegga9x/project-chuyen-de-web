@@ -267,8 +267,8 @@ export async function getServerSideProps(context) {
     const size = context.query.size == null ? 8 : context.query.size;
     const catagory = context.query.catagory == null ? "" : `&catagory=${context.query.catagory}`;
     const sorter = context.query.sorter == null ? "" : `&sorter=${context.query.sorter}`;
-    const res = await InstanceAxios(context).get(`https://sqlshop123.herokuapp.com/api/product/loadAll?page=${page - 1}&size=${size}${catagory}${sorter}`)
-    const res2 = await InstanceAxios(context).get(`https://sqlshop123.herokuapp.com/api/product/loadCagetory`)
+    const res = await InstanceAxios(context).get(`https://localhost:4000/api/product/loadAll?page=${page - 1}&size=${size}${catagory}${sorter}`)
+    const res2 = await InstanceAxios(context).get(`https://localhost:4000/api/product/loadCagetory`)
     const data = await res.data; 
     const data3 = JSON.parse(JSON.stringify(res2.data).replaceAll(',"children":[]', ""));
     if (data.page != null) {

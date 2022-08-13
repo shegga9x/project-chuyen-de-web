@@ -1,5 +1,6 @@
 package backend.backend.services.mainService;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -139,12 +140,17 @@ public class AuthService {
         }
 
         Account account = refreshToken.getAccount();
+        System.out.println(refreshToken.getToken());
+        System.out.println(refreshToken.getReasonRevoked());
+
         if (refreshToken.IsRevoked() && refreshToken != null) {
             refreshToken = tokenUtils.revokeDescendantRefreshTokens(refreshToken, account, ipAddress,
                     "Attempted reuse of revoked ancestor token: " + token);
             refreshTokenRepository.save(refreshToken);
         }
         if (!refreshToken.IsActive()) {
+            System.out.println(refreshToken.getReasonRevoked());
+            System.out.println();
             throw new CustomException("Token is UnActive !!!");
         }
         RefreshToken newRefreshToken = tokenUtils.rotateRefreshToken(refreshToken, ipAddress);
@@ -164,9 +170,11 @@ public class AuthService {
         response.role = roles;
         response.jwtToken = jwtToken;
         response.refreshToken = newRefreshToken.getToken();
-        response.expireToken = refreshToken.getExpires();
+        response.expireToken = newRefreshToken.getExpires();
         response = (AuthenticateResponse) SubUtils.mapperObject(account, response);
         accountRepository.save(account);
+        System.out.println(newRefreshToken.getToken());
+        System.out.println("ok");
         return response;
     }
 
