@@ -1,7 +1,6 @@
 package backend.backend.helpers.utils.digitalSignature.algorim;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -13,8 +12,8 @@ import java.security.cert.CertificateException;
 import java.util.Calendar;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
 
 import backend.backend.helpers.utils.digitalSignature.pdf.CreateVisibleSignatureMem;
 
@@ -74,12 +73,10 @@ public class Signer {
             byte[] imageByte,
             String visibleLine1, String visibleLine2, String uuid, String qrcode) throws KeyStoreException,
             CertificateException, IOException, NoSuchAlgorithmException, UnrecoverableKeyException {
-
-        InputStream ksInputStream = new FileInputStream(ResourceUtils.getFile("classpath:" + keystoreName));
-
+        ClassPathResource classPathResource = new ClassPathResource(keystoreName);
         KeyStore keystore = KeyStore.getInstance("PKCS12");
         char[] pin = keystorePin.toCharArray();
-        keystore.load(ksInputStream, pin);
+        keystore.load(classPathResource.getInputStream(), pin);
 
         CreateVisibleSignatureMem signing = new CreateVisibleSignatureMem(keystore, pin.clone());
         setIfNotNull(signing, signName, signLocation, signReason, visibleLine1, visibleLine2, uuid, qrcode);
