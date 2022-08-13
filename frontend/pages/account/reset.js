@@ -13,7 +13,7 @@ export default function reset() {
         if (validateEmail == null) {
             alert('Email không hợp lệ');
         } else {
-            const res = await axios.post('https://localhost:4000/api/accounts/forgot-password', { email: email.value })
+            const res = await axios.post('http://localhost:4000/api/accounts/forgot-password', { email: email.value })
                 .catch(err => {
                     alert(err.response.data.message);
                 })

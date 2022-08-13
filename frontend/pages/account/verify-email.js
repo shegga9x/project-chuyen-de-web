@@ -10,7 +10,7 @@ export default function VerifyEmail() {
 
 export async function getServerSideProps({ req, res, query }) {
     if (query.token != undefined) {
-        const mes = await axios.post('https://localhost:4000/api/accounts/verify-email', {
+        const mes = await axios.post('http://localhost:4000/api/accounts/verify-email', {
             token: query.token
         }).catch(errors => {
             return { props: {} }

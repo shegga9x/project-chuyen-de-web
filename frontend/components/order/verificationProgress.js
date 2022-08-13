@@ -57,7 +57,7 @@ export default function VerificationProgress({ open, closeModal }) {
         document.getElementById('xmtb').style.display = 'none';
         document.getElementById('xmtc').style.display = 'none';
         document.getElementById('dxm').style.display = 'block';
-        const req = await instance().post(`https://localhost:4000/api/digitalSignature/verifying2`, { ...digitalSignatureRequest2 })
+        const req = await instance().post(`http://localhost:4000/api/digitalSignature/verifying2`, { ...digitalSignatureRequest2 })
             .catch((err) => {
                 document.getElementById('dxm').style.display = 'none';
                 document.getElementById('xmtb').style.display = 'block';

@@ -19,7 +19,7 @@ export default function ModalProfileEmail({ open, closeModal, customer, setCusto
 
     const sendSMS = async () => {
         const email = document.getElementsByClassName('Email')[0].value;
-        const res = await instance().get('https://localhost:4000/api/customer/sendGmailSMS', { params: { email: email } });
+        const res = await instance().get('http://localhost:4000/api/customer/sendGmailSMS', { params: { email: email } });
         if (res) {
             alert('email are ready send, please check');
             setEmail(email);
@@ -28,7 +28,7 @@ export default function ModalProfileEmail({ open, closeModal, customer, setCusto
 
     const checkSMS = async () => {
         const sms = document.getElementsByClassName('SMSEmailNumber')[0].value;
-        const res = await instance().get('https://localhost:4000/api/customer/checkGmailSMS', { params: { sms: sms, email: email } })
+        const res = await instance().get('http://localhost:4000/api/customer/checkGmailSMS', { params: { sms: sms, email: email } })
             .catch(err => {
                 alert(err.response.data.message);
             })

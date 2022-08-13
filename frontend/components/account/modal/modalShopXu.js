@@ -45,7 +45,7 @@ export default function ModalShopXu({ open, closeModal }) {
         if (XuNumber.value != '') {
             if (bankCode != null) {
                 const total = XuNumber.value;
-                const res = await axios.get(`https://localhost:4000/api/vnPay/createLink`, { params: { amount: total, bankCode: bankCode } })
+                const res = await axios.get(`http://localhost:4000/api/vnPay/createLink`, { params: { amount: total, bankCode: bankCode } })
                 if (res) {
                     let a = document.createElement('a');
                     a.href = res.data;

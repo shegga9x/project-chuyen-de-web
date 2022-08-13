@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
     const session = await getSession(context);
     if (session) {
         const money = context.query.vnp_Amount / 100000;
-        const res = await instance(context).get('https://localhost:4000/api/walletCustomer/addMoneyToCustomerWallet', { params: { money: money } });
+        const res = await instance(context).get('http://localhost:4000/api/walletCustomer/addMoneyToCustomerWallet', { params: { money: money } });
         if (res) {
         }
     }
