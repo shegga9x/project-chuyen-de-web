@@ -13,6 +13,7 @@ import backend.backend.helpers.advice.CustomException;
 import backend.backend.helpers.payload.request.DigitalSignatureRequest2;
 import backend.backend.helpers.utils.digitalSignature.DigitalSignature;
 import backend.backend.persitence.entities.Customer;
+import backend.backend.persitence.entities.Shop;
 import backend.backend.persitence.repository.CustomerRepository;
 import org.apache.pdfbox.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,8 +59,9 @@ public class DigitalSignatureService {
         try {
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             String qrcode = docsUrlPrefix + uuid;
-            signer.sign(DigitalUltil.createPDF(digitalSignatureRequest.getListOrderItem(), account), bos, digitalSignatureRequest.getUserName(),
-                    "phung vip", "ký kết mua hàng tại shop", bytes, digitalSignatureRequest.getUserName(),
+            signer.sign(DigitalUltil.createPDF(digitalSignatureRequest.getListOrderItem(), account), bos,
+                    digitalSignatureRequest.getUserName(),
+                    account.getEmail(), "ký kết mua hàng tại shop", bytes, digitalSignatureRequest.getUserName(),
                     "ký kết mua hàng tại shop", uuid, qrcode);
             result = bos.toByteArray();
             bos.close();
@@ -69,17 +71,14 @@ public class DigitalSignatureService {
         return result;
     }
 
-    public String verifying() {
+    public PDFSignatureInfo verifying(byte[] bytes) {
         try {
-            byte[] bytes = IOUtils
-                    .toByteArray(new FileInputStream("9fd82907-1bb7-4fc6-a2ff-4d7bb0399df9.pdf"));
+
             List<PDFSignatureInfo> info = PDFSignatureInfoParser.getPDFSignatureInfo(bytes);
-            for (PDFSignatureInfo pdfSignatureInfo : info) {
-                System.out.println(pdfSignatureInfo);
-            }
+            return info.get(0);
         } catch (Exception e) {
+            throw new CustomException("Sai roi");
         }
-        return null;
     }
 
     public String verifying2(DigitalSignatureRequest2 digitalSignatureRequest2) {
@@ -111,7 +110,7 @@ public class DigitalSignatureService {
         customer.setPubkey(pubKeyEncode);
         customerRepository.save(customer);
 
-        //return priKey to customer
+        // return priKey to customer
         return kp.getPrivate().getEncoded();
     }
 }

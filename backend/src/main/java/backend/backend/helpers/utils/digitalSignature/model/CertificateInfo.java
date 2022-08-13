@@ -4,12 +4,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class CertificateInfo {
 
     public String issuerDN;
     public String subjectDN;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public Date notValidBefore;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public Date notValidAfter;
 
     public String signAlgorithm;

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class PDFSignatureInfo {
 
     public Map<String, Object> entries = new HashMap<>();
@@ -14,7 +16,7 @@ public class PDFSignatureInfo {
     public String filter;
     public String contactInfo;
     public String location;
-
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public Date signDate;
 
     public boolean coversWholeDocument;
@@ -24,11 +26,11 @@ public class PDFSignatureInfo {
 
     public CertificateInfo certificateInfo;
 
-    public Map<String,Object> getEntries() {
+    public Map<String, Object> getEntries() {
         return this.entries;
     }
 
-    public void setEntries(Map<String,Object> entries) {
+    public void setEntries(Map<String, Object> entries) {
         this.entries = entries;
     }
 

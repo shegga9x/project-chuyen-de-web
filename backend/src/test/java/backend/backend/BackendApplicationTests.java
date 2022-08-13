@@ -1,5 +1,8 @@
 package backend.backend;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +10,7 @@ import java.util.Optional;
 
 import javax.transaction.Transactional;
 
+import org.apache.pdfbox.io.IOUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +22,6 @@ import backend.backend.helpers.payload.response.CustomSinglePage;
 import backend.backend.helpers.payload.response.ProductResponse;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.persitence.entities.Category;
-import backend.backend.persitence.entities.OrderItem;
 import backend.backend.persitence.entities.Product;
 import backend.backend.persitence.entities.SingleProductPage;
 import backend.backend.persitence.repository.CartItemRepository;
@@ -31,6 +34,7 @@ import backend.backend.persitence.repository.SingleProductPageRepository;
 import backend.backend.persitence.repository.WalletCustomerRepository;
 import backend.backend.services.entityService.SingleProductPageService;
 import backend.backend.services.mainService.AdminService;
+import backend.backend.services.subService.DigitalSignatureService;
 
 @RunWith(SpringRunner.class)
 
@@ -56,6 +60,8 @@ class BackendApplicationTests {
     ResetPhoneTokenRepository resetPhoneTokenRepository;
     @Autowired
     AdminService adminService;
+    @Autowired
+    DigitalSignatureService digitalSignatureService;
 
     @Test
     @Transactional
@@ -104,7 +110,8 @@ class BackendApplicationTests {
     @Transactional
     void test5() {
         Optional<SingleProductPage> singleProductPage = singleProductPageRepository.findByIdSingleProductPage(1);
-        CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(), singleProductPage.get().getIdShop(),
+        CustomSinglePage test = new CustomSinglePage(singleProductPage.get().getIdSingleProductPage(),
+                singleProductPage.get().getIdShop(),
                 singleProductPage.get().getIdCategory(),
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
@@ -127,11 +134,18 @@ class BackendApplicationTests {
     @Test
     @Transactional
     void test7() {
-//        List<OrderItem> list = orderItemRepository.findByIdCustomerAndStatus(1, (byte) 1);
-//        for (OrderItem orderItem : list) {
-//            System.out.println(orderItem);
-//        }
+        // List<OrderItem> list = orderItemRepository.findByIdCustomerAndStatus(1,
+        // (byte) 1);
+        // for (OrderItem orderItem : list) {
+        // System.out.println(orderItem);
+        // }
     }
 
+    @Test
+    @Transactional
+    void test8() throws FileNotFoundException, IOException {
+        byte[] bytes = IOUtils.toByteArray(new FileInputStream("1.pdf"));
+        digitalSignatureService.verifying(bytes);
+    }
 
 }
