@@ -27,14 +27,13 @@ public class CustomPasswordEncoder implements PasswordEncoder {
             throw new CustomException(e.toString());
         } catch (UnsupportedEncodingException e) {
             throw new CustomException(e.toString());
-
         }
 
     }
 
     @Override
     public boolean matches(CharSequence plainTextPassword, String passwordInDatabase) {
-        return encode(passwordInDatabase).equals(plainTextPassword);
+        return encode(plainTextPassword).equals(passwordInDatabase);
     }
 
 }
