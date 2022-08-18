@@ -1,7 +1,6 @@
 package backend.backend.services.subService;
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
@@ -9,27 +8,25 @@ import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
 
-import backend.backend.helpers.advice.CustomException;
-import backend.backend.helpers.payload.request.DigitalSignatureRequest2;
-import backend.backend.helpers.utils.digitalSignature.DigitalSignature;
-import backend.backend.persitence.entities.Customer;
-import backend.backend.persitence.entities.Shop;
-import backend.backend.persitence.repository.CustomerRepository;
-import org.apache.pdfbox.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Base64Utils;
 
+import backend.backend.helpers.advice.CustomException;
 import backend.backend.helpers.payload.request.DigitalSignatureRequest;
+import backend.backend.helpers.payload.request.DigitalSignatureRequest2;
 import backend.backend.helpers.utils.SubUtils;
+import backend.backend.helpers.utils.digitalSignature.DigitalSignature;
 import backend.backend.helpers.utils.digitalSignature.DigitalUltil;
 import backend.backend.helpers.utils.digitalSignature.algorim.Signer;
 import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfo;
 import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfoParser;
 import backend.backend.persitence.entities.Account;
+import backend.backend.persitence.entities.Customer;
 import backend.backend.persitence.repository.AccountRepository;
+import backend.backend.persitence.repository.CustomerRepository;
 import backend.backend.persitence.repository.OrderItemRepository;
-import org.springframework.util.Base64Utils;
 
 @Service
 public class DigitalSignatureService {
@@ -113,4 +110,5 @@ public class DigitalSignatureService {
         // return priKey to customer
         return kp.getPrivate().getEncoded();
     }
+
 }

@@ -54,7 +54,7 @@ export default function Product() {
             const size = router.query.size == null ? 99 : router.query.size;
             const status = router.query.status == null || router.query.status == 0 ? "" : `&status=${router.query.status}`;
             const sorter = router.query.sorter == null ? "" : `&sorter=${router.query.sorter}`;
-            InstanceAxios().get(`http://localhost:4000/api/saler/productSalerList?page=${page - 1}&size=${size}${status}${sorter}`)
+            InstanceAxios().get(`https://localhost:4000/api/saler/productSalerList?page=${page - 1}&size=${size}${status}${sorter}`)
                 .then((data) => { setData(data.data.page); })
                 .catch((err) => {
                     alert('Chưa cập nhập profile');

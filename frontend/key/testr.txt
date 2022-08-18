@@ -7,16 +7,25 @@ openssl genrsa -out IntermediateCA.key
 openssl req -new  -sha256 -key IntermediateCA.key -nodes -out IntermediateCA.csr -subj "/C=US/O=xyz/OU=abc/CN=INTERIM-CN"
 openssl x509 -req -days 30  -extfile MyOpenssl.conf -extensions int_ca -in IntermediateCA.csr -CA RootCA.pem -CAkey RootCA.key -CAcreateserial -out IntermediateCA.pem
 
-#create EndUser certificates
+#create server certificates
 openssl genrsa -out my_server.key 2048
-openssl req -new  -sha256 -key my_server.key -out my_server.csr -subj "/C=US/O=xyz/OU=abc/CN=USER-CN"
+openssl req -new  -sha256 -key my_server.key -out my_server.csr -subj "/C=US/O=xyz/OU=abc/CN=SERVER-CN"
 openssl x509 -req -days 30  -extfile my_server.conf -extensions v3_req -in my_server.csr -CA IntermediateCA.pem -CAkey IntermediateCA.key -set_serial 01 -out my_server.pem 
 
+#create client certificates
+openssl genrsa -out my_client.key 2048
+openssl req -new  -sha256 -key my_client.key -out my_client.csr -subj "/C=US/O=xyz/OU=abc/CN=CLIENT-CN"
+openssl x509 -req -days 30  -extfile my_server.conf -extensions v3_req -in my_client.csr -CA IntermediateCA.pem -CAkey IntermediateCA.key -set_serial 01 -out my_client.pem 
 
+#create p12 for all
 openssl pkcs12 -export -out my_server.p12 -inkey my_server.key -in my_server.pem  -name "local_ssl" -passout pass:123456
+openssl pkcs12 -export -out my_client.p12 -inkey my_client.key -in my_client.pem  -name "local_ssl" -passout pass:123456
 openssl pkcs12 -export -out RootCA.p12 -inkey RootCA.key -in RootCA.pem  -name "local_ssl" -passout pass:123456
 openssl pkcs12 -export -out IntermediateCA.p12 -inkey IntermediateCA.key -in IntermediateCA.pem  -name "local_ssl" -passout pass:123456
 
+#create crt for all
 openssl pkcs12 -in IntermediateCA.p12 -clcerts -nokeys -out IntermediateCA.crt
 openssl pkcs12 -in RootCA.p12 -clcerts -nokeys -out RootCA.crt
 openssl pkcs12 -in my_server.p12 -clcerts -nokeys -out my_server.crt 
+openssl pkcs12 -in my_client.p12 -clcerts -nokeys -out my_client.crt 
+

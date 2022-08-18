@@ -20,8 +20,8 @@ app
   .then(() => {
     const server = createHttpsServer(
       {
-        key: fs.readFileSync('./certs/my_server.key'),
-        cert: fs.readFileSync('./certs/my_server.pem'),
+        key: fs.readFileSync('./certs/my_client.key'),
+        cert: fs.readFileSync('./certs/my_client.pem'),
       },
       (req, res) => handle(req, res)
     );

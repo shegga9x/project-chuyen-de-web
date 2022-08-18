@@ -39,7 +39,7 @@ export default function OrderView({ value, index, data, tabChange, dataChange })
         }
     }
     function cancelOrder(status) {
-        // await InstanceAxios().post(`http://localhost:4000/api/saler/orderSalerUpdateStatus`, order)
+        // await InstanceAxios().post(`https://localhost:4000/api/saler/orderSalerUpdateStatus`, order)
 
     }
     return (

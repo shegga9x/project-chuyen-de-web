@@ -36,7 +36,7 @@ export default function Header({ updateCartHeader, isPageCart }) {
         if (session) {
             const getCartByIdUser = async () => {
                 // You can await here
-                const response = await instance().get("http://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id } });
+                const response = await instance().get("https://localhost:4000/api/cart/getCartByIdCustomer", { params: { idCustomer: session.user.id } });
                 if (response) {
                     setUserCart(response.data);
                     setLoadingCart(false)

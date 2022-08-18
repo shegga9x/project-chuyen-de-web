@@ -65,7 +65,7 @@ export default function Review({ listReview, listReviewReply, setListReview, idS
         let rateStar = document.getElementById('your-rating-value').value;
         if (content != "") {
             let obj = { idSingleProductPage: idSingleProductPage, likeCount: 1, rateStar: parseInt(rateStar), content: content }
-            const res = await instance().post('http://localhost:4000/api/evaluate/onSubmitReview', obj)
+            const res = await instance().post('https://localhost:4000/api/evaluate/onSubmitReview', obj)
                 .catch((err) => {
                     if (err.response.status == 401) {
                         alert('Bạn phải đăng nhập để sử dụng chức năng này');

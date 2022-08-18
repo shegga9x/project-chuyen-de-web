@@ -56,7 +56,7 @@ export default function VerificationProgress({ open, closeModal }) {
             let formData = new FormData();
             formData.append('file', pdfFile);
             console.log("ok");
-            const res = await instance().post(`http://localhost:4000/api/digitalSignature/verifying`, formData).then(x => {
+            const res = await instance().post(`https://localhost:4000/api/digitalSignature/verifying`, formData).then(x => {
                 setPDFResult(x.data);
                 document.getElementById('pdfSuccess').style.display = 'block';
                 document.getElementById('pdfFail').style.display = 'none';
@@ -74,7 +74,7 @@ export default function VerificationProgress({ open, closeModal }) {
             document.getElementById('xmtb').style.display = 'none';
             document.getElementById('xmtc').style.display = 'none';
             document.getElementById('dxm').style.display = 'block';
-            const req = await instance().post(`http://localhost:4000/api/digitalSignature/verifying2`, { ...digitalSignatureRequest2 })
+            const req = await instance().post(`https://localhost:4000/api/digitalSignature/verifying2`, { ...digitalSignatureRequest2 })
                 .catch((err) => {
                     document.getElementById('dxm').style.display = 'none';
                     document.getElementById('xmtb').style.display = 'block';
@@ -214,7 +214,7 @@ export default function VerificationProgress({ open, closeModal }) {
                                 document.getElementById('pdfSuccess').style.display = 'none';
                                 document.getElementById('pdfFail').style.display = 'none';
                             }} id="pdfFileInput" type="file" style={{ display: "none" }}></input>
-                            <button onClick={() => { document.getElementById('pdfFileInput').click() }}>Choose File</button>
+                            <button onClick={() => { document.getElementById('pdfFileInput').click() }}>  {pdfFile != null ? (pdfFile.name) : (<>ChooseFile</>)}</button>
                         </div>
                         <div id="pdfSuccess" style={{ display: "none" }}>
                             {

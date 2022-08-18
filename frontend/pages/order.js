@@ -465,7 +465,7 @@ export default function Order(props) {
 export async function getServerSideProps(context) {
     const session = await getSession(context);
     if (session) {
-        const response = await instance(context).get("http://localhost:4000/api/order/getOrderItemByIdCustomer")
+        const response = await instance(context).get("https://localhost:4000/api/order/getOrderItemByIdCustomer")
         return {
             props: {
                 order: response.data,
