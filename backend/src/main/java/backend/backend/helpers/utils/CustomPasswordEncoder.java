@@ -3,6 +3,7 @@ package backend.backend.helpers.utils;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.NoSuchProviderException;
 import java.security.Security;
 import java.util.Base64;
 
@@ -18,7 +19,7 @@ public class CustomPasswordEncoder implements PasswordEncoder {
 
         MessageDigest md;
         try {
-            md = MessageDigest.getInstance("SHA-256");
+            md = MessageDigest.getInstance("SHA-256", "BC");
             md.update(plainTextPassword.toString().getBytes("UTF-8"));
             byte[] digest = md.digest();
 
@@ -26,6 +27,8 @@ public class CustomPasswordEncoder implements PasswordEncoder {
         } catch (NoSuchAlgorithmException e) {
             throw new CustomException(e.toString());
         } catch (UnsupportedEncodingException e) {
+            throw new CustomException(e.toString());
+        } catch (NoSuchProviderException e) {
             throw new CustomException(e.toString());
         }
 

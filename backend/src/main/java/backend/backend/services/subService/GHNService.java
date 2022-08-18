@@ -90,7 +90,6 @@ public class GHNService {
     }
 
     public String printOrder(String[] order_id) {
-        // System.out.println(getGen(order_id));
         String url = "https://online-gateway.ghn.vn/a5/public-api/print52x70?token="
                 + "6ce4b6da-07e5-11ed-80c9-360847801e43";
         HttpHeaders headers = new HttpHeaders();

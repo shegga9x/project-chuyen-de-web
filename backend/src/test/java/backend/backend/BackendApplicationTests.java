@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,7 +67,6 @@ class BackendApplicationTests {
     void test1() {
         Category category = categoryRepository.findByName("Áo").get();
         List<SingleProductPage> result = category.getListOfSingleProductPageFromChild();
-        System.out.println(Arrays.toString(result.toArray()));
     }
 
     @Test
@@ -91,7 +89,6 @@ class BackendApplicationTests {
         List<SingleProductPage> allProductsOnThisPage = singleProductPageRepository
                 .findByIdCategoryInAndStatus(catagory, (byte) 1);
         for (SingleProductPage singleProductPage : allProductsOnThisPage) {
-            System.out.println(singleProductPage.getName());
         }
     }
 
@@ -103,7 +100,6 @@ class BackendApplicationTests {
         for (SingleProductPage productPage : listSingleProduct) {
             result.add(productPage.getIdSingleProductPage().toString());
         }
-        System.out.println(result);
     }
 
     @Test
@@ -116,7 +112,6 @@ class BackendApplicationTests {
                 singleProductPage.get().getName(), singleProductPage.get().getDescription(),
                 singleProductPage.get().getPriceRange(), singleProductPage.get().getTotalSoldCount(),
                 singleProductPage.get().getTotalQuantity());
-        System.out.println(test);
     }
 
     @Test
@@ -128,7 +123,6 @@ class BackendApplicationTests {
             ProductResponse p = (ProductResponse) SubUtils.mapperObject(product, new ProductResponse());
             l.add(p);
         }
-        System.out.println(l);
     }
 
     @Test

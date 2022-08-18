@@ -58,14 +58,12 @@ public class DigitalSignature {
         BigInteger number = new BigInteger(1, dis.getMessageDigest().digest());
         String hashText = number.toString(16);
 
-        System.out.println("????");
 
         //decry
         Key originalKey = KeyGenerate.keyRSAOrgin(base64KeyPub, digitalSignatureRequest2.getDecry(), 1);
         String algorithmModePadding = digitalSignatureRequest2.getDecry() + "/" + digitalSignatureRequest2.getMode() + "/" + digitalSignatureRequest2.getPadding();
         Cipher cipher = Cipher.getInstance(algorithmModePadding, "BC");
         byte[] encryptAndIv = Base64Utils.decode(Base64Utils.decodeFromString(digitalSignatureRequest2.getBase64FileEncry()));
-        System.out.println("????");
         if (Variables.listVariableModesIV.contains(digitalSignatureRequest2.getMode())) {
             DigitalSignature.iv = generatingIVDecrypt(encryptAndIv);
             cipher.init(Cipher.DECRYPT_MODE, originalKey, generaIvParameterSpec(iv));
@@ -73,9 +71,7 @@ public class DigitalSignature {
         } else {
             cipher.init(Cipher.DECRYPT_MODE, originalKey);
         }
-        System.out.println("buon vai loz");
         byte[] decrypted = cipher.doFinal(encryptAndIv);
-        System.out.println("loz gi the");
         String decry = new String(decrypted);
 
         if (decry.equals(hashText)) {

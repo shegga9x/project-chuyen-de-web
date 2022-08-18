@@ -139,8 +139,7 @@ public class AuthService {
         }
 
         Account account = refreshToken.getAccount();
-        System.out.println(refreshToken.getToken());
-        System.out.println(refreshToken.getReasonRevoked());
+      
 
         if (refreshToken.IsRevoked() && refreshToken != null) {
             refreshToken = tokenUtils.revokeDescendantRefreshTokens(refreshToken, account, ipAddress,
@@ -148,8 +147,7 @@ public class AuthService {
             refreshTokenRepository.save(refreshToken);
         }
         if (!refreshToken.IsActive()) {
-            System.out.println(refreshToken.getReasonRevoked());
-            System.out.println();
+      
             throw new CustomException("Token is UnActive !!!");
         }
         RefreshToken newRefreshToken = tokenUtils.rotateRefreshToken(refreshToken, ipAddress);
@@ -172,8 +170,7 @@ public class AuthService {
         response.expireToken = newRefreshToken.getExpires();
         response = (AuthenticateResponse) SubUtils.mapperObject(account, response);
         accountRepository.save(account);
-        System.out.println(newRefreshToken.getToken());
-        System.out.println("ok");
+  
         return response;
     }
 
@@ -258,7 +255,6 @@ public class AuthService {
         response.refreshToken = refreshToken.getToken();
         response.expireToken = refreshToken.getExpires();
         response = (AuthenticateResponse) SubUtils.mapperObject(account, response);
-        System.out.println(response);
         return response;
     }
 

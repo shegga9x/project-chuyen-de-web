@@ -222,7 +222,6 @@ public class SingleProductPageService {
                         ghnService.createOrder(ghnOrderCreateRequest, shop.getAddressId() + ""));
                 String orderShipId = jsonObj.getJSONObject("data").getString("order_code");
                 orderItem.setOrderShipId(orderShipId);
-                System.out.println(orderShipId);
 
                 break;
             case 1:

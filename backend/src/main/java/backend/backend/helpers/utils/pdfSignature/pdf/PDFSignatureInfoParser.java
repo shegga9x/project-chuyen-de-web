@@ -143,7 +143,6 @@ public class PDFSignatureInfoParser {
 
                 String subFilter = sig.getSubFilter();
                 if (subFilter != null) {
-                    System.out.println(subFilter);
                     switch (subFilter) {
 
                         case "adbe.pkcs7.detached":
