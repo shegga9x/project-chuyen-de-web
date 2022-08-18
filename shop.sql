@@ -339,14 +339,16 @@ VALUES
     (1)
 
 -- INSERT
+-- jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=
+-- $2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS
 INSERT INTO ACCOUNT
-Values(N'sa@gmail.com', N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS', 'local', null, null, null, null, 1);
+Values(N'sa@gmail.com', N'jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=', 'local', null, null, null, null, 1);
 INSERT INTO ACCOUNT_has_role
 VALUES
     (1, 1)
 ;
 INSERT INTO ACCOUNT
-Values(N'user@gmail.com', N'$2a$10$g/AIRfhpFhGPjAnUw5m8qu974.uI71HwrBpjXeYQu4khl8KI.4VgS', 'local', null, null, null, null, 1);
+Values(N'user@gmail.com', N'jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=', 'local', null, null, null, null, 1);
 INSERT INTO ACCOUNT_has_role
 VALUES
     (2, 2)
