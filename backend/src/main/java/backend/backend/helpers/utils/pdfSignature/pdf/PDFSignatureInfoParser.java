@@ -1,4 +1,4 @@
-package backend.backend.helpers.utils.digitalSignature.model;
+package backend.backend.helpers.utils.pdfSignature.pdf;
 
 /**
  * Created by serafeim on 13/7/2017.
@@ -37,6 +37,9 @@ import org.bouncycastle.cms.jcajce.JcaSimpleSignerInfoVerifierBuilder;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.util.Store;
 import org.bouncycastle.util.StoreException;
+
+import backend.backend.helpers.utils.pdfSignature.model.CertificateInfo;
+import backend.backend.helpers.utils.pdfSignature.model.PDFSignatureInfo;
 
 import javax.naming.InvalidNameException;
 import javax.naming.ldap.LdapName;
@@ -140,7 +143,9 @@ public class PDFSignatureInfoParser {
 
                 String subFilter = sig.getSubFilter();
                 if (subFilter != null) {
+                    System.out.println(subFilter);
                     switch (subFilter) {
+
                         case "adbe.pkcs7.detached":
                         case "ETSI.CAdES.detached":
                             verifyPKCS7(buf, contents, sig, psi);

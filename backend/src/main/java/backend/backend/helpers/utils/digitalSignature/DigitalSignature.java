@@ -41,7 +41,6 @@ public class DigitalSignature {
 
     public static boolean decrypt(String base64KeyPub, DigitalSignatureRequest2 digitalSignatureRequest2) throws Exception {
         // hash
-        System.out.println("????");
         Security.addProvider(new BouncyCastleProvider());
         MessageDigest md = MessageDigest.getInstance(digitalSignatureRequest2.getHash(), "BC");
         InputStream is = new ByteArrayInputStream(Base64Utils.decodeFromString(digitalSignatureRequest2.getBase64FileData()));

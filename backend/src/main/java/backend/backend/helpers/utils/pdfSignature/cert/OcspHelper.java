@@ -1,4 +1,4 @@
-package backend.backend.helpers.utils.digitalSignature.cert;
+package backend.backend.helpers.utils.pdfSignature.cert;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -68,7 +68,7 @@ import org.bouncycastle.operator.DigestCalculator;
 import org.bouncycastle.operator.OperatorCreationException;
 import org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder;
 
-import backend.backend.helpers.utils.digitalSignature.algorim.SigUtils;
+import backend.backend.helpers.utils.pdfSignature.algorim.SigUtils;
 
 /**
  * Helper Class for OCSP-Operations with bouncy castle.

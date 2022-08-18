@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author xonv
  */
+
 public class VNPayUtils {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
@@ -100,6 +101,7 @@ public class VNPayUtils {
         }
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     // Util for VNPAY
     public static String hashAllFields(Map fields) {
         // create a list and sort it
@@ -147,6 +149,7 @@ public class VNPayUtils {
         return sb.toString();
     }
 
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public static String createLink(double amount2, String bankCode, String origin)
             throws UnsupportedEncodingException {
         String vnp_Version = "2.1.0";

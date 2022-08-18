@@ -1,4 +1,4 @@
-package backend.backend.helpers.utils.digitalSignature.algorim;
+package backend.backend.helpers.utils.pdfSignature.algorim;
 
 /*
  * Licensed to the Apache Software Foundation (ASF) under one or more
@@ -28,45 +28,41 @@ import java.io.OutputStream;
 import org.apache.pdfbox.io.IOUtils;
 
 /**
- * Wraps a InputStream into a CMSProcessable object for bouncy castle. It's a memory saving
- * alternative to the {@link org.bouncycastle.cms.CMSProcessableByteArray CMSProcessableByteArray}
+ * Wraps a InputStream into a CMSProcessable object for bouncy castle. It's a
+ * memory saving
+ * alternative to the {@link org.bouncycastle.cms.CMSProcessableByteArray
+ * CMSProcessableByteArray}
  * class.
  *
  * @author Thomas Chojecki
  */
-class CMSProcessableInputStream implements CMSTypedData
-{
+public class CMSProcessableInputStream implements CMSTypedData {
     private final InputStream in;
     private final ASN1ObjectIdentifier contentType;
 
-    CMSProcessableInputStream(InputStream is)
-    {
+    public CMSProcessableInputStream(InputStream is) {
         this(new ASN1ObjectIdentifier(CMSObjectIdentifiers.data.getId()), is);
     }
 
-    CMSProcessableInputStream(ASN1ObjectIdentifier type, InputStream is)
-    {
+    public CMSProcessableInputStream(ASN1ObjectIdentifier type, InputStream is) {
         contentType = type;
         in = is;
     }
 
     @Override
-    public Object getContent()
-    {
+    public Object getContent() {
         return in;
     }
 
     @Override
-    public void write(OutputStream out) throws IOException, CMSException
-    {
+    public void write(OutputStream out) throws IOException, CMSException {
         // read the content only one time
         IOUtils.copy(in, out);
         in.close();
     }
 
     @Override
-    public ASN1ObjectIdentifier getContentType()
-    {
+    public ASN1ObjectIdentifier getContentType() {
         return contentType;
     }
 }

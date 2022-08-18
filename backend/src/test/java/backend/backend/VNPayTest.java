@@ -18,7 +18,6 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 import backend.backend.helpers.utils.VNPayUtils;
@@ -73,11 +72,11 @@ public class VNPayTest {
         // Billing
 
         // Build data to hash and querystring
-        List fieldNames = new ArrayList(vnp_Params.keySet());
+        List<String> fieldNames = new ArrayList<String>(vnp_Params.keySet());
         Collections.sort(fieldNames);
         StringBuilder hashData = new StringBuilder();
         StringBuilder query = new StringBuilder();
-        Iterator itr = fieldNames.iterator();
+        Iterator<String> itr = fieldNames.iterator();
         while (itr.hasNext()) {
             String fieldName = (String) itr.next();
             String fieldValue = (String) vnp_Params.get(fieldName);
@@ -106,6 +105,6 @@ public class VNPayTest {
         job.addProperty("code", "00");
         job.addProperty("message", "success");
         job.addProperty("data", paymentUrl);
-        Gson gson = new Gson();
+        
     }
 }

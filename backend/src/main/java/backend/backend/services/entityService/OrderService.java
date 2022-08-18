@@ -57,7 +57,7 @@ public class OrderService {
 
         for (CartItem cartItem : listCartItem) {
             String[] arr = map.get(cartItem.getProduct().getIdProduct()).split("-");
-            Integer productId = Integer.parseInt(arr[0]);
+            // Integer productId = Integer.parseInt(arr[0]);
             Integer shipPrice = Integer.parseInt(arr[1]);
             Integer serviceID = Integer.parseInt(arr[2]);
             Integer serviceTypeID = Integer.parseInt(arr[3]);

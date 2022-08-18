@@ -1,4 +1,4 @@
-package backend.backend.helpers.utils.digitalSignature.algorim;
+package backend.backend.helpers.utils.pdfSignature.algorim;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Component;
 
-import backend.backend.helpers.utils.digitalSignature.pdf.CreateVisibleSignatureMem;
+import backend.backend.helpers.utils.pdfSignature.pdf.CreateVisibleSignatureMem;
 
 @Component
 public class Signer {

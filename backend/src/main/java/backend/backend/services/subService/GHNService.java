@@ -37,7 +37,7 @@ import backend.backend.persitence.entities.Shop;
 import backend.backend.persitence.model.ghn.GHNServiceModel;
 import backend.backend.persitence.repository.CustomerRepository;
 import backend.backend.persitence.repository.ShopRepository;
-
+@SuppressWarnings("unchecked")
 @Service
 public class GHNService {
     public String token = "133bb4b2-065a-11ed-ad26-3a4226f77ff0";

@@ -1,4 +1,4 @@
-package backend.backend.helpers.utils.digitalSignature.algorim;
+package backend.backend.helpers.utils.pdfSignature.algorim;
 
 /*
  * Copyright 2017 The Apache Software Foundation.
@@ -59,8 +59,8 @@ import org.bouncycastle.tsp.TSPException;
 import org.bouncycastle.tsp.TimeStampToken;
 import org.bouncycastle.util.Store;
 
-import backend.backend.helpers.utils.digitalSignature.cert.CertificateVerificationException;
-import backend.backend.helpers.utils.digitalSignature.cert.CertificateVerifier;
+import backend.backend.helpers.utils.pdfSignature.cert.CertificateVerificationException;
+import backend.backend.helpers.utils.pdfSignature.cert.CertificateVerifier;
 
 /**
  * Utility class for the signature / timestamp examples.

@@ -1,4 +1,4 @@
-package backend.backend.helpers.utils.digitalSignature.model;
+package backend.backend.helpers.utils.pdfSignature.model;
 
 import java.util.Date;
 import java.util.HashMap;

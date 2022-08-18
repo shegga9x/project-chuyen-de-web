@@ -1,4 +1,4 @@
-package backend.backend.helpers.utils.digitalSignature.cert;
+package backend.backend.helpers.utils.pdfSignature.cert;
 
 import java.util.Date;
 

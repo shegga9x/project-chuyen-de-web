@@ -19,9 +19,9 @@ import backend.backend.helpers.payload.request.DigitalSignatureRequest2;
 import backend.backend.helpers.utils.SubUtils;
 import backend.backend.helpers.utils.digitalSignature.DigitalSignature;
 import backend.backend.helpers.utils.digitalSignature.DigitalUltil;
-import backend.backend.helpers.utils.digitalSignature.algorim.Signer;
-import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfo;
-import backend.backend.helpers.utils.digitalSignature.model.PDFSignatureInfoParser;
+import backend.backend.helpers.utils.pdfSignature.algorim.Signer;
+import backend.backend.helpers.utils.pdfSignature.model.PDFSignatureInfo;
+import backend.backend.helpers.utils.pdfSignature.pdf.PDFSignatureInfoParser;
 import backend.backend.persitence.entities.Account;
 import backend.backend.persitence.entities.Customer;
 import backend.backend.persitence.repository.AccountRepository;
@@ -74,6 +74,7 @@ public class DigitalSignatureService {
             List<PDFSignatureInfo> info = PDFSignatureInfoParser.getPDFSignatureInfo(bytes);
             return info.get(0);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new CustomException("Sai roi");
         }
     }

@@ -185,7 +185,7 @@ public class CustomerService {
     }
 
     public String checkEmailSMS(String sms, String email) {
-        int idCustomer = SubUtils.getCurrentUser().getId();
+        // int idCustomer = SubUtils.getCurrentUser().getId();
         Optional<ResetEmailToken> optinal = resetEmailTokenRepository.findByResetTokenContent(sms);
         if (optinal.isPresent()) {
             ResetEmailToken resetEmailToken = optinal.get();

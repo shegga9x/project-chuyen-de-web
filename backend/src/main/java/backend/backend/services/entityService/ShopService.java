@@ -2,7 +2,6 @@ package backend.backend.services.entityService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import backend.backend.helpers.advice.CustomException;
 import backend.backend.helpers.payload.dto.ShopDTO;

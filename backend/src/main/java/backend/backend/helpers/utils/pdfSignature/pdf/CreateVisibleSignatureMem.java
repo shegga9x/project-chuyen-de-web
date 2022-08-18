@@ -1,4 +1,4 @@
-package backend.backend.helpers.utils.digitalSignature.pdf;
+package backend.backend.helpers.utils.pdfSignature.pdf;
 
 import java.awt.Color;
 import java.awt.geom.AffineTransform;
@@ -49,8 +49,8 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 
-import backend.backend.helpers.utils.digitalSignature.algorim.CreateSignatureBase;
-import backend.backend.helpers.utils.digitalSignature.algorim.SigUtils;
+import backend.backend.helpers.utils.pdfSignature.algorim.PDShrink;
+import backend.backend.helpers.utils.pdfSignature.algorim.SigUtils;
 
 /**
  * This is a second example for visual signing a pdf. It doesn't use the "design

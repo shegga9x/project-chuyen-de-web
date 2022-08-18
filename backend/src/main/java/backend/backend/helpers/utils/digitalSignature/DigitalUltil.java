@@ -13,7 +13,7 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import backend.backend.helpers.payload.response.OrderItemResponse;
 import backend.backend.persitence.entities.Account;
 
-@SuppressWarnings("deprecated")
+@SuppressWarnings("deprecation")
 public class DigitalUltil {
 
     // static String[][] headerContent = {{"ProductName", "CustomerId", "Email",
