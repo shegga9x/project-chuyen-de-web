@@ -16,7 +16,6 @@ public class CustomPasswordEncoder implements PasswordEncoder {
     @Override
     public String encode(CharSequence plainTextPassword) {
         Security.addProvider(new BouncyCastleProvider());
-
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA-256", "BC");

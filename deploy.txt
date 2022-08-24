@@ -4,7 +4,7 @@ Username: shegga_shopvip132
 password : 0378876395pP
 backend: 
 git : https://git.heroku.com/sqlshop123.git
-url : https://localhost:4000/
+url : https://sqlshop123.herokuapp.com/
 frontend : 
 url : project-chuyen-de-web.vercel.app
 

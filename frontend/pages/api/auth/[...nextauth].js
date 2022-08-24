@@ -75,12 +75,8 @@ const nextAuthOptions = (req, res) => {
     session: { maxAge: process.env.jwtRefreshExpirationMs },
     callbacks: {
       async jwt(token, user) {
-        if (user) {
-          return { jwtExpires: Date.now() + parseInt(process.env.jwtExpirationMs), ...user }
-        }
-        if (Date.now() < token.jwtExpires) {
-          return token
-        }
+        if (user) return { jwtExpires: Date.now() + parseInt(process.env.jwtExpirationMs), ...user }
+        if (Date.now() < token.jwtExpires) return token
         return await refreshAccessToken(token, cookiesSetter)
       },
       async session(session, token) {
@@ -117,12 +113,12 @@ async function refreshAccessToken(token, cookiesSetter) {
     });
     const cookies = response.headers['set-cookie']
     await cookiesSetter.set(cookies)
-    return {
+    const returnToken = {
       ...token,
-      id: response.data.idAccount,
-      jwtExpires: Date.now() + parseInt(process.env.jwtExpirationMs),
-      jwt: response.data.jwtToken,
-    }
+      id: response.data.idAccount, jwtExpires: Date.now() + parseInt(process.env.jwtExpirationMs),
+      jwt: response.data.jwtToken
+    };
+    return returnToken;
   } catch (error) {
     throw new Error("Refresh Token error");
   }

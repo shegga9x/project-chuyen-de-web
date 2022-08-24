@@ -9,7 +9,7 @@ export default function AccountShopXu() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await instance().get('https://localhost:4000/api/walletCustomer/getMoneyByIdCustomer');
+            const res = await instance().get('https://sqlshop123.herokuapp.com/api/walletCustomer/getMoneyByIdCustomer');
             if (res) {
                 setXuVip(res.data)
             }

@@ -514,7 +514,7 @@ export default function Admin() {
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
   if (session && session.user.role.includes('Admin')) {
-    const response = await instance({ req }).get("https://localhost:4000/api/admin/getAllSingleProductPage")
+    const response = await instance({ req }).get("https://sqlshop123.herokuapp.com/api/admin/getAllSingleProductPage")
     return {
       props: {
         singleProductPages: response.data

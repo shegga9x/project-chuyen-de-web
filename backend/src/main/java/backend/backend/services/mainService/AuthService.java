@@ -139,22 +139,20 @@ public class AuthService {
         }
 
         Account account = refreshToken.getAccount();
-      
-
+        System.out.println(token);
         if (refreshToken.IsRevoked() && refreshToken != null) {
             refreshToken = tokenUtils.revokeDescendantRefreshTokens(refreshToken, account, ipAddress,
                     "Attempted reuse of revoked ancestor token: " + token);
             refreshTokenRepository.save(refreshToken);
         }
         if (!refreshToken.IsActive()) {
-      
+            System.out.println(refreshToken.getRevoked() + " " + refreshToken.IsExpired());
             throw new CustomException("Token is UnActive !!!");
         }
         RefreshToken newRefreshToken = tokenUtils.rotateRefreshToken(refreshToken, ipAddress);
         refreshToken = tokenUtils.revokeRefreshToken(refreshToken, ipAddress, "Replaced by new token",
                 newRefreshToken.getToken());
         tokenUtils.removeOldRefreshTokens(account.getIdAccount());
-
         account.addToListOfRefreshToken(newRefreshToken);
         account.addToListOfRefreshToken(refreshToken);
         account.setLastExpires(new Date());
@@ -170,7 +168,7 @@ public class AuthService {
         response.expireToken = newRefreshToken.getExpires();
         response = (AuthenticateResponse) SubUtils.mapperObject(account, response);
         accountRepository.save(account);
-  
+
         return response;
     }
 

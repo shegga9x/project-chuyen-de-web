@@ -60,7 +60,7 @@ export default function ProductAddModal({ open, closeModal }) {
         },
         validationSchema,
         onSubmit: values => {
-            InstanceAxios().post(`https://localhost:4000/api/saler/productSalerUpdate`, values).then((response) => {
+            InstanceAxios().post(`https://sqlshop123.herokuapp.com/api/saler/productSalerUpdate`, values).then((response) => {
                 alert("Cập Nhật Thành Công"); formik.resetForm(); setImages([]); closeModal();
             }).catch((error) => {
                 if (error.response) {
@@ -249,7 +249,7 @@ export default function ProductAddModal({ open, closeModal }) {
     ];
 
     useEffect(() => {
-        InstanceAxios().get(`https://localhost:4000/api/product/loadCagetory`)
+        InstanceAxios().get(`https://sqlshop123.herokuapp.com/api/product/loadCagetory`)
             .then((data) => {
                 const nodesReuslt = JSON.parse(JSON.stringify(data.data).replaceAll(',"children":[]', ""));
                 setNodes(nodesReuslt);

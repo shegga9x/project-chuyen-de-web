@@ -45,10 +45,7 @@ public class DigitalSignature {
         MessageDigest md = MessageDigest.getInstance(digitalSignatureRequest2.getHash(), "BC");
         InputStream is = new ByteArrayInputStream(Base64Utils.decodeFromString(digitalSignatureRequest2.getBase64FileData()));
         DigestInputStream dis = new DigestInputStream(is, md);
-
         byte[] buffer = new byte[1024];
-
-
         int read = dis.read(buffer);
 
         while (read != -1) {

@@ -16,7 +16,7 @@ export default function ResetPassword({ err, token }) {
         if (newPassword != confirmNewPassword) {
             alert('password với confirmPassword không trùng nhau');
         } else {
-            const res = await axios.post('https://localhost:4000/api/accounts/reset-password', { token: tk, password: newPassword, confirmPassword: confirmNewPassword })
+            const res = await axios.post('https://sqlshop123.herokuapp.com/api/accounts/reset-password', { token: tk, password: newPassword, confirmPassword: confirmNewPassword })
             if (res) {
                 alert('Đã hoàn thành, vui lòng quay trở lại trang đăng nhập');
                 changeRoute('/account', router);
@@ -96,7 +96,7 @@ export default function ResetPassword({ err, token }) {
 
 export async function getServerSideProps({ query }) {
     let err1 = "";
-    const res = await axios.post('https://localhost:4000/api/accounts/validate-reset-token', { token: query.token })
+    const res = await axios.post('https://sqlshop123.herokuapp.com/api/accounts/validate-reset-token', { token: query.token })
         .catch(err => {
             err1 = err.response.data.message;
             return {};

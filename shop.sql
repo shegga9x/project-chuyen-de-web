@@ -790,3 +790,6 @@ select * from Customer
 select * from Order_Item
 delete from Shop where id_shop=2;
 
+use shop 
+select * from Refresh_Token
+order by id desc

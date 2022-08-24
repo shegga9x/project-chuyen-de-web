@@ -15,7 +15,7 @@ import javax.persistence.*;
  *
  */
 @Entity
-@Table(name = "Refresh_Token", schema = "dbo", catalog = Account.CATALOG )
+@Table(name = "Refresh_Token", schema = "dbo", catalog = Account.CATALOG)
 public class RefreshToken implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -163,6 +163,7 @@ public class RefreshToken implements Serializable {
     public Account getAccount() {
         return this.account;
     }
+
     public boolean IsExpired() {
         return this.expires.before(new Date());
     }
@@ -171,7 +172,7 @@ public class RefreshToken implements Serializable {
         return this.revoked != null;
     }
 
-    public boolean  IsActive() {
+    public boolean IsActive() {
         return this.revoked == null && !IsExpired();
     }
 

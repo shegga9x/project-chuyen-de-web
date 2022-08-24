@@ -6,7 +6,7 @@ export default function BrowseProductsTable({ singleProductPages, setProductPage
 
     const duyetSanPham = async (idSingleProductPage) => {
         isLoading(true);
-        const res = await instance().get('https://localhost:4000/api/admin/duyetSanPham', { params: { idSinglePage: idSingleProductPage } })
+        const res = await instance().get('https://sqlshop123.herokuapp.com/api/admin/duyetSanPham', { params: { idSinglePage: idSingleProductPage } })
         if (res) {
             isLoading(false);
             setProductPages(res.data);
